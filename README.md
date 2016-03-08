@@ -1,9 +1,9 @@
 # WhoCanIVoteFor
 
-This project brand new!
+This project is brand new!
 
 
-It is designed for the general public to use to find out everything about upcoming elections, including candidates, polling stations, electon dates, etc.
+It is designed for people who don't know loads about the ins and outs of elections to use to find out everything about upcoming elections, including candidates, polling stations, electon dates, etc.
 
 It will have the following features:
 
