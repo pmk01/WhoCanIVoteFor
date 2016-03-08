@@ -24,3 +24,7 @@ The reason for building this site:
 2. We want to allow 3rd parties to write sites that we can include in this one via data dumps.  3rd parties shouldn't have to use our codebase in order to make interesting things.  We saw this a low during the UK General Election.
 3. This site is very read heavy, so we can think about optimizing for that, rather than both read and write heavy operations.  In 2015 this site was [a Jekyll install](https://github.com/DemocracyClub/YourNextMP-Read).
 4. We want to be able to spin up new ideas quickly in this codebase, and not pollute the [YourNextRepresentative](https://github.com/DemocracyClub/) code too much (it has an international focus)
+
+
+![photo 04-03-2016 17 18 46](https://cloud.githubusercontent.com/assets/739624/13565711/bc9bf7ea-e449-11e5-822b-8322c6a63872.jpg)
+
