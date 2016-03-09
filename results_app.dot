@@ -1,0 +1,31 @@
+digraph ReferenceGraph {
+/*  nodesep = 2;*/
+/*  splines=true;*/
+/*  overlap=prism;*/
+  edge [color=gray50, fontsize=11]
+  node [shape=record, fontsize=11]
+
+
+  subgraph clusterYNR {
+    label="YNR"; style=filled; bgcolor=gray95;
+    "ElectionBase" [label="{{ElectionBase}|{election_id}|{area_id}|{election_date}|{authority}}"]
+    "Person" [label="{{Person}}"]
+  };
+
+
+  subgraph clusterResultsRecorder {
+    label="ResultsRecorder"; style=filled; bgcolor=gray95;
+    "Election" [label="{{Election}|{electorate}}"]
+    "ResultsSet" [label="{{ResultsSet}|{reporter=FK(User)}|{election=FK(Election)}|{turnout_calculated}|{turnout_reported}|{spoilt_ballots}|{datetime}|{verified? (bool)}|{final? (bool)}}"]
+    "CandidateResult" [label="{{CandidateResult}|{result_set=FK(ResultsSet)}|{candidate_id=FK(Person)}|{ballots_reported}|{winner?}}}"]
+ -> ;
+    "Election" -> "ElectionBase"
+    "Election" -> "ResultsSet"
+    "ResultsSet" -> "CandidateResult"
+    "CandidateResult" -> "Person"
+
+
+
+  };
+
+}
