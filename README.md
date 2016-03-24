@@ -33,23 +33,30 @@ The reason for building this site:
 
 This app will be used by people both at counts and after the count to record results from each election.
 
-Initially this is fairly simple: there is an Election model (that we might borrow from [YourNextRepresentative](https://github.com/DemocracyClub/YourNextRepresentative) (YNR), with a sub-class for storing the size of the electorate), a ResultsSet and a CandidateResult model:
+There are two types of 'result' that we want to capture:
+
+1. 'Control' of councils.  This is the dominant party or 'No Overall Control' if no party has more than 50% of the council seats.  This is a fairly simple data model (`AuthorityControlSet`), looking something like `controlling_party(NULL=True)`, `authority`.  Stretch goal would be to pre-load the control model with the previous year's control (data to be provided), to allow 'swing' to be calculated ("HOLD", "LAB GAIN", etc).
+2. Votes Cast per person.  This is slightly more complex than the above, with roughly the following model:
 
 ![Results App](results_app.png)
 
-An authenticated user can navigate to an election and area.  There they see a form with each candidate known about and a text input to enter the number of notes cast for that person.
-
 In addition to this, we will ask them to record the number of spoilt votes, and the turn out if it's reported.
 
-The slight complication is that we might want to record more than one result per election.  There are a number of reasons for this:
+For both of the above, a non-authenticated user can navigate to an election and area.  There they can enter 'control' and 'votes cast' on two different forms.
 
-1. The result may have been recorded incorrectly, either because of a mistake or out of malice.
-2. The result announced at the count might not be the actual final result – apparently this happens alarmingly often.
-3. More than one person might report the results.
-4. Someone might want to double check the results as published on the council's web site at a later date (see #2).
+Both workflow should consoder the following:
 
-Because of this, we can have more than one `ResultsSet` per election.
+* We want to record more than one result of it's class ('control' and 'votes cast') per election.  There are a number of reasons for this:
 
-There should be a nice way to see `ResultsSet` objects that have differing results recorded, and we should provide some shortcuts, for example to `ResultsSet` objects where the sum of the `CandidateResult` `votes_cast` field isn't the same.
+  1. The result may have been recorded incorrectly, either because of a mistake or out of malice.
+  2. The result announced at the count might not be the actual final result – apparently this happens alarmingly often.
+  3. More than one person might report the results.
+  4. Someone might want to double check the results as published on the council's web site at a later date (see #2).
 
-The other complication comes with different voting systems – for example [Single Transferable Vote](https://en.m.wikipedia.org/wiki/Single_transferable_vote), as used in Northern Ireland.  This could be out of scope for this initial phase of work – more research time is needed to see how complex this will be to model.
+  There should be a nice way to see `ResultsSet` and `AuthorityControlSet` objects that have differing results recorded, and we should provide some shortcuts, for example to `ResultsSet` objects where the sum of the `CandidateResult` `votes_cast` field isn't the same.
+
+* Sourcing and timing is important for us, so each model should extend from an abstract base class that has `created` (datetime), `modified` (datetime) and `source` (TextField).  Forms should ask for a source (we need to decide if this is required) when recording either type of result.
+
+* There are different voting systems – for example [Single Transferable Vote](https://en.m.wikipedia.org/wiki/Single_transferable_vote), as used in Northern Ireland.  This could be out of scope for this initial phase of work – more research time is needed to see how complex this will be to model.
+
+
