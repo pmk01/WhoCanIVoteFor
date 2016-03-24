@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/DemocracyClub/WhoCanIVoteFor.png?label=ready&title=Ready)](https://waffle.io/DemocracyClub/WhoCanIVoteFor)
 # WhoCanIVoteFor
 
 This project is brand new!
