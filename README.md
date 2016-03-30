@@ -3,7 +3,6 @@
 
 This project is brand new!
 
-
 It is designed for people who don't know loads about the ins and outs of elections to use to find out everything about upcoming elections, including candidates, polling stations, electon dates, etc.
 
 It will have the following features:
@@ -61,3 +60,7 @@ Both workflow should consoder the following:
 * There are different voting systems – for example [Single Transferable Vote](https://en.m.wikipedia.org/wiki/Single_transferable_vote), as used in Northern Ireland.  This could be out of scope for this initial phase of work – more research time is needed to see how complex this will be to model.
 
 
+
+## Technical
+
+This project is built in python 3.4 and Django 1.9.

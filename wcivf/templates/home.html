@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="columns large-6 large-centered">
+  <div class="card">
+    <p><strong>Everyone in the UK</strong> has an election on the 5th of May 2016.</p>
+    <p>Find out about the elections you can vote in by entering your postcode below</p>
+
+    <form method=post>
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="button">Search</button>
+    </form>
+  </div>
+</section>
+
+{% endblock content %}
