@@ -60,3 +60,4 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+wcivf/static/COMPILED/scss/main.css.map
