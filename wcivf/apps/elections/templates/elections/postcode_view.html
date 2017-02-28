@@ -57,11 +57,6 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
   </div>
 </section>
 
-<section class="columns large-12">
-  <div class="card">
-    {% include "notifications/includes/election_notification_form.html" %}
-  </div>
-</section>
 </div>
 
 {# <div class="row"> #}
@@ -137,6 +132,15 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
 </div>
+
+<div class="row">
+    <section class="columns large-12">
+      <div class="card">
+        {% include "notifications/includes/election_notification_form.html" %}
+      </div>
+    </section>
+</div>
+
 
 <div class="row">
   <div class="columns large-12">
