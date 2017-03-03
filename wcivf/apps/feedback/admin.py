@@ -6,9 +6,9 @@ from .models import Feedback
 class FeedbackAdmin(admin.ModelAdmin):
     list_filter = ('found_useful',)
     list_display = ('found_useful', 'comments',)
-    readonly_fields = Feedback._meta.get_all_field_names()
+    readonly_fields = [f.name for f in Feedback._meta.get_fields()]
 
-    def has_delete_permission(self, request, obj=None): # note the obj=None
+    def has_delete_permission(self, request, obj=None):
         return False
 
     def has_add_permission(self, request):
