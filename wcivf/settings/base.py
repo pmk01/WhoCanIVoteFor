@@ -172,6 +172,6 @@ SITE_TITLE = "Who Can I Vote For?"
 
 # .local.py overrides all the common settings.
 try:
-    from .local import *
+    from .local import *  # noqa
 except ImportError:
     pass

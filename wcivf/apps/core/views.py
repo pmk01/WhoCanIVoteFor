@@ -1,7 +1,4 @@
-import requests
-
 from django.views.generic import FormView
-from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from .forms import PostcodeLookupForm

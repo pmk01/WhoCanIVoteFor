@@ -1,7 +1,4 @@
 from django.core.management.base import BaseCommand
-from django.conf import settings
-
-import requests
 
 from people.models import Person
 from people.helpers import get_wikipedia_extract

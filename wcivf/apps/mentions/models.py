@@ -8,7 +8,6 @@ class MentionsManager(models.Manager):
         defaults = {
             'date_order': mention['date_order'],
             'date_published': mention['date_published'],
-            'quote': mention['quote'],
             'quote': mention['quote']['html'],
             'truncated_left': mention['quote']['truncated']['left'],
             'truncated_right': mention['quote']['truncated']['right'],

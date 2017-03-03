@@ -1,6 +1,5 @@
-from django.conf import settings
-
 from .forms import FeedbackForm
+
 
 def feedback_form(request):
     return {

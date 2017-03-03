@@ -2,7 +2,6 @@ import os
 import csv
 
 from django.core.management.base import BaseCommand
-from django.conf import settings
 
 from people.models import PersonPost
 from profiles.models import Profile
@@ -28,9 +27,8 @@ class Command(BaseCommand):
 
     def add_profile(self, person_post, line):
         text = line['chat']
-        # text = text.replace('\n', '\n\n')
 
-        profile = Profile.objects.update_or_create(
+        Profile.objects.update_or_create(
             person_post=person_post,
             defaults={
                 'text': text,

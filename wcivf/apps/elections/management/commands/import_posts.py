@@ -3,7 +3,8 @@ from django.conf import settings
 
 import requests
 
-from elections.models import Election, Post
+from elections.models import Post
+
 
 class Command(BaseCommand):
     def handle(self, **options):
