@@ -14,7 +14,6 @@ cache:
     - $HOME/.pip-cache/
 install:
   - pip install pip==9.0.1
-  - pip install -r requirements/testing.txt --cache-dir $HOME/.pip-cache
 script:
   - tox
 notifications:
