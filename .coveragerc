@@ -2,3 +2,6 @@
 omit =
     */tests/*
     */migrations/*
+    */migrations/*
+    wcivf/wsgi.py
+    */lib/python3.4/site-packages/*
