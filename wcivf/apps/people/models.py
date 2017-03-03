@@ -25,6 +25,9 @@ class PersonPost(models.Model):
             self.election.slug
         )
 
+    class Meta:
+        ordering = ('-election__election_date', )
+
 
 
 class Person(models.Model):
