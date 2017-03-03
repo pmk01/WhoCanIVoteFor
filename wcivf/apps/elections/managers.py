@@ -31,18 +31,19 @@ class ElectionManager(models.Manager):
 
 
 class PostManager(models.Manager):
-    def update_or_create_from_ynr(self, post):
+    def update_or_create_from_ynr(self, post_dict):
         from .models import Election
-        election = Election.objects.get(slug=post['elections'][0]['id'])
-        return self.update_or_create(
-            ynr_id=post['id'],
+        post, _ = self.update_or_create(
+            ynr_id=post_dict['id'],
             defaults={
-                'label': post['label'],
-                'role': post['role'],
-                'group': post['group'],
-                'organization': post['organization']['name'],
-                'area_name': post['area']['name'],
-                'area_id': post['area']['identifier'],
-                'election': election
+                'label': post_dict['label'],
+                'role': post_dict['role'],
+                'group': post_dict['group'],
+                'organization': post_dict['organization']['name'],
+                'area_name': post_dict['area']['name'],
+                'area_id': post_dict['area']['identifier'],
             }
         )
+        for election_dict in post_dict['elections']:
+            election = Election.objects.get(slug=election_dict['id'])
+            post.elections.add(election)

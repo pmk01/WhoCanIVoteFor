@@ -19,6 +19,9 @@ class PersonView(DetailView):
             raise Http404("No %(verbose_name)s found matching the query" %
                           {'verbose_name': queryset.model._meta.verbose_name})
 
-        obj.current_posts = PersonPost.objects.filter(person=obj, post__election__current=True)
-        obj.past_posts = PersonPost.objects.filter(person=obj, post__election__current=False)
+        obj.current_posts = PersonPost.objects.filter(
+            person=obj, election__current=True)
+
+        obj.past_posts = PersonPost.objects.filter(
+            person=obj, election__current=False)
         return obj

@@ -130,7 +130,7 @@
       <p>{{ object.name }} is a candidate in the following upcoming elections:</p>
       <ul>
       {% for person_post in object.current_posts %}
-        <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.post.election }}, {{ person_post.party.party_name }}</li>
+        <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }}</li>
       {% endfor %}
       </ul>
     {% endif %}

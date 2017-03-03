@@ -22,5 +22,5 @@ class PersonPostFactory(factory.django.DjangoModelFactory):
     person = factory.SubFactory(PersonFactory)
     post = factory.SubFactory(PostFactory)
     party = None
-    election = factory.SubFactory(ElectionFactory)
+    elections = factory.RelatedFactory(ElectionFactory)
     list_position = None

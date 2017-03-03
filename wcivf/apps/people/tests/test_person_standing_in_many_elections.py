@@ -12,13 +12,13 @@ class TestPersonInMultipleElections(TestCase):
         post2 = PostFactory(
             ynr_id="WMC:E14000645",
             label="Southwark",
-            election=election2)
+            elections=election2)
         person.elections.add(election1)
         person.elections.add(election2)
 
         person_post1 = PersonPostFactory(person=person, election=election1)
         person_post2 = PersonPostFactory(
-            person=person, election=election2, post=post2)
+            person=person, elections=election2, post=post2)
         assert person.posts.all().count() == 2
 
 

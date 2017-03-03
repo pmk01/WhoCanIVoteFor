@@ -119,7 +119,7 @@ class Post(models.Model):
     organization = models.CharField(blank=True, max_length=100)
     area_name = models.CharField(blank=True, max_length=100)
     area_id = models.CharField(blank=True, max_length=100)
-    election = models.ForeignKey(Election)
+    elections = models.ManyToManyField(Election)
 
     objects = PostManager()
 

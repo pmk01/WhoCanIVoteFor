@@ -22,7 +22,7 @@ class PostFactory(factory.django.DjangoModelFactory):
 
     ynr_id = "WMC:E14000647"
     label = "copeland"
-    election = factory.SubFactory(ElectionFactory)
+    elections = factory.RelatedFactory(ElectionFactory)
 
 class VotingSystemFactory(factory.django.DjangoModelFactory):
     class Meta:
