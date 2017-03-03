@@ -137,8 +137,8 @@ import os
 import dc_theme
 root_path = os.path.dirname(dc_theme.__file__)
 STATIC_PRECOMPILER_COMPILERS = (
-    ('static_precompiler.compilers.scss.SCSS', {
-        "sourcemap_enabled": True,
+    ('static_precompiler.compilers.libsass.SCSS', {
+        "sourcemap_enabled": False,
         # "output_style": "compressed",
         "load_paths": [
             root_path + '/static/dc_theme/bower_components/foundation-sites/assets',
