@@ -27,4 +27,3 @@ class TestFactories(TestCase):
     def test_voting_system_factory(self):
         model = self._test_save(VotingSystem, VotingSystemFactory)
         self.assertEqual(model.name, "First Past The Post")
-
