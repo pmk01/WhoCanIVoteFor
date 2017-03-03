@@ -12,6 +12,7 @@ cache:
     - /home/travis/virtualenv
     - $HOME/.pip-cache/
     - $HOME/.tox/
+    - .tox
 install:
   - pip install tox coveralls
 script:
