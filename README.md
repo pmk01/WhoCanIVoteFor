@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/DemocracyClub/WhoCanIVoteFor.svg?branch=master)](https://travis-ci.org/DemocracyClub/WhoCanIVoteFor)
+
+[![Coverage Status](https://coveralls.io/repos/github/DemocracyClub/WhoCanIVoteFor/badge.svg?branch=master)](https://coveralls.io/github/DemocracyClub/WhoCanIVoteFor?branch=master)
+
 [![Stories in Ready](https://badge.waffle.io/DemocracyClub/WhoCanIVoteFor.png?label=ready&title=Ready)](https://waffle.io/DemocracyClub/WhoCanIVoteFor)
 # WhoCanIVoteFor
 
