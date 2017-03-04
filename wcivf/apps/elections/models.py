@@ -124,12 +124,6 @@ class Post(models.Model):
 
     objects = PostManager()
 
-    def get_absolute_url(self):
-        return reverse('post_view', args=[
-                str(self.election.slug),
-                str(self.ynr_id),
-                slugify(self.label)
-            ])
 
 
     def friendly_name(self):
@@ -140,6 +134,13 @@ class Post(models.Model):
 class PostElection(models.Model):
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
+
+    def get_absolute_url(self):
+        return reverse('post_view', args=[
+                str(self.election.slug),
+                str(self.post.ynr_id),
+                slugify(self.post.label)
+            ])
 
 
 class VotingSystem(models.Model):

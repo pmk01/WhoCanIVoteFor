@@ -30,8 +30,8 @@
 
             <h3>Posts</h3>
             <ul>
-              {% for post in object.post_set.all %}
-                <li><a href="{{ post.get_absolute_url }}">{{ post.label }}</a></li>
+              {% for postelection in object.postelection_set.all %}
+                <li><a href="{{ postelection.get_absolute_url }}">{{ postelection.post.label }}</a></li>
               {% endfor %}
             </ul>
         {% endif %}
