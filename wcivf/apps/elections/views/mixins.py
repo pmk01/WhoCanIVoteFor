@@ -8,7 +8,7 @@ from django.core.cache import cache
 
 from notifications.forms import PostcodeNotificationForm
 from core.models import LoggedPostcode
-from ..models import Post, Election, InvalidPostcodeError
+from ..models import Post, Election, PostElection, InvalidPostcodeError
 
 
 class ElectionNotificationFormMixin(object):
@@ -103,23 +103,25 @@ class PostcodeToPostsMixin(object):
 
         if type(results_json) == dict and 'error' in results_json.keys():
             raise InvalidPostcodeError(postcode)
+
         all_posts = []
+        all_elections = []
         for election in results_json:
             all_posts.append(election['post_slug'])
-        if self.should_add_eu:
-            all_posts.append(self.add_eu())
-        print(all_posts)
+            all_elections.append(election['election_id'])
 
-
-
-        posts = Post.objects.filter(ynr_id__in=all_posts)
-        posts = posts.select_related('election')
-        posts = posts.select_related('election__voting_system')
-        posts = posts.order_by(
+        pes = PostElection.objects.filter(
+            post__ynr_id__in=all_posts,
+            election__slug__in=all_elections)
+        pes = pes.select_related('post')
+        pes = pes.select_related('election')
+        pes = pes.select_related('election__voting_system')
+        pes = pes.select_related('election')
+        pes = pes.order_by(
             'election__election_date',
             'election__election_weight'
         )
-        return posts
+        return pes
 
 
 class PollingStationInfoMixin(object):

@@ -24,26 +24,26 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
     """
     template_name = 'elections/postcode_view.html'
 
-    def posts_to_people(self, post):
-        key = "person_posts_{}".format(post.ynr_id)
+    def postelections_to_people(self, postelection):
+        key = "person_posts_{}".format(postelection.post.ynr_id)
         people_for_post = cache.get(key)
         if people_for_post:
             return people_for_post
 
         people_for_post = PersonPost.objects.filter(
-            post=post,
-            election=post.election
+            post=postelection.post,
+            election=postelection.election
             )
         people_for_post = people_for_post.select_related('person')
 
-        if post.election.uses_lists:
+        if postelection.election.uses_lists:
             order_by = ['party__party_name', 'list_position']
         else:
             order_by = ['person__name']
 
         people_for_post = people_for_post.order_by(*order_by)
         people_for_post = people_for_post.select_related('post')
-        people_for_post = people_for_post.select_related('post__election')
+        people_for_post = people_for_post.select_related('election')
         cache.set(key, people_for_post)
         return people_for_post
 
@@ -59,10 +59,10 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
         self.postcode = self.clean_postcode(kwargs['postcode'])
         context['postcode'] = self.postcode
         self.log_postcode(context['postcode'])
-        context['posts'] = self.postcode_to_posts(context['postcode'])
+        context['postelections'] = self.postcode_to_posts(context['postcode'])
         context['people_for_post'] = {}
-        for post in context['posts']:
-            post.people = self.posts_to_people(post)
+        for postelection in context['postelections']:
+            postelection.people = self.postelections_to_people(postelection)
 
         context['polling_station'] = self.get_polling_station_info(
             context['postcode'])

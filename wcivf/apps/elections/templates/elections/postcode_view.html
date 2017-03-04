@@ -23,11 +23,11 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
 <section class="columns large-12">
   <div class="card next_election">
 
-    {% if posts.count == 0 %}
+    {% if postelections.count == 0 %}
         We don't know of any upcoming elections.
     {% else %}
 
-      {% regroup posts by election.election_date as header_elections_by_date %}
+      {% regroup postelections by election.election_date as header_elections_by_date %}
       <p style="font-size: 1.4rem;">
       {% if header_elections_by_date.0.list.1 %}
         Your next elections are
@@ -68,54 +68,61 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
 
 <div class="row">
 <section id="elections_list" class="columns large-12">
-    {% regroup posts by election.election_date as elections_by_date %}
+    {% regroup postelections by election.election_date as elections_by_date %}
     {% for election_group in elections_by_date %}
     <div class="row">
       <div class="columns large-12">
         <h2 style="margin: 2rem 0 0 0">{{ election_group.grouper }}</h2>
       </div>
     </div>
-      {% for post in election_group.list %}
-      <div id="election_{{ post.election.slug }}" class="card">
-        {% if post.election.ballot_colour %}<div style="margin:-20px -20px 10px -20px; padding: 20px; background-color:{{ post.election.ballot_colour }};">{% endif %}
-        <h2 class="card_header">{{ post.friendly_name }}</h2>
-        <h3 class="card_subheader">{{ post.election.name }}</h3>
-        {% if post.election.ballot_colour %}</div>{% endif %}
+      {% for postelection in election_group.list %}
+      <div id="election_{{ postelection.election.slug }}" class="card">
 
-        {% if post.election.description %}
-        {{ post.election.description|markdown }}
+        {% if postelection.election.ballot_colour %}
+            <div style="margin:-20px -20px 10px -20px; padding: 20px; background-color:{{ postelection.election.ballot_colour }};">
         {% endif %}
 
-        {% if post.election.voting_system %}
+        <h2 class="card_header">{{ postelection.friendly_name }}</h2>
+        <h3 class="card_subheader">{{ postelection.election.name }}</h3>
+
+        {% if postelection.election.ballot_colour %}</div>{% endif %}
+
+        {% if postelection.election.description %}
+        {{ postelection.election.description|markdown }}
+        {% endif %}
+
+        {% if postelection.election.voting_system %}
         <details>
           <summary>How you vote</summary>
-          <h5>{{ post.election.voting_system }}</h5>
-          {{ post.election.voting_system.description|markdown }}
-          <p><a href="{{ post.election.voting_system.wikipedia_url }}">Read more on wikipedia</a></p>
+          <h5>{{ postelection.election.voting_system }}</h5>
+          {{ postelection.election.voting_system.description|markdown }}
+          <p><a href="{{ postelection.election.voting_system.wikipedia_url }}">
+              Read more on wikipedia</a></p>
         </details>
         {% endif %}
 
-        {% if post.election.voter_age %}
+        {% if postelection.election.voter_age %}
         <details>
           <summary>Can you vote in this election?</summary>
           <h5>Age</h5>
-          <p>You need to be over {{ post.election.voter_age }} on the
-          {{ post.election.election_date|date:"jS" }} of {{ post.election.election_date|date:"F Y" }}  in order to vote in this election</p>
-          {% if post.election.voter_citizenship %}
+          <p>You need to be over {{ postelection.election.voter_age }} on the
+          {{ postelection.election.election_date|date:"jS" }}
+          of {{ postelection.election.election_date|date:"F Y" }} in order to vote in this election</p>
+          {% if postelection.election.voter_citizenship %}
             <h5>Citizenship</h5>
-            {{ post.election.voter_citizenship|markdown }}
+            {{ postelection.election.voter_citizenship|markdown }}
           {% endif %}
         </details>
         {% endif %}
 
-        {% if post.people %}
+        {% if postelections.people %}
         <div class="clearfix row">
           <div class="columns large-12">
-          {% if post.election.uses_lists %}
+          {% if postelection.election.uses_lists %}
           <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
-          {% include "elections/includes/_people_list_with_lists.html" with people=post.people %}
+          {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
           {% else %}
-          {% include "elections/includes/_people_list.html" with people=post.people %}
+          {% include "elections/includes/_people_list.html" with people=postelection.people %}
           {% endif %}
           </div>
         </div>

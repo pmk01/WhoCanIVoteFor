@@ -1,0 +1,30 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: https://candidates.democracyclub.org.uk/upcoming-elections?postcode=EC1A%204EU
+  response:
+    body: {string: '[{"election_name": "City of London Corporation local election",
+        "area": {"identifier": "gss:E05009288", "type": "LBW", "name": "Aldersgate"},
+        "election_date": "2017-03-23", "post_name": "Aldersgate", "organization":
+        "City of London Corporation", "post_slug": "LBW:E05009288", "election_id":
+        "local.city-of-london.2017-03-23"}]'}
+    headers:
+      Access-Control-Allow-Credentials: ['true']
+      Access-Control-Allow-Headers: ['DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type']
+      Access-Control-Allow-Methods: ['GET, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Connection: [keep-alive]
+      Content-Language: [en]
+      Content-Type: [application/json]
+      Date: ['Sat, 04 Mar 2017 13:46:10 GMT']
+      Server: [nginx]
+      Vary: ['Accept-Language, Cookie']
+      X-Frame-Options: [SAMEORIGIN]
+    status: {code: 200, message: OK}
+version: 1

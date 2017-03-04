@@ -119,7 +119,8 @@ class Post(models.Model):
     organization = models.CharField(blank=True, max_length=100)
     area_name = models.CharField(blank=True, max_length=100)
     area_id = models.CharField(blank=True, max_length=100)
-    elections = models.ManyToManyField(Election)
+    elections = models.ManyToManyField(Election,
+        through='elections.PostElection')
 
     objects = PostManager()
 
@@ -135,6 +136,10 @@ class Post(models.Model):
         if self.ynr_id == "ref.2016-06-23":
             return self.label
         return "{} for {}".format(self.election.for_post_role, self.area_name)
+
+class PostElection(models.Model):
+    post = models.ForeignKey(Post)
+    election = models.ForeignKey(Election)
 
 
 class VotingSystem(models.Model):

@@ -32,8 +32,8 @@ class ElectionManager(models.Manager):
 
 class PostManager(models.Manager):
     def update_or_create_from_ynr(self, post_dict):
-        from .models import Election
-        post, _ = self.update_or_create(
+        from .models import Election, PostElection
+        post, created = self.update_or_create(
             ynr_id=post_dict['id'],
             defaults={
                 'label': post_dict['label'],
@@ -46,4 +46,8 @@ class PostManager(models.Manager):
         )
         for election_dict in post_dict['elections']:
             election = Election.objects.get(slug=election_dict['id'])
-            post.elections.add(election)
+            PostElection.objects.get_or_create(
+                election=election,
+                post=post
+            )
+        return (post, created)
