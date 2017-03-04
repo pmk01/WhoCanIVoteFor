@@ -124,8 +124,6 @@ class Post(models.Model):
 
     objects = PostManager()
 
-
-
     def friendly_name(self):
         if self.ynr_id == "ref.2016-06-23":
             return self.label
@@ -141,7 +139,6 @@ class PostElection(models.Model):
                 str(self.post.ynr_id),
                 slugify(self.post.label)
             ])
-
 
 class VotingSystem(models.Model):
     slug = models.SlugField(primary_key=True)

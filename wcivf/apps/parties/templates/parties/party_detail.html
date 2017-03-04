@@ -40,14 +40,14 @@
 <div class="row">
 <section class="columns large-12">
   <div class="card">
-      {% regroup object.personpost_set.all.counts_by_post by post__election__name as people_by_election %}
+      {% regroup object.personpost_set.all.counts_by_post by election__name as people_by_election %}
 
       {% for election in people_by_election %}
       <h4>{{ election.grouper }}</h4>
       {% for post in election.list %}
         <dl>
           <dt>
-            <a href="{% url 'post_view' post.post__election__slug post.post_id post.post__label|slugify %}">
+            <a href="{% url 'post_view' post.election__slug post.post_id post.post__label|slugify %}">
               {{ post.post__label }}
             </a>
           </dt>
