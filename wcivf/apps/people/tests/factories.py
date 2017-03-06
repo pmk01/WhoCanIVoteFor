@@ -18,7 +18,6 @@ class PersonPostFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PersonPost
 
-
     person = factory.SubFactory(PersonFactory)
     post = factory.SubFactory(PostFactory)
     party = None

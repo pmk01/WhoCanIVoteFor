@@ -1,8 +1,5 @@
-import vcr
-
 from django.test import TestCase
 
-from people.tests.factories import PersonFactory, PersonPostFactory
 from elections.tests.factories import ElectionFactory, PostFactory
 from elections.models import PostElection
 

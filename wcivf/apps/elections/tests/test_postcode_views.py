@@ -2,7 +2,6 @@ import vcr
 
 from django.test import TestCase
 
-from people.tests.factories import PersonFactory, PersonPostFactory
 from elections.tests.factories import ElectionFactory, PostFactory
 
 
@@ -17,8 +16,6 @@ class PostcodeViewTests(TestCase):
             ynr_id="LBW:E05009288",
             label="Aldersgate"
         )
-
-        # https://candidates.democracyclub.org.uk/upcoming-elections?postcode=EC1A%204EU
 
     @vcr.use_cassette(
         'fixtures/vcr_cassettes/test_postcode_view.yaml')

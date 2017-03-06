@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from parties.tests.factories import PartyFactory
-from people.tests.factories import PersonPostFactory
+from people.tests.factories import PersonFactory, PersonPostFactory
 from elections.tests.factories import ElectionFactory, PostFactory
 from parties.models import Party
 
