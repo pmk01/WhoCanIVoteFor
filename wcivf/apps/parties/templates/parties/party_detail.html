@@ -52,7 +52,7 @@
             </a>
           </dt>
           <dd>
-            {{ post.num_candidates }} candidate
+            {{ post.num_candidates }} candidate{{ post.num_candidates|pluralize }}
           </dd>
         </dl>
       {% endfor %}
