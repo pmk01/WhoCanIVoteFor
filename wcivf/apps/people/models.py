@@ -27,6 +27,7 @@ class PersonPost(models.Model):
 
     class Meta:
         ordering = ('-election__election_date', )
+        unique_together = ('person', 'post', 'election')
 
 
 
