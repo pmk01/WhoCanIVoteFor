@@ -9,12 +9,12 @@ from parties.models import Party
 class PartyViewTests(TestCase):
     def setUp(self):
         self.party = PartyFactory()
-        election = ElectionFactory()
-        post = PostFactory()
+        self.election = ElectionFactory()
+        self.post = PostFactory()
         PersonPostFactory(
             party=self.party,
-            election=election,
-            post=post,
+            election=self.election,
+            post=self.post,
         )
 
     def test_party_list_view(self):

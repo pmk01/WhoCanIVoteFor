@@ -22,5 +22,4 @@ class PostcodeViewTests(TestCase):
     def test_postcode_view(self):
         response = self.client.get("/elections/EC1A4EU", follow=True)
         self.assertEqual(response.status_code, 200)
-        # self.assertTemplateUsed(response, 'people/person_detail.html')
-
+        self.assertTemplateUsed(response, 'elections/postcode_view.html')

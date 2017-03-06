@@ -8,8 +8,8 @@ class PersonFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Person
 
-    ynr_id = "502"
-    name = "Jane Smith"
+    ynr_id = factory.Sequence(lambda n: n)
+    name = factory.Sequence(lambda n: 'Candidate %d' % n)
     elections = factory.RelatedFactory(ElectionFactory)
     posts = factory.RelatedFactory(PostFactory)
 
