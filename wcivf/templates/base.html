@@ -1,5 +1,5 @@
 {% extends "dc_base.html" %}
-{% load compile_static %}
+{% load pipeline %}
 {% load static %}
 
 {% block base_title %}{% block page_title %}{% endblock page_title %} | WhoCanIVoteFor?{% endblock base_title %}
@@ -28,7 +28,8 @@
 {% else %}
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static "scss/main.scss"|compile %}?{{ REVISION }}" />{% endif %}
+    {% stylesheet 'styles' %}
+    {% endif %}
 {% endblock extra_site_css %}
 
 {% block top_banner %}
@@ -106,7 +107,7 @@ var trackOutboundLink = function(cat, url) {
       eventCategory: cat,
       eventAction: 'click',
      'hitCallback': function(){
-       window.open(url, '_blank');;
+       window.open(url, '_blank');
      }
    });
 }
@@ -115,6 +116,32 @@ var trackOutboundLink = function(cat, url) {
 
 
 {% block extra_javascript %}
-<link rel="stylesheet" href="/static/COMPILED/scss/main.css?{{ REVISION }}">
-<script src="{% static "js/main.js" %}?{{ REVISION }}"></script>
+{% if debug %}
+    <script>
+    // shim fallback in debug mode
+    if (typeof fallback == 'undefined') {
+        var fallback = {
+            ready: function(l, f) {
+                if (typeof l == "function") {
+                    l()
+                } else {
+                    f();
+                }
+            }
+        }
+    }
+    </script>
+    {% javascript 'scripts' %}
+{% else %}
+    <script src="{% static "dc_theme/js/fallback.min.js" %}"></script>
+    <script type="text/javascript">
+        fallback.load({
+            scripts: [
+                '{% static "/js/scripts.js" %}'
+            ],
+        });
+    </script>
+{% endif %}
+
+
 {% endblock extra_javascript %}

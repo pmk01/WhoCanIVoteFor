@@ -11,6 +11,6 @@ Pillow
 icalendar
 dealer
 
-git+https://github.com/DemocracyClub/django-static-precompiler
-git+git://github.com/DemocracyClub/dc_base_theme.git@04efca5047b31d705e63d516b3b5dc5d0f0694a7
+git+git://github.com/DemocracyClub/dc_base_theme.git@e4dc67ce289f8f93b6dbbdcf568095941d6c5e71
 libsass
+git+https://github.com/mysociety/django-pipeline-csscompressor.git
