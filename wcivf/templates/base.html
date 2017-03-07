@@ -24,7 +24,6 @@
     </script>
     <noscript>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/static/COMPILED/scss/main.css?{{ REVISION }}">
     </noscript>
 {% else %}
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -116,5 +115,6 @@ var trackOutboundLink = function(cat, url) {
 
 
 {% block extra_javascript %}
+<link rel="stylesheet" href="/static/COMPILED/scss/main.css?{{ REVISION }}">
 <script src="{% static "js/main.js" %}?{{ REVISION }}"></script>
 {% endblock extra_javascript %}
