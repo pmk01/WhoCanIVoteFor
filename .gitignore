@@ -71,4 +71,4 @@ wcivf/static_root/
 *~
 wcivf/media/
 *.DS_Store
-wcivf/static/COMPILED/
+wcivf/static/
