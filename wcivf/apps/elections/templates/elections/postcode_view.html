@@ -22,7 +22,6 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
 <div class="row">
 <section class="columns large-12">
   <div class="card next_election">
-
     {% if postelections.count == 0 %}
         We don't know of any upcoming elections.
     {% else %}
@@ -77,13 +76,12 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
     </div>
       {% for postelection in election_group.list %}
       <div id="election_{{ postelection.election.slug }}" class="card">
-
         {% if postelection.election.ballot_colour %}
             <div style="margin:-20px -20px 10px -20px; padding: 20px; background-color:{{ postelection.election.ballot_colour }};">
         {% endif %}
 
-        <h2 class="card_header">{{ postelection.friendly_name }}</h2>
-        <h3 class="card_subheader">{{ postelection.election.name }}</h3>
+        <h2 class="card_header">{{ postelection.election.name }}</h2>
+        <h3 class="card_subheader">{{ postelection.post.label }}</h3>
 
         {% if postelection.election.ballot_colour %}</div>{% endif %}
 
@@ -115,7 +113,7 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
         </details>
         {% endif %}
 
-        {% if postelections.people %}
+        {% if postelection.people %}
         <div class="clearfix row">
           <div class="columns large-12">
           {% if postelection.election.uses_lists %}
