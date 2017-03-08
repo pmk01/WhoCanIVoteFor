@@ -129,7 +129,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     root('assets'),
 )
-STATIC_ROOT = root('static_root')
+STATIC_ROOT = root('static')
 
 
 from dc_theme.settings import (
