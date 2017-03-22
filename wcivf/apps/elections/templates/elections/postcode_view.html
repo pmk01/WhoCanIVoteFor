@@ -82,6 +82,12 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
 
         <h2 class="card_header">{{ postelection.election.name }}</h2>
         <h3 class="card_subheader">{{ postelection.post.label }}</h3>
+        {% if not postelection.contested %}
+        <div class="callout">
+            This election isn't contested. That means that there are the same number of candidates nominated
+            as there are seats up for election, so they all get positions without an election taking place.
+        </div>
+        {% endif %}
 
         {% if postelection.election.ballot_colour %}</div>{% endif %}
 

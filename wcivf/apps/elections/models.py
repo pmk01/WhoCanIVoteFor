@@ -132,6 +132,7 @@ class Post(models.Model):
 class PostElection(models.Model):
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
+    contested = models.BooleanField(default=True)
 
     def get_absolute_url(self):
         return reverse('post_view', args=[

@@ -18,7 +18,7 @@ class PostcodeViewTests(TestCase):
         )
 
     @vcr.use_cassette(
-        'fixtures/vcr_cassettes/test_postcode_view.yaml')
+        'fixtures/AA1%201AA_cassettes/test_postcode_view.yaml')
     def test_postcode_view(self):
         response = self.client.get("/elections/EC1A4EU", follow=True)
         self.assertEqual(response.status_code, 200)

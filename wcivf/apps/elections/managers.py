@@ -44,10 +44,18 @@ class PostManager(models.Manager):
                 'area_id': post_dict['area']['identifier'],
             }
         )
+
         for election_dict in post_dict['elections']:
             election = Election.objects.get(slug=election_dict['id'])
-            PostElection.objects.get_or_create(
+            kwargs = {}
+            if post_dict['candidates_locked']:
+                if election_dict['winner_count'] == \
+                        len(post_dict['memberships']):
+                    kwargs['contested'] = False
+
+            PostElection.objects.update_or_create(
                 election=election,
-                post=post
+                post=post,
+                defaults=kwargs
             )
         return (post, created)
