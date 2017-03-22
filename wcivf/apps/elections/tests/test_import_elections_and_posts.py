@@ -34,4 +34,4 @@ class TestElectionAndPostImporter(TestCase):
         assert Election.objects.count() == 0
         self._import_elections()
         self._import_posts()
-        assert Election.objects.count() == 295
+        assert Election.objects.count() == 297

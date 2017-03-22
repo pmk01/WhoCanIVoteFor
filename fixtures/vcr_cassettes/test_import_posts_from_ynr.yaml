@@ -9,7 +9,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=2","previous":null,"results":[{"id":"2015","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/","name":"2015
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=2","previous":null,"results":[{"id":"2015","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/","name":"2015
         General Election","for_post_role":"Member of Parliament","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2015-05-07","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":1,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/","name":"WMC","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":{"id":"UK
         House of Parliament:commons","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/UK%20House%20of%20Parliament:commons/","name":"House
         of Commons"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":"2015
@@ -42,7 +42,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:56 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:25 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -57,7 +57,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=2
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=3","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/","results":[{"id":"mayor.london.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.london.2016-05-05/","name":"London
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=3","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/","results":[{"id":"mayor.london.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.london.2016-05-05/","name":"London
         Mayoral Election","for_post_role":"Mayor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":7,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/7/","name":"GLA","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.liverpool.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.liverpool.2016-05-05/","name":"Liverpool
         Mayoral Election","for_post_role":"Mayor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":10,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/10/","name":"MTD","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.bristol.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.bristol.2016-05-05/","name":"Bristol
         Mayoral Election","for_post_role":"Mayor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":11,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/11/","name":"UTA","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.salford.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.salford.2016-05-05/","name":"Salford
@@ -77,7 +77,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:56 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:26 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -92,7 +92,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=3
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=4","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=2","results":[{"id":"local.great-yarmouth.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.great-yarmouth.2016-05-05/","name":"Great
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=4","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=2","results":[{"id":"local.great-yarmouth.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.great-yarmouth.2016-05-05/","name":"Great
         Yarmouth local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.woking.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.woking.2016-05-05/","name":"Woking
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.epping-forest.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.epping-forest.2016-05-05/","name":"Epping
         Forest local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.lincoln.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.lincoln.2016-05-05/","name":"Lincoln
@@ -112,7 +112,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:56 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:27 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -127,7 +127,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=4
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=5","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=3","results":[{"id":"local.dudley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.dudley.2016-05-05/","name":"Dudley
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=5","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=3","results":[{"id":"local.dudley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.dudley.2016-05-05/","name":"Dudley
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.preston.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.preston.2016-05-05/","name":"Preston
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.craven.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.craven.2016-05-05/","name":"Craven
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.south-lakeland.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.south-lakeland.2016-05-05/","name":"South
@@ -147,7 +147,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:56 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:28 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -162,7 +162,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=5
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=6","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=4","results":[{"id":"local.mole-valley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.mole-valley.2016-05-05/","name":"Mole
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=6","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=4","results":[{"id":"local.mole-valley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.mole-valley.2016-05-05/","name":"Mole
         Valley local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.warrington.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.warrington.2016-05-05/","name":"Warrington
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.leeds.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.leeds.2016-05-05/","name":"Leeds
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.fareham.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.fareham.2016-05-05/","name":"Fareham
@@ -182,7 +182,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:57 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:29 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -197,7 +197,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=6
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=7","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=5","results":[{"id":"local.portsmouth.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.portsmouth.2016-05-05/","name":"Portsmouth
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=7","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=5","results":[{"id":"local.portsmouth.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.portsmouth.2016-05-05/","name":"Portsmouth
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.wyre-forest.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.wyre-forest.2016-05-05/","name":"Wyre
         Forest local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.winchester.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.winchester.2016-05-05/","name":"Winchester
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.knowsley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.knowsley.2016-05-05/","name":"Knowsley
@@ -217,7 +217,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:57 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:29 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -232,7 +232,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=7
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=8","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=6","results":[{"id":"local.sunderland.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.sunderland.2016-05-05/","name":"Sunderland
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=8","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=6","results":[{"id":"local.sunderland.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.sunderland.2016-05-05/","name":"Sunderland
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.cherwell.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.cherwell.2016-05-05/","name":"Cherwell
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.bury.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.bury.2016-05-05/","name":"Bury
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.watford.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.watford.2016-05-05/","name":"Watford
@@ -252,7 +252,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:57 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:30 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -267,7 +267,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=8
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=9","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=7","results":[{"id":"local.blackburn-with-darwen.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.blackburn-with-darwen.2016-05-05/","name":"Blackburn
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=9","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=7","results":[{"id":"local.blackburn-with-darwen.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.blackburn-with-darwen.2016-05-05/","name":"Blackburn
         with Darwen local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.huntingdonshire.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.huntingdonshire.2016-05-05/","name":"Huntingdonshire
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.hartlepool.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.hartlepool.2016-05-05/","name":"Hartlepool
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.wigan.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.wigan.2016-05-05/","name":"Wigan
@@ -287,7 +287,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:57 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:31 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -302,7 +302,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=9
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=10","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=8","results":[{"id":"local.cambridge.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.cambridge.2016-05-05/","name":"Cambridge
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=10","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=8","results":[{"id":"local.cambridge.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.cambridge.2016-05-05/","name":"Cambridge
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.west-lancashire.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.west-lancashire.2016-05-05/","name":"West
         Lancashire local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.hastings.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.hastings.2016-05-05/","name":"Hastings
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.chorley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.chorley.2016-05-05/","name":"Chorley
@@ -322,7 +322,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:58 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:32 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -337,7 +337,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=10
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=11","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=9","results":[{"id":"local.trafford.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.trafford.2016-05-05/","name":"Trafford
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=11","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=9","results":[{"id":"local.trafford.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.trafford.2016-05-05/","name":"Trafford
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.newcastle-upon-tyne.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.newcastle-upon-tyne.2016-05-05/","name":"Newcastle
         upon Tyne local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.bolton.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.bolton.2016-05-05/","name":"Bolton
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.burnley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.burnley.2016-05-05/","name":"Burnley
@@ -357,7 +357,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:58 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:33 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -372,7 +372,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=11
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=12","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=10","results":[{"id":"local.cannock-chase.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.cannock-chase.2016-05-05/","name":"Cannock
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=12","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=10","results":[{"id":"local.cannock-chase.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.cannock-chase.2016-05-05/","name":"Cannock
         Chase local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.manchester.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.manchester.2016-05-05/","name":"Manchester
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.calderdale.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.calderdale.2016-05-05/","name":"Calderdale
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.st-helens.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.st-helens.2016-05-05/","name":"St
@@ -392,7 +392,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:58 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:34 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -407,7 +407,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=12
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=13","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=11","results":[{"id":"local.bradford.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.bradford.2016-05-05/","name":"Bradford
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=13","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=11","results":[{"id":"local.bradford.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.bradford.2016-05-05/","name":"Bradford
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.rugby.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.rugby.2016-05-05/","name":"Rugby
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.harlow.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.harlow.2016-05-05/","name":"Harlow
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.oldham.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.oldham.2016-05-05/","name":"Oldham
@@ -427,7 +427,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:58 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:35 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -442,7 +442,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=13
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=14","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=12","results":[{"id":"local.havant.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.havant.2016-05-05/","name":"Havant
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=14","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=12","results":[{"id":"local.havant.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.havant.2016-05-05/","name":"Havant
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.ipswich.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.ipswich.2016-05-05/","name":"Ipswich
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.kirklees.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.kirklees.2016-05-05/","name":"Kirklees
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.southampton.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.southampton.2016-05-05/","name":"Southampton
@@ -462,7 +462,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:59 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:36 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -477,7 +477,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=14
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=15","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=13","results":[{"id":"local.weymouth-and-portland.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.weymouth-and-portland.2016-05-05/","name":"Weymouth
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=15","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=13","results":[{"id":"local.weymouth-and-portland.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.weymouth-and-portland.2016-05-05/","name":"Weymouth
         and Portland local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.north-tyneside.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.north-tyneside.2016-05-05/","name":"North
         Tyneside local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.thurrock.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.thurrock.2016-05-05/","name":"Thurrock
         local election","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"1","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.hyndburn.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.hyndburn.2016-05-05/","name":"Hyndburn
@@ -499,7 +499,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:59 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:37 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -514,7 +514,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=15
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=16","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=14","results":[{"id":"local.braintree.witham-south.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.braintree.witham-south.2016-05-05/","name":"Braintree
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=16","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=14","results":[{"id":"local.braintree.witham-south.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.braintree.witham-south.2016-05-05/","name":"Braintree
         by-election: Witham South ward","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"","organization":{"id":"District
         council ward:braintree","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/District%20council%20ward:braintree/","name":"Braintree"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.breckland.attleborough-queens-and-besthorpe.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.breckland.attleborough-queens-and-besthorpe.2016-05-05/","name":"Breckland
         by-election: Attleborough Queens and Besthorpe ward","for_post_role":"Local
@@ -547,7 +547,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:59 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:38 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -562,7 +562,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=16
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=17","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=15","results":[{"id":"local.east-riding-of-yorkshire.east-wolds-and-coastal.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.east-riding-of-yorkshire.east-wolds-and-coastal.2016-05-05/","name":"East
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=17","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=15","results":[{"id":"local.east-riding-of-yorkshire.east-wolds-and-coastal.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.east-riding-of-yorkshire.east-wolds-and-coastal.2016-05-05/","name":"East
         Riding of Yorkshire by-election: East Wolds & Coastal ward","for_post_role":"Local
         Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"Unitary
         Authority ward (UTW):east-riding-of-yorkshire","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/Unitary%20Authority%20ward%20(UTW):east-riding-of-yorkshire/","name":"East
@@ -598,7 +598,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:26:59 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:39 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -613,7 +613,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=17
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=18","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=16","results":[{"id":"local.hampshire.headley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.hampshire.headley.2016-05-05/","name":"Hampshire
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=18","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=16","results":[{"id":"local.hampshire.headley.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.hampshire.headley.2016-05-05/","name":"Hampshire
         by-election: Headley ward","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":19,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/19/","name":"CED","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"police_area:hampshire","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/police_area:hampshire/","name":"Hampshire
         Constabulary"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.havering.heaton.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.havering.heaton.2016-05-05/","name":"Havering
         by-election: Heaton ward","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":15,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/15/","name":"MTW","source":"https://elections.democracyclub.org.uk/"},{"id":17,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/17/","name":"LBW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"Metropolitan
@@ -645,7 +645,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:00 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:40 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -660,7 +660,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=18
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=19","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=17","results":[{"id":"local.redbridge.roding.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.redbridge.roding.2016-05-05/","name":"Redbridge
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=19","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=17","results":[{"id":"local.redbridge.roding.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.redbridge.roding.2016-05-05/","name":"Redbridge
         by-election: Roding ward","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":17,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/17/","name":"LBW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"London
         borough ward:redbridge","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/London%20borough%20ward:redbridge/","name":"Redbridge"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.kensington-and-chelsea.abingdon.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.kensington-and-chelsea.abingdon.2016-05-05/","name":"Kensington
         and Chelsea by-election: Abingdon ward","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":17,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/17/","name":"LBW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"London
@@ -695,7 +695,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:00 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:40 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -710,7 +710,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=19
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=20","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=18","results":[{"id":"local.suffolk.haverhill-cangle.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.suffolk.haverhill-cangle.2016-05-05/","name":"Suffolk
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=20","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=18","results":[{"id":"local.suffolk.haverhill-cangle.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.suffolk.haverhill-cangle.2016-05-05/","name":"Suffolk
         County Council by-election: Haverhill Cangle ward","for_post_role":"Local
         Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":19,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/19/","name":"CED","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"County
         council electoral division:suffolk-county-council","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/County%20council%20electoral%20division:suffolk-county-council/","name":"Suffolk
@@ -745,7 +745,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:00 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:41 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -760,7 +760,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=20
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=21","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=19","results":[{"id":"local.st-edmundsbury.haverhill-north.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.st-edmundsbury.haverhill-north.2016-05-05/","name":"St
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=21","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=19","results":[{"id":"local.st-edmundsbury.haverhill-north.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.st-edmundsbury.haverhill-north.2016-05-05/","name":"St
         Edmundsbury by-election: Haverhill North ward","for_post_role":"Local Councillor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2016-05-05","current":false,"use_for_candidate_suggestions":false,"area_types":[{"id":12,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/12/","name":"DIW","source":"MapIt"}],"area_generation":"","organization":{"id":"District
         council ward:st-edmundsbury","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/District%20council%20ward:st-edmundsbury/","name":"St
         Edmundsbury"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.torbay.tormohun.2016-05-05","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.torbay.tormohun.2016-05-05/","name":"Torbay
@@ -772,7 +772,7 @@ interactions:
         council ward:south-ribble","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/District%20council%20ward:south-ribble/","name":"South
         Ribble"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"nia.2017-03-02","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/nia.2017-03-02/","name":"2017
         Northern Ireland Assembly Election","for_post_role":"Member of the Legislative
-        Assembly","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2017-03-02","current":true,"use_for_candidate_suggestions":true,"area_types":[{"id":2,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/2/","name":"NIE","source":"MapIt"}],"area_generation":"22","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.west-midlands.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.west-midlands.2017-05-04/","name":"Mayor
+        Assembly","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2017-03-02","current":false,"use_for_candidate_suggestions":true,"area_types":[{"id":2,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/2/","name":"NIE","source":"MapIt"}],"area_generation":"22","organization":null,"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.west-midlands.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.west-midlands.2017-05-04/","name":"Mayor
         of West Midlands Combined Authority","for_post_role":"Directly elected Mayor","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":22,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/22/","name":"combined-authority","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"combined-authority:west-midlands","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/combined-authority:west-midlands/","name":"West
         Midlands Combined Authority"},"party_lists_in_use":true,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.tees-valley.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.tees-valley.2017-05-04/","name":"Mayor
         of Tees Valley Combined Authority","for_post_role":"Directly elected Mayor","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":22,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/22/","name":"combined-authority","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"combined-authority:tees-valley","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/combined-authority:tees-valley/","name":"Tees
@@ -792,7 +792,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:00 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:42 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -807,7 +807,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=21
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=22","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=20","results":[{"id":"mayor.doncaster.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.doncaster.2017-05-04/","name":"Doncaster
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=22","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=20","results":[{"id":"mayor.doncaster.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.doncaster.2017-05-04/","name":"Doncaster
         Metropolitan Borough Council local election","for_post_role":"Directly elected
         Mayor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":23,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/23/","name":"local-authority","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:doncaster","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:doncaster/","name":"Doncaster
         Metropolitan Borough Council"},"party_lists_in_use":true,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.cambridgeshire-and-peterborough.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.cambridgeshire-and-peterborough.2017-05-04/","name":"Mayor
@@ -840,7 +840,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:01 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:42 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -855,7 +855,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=22
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=23","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=21","results":[{"id":"local.ceredigion.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.ceredigion.2017-05-04/","name":"Ceredigion
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=23","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=21","results":[{"id":"local.ceredigion.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.ceredigion.2017-05-04/","name":"Ceredigion
         County Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":21,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/21/","name":"UTE","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:ceredigion","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:ceredigion/","name":"Ceredigion
         County Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.bridgend.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.bridgend.2017-05-04/","name":"Bridgend
         County Borough Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":21,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/21/","name":"UTE","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:bridgend","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:bridgend/","name":"Bridgend
@@ -885,7 +885,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:01 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:43 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -900,7 +900,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=23
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=24","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=22","results":[{"id":"local.conwy.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.conwy.2017-05-04/","name":"Conwy
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=24","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=22","results":[{"id":"local.conwy.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.conwy.2017-05-04/","name":"Conwy
         County Borough Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":21,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/21/","name":"UTE","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:conwy","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:conwy/","name":"Conwy
         County Borough Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.cornwall.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.cornwall.2017-05-04/","name":"Cornwall
         Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":21,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/21/","name":"UTE","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:cornwall","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:cornwall/","name":"Cornwall
@@ -930,7 +930,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:01 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:44 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -945,7 +945,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=24
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=25","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=23","results":[{"id":"local.east-lothian.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.east-lothian.2017-05-04/","name":"East
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=25","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=23","results":[{"id":"local.east-lothian.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.east-lothian.2017-05-04/","name":"East
         Lothian Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:east-lothian","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:east-lothian/","name":"East
         Lothian Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.essex.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.essex.2017-05-04/","name":"Essex
         County Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":19,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/19/","name":"CED","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:essex","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:essex/","name":"Essex
@@ -975,7 +975,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:01 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:46 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -990,7 +990,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=25
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=26","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=24","results":[{"id":"local.east-ayrshire.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.east-ayrshire.2017-05-04/","name":"East
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=26","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=24","results":[{"id":"local.east-ayrshire.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.east-ayrshire.2017-05-04/","name":"East
         Ayrshire Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:east-ayrshire","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:east-ayrshire/","name":"East
         Ayrshire Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.east-dunbartonshire.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.east-dunbartonshire.2017-05-04/","name":"East
         Dunbartonshire Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:east-dunbartonshire","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:east-dunbartonshire/","name":"East
@@ -1020,7 +1020,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:02 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:47 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -1035,7 +1035,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=26
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=27","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=25","results":[{"id":"local.isle-of-anglesey.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.isle-of-anglesey.2017-05-04/","name":"Isle
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=27","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=25","results":[{"id":"local.isle-of-anglesey.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.isle-of-anglesey.2017-05-04/","name":"Isle
         of Anglesey County Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":21,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/21/","name":"UTE","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:isle-of-anglesey","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:isle-of-anglesey/","name":"Isle
         of Anglesey County Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.powys.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.powys.2017-05-04/","name":"Powys
         County Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":21,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/21/","name":"UTE","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:powys","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:powys/","name":"Powys
@@ -1065,7 +1065,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:02 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:48 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -1080,7 +1080,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=27
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=28","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=26","results":[{"id":"local.surrey.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.surrey.2017-05-04/","name":"Surrey
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=28","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=26","results":[{"id":"local.surrey.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.surrey.2017-05-04/","name":"Surrey
         County Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":19,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/19/","name":"CED","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:surrey","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:surrey/","name":"Surrey
         County Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.highland.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.highland.2017-05-04/","name":"The
         Highland Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:highland","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:highland/","name":"The
@@ -1110,7 +1110,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:02 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:49 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -1125,7 +1125,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=28
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=29","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=27","results":[{"id":"local.west-sussex.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.west-sussex.2017-05-04/","name":"West
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=29","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=27","results":[{"id":"local.west-sussex.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.west-sussex.2017-05-04/","name":"West
         Sussex County Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":24,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/24/","name":"","source":"https://elections.democracyclub.org.uk/"},{"id":19,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/19/","name":"CED","source":"https://elections.democracyclub.org.uk/"},{"id":36,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/36/","name":"E10000032","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:west-sussex","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:west-sussex/","name":"West
         Sussex County Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.wiltshire.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.wiltshire.2017-05-04/","name":"Wiltshire
         Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":21,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/21/","name":"UTE","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:wiltshire","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:wiltshire/","name":"Wiltshire
@@ -1155,7 +1155,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:02 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:49 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -1170,7 +1170,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=29
   response:
-    body: {string: '{"count":295,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=30","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=28","results":[{"id":"local.perth-and-kinross.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.perth-and-kinross.2017-05-04/","name":"Perth
+    body: {string: '{"count":297,"next":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=30","previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=28","results":[{"id":"local.perth-and-kinross.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.perth-and-kinross.2017-05-04/","name":"Perth
         and Kinross Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:perth-and-kinross","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:perth-and-kinross/","name":"Perth
         and Kinross Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.renfrewshire.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.renfrewshire.2017-05-04/","name":"Renfrewshire
         Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":14,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/14/","name":"UTW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:renfrewshire","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:renfrewshire/","name":"Renfrewshire
@@ -1200,7 +1200,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:03 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:50 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -1215,17 +1215,21 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=30
   response:
-    body: {string: '{"count":295,"next":null,"previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=29","results":[{"id":"local.suffolk.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.suffolk.2017-05-04/","name":"Suffolk
+    body: {string: '{"count":297,"next":null,"previous":"https://candidates.democracyclub.org.uk/api/v0.9/elections/?page=29","results":[{"id":"local.suffolk.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.suffolk.2017-05-04/","name":"Suffolk
         County Council local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":19,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/19/","name":"CED","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:suffolk","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:suffolk/","name":"Suffolk
         County Council"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"local.city-of-london.2017-03-23","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/local.city-of-london.2017-03-23/","name":"City
-        of London Corporation local election","for_post_role":"Local elections","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-03-23","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":17,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/17/","name":"LBW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:city-of-london","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:city-of-london/","name":"City
+        of London Corporation local election","for_post_role":"Local elections","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2017-03-23","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":17,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/17/","name":"LBW","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"local-authority:city-of-london","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/local-authority:city-of-london/","name":"City
         of London Corporation"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"parl.stoke-on-trent-central.2017-02-23","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/parl.stoke-on-trent-central.2017-02-23/","name":"Stoke-on-Trent
-        Central","for_post_role":"UK Parliament","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-02-23","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":1,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/","name":"WMC","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"parl:parl","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/parl:parl/","name":"House
+        Central","for_post_role":"UK Parliament","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2017-02-23","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":1,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/","name":"WMC","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"parl:parl","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/parl:parl/","name":"House
         of Commons of the United Kingdom"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"parl.copeland.2017-02-23","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/parl.copeland.2017-02-23/","name":"Copeland","for_post_role":"UK
-        Parliament","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-02-23","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":1,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/","name":"WMC","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"parl:parl","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/parl:parl/","name":"House
+        Parliament","winner_membership_role":"","candidate_membership_role":"Candidate","election_date":"2017-02-23","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":1,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/","name":"WMC","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"parl:parl","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/parl:parl/","name":"House
         of Commons of the United Kingdom"},"party_lists_in_use":false,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.west-of-england.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.west-of-england.2017-05-04/","name":"West
         of England Combined Authority","for_post_role":"Directly elected Mayor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":22,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/22/","name":"combined-authority","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"combined-authority:west-of-england","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/combined-authority:west-of-england/","name":"West
-        of England Combined Authority"},"party_lists_in_use":true,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""}]}'}
+        of England Combined Authority"},"party_lists_in_use":true,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.greater-manchester-ca.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.greater-manchester-ca.2017-05-04/","name":"Greater
+        Manchester","for_post_role":"Directly elected Mayor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":22,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/22/","name":"combined-authority","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"combined-authority:greater-manchester-ca","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/combined-authority:greater-manchester-ca/","name":"Greater
+        Manchester"},"party_lists_in_use":true,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""},{"id":"mayor.liverpool-city-ca.2017-05-04","url":"https://candidates.democracyclub.org.uk/api/v0.9/elections/mayor.liverpool-city-ca.2017-05-04/","name":"Liverpool
+        City Region","for_post_role":"Directly elected Mayor","winner_membership_role":null,"candidate_membership_role":"Candidate","election_date":"2017-05-04","current":true,"use_for_candidate_suggestions":false,"area_types":[{"id":22,"url":"https://candidates.democracyclub.org.uk/api/v0.9/area_types/22/","name":"combined-authority","source":"https://elections.democracyclub.org.uk/"}],"area_generation":"","organization":{"id":"combined-authority:liverpool-city-ca","url":"https://candidates.democracyclub.org.uk/api/v0.9/organizations/combined-authority:liverpool-city-ca/","name":"Liverpool
+        City Region"},"party_lists_in_use":true,"default_party_list_members_to_show":0,"show_official_documents":true,"ocd_division":"","description":""}]}'}
     headers:
       Access-Control-Allow-Credentials: ['true']
       Access-Control-Allow-Headers: ['DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type']
@@ -1235,7 +1239,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:03 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:51 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
@@ -1250,7 +1254,7 @@ interactions:
     method: GET
     uri: https://candidates.democracyclub.org.uk/api/v0.9/posts/
   response:
-    body: {string: "{\"count\":6509,\"next\":\"https://candidates.democracyclub.org.uk/api/v0.9/posts/?page=2\"\
+    body: {string: "{\"count\":6511,\"next\":\"https://candidates.democracyclub.org.uk/api/v0.9/posts/?page=2\"\
         ,\"previous\":null,\"results\":[{\"id\":\"14409\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/posts/14409/\"\
         ,\"label\":\"Member of Parliament for Cumbernauld, Kilsyth and Kirkintilloch\
         \ East\",\"role\":\"Member of Parliament\",\"group\":\"Scotland\",\"candidates_locked\"\
@@ -1265,11 +1269,12 @@ interactions:
         ,\"scheme\":\"mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\"\
         :\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\",\"name\"\
         :\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"elections\"\
-        :[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":4806,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/4806/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":false,\"party_list_position\"\
+        :[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\":\"2015\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/2/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/1/\"\
+        }],\"memberships\":[{\"id\":4806,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/4806/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":false,\"party_list_position\"\
         :null,\"person\":{\"id\":278,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/278/\"\
         ,\"name\":\"Gregg McClymont\"},\"organization\":null,\"on_behalf_of\":{\"\
         id\":\"party:53\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:53/\"\
@@ -1367,11 +1372,12 @@ interactions:
         },{\"identifier\":\"http://mapit.mysociety.org/area/14411\",\"scheme\":\"\
         mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":1904,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1904/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/4/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/3/\"\
+        }],\"memberships\":[{\"id\":1904,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1904/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
         :null,\"person\":{\"id\":1111,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/1111/\"\
         ,\"name\":\"Steven McKeane\"},\"organization\":null,\"on_behalf_of\":{\"id\"\
         :\"party:85\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:85/\"\
@@ -1499,11 +1505,12 @@ interactions:
         },{\"identifier\":\"http://mapit.mysociety.org/area/14416\",\"scheme\":\"\
         mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":402,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/402/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/6/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/5/\"\
+        }],\"memberships\":[{\"id\":402,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/402/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
         :null,\"person\":{\"id\":120,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/120/\"\
         ,\"name\":\"John Loughton\"},\"organization\":null,\"on_behalf_of\":{\"id\"\
         :\"party:90\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:90/\"\
@@ -1630,11 +1637,12 @@ interactions:
         ,\"scheme\":\"mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\"\
         :\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\",\"name\"\
         :\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"elections\"\
-        :[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":643,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/643/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
+        :[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\":\"2015\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/8/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/7/\"\
+        }],\"memberships\":[{\"id\":643,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/643/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
         :null,\"person\":{\"id\":781,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/781/\"\
         ,\"name\":\"Kit Fraser\"},\"organization\":null,\"on_behalf_of\":{\"id\":\"\
         party:854\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:854/\"\
@@ -1801,14 +1809,15 @@ interactions:
         },{\"identifier\":\"http://mapit.mysociety.org/area/65601\",\"scheme\":\"\
         mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"parl.sheffield.sheffield-brightside-and-hillsborough.2016-05-05\"\
-        ,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/parl.sheffield.sheffield-brightside-and-hillsborough.2016-05-05/\"\
-        ,\"name\":\"Sheffield by-election: Sheffield Brightside and Hillsborough constituency\"\
-        },{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":2075,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/2075/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/10/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/9/\"\
+        },{\"winner_count\":1,\"name\":\"Sheffield by-election: Sheffield Brightside\
+        \ and Hillsborough constituency\",\"id\":\"parl.sheffield.sheffield-brightside-and-hillsborough.2016-05-05\"\
+        ,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/4437/\"\
+        }],\"memberships\":[{\"id\":2075,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/2075/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
         :null,\"person\":{\"id\":1657,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/1657/\"\
         ,\"name\":\"John Sharp\"},\"organization\":null,\"on_behalf_of\":{\"id\":\"\
         party:52\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:52/\"\
@@ -2015,11 +2024,12 @@ interactions:
         },{\"identifier\":\"http://mapit.mysociety.org/area/65657\",\"scheme\":\"\
         mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":1548,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1548/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/12/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/11/\"\
+        }],\"memberships\":[{\"id\":1548,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1548/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
         :null,\"person\":{\"id\":1259,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/1259/\"\
         ,\"name\":\"Paul Bristow\"},\"organization\":null,\"on_behalf_of\":{\"id\"\
         :\"party:52\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:52/\"\
@@ -2135,11 +2145,12 @@ interactions:
         },{\"identifier\":\"http://mapit.mysociety.org/area/66109\",\"scheme\":\"\
         mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":1764,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1764/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/14/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/13/\"\
+        }],\"memberships\":[{\"id\":1764,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1764/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
         :null,\"person\":{\"id\":1500,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/1500/\"\
         ,\"name\":\"John Dixon\"},\"organization\":null,\"on_behalf_of\":{\"id\":\"\
         party:77\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:77/\"\
@@ -2265,11 +2276,12 @@ interactions:
         },{\"identifier\":\"http://mapit.mysociety.org/area/65752\",\"scheme\":\"\
         mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":1188,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1188/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":false,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/16/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/15/\"\
+        }],\"memberships\":[{\"id\":1188,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/1188/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":false,\"party_list_position\"\
         :null,\"person\":{\"id\":6319,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/6319/\"\
         ,\"name\":\"Russell Shaw Higgs\"},\"organization\":null,\"on_behalf_of\":{\"\
         id\":\"ynmp-party:2\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/ynmp-party:2/\"\
@@ -2500,11 +2512,12 @@ interactions:
         },{\"identifier\":\"http://mapit.mysociety.org/area/65550\",\"scheme\":\"\
         mapit-area-url\"}],\"parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":4893,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/4893/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":false,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/18/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/17/\"\
+        }],\"memberships\":[{\"id\":4893,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/4893/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":false,\"party_list_position\"\
         :null,\"person\":{\"id\":7247,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/7247/\"\
         ,\"name\":\"Jon Homan\"},\"organization\":null,\"on_behalf_of\":{\"id\":\"\
         party:616\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:616/\"\
@@ -2677,11 +2690,12 @@ interactions:
         :\"http://mapit.mysociety.org/area/65829\",\"scheme\":\"mapit-area-url\"}],\"\
         parent\":null,\"type\":{\"id\":1,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/area_types/1/\"\
         ,\"name\":\"WMC\",\"source\":\"https://elections.democracyclub.org.uk/\"}},\"\
-        elections\":[{\"id\":\"2010\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2010/\"\
-        ,\"name\":\"2010 General Election\"},{\"id\":\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/elections/2015/\"\
-        ,\"name\":\"2015 General Election\"}],\"memberships\":[{\"id\":3873,\"url\"\
-        :\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/3873/\",\"\
-        label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
+        elections\":[{\"winner_count\":1,\"name\":\"2015 General Election\",\"id\"\
+        :\"2015\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/20/\"\
+        },{\"winner_count\":1,\"name\":\"2010 General Election\",\"id\":\"2010\",\"\
+        url\":\"https://candidates.democracyclub.org.uk/api/v0.9/post_elections/19/\"\
+        }],\"memberships\":[{\"id\":3873,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/memberships/3873/\"\
+        ,\"label\":\"\",\"role\":\"Candidate\",\"elected\":null,\"party_list_position\"\
         :null,\"person\":{\"id\":3087,\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/persons/3087/\"\
         ,\"name\":\"Stephen Ladyman\"},\"organization\":null,\"on_behalf_of\":{\"\
         id\":\"party:53\",\"url\":\"https://candidates.democracyclub.org.uk/api/v0.9/organizations/party:53/\"\
@@ -2834,7 +2848,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Fri, 03 Mar 2017 18:27:03 GMT']
+      Date: ['Wed, 22 Mar 2017 18:36:52 GMT']
       Server: [nginx]
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
