@@ -10,6 +10,7 @@ django-redis
 Pillow
 icalendar
 dealer
+django-robots
 
 git+git://github.com/DemocracyClub/dc_base_theme.git@e4dc67ce289f8f93b6dbbdcf568095941d6c5e71
 libsass

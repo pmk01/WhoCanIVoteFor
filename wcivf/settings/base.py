@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'profiles',
     'feedback',
     # 'debug_toolbar',
-    'django_extensions'
+    'django_extensions',
+    'robots',
 )
 
 MIDDLEWARE_CLASSES = (
