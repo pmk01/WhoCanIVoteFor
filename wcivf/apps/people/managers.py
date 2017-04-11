@@ -1,11 +1,11 @@
+import os
+
 import requests
 
 from django.db import models
 from django.db.models import Count
 from django.core.files import File
-
 from django.core.files.temp import NamedTemporaryFile
-
 
 from elections.models import Election, Post
 from parties.models import Party
@@ -92,12 +92,25 @@ class PersonManager(models.Manager):
         )
 
         if person['thumbnail']:
-            img_temp = NamedTemporaryFile(delete=True)
-            img_temp.write(requests.get(person['thumbnail']).content)
-            img_temp.flush()
+            same_photo = False
+            photo_path = person['thumbnail'].split('cache/')[-1]
 
-            person_obj.photo.save(person['thumbnail'], File(img_temp))
-            person_obj.save()
+            if person_obj.photo:
+                try:
+                    file_path = person_obj.photo.file.name
+                except FileNotFoundError:
+                    file_path = None
+                # This person has a photo already, check if it's the same
+                if file_path and os.path.exists(file_path):
+                    if person_obj.photo.name.endswith(photo_path):
+                        same_photo = True
+            if not same_photo:
+                img_temp = NamedTemporaryFile(delete=True)
+                img_temp.write(requests.get(person['thumbnail']).content)
+                img_temp.flush()
+
+                person_obj.photo.save(photo_path, File(img_temp))
+                person_obj.save()
 
         if posts:
             from .models import PersonPost
