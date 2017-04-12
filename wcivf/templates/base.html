@@ -6,6 +6,7 @@
 
 {% block site_meta %}
     <link rel="canonical" href="{{ CANONICAL_URL }}{{ request.path }}" />
+    <meta name="description" content="Who can I vote for - find out the latest information about about elections, candidates and polling stations near you." />
     <meta property="og:site_name" content="WhoCanIVoteFor?" />
     <meta property="og:url" content="{{ CANONICAL_URL }}{{ request.path }}" />
     <meta property="fb:app_id" content="262795130596272" />
@@ -13,7 +14,7 @@
     <meta name="twitter:site" content="@democlub">
     <meta property="og:image" content="{{ CANONICAL_URL }}{% block og_image %}{% static "dc_theme/images/logo-large.png" %}{% endblock og_image %}" />
     <meta property="og:title" content="{% block og_title %}WhoCanIVoteFor?{% endblock og_title %}" />
-    <meta property="og:description" content="{% block og_description %}Find out about elections, candidate and polling stations with Democracy Club's WhoCanIVoteFor tool.{% endblock og_description %}" />
+    <meta property="og:description" content="{% block og_description %}Find out about elections, candidates and polling stations with Democracy Club's WhoCanIVoteFor tool.{% endblock og_description %}" />
     {% block page_meta %}{% endblock page_meta %}
 {% endblock site_meta %}
 
