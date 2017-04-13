@@ -110,13 +110,15 @@ class PostcodeiCalView(PostcodeToPostsMixin, View,
             ))
 
             if polling_station['polling_station_known']:
+                geometry = polling_station['polling_station']['geometry']
                 event['geo'] = "{};{}".format(
-                    polling_station['polling_station']['location']['latitude'],
-                    polling_station['polling_station']['location']['longitude'],
+                    geometry['coordinates'][0],
+                    geometry['coordinates'][1],
                 )
+                properties = polling_station['polling_station']['properties']
                 event['location'] = vText("{}, {}".format(
-                    polling_station['polling_station']['address'].replace('\n', ', '),
-                    polling_station['polling_station']['postcode'],
+                    properties['address'].replace('\n', ', '),
+                    properties['postcode'],
                 ))
 
             cal.add_component(event)
