@@ -91,6 +91,7 @@ class PersonManager(models.Manager):
             ynr_id=person['id'],
             defaults=defaults
         )
+        person_obj.save()
 
         if person['thumbnail']:
             same_photo = False
