@@ -64,6 +64,7 @@ class PersonManager(models.Manager):
         if person['memberships']:
             for membership in person['memberships']:
                 election = None
+                post = None
 
                 if membership['election']:
                     election = Election.objects.get(
@@ -71,10 +72,10 @@ class PersonManager(models.Manager):
                     elections.append(election)
 
                 if membership['post']:
-                    post, _ = Post.objects.update_or_create(
+                    post = Post.objects.update_or_create(
                         ynr_id=membership['post']['id'],
                         label=membership['post']['label'],
-                    )
+                    )[0]
                     if election:
                         post.election = election
 
