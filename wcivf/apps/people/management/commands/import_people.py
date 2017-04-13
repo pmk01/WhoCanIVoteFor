@@ -19,7 +19,10 @@ class Command(BaseCommand):
         )
 
     def handle(self, **options):
-        self.existing_people = set(Person.objects.values_list('pk', flat=True))
+        if options['recent']:
+            self.existing_people = set(Person.objects.values_list('pk', flat=True))
+        else:
+            self.existing_people = set()
         self.seen_people = set()
 
         next_page = settings.YNR_BASE + '/api/v0.9/persons/?page_size=200'
@@ -36,7 +39,8 @@ class Command(BaseCommand):
             next_page = results.get('next')
 
         deleted_ids = self.existing_people.difference(self.seen_people)
-        Person.objects.filter(ynr_id__in=deleted_ids).delete()
+        if not options['recent']:
+            Person.objects.filter(ynr_id__in=deleted_ids).delete()
 
     def add_people(self, results):
         for person in results['results']:
