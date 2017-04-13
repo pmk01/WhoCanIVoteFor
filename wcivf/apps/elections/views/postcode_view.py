@@ -92,14 +92,18 @@ class PostcodeiCalView(PostcodeToPostsMixin, View,
 
         cal.add('version', '2.0')
         cal.add('prodid', '-//Elections in {}//mxm.dk//'.format(postcode))
-        for post in self.postcode_to_posts(postcode):
+
+        for post_election in self.postcode_to_posts(postcode):
             event = Event()
-            event['uid'] = "{}-{}".format(post.ynr_id, post.election.slug)
-            event['summary'] = "{} - {}".format(post.election.name, post.label)
+            event['uid'] = "{}-{}".format(
+                post_election.post.ynr_id,
+                post_election.election.slug)
+            event['summary'] = "{} - {}".format(
+                post_election.election.name, post_election.post.label)
 
 
-            event.add('dtstart', post.election.start_time)
-            event.add('dtend', post.election.end_time)
+            event.add('dtstart', post_election.election.start_time)
+            event.add('dtend', post_election.election.end_time)
             event.add('DESCRIPTION', "Find out more at {}/elections/{}/".format(
                 settings.CANONICAL_URL,
                 postcode
