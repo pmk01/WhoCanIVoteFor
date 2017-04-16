@@ -1,0 +1,162 @@
+
+/* Cards */
+.card {
+    table {
+        thead {
+            background: #E6E6E6;
+
+            td {
+                font-weight: normal;
+            }
+        }
+
+        tbody, thead {
+            border: 0;
+
+            tr {
+                &:nth-child(even) {
+                    background-color: #f7f7f7;
+                }
+            }
+        }
+    }
+}
+
+
+.party_card {
+  width:400px;
+  @include media(tablet) {
+    width:50%;
+    max-width:180px;
+  }
+
+  float:left;
+  position:relative;
+}
+
+
+
+.candidate_card {
+  background-color:#F6F6F6;
+
+  &:hover {
+    @include box_shadow(2);
+    -webkit-transform: translateY(-5px);
+    -moz-transform: translateY(-5px);
+    transform: translateY(-5px);
+    z-index:10;
+  }
+  -webkit-transition: all 250ms;
+  -moz-transition: all 250ms;
+
+  margin: 10px;
+  padding: 10px;
+  height: 13rem;
+  position: relative;
+  float: left;
+  width: 40%;
+
+//  &.candidate_card_list_candidate {
+//    width:255px;
+//  }
+  @include media(tablet) {
+    float: none;
+    width: initial;
+    margin: 0 -10px 10px -10px;
+  }
+
+  @include media(mobile) {
+    padding: 20px;
+    height: 17rem;
+  }
+
+  &.candidate_card_list_candidate {
+    height: 13rem;
+  }
+
+  header {
+    div.candidate_info {
+      padding: 20px 20px 0 20px;
+
+      @include media(mobile) {
+        text-align:center;
+        float: none;
+      }
+
+      h4.candidate_name {
+        font-size: 1.3rem;
+      }
+    }
+
+    a.person_photo {
+      float: right;
+      display: block;
+      width: 100px;
+      margin: 20px;
+
+      @include media(mobile) {
+        text-align:center;
+        float: none;
+        margin: auto;
+
+        img {
+          width:100px;
+        }
+      }
+    }
+  }
+
+    footer {
+      background-color:#E2E2E2;
+      height:50px;
+      position:absolute;
+      bottom:0;
+      left:0;
+      right:0;
+
+      .candidate_extra_info {
+        position:absolute;
+        bottom:15px;
+        left:15px;
+        width:60px;
+        height:60px;
+        border:1px solid #CCC;
+        background-color:#FFF;
+      }
+      .contact_links {
+        margin:0;
+        padding:0;
+        li {
+          list-style-type:none;
+          margin:0 0 0 0.5em;
+          padding:0;
+          float:left;
+          a {
+            display: block;
+            font-size: 0.9em;
+            padding: 0.3em;
+            color: #FFF;
+            border-radius: 50%;
+            background-color: #EFEFEF;
+            display: block;
+            height: 2em;
+            text-align: center;
+            width: 2em;
+            margin: 0.8em 0.3em;
+            @include box_shadow(1);
+            i {
+              color:#2A8B76;
+            }
+            &.more {
+              position:absolute;
+              background-color:#FFF;
+              bottom:-2px;
+              right:0px;
+              font-weight:bold;
+            }
+
+          }
+        }
+      }
+  }
+}
