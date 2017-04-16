@@ -11,54 +11,46 @@
 
 
 {% block content %}
-<div class="row">
-<section class="columns large-12">
-  <div class="card">
-    <div class="row">
-      <div class="columns large-2">
-        {% if object.emblem %}
-        <img src="{% static object.emblem.url %}" height="120px" width="120px">
-        {% endif %}
-      </div>
-      <div class="columns large-10">
-      <h2>
-        {{ object.party_name }}</h2>
-        <p>{{ object.personpost_set.all.count }} candidates</p>
-        {% if object.description %}
-        {{ object.description|markdown }}
-        {% endif %}
-        {% if object.wikipedia_url %}
-        <p><a href="{{ object.wikipedia_url }}">Read more on wikipedia</a></p>
-        {% endif %}
+<div class="card">
+  <div class="row">
+    <div class="columns large-2">
+      {% if object.emblem %}
+      <img src="{% static object.emblem.url %}" height="120px" width="120px">
+      {% endif %}
+    </div>
+    <div class="columns large-10">
+    <h2>
+      {{ object.party_name }}</h2>
+      <p>{{ object.personpost_set.all.count }} candidates</p>
+      {% if object.description %}
+      {{ object.description|markdown }}
+      {% endif %}
+      {% if object.wikipedia_url %}
+      <p><a href="{{ object.wikipedia_url }}">Read more on wikipedia</a></p>
+      {% endif %}
 
-      </div>
     </div>
   </div>
-</section>
 </div>
 
-<div class="row">
-<section class="columns large-12">
-  <div class="card">
-      {% regroup object.personpost_set.all.counts_by_post by election__name as people_by_election %}
+<div class="card">
+  {% regroup object.personpost_set.all.counts_by_post by election__name as people_by_election %}
 
-      {% for election in people_by_election %}
-      <h4>{{ election.grouper }}</h4>
-      {% for post in election.list %}
-        <dl>
-          <dt>
-            <a href="{% url 'post_view' post.election__slug post.post_id post.post__label|slugify %}">
-              {{ post.post__label }}
-            </a>
-          </dt>
-          <dd>
-            {{ post.num_candidates }} candidate{{ post.num_candidates|pluralize }}
-          </dd>
-        </dl>
-      {% endfor %}
-      {% endfor %}
-  </div>
-</section>
+  {% for election in people_by_election %}
+  <h4>{{ election.grouper }}</h4>
+  {% for post in election.list %}
+    <dl>
+      <dt>
+        <a href="{% url 'post_view' post.election__slug post.post_id post.post__label|slugify %}">
+          {{ post.post__label }}
+        </a>
+      </dt>
+      <dd>
+        {{ post.num_candidates }} candidate{{ post.num_candidates|pluralize }}
+      </dd>
+    </dl>
+  {% endfor %}
+  {% endfor %}
 </div>
 {% endblock content %}
 
