@@ -12,25 +12,23 @@
 
 {% block content %}
 <div class="card">
-  <div class="row">
-    <div class="columns large-2">
-      {% if object.emblem %}
-      <img src="{% static object.emblem.url %}" height="120px" width="120px">
-      {% endif %}
-    </div>
-    <div class="columns large-10">
-    <h2>
-      {{ object.party_name }}</h2>
-      <p>{{ object.personpost_set.all.count }} candidates</p>
-      {% if object.description %}
-      {{ object.description|markdown }}
-      {% endif %}
-      {% if object.wikipedia_url %}
-      <p><a href="{{ object.wikipedia_url }}">Read more on wikipedia</a></p>
-      {% endif %}
+  <div class="party_header">
 
+    {% if object.emblem %}
+    <img src="{% static object.emblem.url %}" height="120px" width="120px">
+    {% endif %}
+    <div>
+      <h2>{{ object.party_name }}</h2>
+      <p>{{ object.personpost_set.all.count }} candidates</p>
     </div>
   </div>
+
+  {% if object.description %}
+  {{ object.description|markdown }}
+  {% endif %}
+  {% if object.wikipedia_url %}
+  <p><a href="{{ object.wikipedia_url }}">Read more on wikipedia</a></p>
+  {% endif %}
 </div>
 
 <div class="card">
