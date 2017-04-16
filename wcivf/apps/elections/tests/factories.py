@@ -1,6 +1,6 @@
 import factory
 
-from elections.models import Election, Post, VotingSystem
+from elections.models import Election, Post, VotingSystem, PostElection
 
 
 class ElectionFactory(factory.django.DjangoModelFactory):
@@ -23,6 +23,16 @@ class PostFactory(factory.django.DjangoModelFactory):
     ynr_id = "WMC:E14000647"
     label = "copeland"
     elections = factory.RelatedFactory(ElectionFactory)
+
+
+class PostElectionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = PostElection
+        django_get_or_create = ('post', 'election')
+
+    post = factory.SubFactory(PostFactory)
+    election = factory.SubFactory(ElectionFactory)
+
 
 class VotingSystemFactory(factory.django.DjangoModelFactory):
     class Meta:

@@ -103,7 +103,6 @@ class PostcodeToPostsMixin(object):
 
         if type(results_json) == dict and 'error' in results_json.keys():
             raise InvalidPostcodeError(postcode)
-
         all_posts = []
         all_elections = []
         for election in results_json:

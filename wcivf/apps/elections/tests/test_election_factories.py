@@ -1,9 +1,9 @@
 from django.test import TestCase
 
 from elections.tests.factories import (
-    ElectionFactory, PostFactory, VotingSystemFactory)
+    ElectionFactory, PostFactory, VotingSystemFactory, PostElectionFactory)
 
-from elections.models import Election, Post, VotingSystem
+from elections.models import Election, Post, VotingSystem, PostElection
 
 class TestFactories(TestCase):
     """
@@ -23,6 +23,14 @@ class TestFactories(TestCase):
     def test_post_factory(self):
         model = self._test_save(Post, PostFactory)
         self.assertEqual(model.label, "copeland")
+
+    def test_post_election_factory(self):
+        self.assertEqual(Election.objects.all().count(), 0)
+        self.assertEqual(Post.objects.all().count(), 0)
+        model = self._test_save(PostElection, PostElectionFactory)
+        self.assertEqual(Election.objects.all().count(), 1)
+        self.assertEqual(Post.objects.all().count(), 1)
+
 
     def test_voting_system_factory(self):
         model = self._test_save(VotingSystem, VotingSystemFactory)
