@@ -2,9 +2,13 @@
 {% load pipeline %}
 {% load static %}
 
-{% block base_title %}{% block page_title %}{% endblock page_title %} | WhoCanIVoteFor?{% endblock base_title %}
 
 {% block site_meta %}
+    <title>
+      {% block base_title %}
+      {% block page_title %}{% endblock page_title %} | WhoCanIVoteFor?
+      {% endblock base_title %}
+    </title>
     <link rel="canonical" href="{{ CANONICAL_URL }}{{ request.path }}" />
     <meta property="og:site_name" content="WhoCanIVoteFor?" />
     <meta property="og:url" content="{{ CANONICAL_URL }}{{ request.path }}" />

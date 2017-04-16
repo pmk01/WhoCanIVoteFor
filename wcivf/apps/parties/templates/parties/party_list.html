@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% load breadcrumb_tags %}
+
+{% block page_title %}UK Political Parties{% endblock page_title %}
+{% block og_title %}UK Political Parties{% endblock og_title %}
+{% block og_description %}List of candidates for UK Political Parties{% endblock og_description %}
+
 
 {% block content %}
 <div class="row">
@@ -17,3 +23,13 @@
 </section>
 </div>
 {% endblock content %}
+
+
+{% block breadcrumbs %}
+<ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+  {% url 'home_view' as home_view %}
+  {% breadcrumb_item home_view 'Home' 1 %}
+  <li class="disabled"><span class="show-for-sr">Current: </span> Parties</li>
+</ol>
+
+{% endblock breadcrumbs %}
