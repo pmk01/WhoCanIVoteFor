@@ -5,14 +5,9 @@
 
 
 {% block content %}
-<section class="columns large-6 large-centered">
-  <div style="margin-top:2rem;">
-    {% block pre_post_code_copy %}
-      <p>Find out about elections in your area by entering your postcode below.</p>
-    {% endblock %}
-  </div>
 
   <div class="card postcode_card">
+    <p>Find out about candidates in your area by entering your postcode.</p>
     <form method=post>
       {% csrf_token %}
       {{ form }}
