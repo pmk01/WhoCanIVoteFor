@@ -30,72 +30,47 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     </noscript>
 {% else %}
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     {% stylesheet 'styles' %}
     {% endif %}
 {% endblock extra_site_css %}
 
-{% block top_banner %}
-{# <div class="callout warning" style="overflow:auto"> #}
-{#     <div class="columns large-6 large-centered"> #}
-{#       <h5>Archived site</h5> #}
-{#       <p>This site contains information about the elections in May 2016. We will be updating the site in time for May 2017.</p> #}
-{#       <a href="https://candidates.democracyclub.org.uk/">Keep an eye on our candidates web site</a> or <a href="https://democracyclub.org.uk/blog/">follow our blog for news on what we're up to.</a> #}
-{#     </div> #}
-{# </div> #}
-{% endblock top_banner %}
-
 {% block bottom_banner %}
 <div id="bottom_banner">
-  <div class="row">
-    <div class="columns large-6 large-centered">
-      <p><strong>BETA</strong>: This is a new website, <a href="{% url 'about_view' %}#contact">we'd love to hear your feedback</a>.</p>
-    </div>
-  </div>
+  <p><a href="{% url 'about_view' %}#contact">We'd love to hear your feedback</a>.</p>
 </div>
 {% endblock bottom_banner %}
 
 {% block site_footer %}
 </section>
-<footer class="footer">
-  <div class="row">
-    <div class="small-12 medium-7 columns">
-      <p class="footer-links">
-        <a href="{% url 'home_view' %}">Home</a>
-        <a href="{% url 'about_view' %}">About</a>
-        <a href="{% url 'privacy_view' %}">Privacy</a>
-        <a href="{% url 'elections_view' %}">All Elections</a>
-        <a href="{% url 'parties_view' %}">All Parties</a>
-        <a href="https://democracyclub.org.uk/blog/">Blog</a>
-        <a href="https://democracyclub.org.uk/contact/">Contact</a>
-      </p>
-      <p>Democracy Club is a UK based Community Interest Company that builds
-        the digital infrastructure needed for a 21st century democracy</p>
-      <p class="inline-list social">
-        <a href="https://www.facebook.com/democracyclub/">
-            <i class="fa fa-facebook" aria-hidden="true" style="color: white"></i>
-        </a>
-        <a href="https://twitter.com/democlub">
-            <i class="fa fa-twitter" aria-hidden="true" style="color: white"></i>
-        </a>
-        <a href="https://github.com/DemocracyClub/WhoCanIVoteFor">
-            <i class="fa fa-github" aria-hidden="true" style="color: white"></i>
-        </a>
-      </p>
-    </div>
+<footer class="hide_for_print">
+  <div class="container">
+    <h3>Who Can I Vote For?</h3>
+    <ul>
+      <li><a href="{% url 'home_view' %}">Home</a></li>
+      <li><a href="{% url 'elections_view' %}">All Elections</a></li>
+      <li><a href="{% url 'parties_view' %}">All Parties</a></li>
+      <li><a href="{% url 'about_view' %}">About WhoCanIVoteFor</a></li>
+      <li><a href="{% url 'privacy_view' %}">Privacy</a></li>
+      <li><a href="https://github.com/DemocracyClub/WhoCanIVoteFor">Source code</a></li>
+    </ul>
+
+
+    <h3>Made by Democracy Club</h3>
+    <p>Democracy Club is a UK based Community Interest Company that builds
+      the digital infrastructure needed for a 21st century democracy</p>
+    <ul>
+      <li><a href="https://democracyclub.org.uk/about/">About Democracy Club</a></li>
+      <li><a href="https://democracyclub.org.uk/contact/">Contact Us</a></li>
+      <li><a href="https://democracyclub.org.uk/blog/">Blog</a></li>
+      <li>
+          <a href="https://twitter.com/democlub">Twitter</a>
+          | <a href="https://facebook.com/DemocracyClub">Facebook</a>
+          | <a href="https://github.com/DemocracyClub">GitHub</a>
+      </li>
+    </ul>
+    <p>Copyright &copy; 2017 Democracy Club Community Interest Company Company No: <a href="https://beta.companieshouse.gov.uk/company/09461226">09461226</a></p>
   </div>
 </footer>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-660910-28', 'auto');
-  ga('send', 'pageview');
-
-</script>
 
 <script>
 /**
