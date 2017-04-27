@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load markdown_deux_tags %}
+{% load breadcrumb_tags %}
 
 
 {% block og_image %}{% if object.photo %}{% static object.photo.url %}{% endif %}{% endblock og_image %}
@@ -136,16 +137,26 @@
   {# {% include "mentions/includes/_mentions_list.html" with mentions=object.mention_set.all %} #}
   {# {% endif %} #}
 
-</section>
-</div>
 
-<div class="row">
 {% include "elections/includes/_postcode_search_form.html" %}
-</div>
 
-<div class="row">
 {% include "feedback/feedback_form.html" %}
-</div>
 
 {% endblock content %}
 
+
+
+
+{% block breadcrumbs %}
+{% if referer_postcode %}
+  {# We've come from the postcode page #}
+  <ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+    {% url 'home_view' as home_view %}
+    {% breadcrumb_item home_view 'Home' 1 %}
+    {% url 'postcode_view' referer_postcode as postcode_view %}
+    {% breadcrumb_item postcode_view 'Candidates' 2 %}
+    <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
+  </ol>
+{% endif %}
+
+{% endblock breadcrumbs %}

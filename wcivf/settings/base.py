@@ -83,6 +83,7 @@ TEMPLATES = [
                 'core.context_processors.canonical_url',
                 'core.context_processors.use_compress_css',
                 'core.context_processors.postcode_form',
+                'core.context_processors.referer_postcode',
                 'feedback.context_processors.feedback_form',
                 'dealer.contrib.django.context_processor',
             ],
