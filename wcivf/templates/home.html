@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load dc_forms %}
 
 {% block base_title %}Who Can I Vote For?{% endblock base_title %}
 {% block og_title %}Who Can I Vote For?{% endblock og_title %}
@@ -7,14 +8,17 @@
 {% block content %}
 
   <div class="card postcode_card">
-    <p>Find out about candidates in your area by entering your postcode.</p>
+    <h2>Find out about candidates in your area</h2>
     <form method=post>
       {% csrf_token %}
-      {{ form }}
+        {{ form|dc_form }}
       {% if request.GET.invalid_postcode %}
-      <p><strong>Sorry, we don't know the postcode {{ request.GET.postcode }}.  Is there another one you can try?</strong></p>
+      <p>
+        <strong>Sorry, we don't know the postcode {{ request.GET.postcode }}.
+          Is there another one you can try?</strong>
+      </p>
       {% endif %}
-      <button type="submit" class="button">Search</button>
+      <button type="submit">Find your candidates</button>
     </form>
   </div>
 
