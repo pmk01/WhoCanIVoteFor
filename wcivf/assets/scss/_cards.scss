@@ -21,64 +21,74 @@
   position:relative;
 }
 
-
+.candidate_grid {
+  overflow:auto;
+  margin: 0 -10px 10px -10px;
+}
 
 .candidate_card {
   background-color:#F6F6F6;
+  float: none;
+  width: initial;
+  position:relative;
+  margin: 0 -10px 10px -10px;
 
-  margin: 10px;
-  padding: 10px;
-  height: 13rem;
-  position: relative;
-  float: left;
-  width: 40%;
-
-//  &.candidate_card_list_candidate {
-//    width:255px;
-//  }
   @include media(tablet) {
-    float: none;
-    width: initial;
-    margin: 0 -10px 10px -10px;
+    margin: 10px;
+    padding: 0 0 0 5px;
+    height: 130px;
+    box-sizing:border-box;
+    float: left;
+    width: calc(50% - 20px);
+
   }
 
   @include media(mobile) {
     padding: 20px;
-    height: 17rem;
+    height: 13rem;
   }
 
   &.candidate_card_list_candidate {
     height: 13rem;
   }
 
-  header {
-    div.candidate_info {
-      padding: 20px 20px 0 20px;
+  div.candidate_info {
+    padding: 5px 2px 0 0px;
+    font-size:0.8em;
 
-      @include media(mobile) {
-        text-align:center;
-        float: none;
-      }
-
-      h4.candidate_name {
-        font-size: 1.3rem;
-      }
+    @include media(mobile) {
+      text-align:center;
+      float: none;
     }
 
-    a.person_photo {
-      float: right;
-      display: block;
-      width: 100px;
-      margin: 20px;
+    h4.candidate_name {
+      font-size: 1.3rem;
+      margin:0;
+    }
+    p {
+      margin:0;
+    }
+    .more_info {
+      position:absolute;
+      bottom:0;
+    }
+  }
 
-      @include media(mobile) {
-        text-align:center;
-        float: none;
-        margin: auto;
 
-        img {
-          width:100px;
-        }
+  a.person_photo {
+    float: right;
+    display: block;
+    width: 130px;
+    margin: 0px;
+//    margin-top: 0.7em;
+
+    @include media(mobile) {
+      text-align:center;
+      float: none;
+      margin: auto;
+
+      img {
+        width:100px;
       }
     }
   }

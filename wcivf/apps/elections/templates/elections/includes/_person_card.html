@@ -1,14 +1,12 @@
 {% load static %}
 <section class="candidate_card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %}">
-  <header>
-
     <a href="{{ person_post.person.get_absolute_url }}" class="person_photo">
       {% if person_post.person.photo %}
-        <img src="{% static person_post.person.photo.url %}" class="candidate_photo" alt="Photo of {{ person_post.person.name }}">
+        <img src="{{ person_post.person.photo.url }}" class="candidate_photo" alt="Photo of {{ person_post.person.name }}">
       {% elif person_post.person.gender|lower == 'male' %}
-        <img src="{% static 'blank-man.png' %}" style="background-color: #ddd;" class="candidate_photo">
+        <img src="{% static 'people/images/blank-man.png' %}" style="background-color: #ddd;" class="candidate_photo">
       {% else %}
-        <img src="{% static 'blank-woman.png' %}" style="background-color: #ddd;" class="candidate_photo">
+        <img src="{% static 'people/images/blank-woman.png' %}" style="background-color: #ddd;" class="candidate_photo">
       {% endif %}
     </a>
 
@@ -24,7 +22,7 @@
       {% if not person_post.list_position %}
       <p>{{ person_post.party.party_name }}</p>
       {% endif %}
+      <a href="{{ person_post.person.get_absolute_url }}" class="more_info">
+        More info</a>
     </div>
-
-  </header>
 </section>

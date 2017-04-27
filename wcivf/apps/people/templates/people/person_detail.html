@@ -4,7 +4,7 @@
 {% load breadcrumb_tags %}
 
 
-{% block og_image %}{% if object.photo %}{% static object.photo.url %}{% endif %}{% endblock og_image %}
+{% block og_image %}{% if object.photo %}{{ object.photo.url }}{% endif %}{% endblock og_image %}
 
 
 {% block og_title %}{{ object.name }}{% endblock og_title %}
@@ -12,22 +12,29 @@
 {% block og_description %}Standing for '{{ object.posts.all.0.label }}' in {{ object.posts.all.0.election.name }}{% endblock og_description %}
 
 {% block content %}
-  <div class="card">
-    {% if object.photo %}
-      <img src="{% static object.photo.url %}" class="person_photo" alt="profile photo of {{ object.name }}">
-    {% endif %}
-    <p>
-      Husband, father, entrepreneur, Cllr, runner and Derby Cty supporter. Lib Dem candidate to be the first Mayor of Cambridgeshire and Peterborough. Proud Remainer.
-    </p>
+  <div class="card person_banner">
     <h2 class="person_name">{{ object.name }}</h2>
-    <a href="{{ object.get_ynr_url }}" class="link-button">
-      edit details
-    </a>
 
-    {% if object.wikipedia_bio %}
-      <p>{{ object.wikipedia_bio }} <a href="{{ object.wikipedia_url }}">Read more on Wikipedia</a></p>
+    {% if object.photo %}
+      <img src="{{ object.photo.url }}" class="person_photo" alt="profile photo of {{ object.name }}">
     {% endif %}
+
+    {% if object.current_posts %}
+      <p>Standing in the {{ object.current_posts.0.election.name }} for the
+      {{ object.current_posts.0.party.party_name }}</p>
+    {% endif %}
+
   </div>
+
+
+  {% if object.wikipedia_bio %}
+  <div class="card">
+    <h3>Wikipedia</h3>
+    <p>{{ object.wikipedia_bio }}</p>
+    <a href="{{ object.wikipedia_url }}" class="link-button">Read more on Wikipedia</a>
+  </div>
+  {% endif %}
+
 
   <div class="card">
     <h3>Learn more about this candidate</h3>
@@ -93,44 +100,51 @@
   </div>
 
 {% if object.personpost_set.all.0.profile %}
-<div class="row">
-<section class="columns large-12">
-  <div class="card">
-    <h3>Personal statement</h3>
-    {% for personpost  in object.personpost_set.all %}
-      {% if personpost.profile %}
-        <h4>{{ personpost.election.name }}</h4>
-        {% if request.user.is_staff %}
-        <a href="/admin/profiles/profile/{{ personpost.profile.pk }}/change/" class="button alert tiny">Edit</a>
-        {% endif %}
-        {{ personpost.profile.text|markdown|urlize }}
-        <a href="{{ personpost.profile.url }}" class="small">source</a>
+<div class="card">
+  <h3>Personal statement</h3>
+  {% for personpost  in object.personpost_set.all %}
+    {% if personpost.profile %}
+      <h4>{{ personpost.election.name }}</h4>
+      {% if request.user.is_staff %}
+      <a href="/admin/profiles/profile/{{ personpost.profile.pk }}/change/" class="button alert tiny">Edit</a>
       {% endif %}
-    {% endfor %}
-  </div>
-</section>
+      {{ personpost.profile.text|markdown|urlize }}
+      <a href="{{ personpost.profile.url }}" class="small">source</a>
+    {% endif %}
+  {% endfor %}
 </div>
 {% endif %}
 
-  <div class="card">
-    <h3>Elections</h3>
-    {% if object.current_posts %}
-      <p>{{ object.name }} is a candidate in the following upcoming elections:</p>
-      <ul>
-      {% for person_post in object.current_posts %}
-        <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
+<div class="card">
+  <h3>Elections</h3>
+  {% if object.current_posts %}
+    <p>{{ object.name }} is a candidate in the following upcoming elections:</p>
+    <ul>
+    {% for person_post in object.current_posts %}
+      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
 
-    {% if object.past_posts %}
-      <p>{{ object.name }} previously stood in the following elections:</p>
-      <ul>
-      {% for person_post in object.past_posts %}
-        <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
+  {% if object.past_posts %}
+    <p>{{ object.name }} previously stood in the following elections:</p>
+    <ul>
+    {% for person_post in object.past_posts %}
+      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+
+
+  {# Edit link #}
+  <div class="card">
+    <h3>Edit this information</h3>
+    <p>If you know something about this candidate that should be on this
+      page, please log in to our crowdsourcing website to add it.</p>
+    <a href="{{ object.get_ynr_url }}update/" class="link-button">
+      Edit details
+    </a>
   </div>
 
   {# {% if object.mention_set.all %} #}
