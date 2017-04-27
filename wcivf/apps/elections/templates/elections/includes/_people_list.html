@@ -1,5 +1,4 @@
-{% load static %}
 {% for person_post in people %}
-{% include "elections/includes/_person_card.html" with person_post=person_post %}
+  {% include "elections/includes/_person_card.html" with person_post=person_post %}
 {% endfor %}
 

@@ -26,16 +26,6 @@
 .candidate_card {
   background-color:#F6F6F6;
 
-  &:hover {
-    @include box_shadow(2);
-    -webkit-transform: translateY(-5px);
-    -moz-transform: translateY(-5px);
-    transform: translateY(-5px);
-    z-index:10;
-  }
-  -webkit-transition: all 250ms;
-  -moz-transition: all 250ms;
-
   margin: 10px;
   padding: 10px;
   height: 13rem;
