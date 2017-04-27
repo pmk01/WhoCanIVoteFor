@@ -163,7 +163,7 @@ CANONICAL_URL = "https://whocanivotefor.co.uk"
 # DC Base Theme settings
 SITE_TITLE = "Who Can I Vote For?"
 SITE_LOGO = "images/logo.png"
-SITE_LOGO_WIDTH = "405px"
+SITE_LOGO_WIDTH = "440px"
 
 # .local.py overrides all the common settings.
 try:
