@@ -83,59 +83,6 @@
     }
   }
 
-    footer {
-      background-color:#E2E2E2;
-      height:50px;
-      position:absolute;
-      bottom:0;
-      left:0;
-      right:0;
-
-      .candidate_extra_info {
-        position:absolute;
-        bottom:15px;
-        left:15px;
-        width:60px;
-        height:60px;
-        border:1px solid #CCC;
-        background-color:#FFF;
-      }
-      .contact_links {
-        margin:0;
-        padding:0;
-        li {
-          list-style-type:none;
-          margin:0 0 0 0.5em;
-          padding:0;
-          float:left;
-          a {
-            display: block;
-            font-size: 0.9em;
-            padding: 0.3em;
-            color: #FFF;
-            border-radius: 50%;
-            background-color: #EFEFEF;
-            display: block;
-            height: 2em;
-            text-align: center;
-            width: 2em;
-            margin: 0.8em 0.3em;
-            @include box_shadow(1);
-            i {
-              color:#2A8B76;
-            }
-            &.more {
-              position:absolute;
-              background-color:#FFF;
-              bottom:-2px;
-              right:0px;
-              font-weight:bold;
-            }
-
-          }
-        }
-      }
-  }
 }
 
 

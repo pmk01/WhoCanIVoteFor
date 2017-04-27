@@ -1,18 +1,19 @@
-<h2 class="card_header">Free election reminders</h2>
+{% load dc_forms %}
+<h2>Free election reminders</h2>
 {% if postcode in request.session.notification_for_postcode %}
   <h4>Thanks</h4>
   <p>You're signed up for notifications about elections in {{ postcode }}.</p>
 {% else %}
-<form method="post">
-  {% csrf_token %}
-  {{ notification_form.errors }}
-  <p>We will email you when there is an election in this area.</p>
-  <input type="hidden" value="{{ postcode }}" id="{{ notification_form.postcode.id_for_label }}" name="{{ notification_form.postcode.name }}">
-  <label for="{{ form.message.id_for_label }}">Your email address:
-    {{ notification_form.email }}
-  </label>
-  {{ notification_form.form_name }}
-  <button type=submit class="button">Sign up</button>
-</form>
+  <form method="post">
+    {% csrf_token %}
+    {{ notification_form.errors }}
+    <p>We will email you when there is an election in this area.</p>
+
+    <input type="hidden" value="{{ postcode }}" id="{{ notification_form.postcode.id_for_label }}" name="{{ notification_form.postcode.name }}">
+    {{ notification_form.email|dc_form }}
+    {{ notification_form.form_name }}
+
+    <button type=submit class="button">Sign up</button>
+  </form>
 {% endif %}
 

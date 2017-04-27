@@ -11,31 +11,23 @@
 {% block og_description %}Standing for '{{ object.posts.all.0.label }}' in {{ object.posts.all.0.election.name }}{% endblock og_description %}
 
 {% block content %}
-<div class="row">
-<section class="columns large-12">
   <div class="card">
-    <div class="row">
-      <div class="columns large-12 person_banner">
-        <button class="button person_edit">
-          <a href="{{ object.get_ynr_url }}">
-            edit details
-          </a>
-        </button>
-        {% if object.photo %}
-        <img src="{% static object.photo.url %}" class="person_photo">
-        {% endif %}
-        <h2 class="person_name">{{ object.name }}</h2>
-        {% if object.wikipedia_bio %}
-        <p>{{ object.wikipedia_bio }} <a href="{{ object.wikipedia_url }}">Read more on Wikipedia</a></p>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</section>
-</div>
+    {% if object.photo %}
+      <img src="{% static object.photo.url %}" class="person_photo" alt="profile photo of {{ object.name }}">
+    {% endif %}
+    <p>
+      Husband, father, entrepreneur, Cllr, runner and Derby Cty supporter. Lib Dem candidate to be the first Mayor of Cambridgeshire and Peterborough. Proud Remainer.
+    </p>
+    <h2 class="person_name">{{ object.name }}</h2>
+    <a href="{{ object.get_ynr_url }}" class="link-button">
+      edit details
+    </a>
 
-<div class="row">
-<section class="columns large-12">
+    {% if object.wikipedia_bio %}
+      <p>{{ object.wikipedia_bio }} <a href="{{ object.wikipedia_url }}">Read more on Wikipedia</a></p>
+    {% endif %}
+  </div>
+
   <div class="card">
     <h3>Learn more about this candidate</h3>
     <dl>
@@ -98,8 +90,6 @@
 
     </dl>
   </div>
-</section>
-</div>
 
 {% if object.personpost_set.all.0.profile %}
 <div class="row">
@@ -121,9 +111,6 @@
 </div>
 {% endif %}
 
-
-<div class="row">
-<section class="columns large-12">
   <div class="card">
     <h3>Elections</h3>
     {% if object.current_posts %}
