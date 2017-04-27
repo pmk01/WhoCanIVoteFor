@@ -1,26 +1,4 @@
-
 /* Cards */
-.card {
-    table {
-        thead {
-            background: #E6E6E6;
-
-            td {
-                font-weight: normal;
-            }
-        }
-
-        tbody, thead {
-            border: 0;
-
-            tr {
-                &:nth-child(even) {
-                    background-color: #f7f7f7;
-                }
-            }
-        }
-    }
-}
 
 .postcode_card {
   text-align:center;
