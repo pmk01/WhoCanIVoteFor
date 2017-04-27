@@ -15,11 +15,13 @@ def postcode_form(request):
         'postcode_form': PostcodeLookupForm()
     }
 
+
 def referer_postcode(request):
-    http_referer_parts = request.META['HTTP_REFERER'].strip('/').split('/')
-    if http_referer_parts[-2] == 'elections':
+    referer_parts = request.META.get('HTTP_REFERER', '')
+    referer_parts = referer_parts.strip('/').split('/')
+    if len(referer_parts) >= 2 and referer_parts[-2] == 'elections':
         return {
             'referer_postcode':
-                http_referer_parts[-1].upper().replace('%20', ' '),
+                referer_parts[-1].upper().replace('%20', ' '),
         }
     return {}
