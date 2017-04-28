@@ -60,6 +60,8 @@ class PersonManager(models.Manager):
             defaults['homepage_url'] = version_data['homepage_url']
         if 'wikipedia_url' in version_data:
             defaults['wikipedia_url'] = version_data['wikipedia_url']
+        if 'biography' in version_data:
+            defaults['statement_to_voters'] = version_data['biography']
 
         if person['memberships']:
             for membership in person['memberships']:

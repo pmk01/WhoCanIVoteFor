@@ -49,6 +49,7 @@ class Person(models.Model):
     #Bios
     wikipedia_url = models.CharField(blank=True, null=True, max_length=800)
     wikipedia_bio = models.TextField(null=True)
+    statement_to_voters = models.TextField(null=True)
 
     posts = models.ManyToManyField(Post, through=PersonPost)
     elections = models.ManyToManyField(Election)
