@@ -7,23 +7,23 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.9.1]
     method: GET
-    uri: https://wheredoivote.co.uk/api/beta/postcode/CB13HU.json
+    uri: https://wheredoivote.co.uk/api/beta/postcode/CB13HU.json?auth_token=DCINTERNAL-WHO-SYM-LOCAL
   response:
-    body: {string: '{"polling_station_known":true,"postcode_location":{"type":"Feature","geometry":{"point":{"type":"Point","coordinates":[0.16076721,52.200810477499985]}}},"custom_finder":null,"council":{"url":"https://wheredoivote.co.uk/api/beta/councils/E07000008/","council_id":"E07000008","council_type":"DIS","name":"Cambridge
+    body: {string: '{"polling_station_known":true,"postcode_location":{"geometry":{"point":{"type":"Point","coordinates":[0.16076721,52.200810477499985]}},"type":"Feature"},"custom_finder":null,"council":{"url":"https://wheredoivote.co.uk/api/beta/councils/E07000008/","council_id":"E07000008","council_type":"DIS","name":"Cambridge
         City Council","email":"elections@cambridge.gov.uk","phone":"01223 457048","website":"http://www.cambridge.gov.uk/","postcode":"CB1
         0JH","address":"Electoral Registration Officer\nElectoral Services\nPO Box
-        700"},"polling_station":{"id":"E07000008.45","type":"Feature","geometry":{"type":"Point","coordinates":[0.15623103928571427,52.19845433392857]},"properties":{"urls":{"detail":"https://wheredoivote.co.uk/api/beta/pollingstations/?council_id=E07000008&station_id=45","geo":"https://wheredoivote.co.uk/api/beta/pollingstations/geo/?council_id=E07000008&station_id=45"},"council":"https://wheredoivote.co.uk/api/beta/councils/E07000008/","station_id":"45","postcode":"CB1
+        700"},"polling_station":{"id":"E07000008.45","type":"Feature","geometry":{"type":"Point","coordinates":[0.15622989107142857,52.198456917857136]},"properties":{"urls":{"detail":"https://wheredoivote.co.uk/api/beta/pollingstations/?station_id=45&council_id=E07000008","geo":"https://wheredoivote.co.uk/api/beta/pollingstations/geo/?station_id=45&council_id=E07000008"},"council":"https://wheredoivote.co.uk/api/beta/councils/E07000008/","station_id":"45","postcode":"CB1
         3HR","address":"C3 CENTRE\nCOLDHAM''S LANE\nCAMBRIDGE"}},"addresses":[]}'}
     headers:
       Allow: ['GET, HEAD, OPTIONS']
       Connection: [keep-alive]
       Content-Language: [en]
-      Content-Length: ['1058']
+      Content-Length: ['1059']
       Content-Type: [application/json]
-      Date: ['Thu, 13 Apr 2017 20:23:42 GMT']
+      Date: ['Sat, 29 Apr 2017 11:59:07 GMT']
       Server: [nginx/1.4.6 (Ubuntu)]
-      Set-Cookie: ['sessionid=eyJ1dG1fZGF0YSI6e319:1cylHK:63Hk5GJIVjBA-XsFdixH-lFwMjo;
-          expires=Thu, 27-Apr-2017 20:23:42 GMT; HttpOnly; Max-Age=1209600; Path=/']
+      Set-Cookie: ['sessionid=eyJ1dG1fZGF0YSI6e319:1d4R1n:TQt3_qAMyt4AAPN7hRSHlEy3Vs0;
+          expires=Sat, 13-May-2017 11:59:07 GMT; HttpOnly; Max-Age=1209600; Path=/']
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
     status: {code: 200, message: OK}
@@ -47,7 +47,11 @@ interactions:
         Authority"}, "election_date": "2017-05-04", "post_name": "Cambridgeshire and
         Peterborough Combined Authority", "organization": "Cambridgeshire and Peterborough
         Combined Authority", "post_slug": "cambridgeshire-and-peterborough", "election_id":
-        "mayor.cambridgeshire-and-peterborough.2017-05-04"}]'}
+        "mayor.cambridgeshire-and-peterborough.2017-05-04"}, {"election_name": "2017
+        General Election", "area": {"identifier": "gss:E14000617", "type": "WMC",
+        "name": "Cambridge"}, "election_date": "2017-06-08", "post_name": "Cambridge",
+        "organization": "House of Commons of the United Kingdom", "post_slug": "WMC:E14000617",
+        "election_id": "parl.2017-06-08"}]'}
     headers:
       Access-Control-Allow-Credentials: ['true']
       Access-Control-Allow-Headers: ['DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type']
@@ -56,7 +60,7 @@ interactions:
       Connection: [keep-alive]
       Content-Language: [en]
       Content-Type: [application/json]
-      Date: ['Thu, 13 Apr 2017 20:24:00 GMT']
+      Date: ['Sat, 29 Apr 2017 11:59:28 GMT']
       Server: [nginx]
       Vary: ['Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
