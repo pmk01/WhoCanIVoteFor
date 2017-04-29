@@ -56,6 +56,16 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
     </div>
     {% endif %}
 
+    {% if postelection.people %}
+      <h3>Candidates</h3>
+      {% if postelection.election.uses_lists %}
+      <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
+      {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
+      {% else %}
+      {% include "elections/includes/_people_list.html" with people=postelection.people %}
+      {% endif %}
+    {% endif %}
+
 
     {% if postelection.election.description %}
     {{ postelection.election.description|markdown }}
@@ -85,15 +95,7 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
     </details>
     {% endif %}
 
-    {% if postelection.people %}
-      <h3>Candidates</h3>
-      {% if postelection.election.uses_lists %}
-      <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
-      {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
-      {% else %}
-      {% include "elections/includes/_people_list.html" with people=postelection.people %}
-      {% endif %}
-    {% endif %}
+
   </div>
   {% endfor %}
 {% endfor %}
