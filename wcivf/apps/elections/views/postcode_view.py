@@ -108,8 +108,7 @@ class PostcodeiCalView(PostcodeToPostsMixin, View,
                 settings.CANONICAL_URL,
                 postcode
             ))
-
-            if polling_station['polling_station_known']:
+            if polling_station.get('polling_station_known'):
                 geometry = polling_station['polling_station']['geometry']
                 event['geo'] = "{};{}".format(
                     geometry['coordinates'][0],
