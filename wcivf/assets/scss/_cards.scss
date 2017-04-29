@@ -22,29 +22,35 @@
 }
 
 .candidate_grid {
-  overflow:auto;
   margin: 0 -10px 10px -10px;
 }
 
 .candidate_card {
   background-color:#F6F6F6;
-  float: none;
-  width: initial;
+  display:inline-block;
+  vertical-align: top;
+  width: 100%;
   position:relative;
-  margin: 0 -10px 10px -10px;
+  box-sizing:border-box;
+  margin: 10px 0;
 
   @include media(tablet) {
-    margin: 10px;
-    padding: 0 0 0 5px;
+    margin: 5px;
+    padding: 0 0 0 15px;
     height: 130px;
-    box-sizing:border-box;
-    float: left;
-    width: calc(50% - 20px);
+    width: 100%;
+    line-height:1.1em;
+  }
 
+  @include media(desktop) {
+    margin: 10px;
+    width: calc(50% - 25px);
+    padding: 0 0 0 15px;
+    line-height:1.3em;
   }
 
   @include media(mobile) {
-    padding: 20px;
+    padding: 10px;
     height: 13rem;
   }
 
@@ -64,6 +70,9 @@
     h4.candidate_name {
       font-size: 1.3rem;
       margin:0;
+      a {
+        color:$heading-text-colour;
+      }
     }
     p {
       margin:0;
@@ -71,6 +80,11 @@
     .more_info {
       position:absolute;
       bottom:0;
+      @include media(mobile) {
+        position:relative;
+        text-align:center;
+      }
+
     }
   }
 

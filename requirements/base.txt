@@ -12,5 +12,5 @@ icalendar
 dealer
 django-robots
 
-git+git://github.com/DemocracyClub/dc_base_theme.git@8e58f8b67fc0ec100383dfa868187ab98d7b2267
+git+git://github.com/DemocracyClub/dc_base_theme.git@b205be94aa978a1643283aaae6136a1a924a576b
 libsass
