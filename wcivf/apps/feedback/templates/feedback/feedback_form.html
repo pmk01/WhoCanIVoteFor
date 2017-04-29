@@ -1,6 +1,7 @@
 <div class="card">
   <form id="feedback_form" method="post" action="{% url 'feedback_form_view' %}">
     {% csrf_token %}
+    {{ feedback_form.token }}
     {{ feedback_form.source_url }}
 
     <h3>Did you find what you were looking for?</h3>
@@ -14,6 +15,5 @@
       {{ feedback_form.comments }}
       <button type="submit" class="button">Send feedback</button>
     </div>
-
   </form>
 </div>

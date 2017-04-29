@@ -139,7 +139,10 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 PIPELINE = get_pipeline_settings(
     extra_css=['scss/main.scss', ],
-    extra_js=['js/scripts.js', ],
+    extra_js=[
+        'js/scripts.js',
+        'feedback/js/feedback_form.js',
+    ],
 )
 
 CACHES = {
