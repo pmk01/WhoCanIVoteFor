@@ -42,11 +42,6 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
 </div>
 {% endif %}
 
-{% if polling_station.polling_station_known or polling_station.custom_finder%}
-{# Add this at the top of the page if it's known, or at the bottom if it's not #}
-{% include "elections/includes/_polling_place.html" %}
-{% endif %}
-
 {% regroup postelections by election.election_date as elections_by_date %}
 {% for election_group in elections_by_date %}
   {% for postelection in election_group.list %}
@@ -102,7 +97,8 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
   {% endfor %}
 {% endfor %}
 
-{% if not polling_station.polling_station_known and not polling_station.custom_finder%}
+
+{% if polling_station.polling_station_known or polling_station.custom_finder%}
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
 {% include "elections/includes/_polling_place.html" %}
 {% endif %}
