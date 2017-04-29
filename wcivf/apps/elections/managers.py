@@ -1,7 +1,22 @@
 from django.db import models
 
+import requests
+
 
 class ElectionManager(models.Manager):
+
+    def get_explainer_from_ee(self, election):
+        req = requests.get(
+            'https://elections.democracyclub.org.uk/api/elections/{}/'.format(
+                election['id'])
+            )
+        if req.status_code == 200:
+            description = req.json()['explanation']
+            if description:
+                return description
+        return election['description']
+
+
     def update_or_create_from_ynr(self, election):
         election_type = self.election_id_to_type(election['id'])
 
@@ -11,13 +26,15 @@ class ElectionManager(models.Manager):
         if election_type == 'mayor':
             election_weight = 5
 
+        description = self.get_explainer_from_ee(election)
+
         return self.update_or_create(
             slug=election['id'],
             defaults={
                 'election_date': election['election_date'],
                 'name': election['name'].replace('2016', '').strip(),
                 'current': election['current'],
-                'description': election['description'],
+                'description': description,
                 'election_type': election_type,
                 'uses_lists': election['party_lists_in_use'],
                 'for_post_role': election['for_post_role'],
