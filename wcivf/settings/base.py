@@ -172,3 +172,9 @@ try:
     from .local import *  # noqa
 except ImportError:
     pass
+
+if os.environ.get('TRAVIS'):
+    try:
+        from .travis import *  # noqa
+    except ImportError:
+        pass
