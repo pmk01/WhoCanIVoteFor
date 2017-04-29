@@ -27,11 +27,11 @@ class TestElectionAndPostImporter(TestCase):
     def test_import_elections_from_ynr(self):
         assert Election.objects.count() == 0
         self._import_elections()
-        assert Election.objects.count() == 295
+        assert Election.objects.count() == 385
 
     @vcr.use_cassette('fixtures/vcr_cassettes/test_import_posts_from_ynr.yaml')
     def test_import_posts_from_ynr(self):
         assert Election.objects.count() == 0
         self._import_elections()
         self._import_posts()
-        assert Election.objects.count() == 297
+        assert Election.objects.count() == 385
