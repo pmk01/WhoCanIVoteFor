@@ -19,7 +19,7 @@ class PersonPostQuerySet(models.QuerySet):
         return self.values(
             'post__label', 'post_id', 'election__slug', 'election__name')\
             .annotate(num_candidates=Count('person'))\
-            .order_by('election__name', 'post__label',)
+            .order_by('-election__election_date', 'post__label',)
 
 
 class PersonPostManager(models.Manager):
