@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
 {% load breadcrumb_tags %}
-{% load static %}
 {% load markdown_deux_tags %}
 
-{% block og_image %}{% if object.emblem %}{% static object.emblem.url %}{% endif %}{% endblock og_image %}
+{% block og_image %}{% if object.emblem %}{{ object.emblem.url }}{% endif %}{% endblock og_image %}
 {% block og_title %}{{ object.party_name }}{% endblock og_title %}
 {% block page_title %}{{ object.party_name }}{% endblock page_title %}
 {% block og_description %}{{ object.personpost_set.all.count }} candidates{% endblock og_description %}
@@ -15,7 +14,7 @@
   <div class="party_header">
 
     {% if object.emblem %}
-    <img src="{% static object.emblem.url %}" height="120px" width="120px">
+    <img src="{{ object.emblem.url }}" height="120px" width="120px">
     {% endif %}
     <div>
       <h2>{{ object.party_name }}</h2>
