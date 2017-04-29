@@ -27,7 +27,7 @@ class TestFactories(TestCase):
     def test_post_election_factory(self):
         self.assertEqual(Election.objects.all().count(), 0)
         self.assertEqual(Post.objects.all().count(), 0)
-        model = self._test_save(PostElection, PostElectionFactory)
+        self._test_save(PostElection, PostElectionFactory)
         self.assertEqual(Election.objects.all().count(), 1)
         self.assertEqual(Post.objects.all().count(), 1)
 
