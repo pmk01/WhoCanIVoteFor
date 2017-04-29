@@ -12,6 +12,7 @@ class FeedbackFormView(CreateView):
     def get_success_url(self):
 
         messages.success(self.request, 'Thank you for your feedback!')
+        self.object.send_feedback_to_slack()
 
         if is_safe_url(self.object.source_url):
             return self.object.source_url
