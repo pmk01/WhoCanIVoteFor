@@ -13,7 +13,7 @@ urlpatterns = [
         ElectionView.as_view(),
         name='election_view'),
     url(
-        r'^(?P<pk>[a-z0-9\.\-]+)/post-(?P<post_id>.*)/(?P<ignored_slug>[^/]+)$',
+        r'^(?P<election_id>[a-z0-9\.\-]+)/post-(?P<post_id>.*)/(?P<ignored_slug>[^/]+)$',
         PostView.as_view(),
         name='post_view'),
     url(

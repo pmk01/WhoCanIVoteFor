@@ -3,7 +3,7 @@ from django.http import Http404
 
 
 from people.helpers import peopleposts_for_election_post
-from ..models import Election, Post
+from ..models import Election, PostElection
 
 
 class ElectionsView(TemplateView):
@@ -43,13 +43,16 @@ class ElectionView(DetailView):
 
 class PostView(DetailView):
     template_name = "elections/post_view.html"
-    model = Post
+    model = PostElection
 
     def get_object(self, queryset=None):
         if queryset is None:
             queryset = self.get_queryset()
-        pk = self.kwargs.get('post_id')
-        queryset = queryset.filter(ynr_id=pk)
+        post_id = self.kwargs.get('post_id')
+        election_id = self.kwargs.get('election_id')
+        queryset = queryset.filter(
+            post__ynr_id=post_id, election__slug=election_id)
+
         try:
             # Get the single item from the filtered queryset
             obj = queryset.get()
@@ -60,9 +63,10 @@ class PostView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['election'] = Election.objects.get(slug=self.kwargs['pk'])
+        context['election'] = Election.objects.get(
+            slug=self.kwargs['election_id'])
         context['person_posts'] = peopleposts_for_election_post(
             election=context['election'],
-            post=self.object
+            post=self.object.post
         )
         return context
