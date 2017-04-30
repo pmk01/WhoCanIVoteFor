@@ -28,7 +28,7 @@ class Feedback(TimeStampedModel):
         msg_fmt = "Yay! Someone just left some feedback on the site! {extra}"
         color = "#2AB27B"
 
-        if self.found_useful:
+        if self.found_useful == "YES":
             message = msg_fmt.format(
                 extra="They found what they were looking for! :+1:"
             )
