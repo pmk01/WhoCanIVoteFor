@@ -47,8 +47,12 @@ class Feedback(TimeStampedModel):
         if self.comments:
             payload["fields"] = [
                 {
-                    # "title": "They said:",
                     "value": self.comments,
+                    "short": False
+                },
+                {
+                    "title": "Feedback URL",
+                    "value": settings.CANONICAL_URL + self.source_url,
                     "short": False
                 }
             ]
