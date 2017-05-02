@@ -107,6 +107,27 @@ class Election(models.Model):
             slugify(self.name)
         ])
 
+    def election_booklet(self):
+        election_to_booklet = {
+            'mayor.greater-manchester-ca.2017-05-04':
+               "booklets/2017-05-04/mayoral/mayor.greater-manchester-ca.2017-05-04.pdf",
+            'mayor.liverpool-city-ca.2017-05-04':
+                "booklets/2017-05-04/mayoral/mayor.liverpool-city-ca.2017-05-04.pdf",
+            'mayor.cambridgeshire-and-peterborough.2017-05-04':
+                "booklets/2017-05-04/mayoral/mayor.cambridgeshire-and-peterborough.2017-05-04.pdf",  # noqa
+            'mayor.west-of-england.2017-05-04':
+                "booklets/2017-05-04/mayoral/mayor.west-of-england.2017-05-04.pdf",
+            'mayor.west-midlands.2017-05-04':
+                "booklets/2017-05-04/mayoral/mayor.west-midlands.2017-05-04.pdf",
+            'mayor.tees-valley.2017-05-04':
+                "booklets/2017-05-04/mayoral/mayor.tees-valley.2017-05-04.pdf",
+            'mayor.north-tyneside.2017-05-04':
+                "booklets/2017-05-04/mayoral/mayor.north-tyneside.2017-05-04.pdf",
+            'mayor.doncaster.2017-05-04':
+                "booklets/2017-05-04/mayoral/mayor.doncaster.2017-05-04.pdf",
+        }
+        return election_to_booklet.get(self.slug)
+
 
 class Post(models.Model):
     """

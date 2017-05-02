@@ -67,6 +67,11 @@ On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_da
     {% endif %}
 
 
+    {% if postelection.election.election_booklet %}
+    <h4><a href="{% static postelection.election.election_booklet %}">
+          Read the official candidate booklet for this election.</a></h4>
+    {% endif %}
+
     {% if postelection.election.description %}
     {{ postelection.election.description|markdown }}
     {% endif %}
