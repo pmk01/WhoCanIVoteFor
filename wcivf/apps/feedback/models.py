@@ -52,7 +52,7 @@ class Feedback(TimeStampedModel):
                 },
                 {
                     "title": "Feedback URL",
-                    "value": settings.CANONICAL_URL + self.source_url,
+                    "value": "<{0}{1}>".format(settings.CANONICAL_URL, self.source_url),
                     "short": False
                 }
             ]
