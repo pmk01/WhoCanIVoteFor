@@ -5,10 +5,7 @@
 
 {% block page_title %}Elections in {{ postcode }}{% endblock page_title %}
 {% block og_title %}Elections in {{ postcode }}{% endblock og_title %}
-{% block og_description %}
-{% regroup posts by election.election_date as header_elections_by_date %}
-On {{ posts.0.election.election_date|date:"l" }} {{ posts.0.election.election_date }}, registered voters in {{ postcode }} will be able to vote in {{ header_elections_by_date.0.list|length|apnumber }} election{{ header_elections_by_date.0.list|length|pluralize }}{% endblock og_description %}
-
+{% block og_description %}{% regroup postelections by election.election_date as header_elections_by_date %}{% if postelections.count == 0 %}No upcoming elections{% else %}On {{ header_elections_by_date.0.grouper }}, registered voters in {{ postcode }} will be able to vote in {{ header_elections_by_date.0.list|length|apnumber }} election{{ header_elections_by_date.0.list|length|pluralize }}{% endif %}{% endblock og_description %}
 
 {% block content %}
 
