@@ -1,3 +1,4 @@
+from django import http
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse
 
@@ -6,6 +7,16 @@ from .forms import PostcodeLookupForm
 
 class PostcodeFormView(FormView):
     form_class = PostcodeLookupForm
+
+    def get(self, request, *args, **kwargs):
+        if 'postcode' in request.GET \
+                and 'invalid_postcode' not in self.request.GET:
+            redirect_url = reverse(
+                'postcode_view',
+                kwargs={'postcode': request.GET['postcode']}
+            )
+            return http.HttpResponseRedirect(redirect_url)
+        return super(PostcodeFormView, self).get(request, *args, **kwargs)
 
     def get_initial(self):
         initial = self.initial.copy()
