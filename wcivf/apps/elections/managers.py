@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 import requests
 
@@ -7,7 +8,8 @@ class ElectionManager(models.Manager):
 
     def get_explainer_from_ee(self, election):
         req = requests.get(
-            'https://elections.democracyclub.org.uk/api/elections/{}/'.format(
+            '{}/api/elections/{}/'.format(
+                settings.EE_BASE,
                 election['id'])
             )
         if req.status_code == 200:
