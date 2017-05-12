@@ -20,10 +20,10 @@ interactions:
       Content-Language: [en]
       Content-Length: ['1059']
       Content-Type: [application/json]
-      Date: ['Sat, 29 Apr 2017 11:59:07 GMT']
+      Date: ['Fri, 12 May 2017 09:32:50 GMT']
       Server: [nginx/1.4.6 (Ubuntu)]
-      Set-Cookie: ['sessionid=eyJ1dG1fZGF0YSI6e319:1d4R1n:TQt3_qAMyt4AAPN7hRSHlEy3Vs0;
-          expires=Sat, 13-May-2017 11:59:07 GMT; HttpOnly; Max-Age=1209600; Path=/']
+      Set-Cookie: ['sessionid=eyJ1dG1fZGF0YSI6e319:1d96wM:3Jz5K-McWqritz09TIO14lgtguo;
+          expires=Fri, 26-May-2017 09:32:50 GMT; HttpOnly; Max-Age=1209600; Path=/']
       Vary: ['Accept, Accept-Language, Cookie']
       X-Frame-Options: [SAMEORIGIN]
     status: {code: 200, message: OK}
@@ -35,34 +35,44 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.9.1]
     method: GET
-    uri: https://candidates.democracyclub.org.uk/upcoming-elections?postcode=CB13HU
+    uri: https://elections.democracyclub.org.uk/api/elections?postcode=CB13HU&future=1
   response:
-    body: {string: '[{"election_name": "Cambridgeshire County Council local election",
-        "area": {"identifier": "CAM:romsey", "type": "CED", "name": "Romsey"}, "election_date":
-        "2017-05-04", "post_name": "Romsey", "organization": "Cambridgeshire County
-        Council", "post_slug": "CED:romsey", "election_id": "local.cambridgeshire.2017-05-04"},
-        {"election_name": "Mayor of Cambridgeshire and Peterborough Combined Authority",
-        "area": {"identifier": "combined-authority:cambridgeshire-and-peterborough",
-        "type": "combined-authority", "name": "Cambridgeshire and Peterborough Combined
-        Authority"}, "election_date": "2017-05-04", "post_name": "Cambridgeshire and
-        Peterborough Combined Authority", "organization": "Cambridgeshire and Peterborough
-        Combined Authority", "post_slug": "cambridgeshire-and-peterborough", "election_id":
-        "mayor.cambridgeshire-and-peterborough.2017-05-04"}, {"election_name": "2017
-        General Election", "area": {"identifier": "gss:E14000617", "type": "WMC",
-        "name": "Cambridge"}, "election_date": "2017-06-08", "post_name": "Cambridge",
-        "organization": "House of Commons of the United Kingdom", "post_slug": "WMC:E14000617",
-        "election_id": "parl.2017-06-08"}]'}
+    body: {string: ''}
     headers:
-      Access-Control-Allow-Credentials: ['true']
-      Access-Control-Allow-Headers: ['DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type']
-      Access-Control-Allow-Methods: ['GET, OPTIONS']
-      Access-Control-Allow-Origin: ['*']
       Connection: [keep-alive]
-      Content-Language: [en]
-      Content-Type: [application/json]
-      Date: ['Sat, 29 Apr 2017 11:59:28 GMT']
+      Content-Type: [text/html; charset=utf-8]
+      Date: ['Fri, 12 May 2017 09:33:25 GMT']
+      Location: ['/api/elections/?postcode=CB13HU&future=1']
       Server: [nginx]
-      Vary: ['Accept-Language, Cookie']
+      Strict-Transport-Security: [max-age=15768000]
+      X-Frame-Options: [SAMEORIGIN]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: https://elections.democracyclub.org.uk/api/elections/?postcode=CB13HU&future=1
+  response:
+    body: {string: '{"count":1,"next":null,"previous":null,"results":[{"election_id":"parl.cambridge.2017-06-08","tmp_election_id":null,"election_title":"Cambridge","poll_open_date":"2017-06-08","election_type":{"name":"UK
+        Parliament","election_type":"parl"},"election_subtype":null,"organisation":{"official_identifier":"parl-hoc","organisation_type":"parl","organisation_subtype":"","official_name":"House
+        of Commons of the United Kingdom","common_name":"House of Commons","gss":"","slug":"parl","territory_code":"GBN","election_name":"UK
+        general election"},"group":"parl.2017-06-08","group_type":null,"children":[],"elected_role":"Member
+        of Parliament","division":{"divisionset":{"start_date":"2010-07-18","end_date":null,"legislation_url":null,"consultation_url":null,"short_title":"2010
+        Boundaries","mapit_generation_id":"http://mapit.mysociety.org/generations/13","notes":"Auto
+        imported from http://mapit.mysociety.org"},"name":"Cambridge","official_identifier":"gss:E14000617","geography_curie":"gss:E14000617","slug":"cambridge","division_type":"WMC","division_subtype":"UK
+        Parliament constituency","division_election_sub_type":"","seats_total":null,"mapit_generation_low":13,"mapit_generation_high":30},"voting_system":{"slug":"FPTP","name":"First-past-the-post","uses_party_lists":false},"current":true,"explanation":null}]}'}
+    headers:
+      Allow: ['GET, OPTIONS']
+      Connection: [keep-alive]
+      Content-Type: [application/json]
+      Date: ['Fri, 12 May 2017 09:33:26 GMT']
+      Server: [nginx]
+      Strict-Transport-Security: [max-age=15768000]
+      Vary: ['Accept, Cookie']
       X-Frame-Options: [SAMEORIGIN]
     status: {code: 200, message: OK}
 version: 1

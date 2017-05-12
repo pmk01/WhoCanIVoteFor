@@ -1,5 +1,3 @@
-import datetime
-
 import requests
 
 from django.conf import settings
@@ -8,7 +6,7 @@ from django.core.cache import cache
 
 from notifications.forms import PostcodeNotificationForm
 from core.models import LoggedPostcode
-from ..models import Post, Election, PostElection, InvalidPostcodeError
+from ..models import PostElection, InvalidPostcodeError
 
 
 class ElectionNotificationFormMixin(object):
@@ -61,21 +59,33 @@ class PostcodeToPostsMixin(object):
         key = "upcoming_elections_{}".format(postcode)
         results_json = cache.get(key)
         if not results_json:
-            url = '{0}/upcoming-elections?postcode={1}'.format(
-                settings.YNR_BASE,
+            url = '{0}/api/elections?postcode={1}&future=1'.format(
+                settings.EE_BASE,
                 postcode
             )
             req = requests.get(url)
-            results_json = req.json()
+
+            # Don't cache bad postcodes
+            if req.status_code != 200:
+                raise InvalidPostcodeError(postcode)
+
+            results_json = req.json()['results']
             cache.set(key, results_json)
 
-        if type(results_json) == dict and 'error' in results_json.keys():
-            raise InvalidPostcodeError(postcode)
         all_posts = []
         all_elections = []
         for election in results_json:
-            all_posts.append(election['post_slug'])
-            all_elections.append(election['election_id'])
+            if election['group_type'] in ['organisation', 'election']:
+                continue
+
+            # Convert an EE election dict in to a YNR ID
+            post_id = ":".join([
+                election['division']['division_type'],
+                election['division']['official_identifier'].split(':')[-1]
+            ])
+
+            all_posts.append(post_id)
+            all_elections.append(election['group'])
 
         pes = PostElection.objects.filter(
             post__ynr_id__in=all_posts,

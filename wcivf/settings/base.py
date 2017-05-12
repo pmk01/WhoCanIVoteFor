@@ -47,7 +47,7 @@ INSTALLED_APPS = (
     'parties',
     'profiles',
     'feedback',
-    # 'debug_toolbar',
+    'debug_toolbar',
     'django_extensions',
     'robots',
 )
@@ -62,6 +62,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'core.middleware.UTMTrackerMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'wcivf.urls'
@@ -158,6 +159,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 YNR_BASE = "https://candidates.democracyclub.org.uk"
+EE_BASE = "https://elections.democracyclub.org.uk"
 
 WDIV_BASE = "https://wheredoivote.co.uk"
 WDIV_API = "/api/beta"
