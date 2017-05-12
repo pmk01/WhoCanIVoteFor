@@ -57,38 +57,6 @@ class PostcodeToPostsMixin(object):
                 ))
         return self.render_to_response(context)
 
-    @property
-    def should_add_eu(self):
-        return datetime.datetime.now().timestamp() < 1466719200
-
-    def add_eu(self):
-        election, _ = Election.objects.update_or_create(
-            slug="ref.2016-06-23",
-            election_date="2016-06-23",
-            name="Referendum on the UK's membership of the European Union",
-            current=True,
-            defaults={
-                'election_type': "ref",
-            }
-        )
-        if not self.should_add_eu:
-            # Don't do anyting if the election is in the past
-            if election.current:
-                election.current = False
-                election.save()
-            return
-        eu_post, _ = Post.objects.update_or_create(
-            ynr_id="ref.2016-06-23",
-            label="EU Referendum",
-            role="Referendum on the UK's membership of the European Union",
-            group="UK",
-            organization="UK Government",
-            area_name="UK",
-            area_id="GB",
-            election=election
-        )
-        return eu_post.ynr_id
-
     def postcode_to_posts(self, postcode):
         key = "upcoming_elections_{}".format(postcode)
         results_json = cache.get(key)

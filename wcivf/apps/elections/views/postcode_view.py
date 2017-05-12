@@ -67,14 +67,6 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
         context['polling_station'] = self.get_polling_station_info(
             context['postcode'])
 
-        # #Always add the EU Ref for the time being
-        # try:
-        #     eu_ref = Election.objects.get(slug='ref.2016-06-23')
-        #     context['elections'] = list(context['elections'])
-        #     context['elections'].append(eu_ref)
-        # except Election.DoesNotExist:
-        #     pass
-
         return context
 
 
