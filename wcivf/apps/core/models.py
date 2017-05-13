@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 
 from django.conf import settings
 from django.utils.timezone import now
