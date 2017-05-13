@@ -12,6 +12,7 @@ Pillow
 icalendar
 dealer
 django-robots
+django-debug-toolbar
 
 git+git://github.com/DemocracyClub/dc_base_theme.git@b205be94aa978a1643283aaae6136a1a924a576b
 libsass
