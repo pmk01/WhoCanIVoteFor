@@ -11,7 +11,9 @@ class PersonView(DetailView):
         if queryset is None:
             queryset = self.get_queryset()
         pk = self.kwargs.get(self.pk_url_kwarg)
-        queryset = queryset.filter(ynr_id=pk)
+        queryset = queryset.filter(
+            ynr_id=pk).prefetch_related('posts')
+        # import ipdb; ipdb.set_trace()
         try:
             # Get the single item from the filtered queryset
             obj = queryset.get()
@@ -20,8 +22,16 @@ class PersonView(DetailView):
                           {'verbose_name': queryset.model._meta.verbose_name})
 
         obj.current_posts = PersonPost.objects.filter(
-            person=obj, election__current=True)
+            person=obj, election__current=True).select_related(
+                'party',
+                'post',
+                'election',
+            )
 
         obj.past_posts = PersonPost.objects.filter(
-            person=obj, election__current=False)
+            person=obj, election__current=False).select_related(
+                'party',
+                'post',
+                'election',
+            )
         return obj
