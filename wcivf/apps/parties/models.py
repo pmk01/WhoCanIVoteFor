@@ -1,3 +1,5 @@
+import os
+
 import requests
 
 from django.conf import settings
@@ -19,19 +21,34 @@ class PartyManager(models.Manager):
             defaults=defaults
         )
         if party['images']:
+            same_photo = False
+
             selected_image = party['images'][0]
             for image in party['images']:
                 if image['is_primary']:
                     selected_image = image
 
+            photo_filename = selected_image['image_url'].split('/')[-1]
+
             url = "{}{}".format(settings.YNR_BASE, selected_image['image_url'])
 
-            img_temp = NamedTemporaryFile(delete=True)
-            img_temp.write(requests.get(url).content)
-            img_temp.flush()
+            try:
+                file_path = party_obj.emblem.file.name
+            except FileNotFoundError:
+                file_path = None
 
-            party_obj.emblem.save(url, File(img_temp))
-            party_obj.save()
+            # This person has a photo already, check if it's the same
+            if file_path and os.path.exists(file_path):
+                if party_obj.emblem.name.endswith(photo_filename):
+                    same_photo = True
+
+            if not same_photo:
+                img_temp = NamedTemporaryFile(delete=True)
+                img_temp.write(requests.get(url).content)
+                img_temp.flush()
+
+                party_obj.emblem.save(photo_filename, File(img_temp))
+                party_obj.save()
 
         return (party_obj, _)
 
