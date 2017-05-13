@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.cache import cache
 
 from notifications.forms import PostcodeNotificationForm
-from core.models import LoggedPostcode
+from core.models import log_postcode
 from ..models import PostElection, InvalidPostcodeError
 
 
@@ -132,4 +132,4 @@ class LogLookUpMixin(object):
             'postcode': postcode,
         }
         kwargs.update(self.request.session['utm_data'])
-        LoggedPostcode.objects.create(**kwargs)
+        log_postcode(kwargs)

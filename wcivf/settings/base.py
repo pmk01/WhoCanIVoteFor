@@ -172,6 +172,10 @@ SITE_TITLE = "Who Can I Vote For?"
 SITE_LOGO = "images/logo.png"
 SITE_LOGO_WIDTH = "440px"
 
+import redis
+REDIS_POOL = redis.ConnectionPool(port=6379, db=5)
+REDIS_KEY_PREFIX = "WCIVF"
+
 # .local.py overrides all the common settings.
 try:
     from .local import *  # noqa

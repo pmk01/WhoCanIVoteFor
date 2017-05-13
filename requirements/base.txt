@@ -7,6 +7,7 @@ django-markdown-deux
 django-localflavor==1.2
 django-extensions
 django-redis
+hiredis
 Pillow
 icalendar
 dealer

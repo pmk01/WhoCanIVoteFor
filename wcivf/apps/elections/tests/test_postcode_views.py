@@ -1,9 +1,10 @@
 import vcr
 
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from elections.tests.factories import (
     ElectionFactory, PostFactory, PostElectionFactory)
+from core.models import LoggedPostcode, write_logged_postcodes
 
 
 class PostcodeViewTests(TestCase):
@@ -24,6 +25,18 @@ class PostcodeViewTests(TestCase):
         response = self.client.get("/elections/EC1A4EU", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'elections/postcode_view.html')
+
+    @vcr.use_cassette(
+        'fixtures/vcr_cassettes/test_postcode_view.yaml')
+    @override_settings(REDIS_KEY_PREFIX='WCIVF_TEST')
+    def test_logged_postcodes(self):
+        assert LoggedPostcode.objects.all().count() == 0
+        response = self.client.get("/elections/EC1A4EU", follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'elections/postcode_view.html')
+        assert LoggedPostcode.objects.all().count() == 0
+        write_logged_postcodes()
+        assert LoggedPostcode.objects.all().count() == 1
 
     @vcr.use_cassette(
         'fixtures/vcr_cassettes/test_ical_view.yaml')
