@@ -34,7 +34,7 @@ class PartyManager(models.Manager):
 
             try:
                 file_path = party_obj.emblem.file.name
-            except FileNotFoundError:
+            except:
                 file_path = None
 
             # This person has a photo already, check if it's the same
