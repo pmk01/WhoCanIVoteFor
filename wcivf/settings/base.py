@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'parties',
     'profiles',
     'feedback',
+    'hustings',
     'debug_toolbar',
     'django_extensions',
     'robots',

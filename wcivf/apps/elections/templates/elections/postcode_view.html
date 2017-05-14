@@ -99,6 +99,36 @@
 
 
   </div>
+
+  {% if postelection.husting_set.exists %}
+    <div class="card">
+      <h3>Election events in your area</h3>
+      {% for husting in postelection.husting_set.all %}
+        <h4>{{ husting.title}}</h4>
+      <p>
+        {{ husting.starts | date:"D F d P"}}
+        {% if husting.ends %}
+          &ndash; {{ husting.ends | date:"P"}}
+        {% endif %}
+        <br />
+        {{ husting.location }}
+        <br />
+        {{ husting.postcode }}
+      </p>
+      {% if husting.url %}
+        <p>
+          Event web page:
+          <br/>
+          <a href="{{ husting.url }}" >
+            {{ husting.url }}
+          </a>
+        </p>
+      {% endif %}
+    {% endfor %}
+    </div>
+  {% endif %}
+  <!-- End Hustings card -->
+
   {% endfor %}
 {% endfor %}
 
