@@ -6,11 +6,31 @@ from django.core.management import call_command
 
 
 class Command(BaseCommand):
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--full',
+            action='store_true',
+            dest='full',
+            default=False,
+            help='Import all data, not just people',
+        )
+
     def handle(self, **options):
 
-        commands = [
-            'import_people',
-        ]
+        if options['full']:
+            commands = [
+                'import_elections',
+                'import_posts',
+                'import_parties',
+                'import_people',
+                'import_wikipedia_bios',
+            ]
+        else:
+            commands = [
+                'import_people',
+            ]
+
+
 
         for command in commands:
             print(command)
