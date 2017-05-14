@@ -9,11 +9,7 @@ class Command(BaseCommand):
     def handle(self, **options):
 
         commands = [
-            'import_elections',
-            'import_posts',
-            'import_parties',
             'import_people',
-            'import_wikipedia_bios',
         ]
 
         for command in commands:
