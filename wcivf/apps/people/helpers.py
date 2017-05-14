@@ -22,10 +22,17 @@ def get_wikipedia_extract(person):
         'redirects': '',
     }
     url = "{}?{}".format(base_url, urlencode(params))
+    print(url)
 
     api_url = url.format(wiki_title)
 
-    resp = requests.get(api_url).json()
+    resp = requests.get(api_url)
+    if resp.status_code != 200:
+        return None
+    try:
+        resp = resp.json()
+    except:
+        return None
     page_id = list(resp['query']['pages'].keys())[0]
     full = resp['query']['pages'][page_id]
 
