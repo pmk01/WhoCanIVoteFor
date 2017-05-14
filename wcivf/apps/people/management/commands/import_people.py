@@ -25,7 +25,9 @@ class Command(BaseCommand):
             self.existing_people = set()
         self.seen_people = set()
 
-        next_page = settings.YNR_BASE + '/api/v0.9/persons/?page_size=200'
+        next_page = settings.YNR_BASE + \
+            '/media/cached-persons/latest/page-000001.json'
+
         if options['recent']:
             past_time = datetime.now() - timedelta(minutes=5)
             next_page = "{}&updated_gte={}".format(
