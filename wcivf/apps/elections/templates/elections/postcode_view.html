@@ -102,7 +102,7 @@
 
   {% if postelection.husting_set.exists %}
     <div class="card">
-      <h3>Hustings</h3>
+      <h3>Election events in your area</h3>
       {% for husting in postelection.husting_set.all %}
         <h4>{{ husting.title}}</h4>
       <p>
