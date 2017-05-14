@@ -91,14 +91,14 @@ class Command(BaseCommand):
         # in the ORM ? Maybe I don't understand the data model properly?
         election = Election.objects.get(slug=data.electionid)
         try:
-            post = election.postelection_set.get(
-                post__area_name=data.constituency).post
+            post_election = election.postelection_set.get(
+                post__area_name=data.constituency)
         except PostElection.DoesNotExist:
             self.not_a_constituency_friend.append(data.constituency)
             return None
 
         husting = Husting(
-            post=post,
+            post_election=post_election,
             title=data.title,
             url=data.url,
             starts= starts,
@@ -114,6 +114,7 @@ class Command(BaseCommand):
         Entrypoint for our command.
         """
         self.delete_all_hustings()
+        hustings_counter = 0
         self.not_a_constituency_friend = []
         with open(options['filename'], 'r') as fh:
             reader = csv.reader(fh)
@@ -122,7 +123,10 @@ class Command(BaseCommand):
                 data = Hust(*row)
                 husting = self.create_husting(data)
                 if husting:
-                    print ('Created husting {0} {1}'.format(husting.id, husting))
+                    hustings_counter += 1
+                    print ('Created husting {0} <{1}>'.format(
+                        hustings_counter, husting)
+                    )
 
         if len(self.not_a_constituency_friend) > 0:
             print(

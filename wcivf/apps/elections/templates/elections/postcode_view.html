@@ -100,10 +100,10 @@
 
   </div>
 
-  {% if postelection.post.husting_set.count %}
+  {% if postelection.husting_set.exists %}
     <div class="card">
       <h3>Hustings</h3>
-      {% for husting in postelection.post.husting_set.all %}
+      {% for husting in postelection.husting_set.all %}
         <h4>{{ husting.title}}</h4>
       <p>
         {{ husting.starts | date:"D b d P"}}

@@ -93,7 +93,8 @@ class PostcodeToPostsMixin(object):
         pes = pes.select_related('post')
         pes = pes.select_related('election')
         pes = pes.select_related('election__voting_system')
-        pes = pes.select_related('election')
+        pes = pes.select_related('election')  # <- Better safe (x2) than sorry?
+        pes = pes.prefetch_related('husting_set')
         pes = pes.order_by(
             'election__election_date',
             'election__election_weight'
