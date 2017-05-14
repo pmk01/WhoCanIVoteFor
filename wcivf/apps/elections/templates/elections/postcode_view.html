@@ -106,9 +106,9 @@
       {% for husting in postelection.husting_set.all %}
         <h4>{{ husting.title}}</h4>
       <p>
-        {{ husting.starts | date:"D b d P"}}
+        {{ husting.starts | date:"D F d P"}}
         {% if husting.ends %}
-          - {{ husting.ends | date:"P"}}
+          &ndash; {{ husting.ends | date:"P"}}
         {% endif %}
         <br />
         {{ husting.location }}
