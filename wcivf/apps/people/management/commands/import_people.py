@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 from django.conf import settings
 
 import requests
@@ -18,6 +19,7 @@ class Command(BaseCommand):
             help='Import changes in the last 5 minutes',
         )
 
+    @transaction.atomic
     def handle(self, **options):
         if options['recent']:
             self.existing_people = set(Person.objects.values_list('pk', flat=True))
@@ -33,6 +35,10 @@ class Command(BaseCommand):
             next_page = "{}&updated_gte={}".format(
                 next_page, past_time.isoformat()
             )
+
+        if not options['recent']:
+            Person.objects.all().delete()
+
         while next_page:
             print(next_page)
             req = requests.get(next_page)
