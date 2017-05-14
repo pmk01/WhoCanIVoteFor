@@ -16,22 +16,34 @@ class Command(BaseCommand):
             action='store_true',
             dest='recent',
             default=False,
-            help='Import changes in the last 5 minutes',
+            help='Import changes in the last `n` minutes',
+        )
+
+        parser.add_argument(
+            '--recent-minutes',
+            action='store',
+            dest='recent_minutes',
+            default=5,
+            type=int,
+            help='Number of minutes to look back for changes',
         )
 
     @transaction.atomic
     def handle(self, **options):
         if options['recent']:
+            next_page = settings.YNR_BASE + \
+                '/api/v0.9/persons/?page_size=200'
             self.existing_people = set(Person.objects.values_list('pk', flat=True))
         else:
             self.existing_people = set()
+            next_page = settings.YNR_BASE + \
+                '/media/cached-persons/latest/page-000001.json'
         self.seen_people = set()
 
-        next_page = settings.YNR_BASE + \
-            '/media/cached-persons/latest/page-000001.json'
 
         if options['recent']:
-            past_time = datetime.now() - timedelta(minutes=5)
+            past_time = datetime.now() - timedelta(
+                minutes=options['recent_minutes'])
             next_page = "{}&updated_gte={}".format(
                 next_page, past_time.isoformat()
             )
