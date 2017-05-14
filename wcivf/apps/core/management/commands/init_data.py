@@ -19,22 +19,21 @@ class Command(BaseCommand):
 
         if options['full']:
             commands = [
-                'import_elections',
-                'import_posts',
-                'import_parties',
-                'import_people',
-                'import_wikipedia_bios',
+                ('import_elections', ),
+                ('import_posts', ),
+                ('import_parties', ),
+                ('import_people', ),
             ]
         else:
             commands = [
-                'import_people',
+                ('import_people', "--recent", "--recent-minutes=30"),
             ]
 
 
 
         for command in commands:
-            print(command)
-            call_command(command)
+            print(" ".join(command))
+            call_command(*command)
 
         # Unset dirty file if it exists
         if getattr(settings, 'CHECK_HOST_DIRTY', False):
