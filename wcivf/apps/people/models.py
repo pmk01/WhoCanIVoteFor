@@ -32,7 +32,7 @@ class PersonPost(models.Model):
 
 
 class Person(models.Model):
-    ynr_id = models.CharField(max_length=255, db_index=True)
+    ynr_id = models.CharField(max_length=255, db_index=True, unique=True)
     name = models.CharField(blank=True, max_length=255)
     email = models.EmailField(null=True)
     gender = models.CharField(blank=True, max_length=255, null=True)
