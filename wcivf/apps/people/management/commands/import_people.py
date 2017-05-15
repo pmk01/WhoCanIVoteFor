@@ -7,6 +7,7 @@ from django.conf import settings
 import requests
 
 from people.models import Person, PersonPost
+from elections.models import Election, Post
 
 
 class Command(BaseCommand):
@@ -31,10 +32,14 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
         if options['recent']:
+            self.all_elections = {}
+            self.all_posts = {}
             next_page = settings.YNR_BASE + \
                 '/api/v0.9/persons/?page_size=200'
             self.existing_people = set(Person.objects.values_list('pk', flat=True))
         else:
+            self.all_elections = {e.slug: e for e in Election.objects.all()}
+            self.all_posts = {p.ynr_id: p for p in Post.objects.all()}
             self.existing_people = set()
             next_page = settings.YNR_BASE + \
                 '/media/cached-persons/latest/page-000001.json'
@@ -58,6 +63,7 @@ class Command(BaseCommand):
             self.add_people(results)
             next_page = results.get('next')
 
+        PersonPost.objects.filter(party=None).delete()
         deleted_ids = self.existing_people.difference(self.seen_people)
         if not options['recent']:
             Person.objects.filter(ynr_id__in=deleted_ids).delete()
@@ -65,8 +71,5 @@ class Command(BaseCommand):
     def add_people(self, results):
         for person in results['results']:
             person_obj, created = Person.objects.update_or_create_from_ynr(
-                person)
+                person, all_elections=self.all_elections, all_posts=self.all_posts)
             self.seen_people.add(person['id'])
-            if created:
-                print("Added new person: {0}".format(person['name']))
-        PersonPost.objects.filter(party=None).delete()

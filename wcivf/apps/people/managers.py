@@ -35,7 +35,8 @@ class PersonPostManager(models.Manager):
 
 class PersonManager(models.Manager):
 
-    def update_or_create_from_ynr(self, person):
+    def update_or_create_from_ynr(self, person,
+                                  all_elections=None, all_posts=None):
         posts = []
         elections = []
 
@@ -71,15 +72,19 @@ class PersonManager(models.Manager):
                 post = None
 
                 if membership['election']:
-                    election = Election.objects.get(
-                        slug=membership['election']['id'])
+                    election_slug = membership['election']['id']
+                    election = all_elections.get(
+                        election_slug,
+                        Election.objects.get(slug=election_slug)
+                    )
                     elections.append(election)
 
                 if membership['post']:
-                    post = Post.objects.update_or_create(
-                        ynr_id=membership['post']['id'],
-                        label=membership['post']['label'],
-                    )[0]
+                    post_id = membership['post']['id']
+                    post = all_posts.get(
+                        post_id,
+                        Post.objects.get(ynr_id=post_id)
+                    )
                     if election:
                         post.election = election
 
