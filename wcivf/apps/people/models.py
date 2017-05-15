@@ -37,7 +37,7 @@ class Person(models.Model):
     email = models.EmailField(null=True)
     gender = models.CharField(blank=True, max_length=255, null=True)
     birth_date = models.CharField(null=True, max_length=255)
-    photo = models.ImageField(upload_to="people/photos", null=True)
+    photo_url = models.URLField(blank=True, null=True)
 
     # contact points
     twitter_username = models.CharField(blank=True, null=True, max_length=100)

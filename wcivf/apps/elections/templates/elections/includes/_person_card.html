@@ -1,8 +1,8 @@
 {% load static %}
 <section class="candidate_card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %}">
     <a href="{{ person_post.person.get_absolute_url }}" class="person_photo">
-      {% if person_post.person.photo %}
-        <img src="{{ person_post.person.photo.url }}" class="candidate_photo" alt="Photo of {{ person_post.person.name }}">
+      {% if person_post.person.photo_url %}
+        <img src="{{ person_post.person.photo_url }}" class="candidate_photo" alt="Photo of {{ person_post.person.name }}">
       {% elif person_post.person.gender|lower == 'male' %}
         <img src="{% static 'people/images/blank-man.png' %}" style="background-color: #ddd;" class="candidate_photo">
       {% else %}

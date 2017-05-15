@@ -62,6 +62,8 @@ class PersonManager(models.Manager):
             defaults['wikipedia_url'] = version_data['wikipedia_url']
         if 'biography' in version_data:
             defaults['statement_to_voters'] = version_data['biography']
+        if 'thumbnail' in person:
+            defaults['photo_url'] = person['thumbnail']
 
         if person['memberships']:
             for membership in person['memberships']:
@@ -94,27 +96,6 @@ class PersonManager(models.Manager):
             defaults=defaults
         )
         person_obj.save()
-
-        if person['thumbnail']:
-            same_photo = False
-            photo_path = person['thumbnail'].split('cache/')[-1]
-
-            if person_obj.photo:
-                try:
-                    file_path = person_obj.photo.file.name
-                except FileNotFoundError:
-                    file_path = None
-                # This person has a photo already, check if it's the same
-                if file_path and os.path.exists(file_path):
-                    if person_obj.photo.name.endswith(photo_path):
-                        same_photo = True
-            if not same_photo:
-                img_temp = NamedTemporaryFile(delete=True)
-                img_temp.write(requests.get(person['thumbnail']).content)
-                img_temp.flush()
-
-                person_obj.photo.save(photo_path, File(img_temp))
-                person_obj.save()
 
         if posts:
             from .models import PersonPost

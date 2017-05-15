@@ -4,7 +4,7 @@
 {% load breadcrumb_tags %}
 
 
-{% block og_image %}{% if object.photo %}{{ object.photo.url }}{% endif %}{% endblock og_image %}
+{% block og_image %}{% if object.photo_url %}{{ object.photo_url }}{% endif %}{% endblock og_image %}
 
 
 {% block og_title %}{{ object.name }}{% endblock og_title %}
@@ -15,8 +15,8 @@
   <div class="card person_banner">
     <h2 class="person_name">{{ object.name }}</h2>
 
-    {% if object.photo %}
-      <img src="{{ object.photo.url }}" class="person_photo" alt="profile photo of {{ object.name }}">
+    {% if object.photo_url %}
+      <img src="{{ object.photo_url }}" class="person_photo" alt="profile photo of {{ object.name }}">
     {% endif %}
 
     {% if object.current_posts %}
