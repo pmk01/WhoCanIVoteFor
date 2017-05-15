@@ -26,7 +26,7 @@ class Command(BaseCommand):
             ]
         else:
             commands = [
-                ('import_people', "--recent", "--recent-minutes=30"),
+                ('import_people', "--recent", "--recent-minutes=90"),
             ]
 
 
