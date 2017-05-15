@@ -6,6 +6,7 @@ import csv
 import datetime
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 
 from elections.models import Election, PostElection
 from hustings.models import Husting
@@ -109,6 +110,7 @@ class Command(BaseCommand):
         husting.save()
         return husting
 
+    @transaction.atomic
     def handle(self, **options):
         """
         Entrypoint for our command.
