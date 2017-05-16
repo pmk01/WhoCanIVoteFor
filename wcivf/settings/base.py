@@ -50,7 +50,9 @@ INSTALLED_APPS = (
     'hustings',
     'debug_toolbar',
     'django_extensions',
+    'rest_framework',
     'robots',
+    'api',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -176,6 +178,15 @@ SITE_LOGO_WIDTH = "440px"
 import redis
 REDIS_POOL = redis.ConnectionPool(port=6379, db=5)
 REDIS_KEY_PREFIX = "WCIVF"
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'api.permissions.ReadOnly'
+    ],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 # .local.py overrides all the common settings.
 try:

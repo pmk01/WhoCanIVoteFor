@@ -6,6 +6,7 @@ django-model-utils==2.4
 django-markdown-deux
 django-localflavor==1.2
 django-extensions
+djangorestframework==3.6.3
 django-redis
 hiredis
 Pillow
