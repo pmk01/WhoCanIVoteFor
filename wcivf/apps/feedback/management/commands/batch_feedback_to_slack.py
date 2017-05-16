@@ -1,9 +1,12 @@
-from django.core.management.base import BaseCommand
-from django.conf import settings
 from datetime import datetime, timedelta
+import json
+import random
 
 import requests
-import json
+
+from django.core.management.base import BaseCommand
+from django.conf import settings
+
 from feedback.models import Feedback
 
 class Command(BaseCommand):
@@ -13,36 +16,103 @@ class Command(BaseCommand):
             action='store',
             dest='hours',
             default=1,
+            type=int,
             help='Hours to look back for feedback'
         )
+
+    @property
+    def random_happy(self):
+        return random.choice([
+            ':+1:',
+            ':tada:',
+            ':grinning:',
+            ':heart_eyes:',
+            ':heart_eyes_cat:',
+            ':heart:',
+            ':laughing:',
+        ])
+
+    @property
+    def random_sad(self):
+        return random.choice([
+            ':-1:',
+            ':disappointed:',
+            ':confused:',
+            ':unamused:',
+            ':rage:',
+            ':confounded:',
+        ])
+
+    def format_attachment(self, comment):
+        useful_colour = "#2AB27B"
+        not_useful_colour = "#C7254E"
+
+        colour = useful_colour
+        comment_title = "A 'found' comment:"
+        if comment.found_useful == "NO":
+            comment_title = "A 'not found' comment:"
+            colour = not_useful_colour
+        useful_comment = {
+            "fallback": comment.comments,
+            "color": colour,
+            "fields": [
+                {
+                    "title": comment_title,
+                    "value": comment.comments,
+                    "short": False
+                },
+                {
+                    "title": "Page",
+                    "value": "<{0}{1}>".format(
+                        settings.CANONICAL_URL, comment.source_url),
+                    "short": False
+                }
+            ],
+        }
+        return useful_comment
+
 
     def handle(self, **options):
         past_time = datetime.now() - timedelta(hours=int(options['hours']))
 
-        msg_fmt = "Aggregated site feedback since {time} - :+1: x{found}, :-1: x{not_found} - yay!"
+        msg_fmt = """Feedback time!\nIn the last {hour_string}:\n\t{found} people felt {random_happy}\n\t{not_found} people felt {random_sad}\n"""
 
-        recent_feedback = list(Feedback.objects.filter(created__gte=past_time))
+        recent_feedback = Feedback.objects.filter(created__gte=past_time)
 
-        found     = len([feedback for feedback in recent_feedback if feedback.found_useful == 'YES'])
-        not_found = len([feedback for feedback in recent_feedback if feedback.found_useful != 'YES'])
+        if not recent_feedback.exists():
+            return
+
+        found = recent_feedback.filter(found_useful="YES")
+        not_found = recent_feedback.exclude(found_useful="YES")
+
+        hour_string = "hour"
+        if options['hours'] > 1:
+            hour_string = "{} hours".format(options['hours'])
+
 
         message = msg_fmt.format(
-            time      = past_time.strftime("%H:%M"),
-            found     = found,
-            not_found = not_found
+            hour_string = hour_string,
+            found = found.count(),
+            not_found = not_found.count(),
+            random_happy = self.random_happy,
+            random_sad = self.random_sad,
         )
 
         payload = {
-            "fallback": message,
-            "pretext": message,
-            "color": "#2AB27B" if found >= not_found else "#C7254E",
+            "text": message,
         }
 
-        comments = [ { "title" : "<{0}{1}>".format(settings.CANONICAL_URL, feedback.source_url), "value": feedback.comments, "short": False }
-                     for feedback in recent_feedback if feedback.comments is not None][0:5]
+        found_useful_comments = found.exclude(comments="")[:2]
+        not_found_useful_comments = not_found.exclude(comments="")[:2]
+        attachments = []
 
-        if comments:
-            payload["fields"] = comments
+        for comment in found_useful_comments:
+            attachments.append(self.format_attachment(comment))
+        for comment in not_found_useful_comments:
+            attachments.append(self.format_attachment(comment))
+
+        if attachments:
+            payload["attachments"] = attachments
 
         if getattr(settings, 'SLACK_FEEDBACK_WEBHOOK_URL', None):
             url = settings.SLACK_FEEDBACK_WEBHOOK_URL
