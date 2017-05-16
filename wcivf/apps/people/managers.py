@@ -1,11 +1,5 @@
-import os
-
-import requests
-
 from django.db import models
 from django.db.models import Count
-from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
 
 from elections.models import Election, Post
 from parties.models import Party
