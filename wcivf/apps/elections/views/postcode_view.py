@@ -1,19 +1,17 @@
-import re
-
 from icalendar import Calendar, Event, vText
 
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
-from django.core.cache import cache
 
 from .mixins import (ElectionNotificationFormMixin, LogLookUpMixin,
-                     PostcodeToPostsMixin, PollingStationInfoMixin)
-from people.models import PersonPost
+                     PostcodeToPostsMixin, PollingStationInfoMixin,
+                     PostelectionsToPeopleMixin)
 
 
 class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
-                   PollingStationInfoMixin, LogLookUpMixin, TemplateView):
+                   PollingStationInfoMixin, LogLookUpMixin, TemplateView,
+                   PostelectionsToPeopleMixin):
     """
     This is the main view that takes a postcode and shows all elections
     for that area, with related information.
@@ -23,38 +21,6 @@ class PostcodeView(ElectionNotificationFormMixin, PostcodeToPostsMixin,
     well.
     """
     template_name = 'elections/postcode_view.html'
-
-    def postelections_to_people(self, postelection):
-        key = "person_posts_{}".format(postelection.post.ynr_id)
-        people_for_post = cache.get(key)
-        if people_for_post:
-            return people_for_post
-
-        people_for_post = PersonPost.objects.filter(
-            post=postelection.post,
-            election=postelection.election
-            ).select_related(
-                'person',
-                'party'
-            )
-
-        if postelection.election.uses_lists:
-            order_by = ['party__party_name', 'list_position']
-        else:
-            order_by = ['person__name']
-
-        people_for_post = people_for_post.order_by(*order_by)
-        people_for_post = people_for_post.select_related('post')
-        people_for_post = people_for_post.select_related('election')
-        cache.set(key, people_for_post)
-        return people_for_post
-
-
-    def clean_postcode(self, postcode):
-        incode_pattern = '[0-9][ABD-HJLNP-UW-Z]{2}'
-        space_regex = re.compile(r' *(%s)$' % incode_pattern)
-        postcode = space_regex.sub(r' \1', postcode.upper())
-        return postcode
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

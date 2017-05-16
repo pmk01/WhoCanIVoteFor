@@ -1,3 +1,5 @@
+import re
+
 import requests
 
 from django.conf import settings
@@ -6,6 +8,7 @@ from django.core.cache import cache
 
 from notifications.forms import PostcodeNotificationForm
 from core.models import log_postcode
+from people.models import PersonPost
 from ..models import PostElection, InvalidPostcodeError
 
 
@@ -55,7 +58,13 @@ class PostcodeToPostsMixin(object):
                 ))
         return self.render_to_response(context)
 
-    def postcode_to_posts(self, postcode):
+    def clean_postcode(self, postcode):
+        incode_pattern = '[0-9][ABD-HJLNP-UW-Z]{2}'
+        space_regex = re.compile(r' *(%s)$' % incode_pattern)
+        postcode = space_regex.sub(r' \1', postcode.upper())
+        return postcode
+
+    def postcode_to_posts(self, postcode, compact=False):
         key = "upcoming_elections_{}".format(postcode)
         results_json = cache.get(key)
         if not results_json:
@@ -93,12 +102,40 @@ class PostcodeToPostsMixin(object):
         pes = pes.select_related('post')
         pes = pes.select_related('election')
         pes = pes.select_related('election__voting_system')
-        pes = pes.prefetch_related('husting_set')
+        if not compact:
+            pes = pes.prefetch_related('husting_set')
         pes = pes.order_by(
             'election__election_date',
             'election__election_weight'
         )
         return pes
+
+
+class PostelectionsToPeopleMixin(object):
+    def postelections_to_people(self, postelection):
+        key = "person_posts_{}".format(postelection.post.ynr_id)
+        people_for_post = cache.get(key)
+        if people_for_post:
+            return people_for_post
+
+        people_for_post = PersonPost.objects.filter(
+            post=postelection.post,
+            election=postelection.election
+            ).select_related(
+                'person',
+                'party'
+            )
+
+        if postelection.election.uses_lists:
+            order_by = ['party__party_name', 'list_position']
+        else:
+            order_by = ['person__name']
+
+        people_for_post = people_for_post.order_by(*order_by)
+        people_for_post = people_for_post.select_related('post')
+        people_for_post = people_for_post.select_related('election')
+        cache.set(key, people_for_post)
+        return people_for_post
 
 
 class PollingStationInfoMixin(object):
