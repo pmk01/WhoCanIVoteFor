@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.views.generic import TemplateView
 
-from .views import HomePageView, PostcodeFormView, StatusCheckView
+from .views import HomePageView, PostcodeFormView, StatusCheckView, OpenSearchView
 
 urlpatterns = [
     url(r'^$', HomePageView.as_view(), name="home_view"),
@@ -74,4 +74,8 @@ urlpatterns = [
         PostcodeFormView.as_view(template_name='seo-landing-pages/index.html'),
         name='seo-index'),
 
+    url(r'^opensearch\.xml',
+        OpenSearchView.as_view(),
+        name="opensearch"
+    ),
 ]
