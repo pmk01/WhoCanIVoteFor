@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% load static %}
+{% load markdown_deux_tags %}
+{% load breadcrumb_tags %}
+
+
+{% block og_image %}{% if object.photo_url %}{{ object.photo_url }}{% endif %}{% endblock og_image %}
+
+
+{% block og_title %}{{ object.name }}{% endblock og_title %}
+{% block page_title %}{{ object.name }}{% endblock page_title %}
+{% block og_description %}Standing for '{{ object.posts.all.0.label }}' in {{ object.posts.all.0.election.name }}{% endblock og_description %}
+
+{% block content %}
+  <div class="card person_banner">
+    <h2 class="person_name">Ask {{ object.name }} for more information</h2>
+
+    {% if object.photo_url %}
+      <img src="{{ object.photo_url }}" class="person_photo" alt="profile photo of {{ object.name }}">
+    {% endif %}
+
+    <style>
+
+      #email p, #headers {
+        font-family: monospace;
+        font-size: 80%;
+        max-width: 60em;
+      }
+
+      #controls td {
+        padding: 0.3em;
+      }
+
+      #colophon {
+        font-style: italic;
+        font-size: 70%;
+        text-align: center;
+      }
+
+      .error {
+        font-weight: bold;
+        color: red;
+      }
+      .name {
+        font-weight:bold;
+      }
+
+    </style>
+
+
+    <div id="error"></div>
+
+    <p>This page generates a customised email for {{ object.name }}
+    to ask them to provide missing data
+    for the Democracy Club dataset. </p>
+
+    <p>Add your name, check the box if you live in {{ object.current_posts.0.post.label }},
+      and then press the 'open email in email program'.</p>
+
+    <form>
+      <div class="form-group">
+        <label for="name" class="form-label-bold">Your Name</label>
+        <input type="text" id="name" onkeyup="nameChange()" class=" form-control">
+      </div>
+      <div class="form-group">
+        <label for="constituent" class="form-label-bold">I live in {{ object.current_posts.0.post.label }}</label>
+        <input type="checkbox" id="constituent" onchange="constituentChange()" value="1" class=" form-control">
+      </div>
+    </form>
+
+    <p>Here's the text of email we've generated for you to send to <span class="candidatename"></span>.</p>
+
+    <p id="headers">
+    To: <span id="candidateemail" class="candidateemail"></span><br>
+    Subject: <span id="subject">Candidate information request for national database used by Google and others</span>
+    </p>
+
+    <div id="email" style="font-family: monospace">
+    <p>Hi,</p>
+
+    <p>My name is <span class="name">TYPE YOUR NAME IN THE BOX</span><span class="constituent">, I live in {{ object.current_posts.0.post.label }} </span> and I'm working with an organisation called Democracy Club, which is assembling candidate information for the General Election 2017. Your page is here:
+    https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}/</p>
+
+    <p>At the last election, Democracy Club's data was used by a number of national newspapers and search engines. This year, Google plan to link to it for any general election-related search, and many people will learn about you from this source. So it's worth taking the time to make it complete.</p>
+
+    <p>Fortunately, I'm able to help you with this. If you or your team could send me (or, even better, send me links to public statements of) any of the missing items of information on the page given above, I would be most grateful.<p>
+
+      {% if not object.photo_url %}
+        In particular, it would be great if you provided a photo which met the guidelines below.</p>
+      {% endif %}
+
+    {% if not object.statement_to_voters %}
+    <p>You may wish to take advantage of the opportunity to provide a plain text
+      "statement to voters" setting out your platform. If you'd like to do this,
+      we recommend about 600 words.</p>
+    {% endif %}
+
+
+    <p>I can insert the data into the database for you.</p>
+    <p>I look foward to hearing from you.</p>
+
+    <p>With best wishes,</p>
+
+    <p><span class="name">TYPE YOUR NAME IN THE BOX</span></p>
+
+    <p>&nbsp;</p>
+
+    {% if not object.photo_url %}
+    <div class="ifnophoto">
+    <p>Photo Guidelines<br>
+    ----------------</p>
+
+    <p>* The photo must be a clear, recent, colour headshot of you.</p>
+
+    <p>* No text or party logos may be included in the photo, unless an unavoidable part of the background or a small rosette/badge that doesn't interfere with the rule above.</p>
+
+    <p>* It must be either free of copyright restrictions, or you must provide it along with confirmation that Democracy Club has rights to use it.</p>
+
+    <p>* The photo will be displayed on the site as a square.</p>
+    </div>
+    {% endif %}
+
+    </div>
+
+    <p><button onclick="openEmail();">Open Email in Email Program</button></p>
+
+
+
+
+    <script>
+
+    function init() {
+      // Read cookie for name, if present
+      var name = readCookie("userName");
+      if (name) {
+        document.getElementById("name").value = name;
+        nameChange();
+      }
+
+      constituentChange();
+    }
+
+    function nameChange() {
+      var name = document.getElementById("name").value;
+      replaceAll("name", name);
+      createCookie("userName", name, 365);
+    }
+
+    function constituentChange() {
+      var constituent = document.getElementById("constituent").checked;
+      setClassVisibility("constituent", constituent);
+    }
+
+    function setClassVisibility(className, bool) {
+      var val = bool ? "" : "none";
+      document.querySelectorAll('.' + className).forEach(function(elem) {
+          elem.style.display = val;
+      });
+    }
+
+    function replaceAll(className, value) {
+      document.querySelectorAll('.' + className).forEach(function(elem) {
+          elem.innerText = value;
+      });
+    }
+
+    function openEmail() {
+      if (name == "") {
+        alert('Please enter your name first');
+        document.getElementById("name").focus();
+        return false;
+      };
+      var body = document.getElementById("email").innerText;
+      body = encodeURIComponent(body);
+
+      var emailAddress = "{{ object.email }}";
+      emailAddress = encodeURIComponent(emailAddress);
+
+      var subject = "Candidate information request for national database used by Google and others";
+      subject = encodeURIComponent(subject);
+
+      var mailto = "mailto:" + emailAddress + "?subject=" + subject +
+                   "&body=" + body;
+      location.href = mailto;
+    }
+
+    // Utility functions
+    function error(text) {
+      document.getElementById("error").innerHTML =
+        document.getElementById("error").innerHTML +
+        "<p class='error'>Error: " + text + "</p>";
+    }
+
+    // https://www.quirksmode.org/js/cookies.html
+    function createCookie(name, value, days) {
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        var expires = "; expires=" + date.toGMTString();
+      }
+      else {
+        var expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+          return c.substring(nameEQ.length, c.length);
+        }
+      }
+      return null;
+    }
+
+    nameChange();
+    constituentChange();
+    </script>
+
+
+  </div>
+
+{% endblock content %}
+
+
+
+
+{% block breadcrumbs %}
+{% if referer_postcode %}
+  {# We've come from the postcode page #}
+  <ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+    {% url 'home_view' as home_view %}
+    {% breadcrumb_item home_view 'Home' 1 %}
+    {% url 'postcode_view' referer_postcode as postcode_view %}
+    {% breadcrumb_item postcode_view 'Candidates' 2 %}
+    <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
+  </ol>
+{% endif %}
+
+{% endblock breadcrumbs %}
+

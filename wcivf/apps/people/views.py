@@ -4,16 +4,17 @@ from django.http import Http404
 from .models import Person, PersonPost
 
 
-class PersonView(DetailView):
-    model = Person
-
+class PersonMixin(object):
     def get_object(self, queryset=None):
+        return self.get_person(queryset)
+
+    def get_person(self, queryset=None):
         if queryset is None:
             queryset = self.get_queryset()
         pk = self.kwargs.get(self.pk_url_kwarg)
         queryset = queryset.filter(
             ynr_id=pk).prefetch_related('posts')
-        # import ipdb; ipdb.set_trace()
+
         try:
             # Get the single item from the filtered queryset
             obj = queryset.get()
@@ -28,6 +29,15 @@ class PersonView(DetailView):
                 'election',
             )
 
+        return obj
+
+
+class PersonView(DetailView, PersonMixin):
+    model = Person
+
+    def get_object(self, queryset=None):
+        obj = self.get_person(queryset)
+
         obj.past_posts = PersonPost.objects.filter(
             person=obj, election__current=False).select_related(
                 'party',
@@ -35,3 +45,8 @@ class PersonView(DetailView):
                 'election',
             )
         return obj
+
+
+class EmailPersonView(PersonMixin, DetailView):
+    template_name = "people/email_person.html"
+    model = Person
