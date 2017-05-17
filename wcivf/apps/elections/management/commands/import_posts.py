@@ -8,7 +8,8 @@ from elections.models import Post
 
 class Command(BaseCommand):
     def handle(self, **options):
-        next_page = settings.YNR_BASE + '/api/v0.9/posts/?page_size=200'
+        next_page = settings.YNR_BASE \
+            + '/media/cached-api/latest/posts-000001.json'
         while next_page:
             print(next_page)
             req = requests.get(next_page)

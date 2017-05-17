@@ -42,7 +42,7 @@ class Command(BaseCommand):
             self.all_posts = {p.ynr_id: p for p in Post.objects.all()}
             self.existing_people = set()
             next_page = settings.YNR_BASE + \
-                '/media/cached-persons/latest/page-000001.json'
+                '/media/cached-api/latest/persons-000001.json'
         self.seen_people = set()
 
 
