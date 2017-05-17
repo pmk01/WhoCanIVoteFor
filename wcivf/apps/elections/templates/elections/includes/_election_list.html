@@ -5,7 +5,7 @@
   </h3>
   {% for election in election_group.list %}
   <div class="election">
-    <a href="{{ election.get_absolute_url }}">{{ election }}</a>
+    <small>{{ election.election_date }}</small> <a href="{{ election.get_absolute_url }}">{{ election }}</a>
   </div>
   {% endfor %}
 {% endfor %}
