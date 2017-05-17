@@ -26,17 +26,17 @@ By default WhoCanIVoteFor uses PostgreSQL with the PostGIS extension. To set thi
 
     sudo apt-get install postgresql postgis
 
-Then create, for example, a 'wcivf' user:
+Then create, for example, a `wcivf` user:
 
     sudo -u postgres createuser -P wcivf
 
-Set the password to, for example, 'wcivf'. Then create the database, owned by the 'wcivf' user:
+Set the password to, for example, `wcivf`. Then create the database, owned by the `wcivf` user:
 
     sudo -u postgres createdb -O wcivf wcivf
 
 Finally, add the PostGIS extension to the database:
 
-  sudo -u postgres psql -d wcivf -c "CREATE EXTENSION postgis;"
+    sudo -u postgres psql -d wcivf -c "CREATE EXTENSION postgis;"
 
 Then, create a file `wcivf/settings/local.py` with the following contents, assuming you used the same username, password and database name as above:
 
