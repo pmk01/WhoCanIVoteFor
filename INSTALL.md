@@ -20,6 +20,37 @@ the cache backend with a file at `./wcivf/settings/local.py` with the following:
                       }
              }
 
+## Setting up PostgreSQL and PostGIS
+
+By default WhoCanIVoteFor uses PostgreSQL with the PostGIS extension. To set this up locally, first install the packages:
+
+    sudo apt-get install postgresql postgis
+
+Then create, for example, a 'wcivf' user:
+
+    sudo -u postgres createuser -P wcivf
+
+Set the password to, for example, 'wcivf'. Then create the database, owned by the 'wcivf' user:
+
+    sudo -u postgres createdb -O wcivf wcivf
+
+Finally, add the PostGIS extension to the database:
+
+  sudo -u postgres psql -d wcivf -c "CREATE EXTENSION postgis;"
+
+Then, create a file `wcivf/settings/local.py` with the following contents, assuming you used the same username, password and database name as above:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'NAME': 'wcivf',
+            'USER': 'wcivf',
+            'PASSWORD': 'wcivf',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+
 
 ## Creating inline CSS
 
