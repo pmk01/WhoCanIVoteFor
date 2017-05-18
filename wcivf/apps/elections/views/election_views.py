@@ -12,7 +12,7 @@ class ElectionsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         all_elections = Election.objects.all().order_by(
-            '-election_date', 'election_type')
+            '-election_date', 'election_type', 'name')
 
         context['past_elections'] = \
             all_elections.filter(current=False)
