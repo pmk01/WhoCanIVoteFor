@@ -1,5 +1,6 @@
 from django.views.generic import DetailView
 from django.http import Http404
+from django.db.models import Prefetch
 
 from .models import Person, PersonPost
 
@@ -13,7 +14,13 @@ class PersonMixin(object):
             queryset = self.get_queryset()
         pk = self.kwargs.get(self.pk_url_kwarg)
         queryset = queryset.filter(
-            ynr_id=pk).prefetch_related('posts')
+            ynr_id=pk).prefetch_related(
+                Prefetch(
+                    'personpost_set',
+                    queryset=PersonPost.objects.all().select_related(
+                        'election', 'post', 'party')
+                )
+            )
 
         try:
             # Get the single item from the filtered queryset
@@ -26,7 +33,7 @@ class PersonMixin(object):
             person=obj, election__current=True).select_related(
                 'party',
                 'post',
-                'election',
+                'election'
             )
 
         return obj
@@ -42,7 +49,7 @@ class PersonView(DetailView, PersonMixin):
             person=obj, election__current=False).select_related(
                 'party',
                 'post',
-                'election',
+                'election'
             )
         return obj
 

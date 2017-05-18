@@ -14,7 +14,7 @@ class PersonPost(models.Model):
     person = models.ForeignKey('Person')
     post = models.ForeignKey(Post)
     party = models.ForeignKey(Party, null=True)
-    election = models.ForeignKey(Election, null=True)
+    election = models.ForeignKey(Election, null=False)
     list_position = models.IntegerField(blank=True, null=True)
     objects = PersonPostManager()
 
@@ -50,9 +50,6 @@ class Person(models.Model):
     wikipedia_url = models.CharField(blank=True, null=True, max_length=800)
     wikipedia_bio = models.TextField(null=True)
     statement_to_voters = models.TextField(null=True)
-
-    posts = models.ManyToManyField(Post, through=PersonPost)
-    elections = models.ManyToManyField(Election)
 
     objects = PersonManager()
 
