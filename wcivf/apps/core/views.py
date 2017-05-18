@@ -2,7 +2,7 @@ import os
 
 from django import http
 from django.conf import settings
-from django.views.generic import View, FormView
+from django.views.generic import View, FormView, TemplateView
 from django.core.urlresolvers import reverse
 
 from .forms import PostcodeLookupForm
@@ -44,6 +44,15 @@ class PostcodeFormView(FormView):
 class HomePageView(PostcodeFormView):
     template_name = "home.html"
 
+class OpenSearchView(TemplateView):
+    template_name = 'opensearch.xml'
+    content_type = 'text/xml'
+
+    def get_context_data(self, **kwargs):
+        context = super(OpenSearchView, self).get_context_data(**kwargs)
+        context['CANONICAL_URL'] = settings.CANONICAL_URL
+        context['SITE_TITLE'] = settings.SITE_TITLE
+        return context
 
 class StatusCheckView(View):
 
