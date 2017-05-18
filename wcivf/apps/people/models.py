@@ -65,3 +65,15 @@ class Person(models.Model):
     def get_ynr_url(self):
         return "{}/person/{}/".format(settings.YNR_BASE, self.ynr_id)
 
+    @property
+    def should_show_email_cta(self):
+        show_cta = bool(self.email)
+
+        conditions = [
+            self.statement_to_voters,
+        ]
+
+        all_conditions = not any(map(bool, conditions))
+
+        return all([show_cta, all_conditions])
+

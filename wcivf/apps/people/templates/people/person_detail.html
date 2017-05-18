@@ -122,6 +122,18 @@
 </div>
 {% endif %}
 
+
+{% if object.should_show_email_cta %}
+<div class="card">
+  <h4>Will you help us find more information about this candidate?</h4>
+  Thousands of voters will rely on this site. You can help them by emailing the
+  candidate to ask them to provide more information.
+  <p><a href="{% url 'email_person_view' pk=object.pk ignored_slug=person.name|slugify %}" class="link-button">Ask {{ object.name }} for more information</a></p>
+</div>
+
+
+{% endif %}
+
 <div class="card">
   <h3>Elections</h3>
   {% if object.current_posts %}
