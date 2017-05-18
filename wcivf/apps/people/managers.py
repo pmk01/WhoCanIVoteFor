@@ -30,7 +30,9 @@ class PersonPostManager(models.Manager):
 class PersonManager(models.Manager):
 
     def update_or_create_from_ynr(self, person,
-                                  all_elections=None, all_posts=None):
+                                  all_elections=None,
+                                  all_posts=None,
+                                  all_parties=None):
         posts = []
         elections = []
 
@@ -67,18 +69,18 @@ class PersonManager(models.Manager):
 
                 if membership['election']:
                     election_slug = membership['election']['id']
-                    election = all_elections.get(
-                        election_slug,
-                        Election.objects.get(slug=election_slug)
-                    )
+                    try:
+                        election = all_elections[election_slug]
+                    except KeyError:
+                        election = Election.objects.get(slug=election_slug)
                     elections.append(election)
 
                 if membership['post']:
                     post_id = membership['post']['id']
-                    post = all_posts.get(
-                        post_id,
-                        Post.objects.get(ynr_id=post_id)
-                    )
+                    try:
+                        post = all_posts[post_id]
+                    except KeyError:
+                        post = Post.objects.get(ynr_id=post_id)
                     if election:
                         post.election = election
 
@@ -90,31 +92,32 @@ class PersonManager(models.Manager):
                     post.party_id = None
                 posts.append(post)
 
+        person_id = person['id']
         person_obj, _ = self.update_or_create(
             ynr_id=person['id'],
             defaults=defaults
         )
-        person_obj.save()
 
         if posts:
             from .models import PersonPost
             # Delete old posts for this person
-            PersonPost.objects.filter(person=person_obj).delete()
+            PersonPost.objects.filter(person_id=person_id).delete()
+            # import ipdb; ipdb.set_trace()
             for post in posts:
                 defaults = {
                     'list_position': post.party_list_position
                 }
                 if post.party_id:
-                    defaults['party'] = Party.objects.get(
-                        party_id=post.party_id)
-
+                    try:
+                        defaults['party'] = all_parties[post.party_id]
+                    except KeyError:
+                        defaults['party'] = Party.objects.get(
+                            party_id=post.party_id)
                 PersonPost.objects.update_or_create(
                     post=post,
                     election=post.election,
-                    person=person_obj,
+                    person_id=person_id,
                     defaults=defaults
                 )
-        if elections:
-            person_obj.elections.add(*elections)
 
-        return (person_obj, _)
+        return person_obj

@@ -8,6 +8,7 @@ import requests
 
 from people.models import Person, PersonPost
 from elections.models import Election, Post
+from parties.models import Party
 
 
 class Command(BaseCommand):
@@ -31,16 +32,15 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, **options):
+        self.all_parties = {p.party_id: p for p in Party.objects.all()}
+        self.all_elections = {e.slug: e for e in Election.objects.all()}
+        self.all_posts = {p.ynr_id: p for p in Post.objects.all()}
+
         if options['recent']:
-            self.all_elections = {}
-            self.all_posts = {}
             next_page = settings.YNR_BASE + \
                 '/api/v0.9/persons/?page_size=200'
-            self.existing_people = set(Person.objects.values_list('pk', flat=True))
         else:
-            self.all_elections = {e.slug: e for e in Election.objects.all()}
-            self.all_posts = {p.ynr_id: p for p in Post.objects.all()}
-            self.existing_people = set()
+            self.existing_people = set(Person.objects.values_list('pk', flat=True))
             next_page = settings.YNR_BASE + \
                 '/media/cached-api/latest/persons-000001.json'
         self.seen_people = set()
@@ -53,9 +53,6 @@ class Command(BaseCommand):
                 next_page, past_time.isoformat()
             )
 
-        if not options['recent']:
-            Person.objects.all().delete()
-
         while next_page:
             print(next_page)
             req = requests.get(next_page)
@@ -64,12 +61,16 @@ class Command(BaseCommand):
             next_page = results.get('next')
 
         PersonPost.objects.filter(party=None).delete()
-        deleted_ids = self.existing_people.difference(self.seen_people)
         if not options['recent']:
+            deleted_ids = self.existing_people.difference(self.seen_people)
             Person.objects.filter(ynr_id__in=deleted_ids).delete()
 
     def add_people(self, results):
         for person in results['results']:
-            person_obj, created = Person.objects.update_or_create_from_ynr(
-                person, all_elections=self.all_elections, all_posts=self.all_posts)
-            self.seen_people.add(person['id'])
+            person_obj = Person.objects.update_or_create_from_ynr(
+                person,
+                all_elections=self.all_elections,
+                all_posts=self.all_posts,
+                all_parties=self.all_parties
+            )
+            self.seen_people.add(person_obj.pk)
