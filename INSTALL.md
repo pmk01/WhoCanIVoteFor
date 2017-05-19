@@ -2,9 +2,12 @@ WCIVF requires Python 3.
 
 To install:
 
-    sudo apt-get install python3-dev libpq-dev libjpeg-dev
-    sudo gem install --no-ri --no-rdoc sass -v 3.4.21`
+    sudo apt-get install python3-dev libpq-dev libjpeg-dev redis-server
+    sudo gem install --no-ri --no-rdoc sass -v 3.4.21
     pip install -r requirements/local.txt
+
+Create a Postgres database as detailed below, then:
+
     python manage.py migrate
     python manage.py import_elections
     manage.py import_posts
@@ -15,10 +18,10 @@ If you don't want to install Redis for some reason (like e.g. laziness) you can 
 the cache backend with a file at `./wcivf/settings/local.py` with the following:
 
     CACHES = {
-           'default': {
-                   'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-                      }
-             }
+        'default': {
+           'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
 
 ## Setting up PostgreSQL and PostGIS
 
@@ -54,6 +57,10 @@ Then, create a file `wcivf/settings/local.py` with the following contents, assum
 
 ## Creating inline CSS
 
+To regenerate the static files, `npm install -g yuglify`, then:
+
+    manage.py collectstatic
+
 The CSS for this project is inlined in the base template for performance reasons.
 
 This is created using [`critical`](https://github.com/addyosmani/critical), and can be re-created by running
@@ -61,4 +68,3 @@ This is created using [`critical`](https://github.com/addyosmani/critical), and 
 ```
 curl localhost:8000 | critical --base wcivf -m > wcivf/templates/_compressed_css.html
 ```
-
