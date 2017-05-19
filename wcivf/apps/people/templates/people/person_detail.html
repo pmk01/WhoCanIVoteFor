@@ -59,9 +59,7 @@
           Twitter
         </dt>
         <dd>
-          <a href="https://twitter.com/{{ object.twitter_username }}" title="{{ object.name }}'s Twitter profile">
-            @{{ object.twitter_username }}
-          </a>
+          <a data-width="400" data-height="500" class="twitter-timeline" href="https://twitter.com/{{ object.twitter_username }}">Loading...</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </dd>
         {% endif %}
         {% if object.facebook_page_url %}
