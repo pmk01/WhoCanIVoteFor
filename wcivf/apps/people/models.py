@@ -77,3 +77,13 @@ class Person(models.Model):
 
         return all([show_cta, all_conditions])
 
+
+class AssociatedCompany(models.Model):
+    person              = models.ForeignKey(Person)
+    company_name        = models.CharField(max_length=255)
+    company_number      = models.CharField(max_length=50)
+    company_status      = models.CharField(max_length=50)
+    role                = models.CharField(max_length=50)
+    role_status         = models.CharField(max_length=50, blank=True, null=True)
+    role_appointed_date = models.DateField()
+    role_resigned_date  = models.DateField(blank=True, null=True)

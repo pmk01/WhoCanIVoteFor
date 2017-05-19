@@ -51,6 +51,7 @@ class PersonView(DetailView, PersonMixin):
                 'post',
                 'election'
             )
+
         return obj
 
 
