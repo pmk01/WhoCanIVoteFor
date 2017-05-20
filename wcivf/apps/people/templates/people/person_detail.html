@@ -20,8 +20,12 @@
     {% endif %}
 
     {% if object.current_posts %}
+      {% if object.current_posts.0.party.party_name == "Independent" %}
+      <p>Standing in the {{ object.current_posts.0.election.name }} as an independent candidate.
+      {% else %}
       <p>Standing in the {{ object.current_posts.0.election.name }} for the
       {{ object.current_posts.0.party.party_name }}</p>
+      {% endif %}
     {% endif %}
 
   </div>
