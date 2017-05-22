@@ -58,6 +58,43 @@
   </div>
   {% endif %}
 
+{% if object.personpost_set.all.0.profile %}
+<div class="card">
+  <h3>Personal statement</h3>
+  {% for personpost  in object.personpost_set.all %}
+    {% if personpost.profile %}
+      <h4>{{ personpost.election.name }}</h4>
+      {% if request.user.is_staff %}
+      <a href="/admin/profiles/profile/{{ personpost.profile.pk }}/change/" class="button alert tiny">Edit</a>
+      {% endif %}
+      {{ personpost.profile.text|markdown|urlize }}
+      <a href="{{ personpost.profile.url }}" class="small">source</a>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if object.associatedcompany_set.exists %}
+  <div class="card">
+    <h3>Associated Comapnies</h3>
+    <p>{{object.name}} is associated with the following companies:</p>
+    <ul>
+      {% for company in  object.associatedcompany_set.all %}
+      <li>
+        <strong>{{ company.company_name }}</strong>
+        <br />
+        {{ company.role }}{% if company.role_status %}({{ company.role_status }}){% endif %}
+        {{ company.role_appointed_date | date:"Y" }} &ndash; {{ company.role_resigned_date | date:"Y"}}
+        <br />
+        <a href="https://beta.companieshouse.gov.uk/company/{{ company.company_number }}/">
+          More details from Companies House
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
   {% if object.twitter_username %}
   <div class="card">
     <h3>Twitter</h3>
@@ -114,23 +151,6 @@
     </dl>
   </div>
 
-{% if object.personpost_set.all.0.profile %}
-<div class="card">
-  <h3>Personal statement</h3>
-  {% for personpost  in object.personpost_set.all %}
-    {% if personpost.profile %}
-      <h4>{{ personpost.election.name }}</h4>
-      {% if request.user.is_staff %}
-      <a href="/admin/profiles/profile/{{ personpost.profile.pk }}/change/" class="button alert tiny">Edit</a>
-      {% endif %}
-      {{ personpost.profile.text|markdown|urlize }}
-      <a href="{{ personpost.profile.url }}" class="small">source</a>
-    {% endif %}
-  {% endfor %}
-</div>
-{% endif %}
-
-
 {% if object.should_show_email_cta %}
 <div class="card">
   <h4>Will you help us find more information about this candidate?</h4>
@@ -162,28 +182,6 @@
     </ul>
   {% endif %}
 </div>
-
-{% if object.associatedcompany_set.exists %}
-  <div class="card">
-    <h3>Associated Comapnies</h3>
-    <p>{{object.name}} is associated with the following companies:</p>
-    <ul>
-      {% for company in  object.associatedcompany_set.all %}
-      <li>
-        <strong>{{ company.company_name }}</strong>
-        <br />
-        {{ company.role }}{% if company.role_status %}({{ company.role_status }}){% endif %}
-        {{ company.role_appointed_date | date:"Y" }} &ndash; {{ company.role_resigned_date | date:"Y"}}
-        <br />
-        <a href="https://beta.companieshouse.gov.uk/company/{{ company.company_number }}/">
-          More details from Companies House
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
-
 
   {# Edit link #}
   <div class="card">
