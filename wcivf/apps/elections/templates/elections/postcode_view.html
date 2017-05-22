@@ -43,7 +43,7 @@
 {% for election_group in elections_by_date %}
   {% for postelection in election_group.list %}
   <div id="election_{{ postelection.election.slug }}" class="card">
-    <h2>{{ postelection.election.name }}</h2>
+    <h2>{{ postelection.election.name }} - {{ postelection.election.election_date }}</h2>
     <h3>{{ postelection.post.label }}</h3>
 
     {% if not postelection.contested %}
