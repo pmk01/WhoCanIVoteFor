@@ -58,6 +58,15 @@
   </div>
   {% endif %}
 
+  {% if object.twitter_username %}
+  <div class="card">
+    <h3>Twitter</h3>
+    <a data-width="80%" data-height="500" class="twitter-timeline" href="https://twitter.com/{{ object.twitter_username }}">
+      Loading Tweets...</a>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+  {% endif %}
+
 
 
   <div class="card">
@@ -71,14 +80,6 @@
       <a href="{{ object.get_ynr_url }}">Can you add it?</a>
       {% endif %}
 
-        {% if object.twitter_username %}
-        <dt>
-          Twitter
-        </dt>
-        <dd>
-          <a data-width="400" data-height="500" class="twitter-timeline" href="https://twitter.com/{{ object.twitter_username }}">Loading...</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </dd>
-        {% endif %}
         {% if object.facebook_page_url %}
         <dt>Facebook</dt>
         <dd>
