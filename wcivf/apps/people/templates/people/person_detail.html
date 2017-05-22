@@ -76,7 +76,7 @@
 
 {% if object.associatedcompany_set.exists %}
   <div class="card">
-    <h3>Associated Comapnies</h3>
+    <h3>Associated companies</h3>
     <p>{{object.name}} is associated with the following companies:</p>
     <ul>
       {% for company in  object.associatedcompany_set.all %}
