@@ -23,6 +23,7 @@ class Command(BaseCommand):
                 ('import_posts', ),
                 ('import_parties', ),
                 ('import_people', ),
+                ('import_cvs', ),
             ]
         else:
             commands = [

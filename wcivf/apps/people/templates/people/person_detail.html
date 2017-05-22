@@ -89,6 +89,18 @@
         </dd>
         {% endif %}
 
+        {% if object.cv %}
+        <dt>CV</dt>
+        <dd>
+          <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
+            {% if object.cv.thumb_url %}
+            <img src="{{ object.cv.thumb_url }}" class="cv_thumb" alt="Thumbnail of CV for {{ object.name }}" />
+            {% endif %}
+            <br/>See {{ object.name }}'s CV
+          </a>
+        </dd>
+        {% endif %}
+
         <dt>Google</dt>
         <dd><a href='https://www.google.co.uk/search?q=%22{{object.name}}%22+candidate' target="_blank">
             Search</a></dd>

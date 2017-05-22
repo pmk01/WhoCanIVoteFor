@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'profiles',
     'feedback',
     'hustings',
+    'peoplecvs',
     'debug_toolbar',
     'django_extensions',
     'rest_framework',

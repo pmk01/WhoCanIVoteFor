@@ -3,6 +3,7 @@ from django.http import Http404
 from django.db.models import Prefetch
 
 from .models import Person, PersonPost
+from peoplecvs.models import CV
 
 
 class PersonMixin(object):
@@ -35,6 +36,10 @@ class PersonMixin(object):
                 'post',
                 'election'
             )
+        try:
+            obj.cv = CV.objects.get(person=obj)
+        except CV.DoesNotExist:
+            pass
 
         return obj
 
