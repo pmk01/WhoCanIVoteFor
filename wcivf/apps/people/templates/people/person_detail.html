@@ -42,6 +42,19 @@
   </div>
   {% endif %}
 
+  {% if object.cv %}
+  <div class="card">
+    <h3>{{ object.name }}'s CV</h3>
+    <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
+      {% if object.cv.thumb_url %}
+      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" alt="Thumbnail of CV for {{ object.name }}" />
+      {% endif %}
+      <p>See {{ object.name }}'s CV</p>
+    </a>
+  </div>
+  {% endif %}
+
+
 
   <div class="card">
     <h3>Learn more about this candidate</h3>
@@ -85,18 +98,6 @@
         <dd>
           <a href="{{ object.homepage_url }}" title="{{ object.name }}'s home page">
             {{ object.homepage_url }}
-          </a>
-        </dd>
-        {% endif %}
-
-        {% if object.cv %}
-        <dt>CV</dt>
-        <dd>
-          <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
-            {% if object.cv.thumb_url %}
-            <img src="{{ object.cv.thumb_url }}" class="cv_thumb" alt="Thumbnail of CV for {{ object.name }}" />
-            {% endif %}
-            <br/>See {{ object.name }}'s CV
           </a>
         </dd>
         {% endif %}
