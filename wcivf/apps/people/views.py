@@ -15,7 +15,9 @@ class PersonMixin(object):
             queryset = self.get_queryset()
         pk = self.kwargs.get(self.pk_url_kwarg)
         queryset = queryset.filter(
-            ynr_id=pk).prefetch_related(
+            ynr_id=pk).select_related(
+                'cv',
+            ).prefetch_related(
                 Prefetch(
                     'personpost_set',
                     queryset=PersonPost.objects.all().select_related(
@@ -34,12 +36,8 @@ class PersonMixin(object):
             person=obj, election__current=True).select_related(
                 'party',
                 'post',
-                'election'
+                'election',
             )
-        try:
-            obj.cv = CV.objects.get(person=obj)
-        except CV.DoesNotExist:
-            pass
 
         return obj
 
