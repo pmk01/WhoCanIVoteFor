@@ -143,7 +143,7 @@
     <p>{{ object.name }} is a candidate in the following upcoming elections:</p>
     <ul>
     {% for person_post in object.current_posts %}
-      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }}</li>
+      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }} on {{ person_post.election.election_date }}</li>
     {% endfor %}
     </ul>
   {% endif %}
@@ -152,7 +152,7 @@
     <p>{{ object.name }} previously stood in the following elections:</p>
     <ul>
     {% for person_post in object.past_posts %}
-      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }}</li>
+      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }} on {{ person_post.election.election_date }}</li>
     {% endfor %}
     </ul>
   {% endif %}
