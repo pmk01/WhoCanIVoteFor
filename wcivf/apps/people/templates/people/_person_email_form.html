@@ -40,10 +40,10 @@
       </div>
     </form>
 
-    <p>Here's the text of email we've generated for you to send to <span class="candidatename"></span>.</p>
+    <p>Here's the email text we've generated for you to send to <span class="candidatename">{{ object.name }}</span>.</p>
 
     <p id="headers">
-    To: <span id="candidateemail" class="candidateemail"></span><br>
+    To: <span id="candidateemail" class="candidateemail">{{ object.email }}</span><br>
     Subject: <span id="subject">Candidate information request for national database used by Google and others</span>
     </p>
 
