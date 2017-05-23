@@ -30,6 +30,10 @@ class Command(BaseCommand):
             ':heart_eyes_cat:',
             ':heart:',
             ':laughing:',
+            ':sunny:',
+            ':white_check_mark:',
+            ':star:',
+            ':smile:',
         ])
 
     @property
@@ -41,6 +45,10 @@ class Command(BaseCommand):
             ':unamused:',
             ':rage:',
             ':confounded:',
+            ':hankey:',
+            ':red_circle:',
+            ':x:',
+            ':cry:',
         ])
 
     def format_attachment(self, comment):
