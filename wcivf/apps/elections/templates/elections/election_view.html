@@ -29,7 +29,7 @@
 
         <h3>Posts</h3>
         <ul>
-          {% for postelection in object.postelection_set.all %}
+          {% for postelection in object.postelection_set.all|dictsort:"post.label" %}
             <li><a href="{{ postelection.get_absolute_url }}">{{ postelection.post.label }}</a></li>
           {% endfor %}
         </ul>
