@@ -15,5 +15,5 @@ dealer
 django-robots
 django-debug-toolbar
 
-git+git://github.com/DemocracyClub/dc_base_theme.git@e9293946b99ca997ecf837eb348bfeb5071b463c
+git+git://github.com/DemocracyClub/dc_base_theme.git@78ddbed0be96625bab9a231d486f4635ed7d5ef0
 libsass
