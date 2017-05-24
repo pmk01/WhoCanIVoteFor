@@ -5,11 +5,10 @@
 
 
 {% block og_image %}{% if object.photo_url %}{{ object.photo_url }}{% endif %}{% endblock og_image %}
-
-
 {% block og_title %}{{ object.name }}{% endblock og_title %}
 {% block page_title %}{{ object.name }}{% endblock page_title %}
-{% block og_description %}Standing for '{{ object.posts.all.0.label }}' in {{ object.posts.all.0.election.name }}{% endblock og_description %}
+{% block page_description %}{{ object.text_intro }}. Get the latest information on this candidate at WhoCanIVoteFor?{% endblock page_description %}
+{% block og_description %}{{ object.text_intro }}. Get the latest information on this candidate at WhoCanIVoteFor?{% endblock og_description %}
 
 {% block content %}
   <div class="card person_banner">
@@ -19,17 +18,11 @@
       <img src="{{ object.photo_url }}" class="person_photo" alt="profile photo of {{ object.name }}">
     {% endif %}
 
-    {% if object.current_posts %}
-      {% if object.current_posts.0.party.party_name == "Independent" %}
-      <p>Standing in the <a href="{{ object.current_posts.0.election.get_absolute_url }}">{{ object.current_posts.0.election.name }}</a> as an independent candidate.
-      {% else %}
-      <p>Standing in the <a href="{{ object.current_posts.0.election.get_absolute_url }}">{{ object.current_posts.0.election.name }}</a> for the
-      <a href="{{ object.current_posts.0.party.get_absolute_url }}">{{ object.current_posts.0.party.party_name }}</a></p>
-      {% endif %}
-    {% endif %}
+    <p>
+    {{ object.intro|safe }}. Learn more below.
+    </p>
 
   </div>
-
 
   {% if object.statement_to_voters %}
   <div class="card">

@@ -1,8 +1,10 @@
 from django.views.generic import DetailView
 from django.http import Http404
 from django.db.models import Prefetch
+from django.utils.html import strip_tags
 
 from .models import Person, PersonPost
+from elections.models import PostElection
 
 
 class PersonMixin(object):
@@ -53,8 +55,47 @@ class PersonView(DetailView, PersonMixin):
                 'post',
                 'election'
             )
+        obj.intro = self.get_intro(obj)
+        obj.text_intro = strip_tags(obj.intro)
 
         return obj
+
+    def get_intro(self, person):
+        intro = [person.name]
+        post = None
+        if person.current_posts:
+            post = person.current_posts[0]
+            intro.append('is')
+        elif person.past_posts:
+            post = person.past_posts[0]
+            intro.append('was')
+        if post:
+            party = post.party
+            if party:
+                if party.party_name == "Independent":
+                    intro.append('an independent candidate')
+                elif party.party_name == "Speaker seeking re-election":
+                    intro.append('the Speaker seeking re-election')
+                else:
+                    intro.append('a candidate for the')
+                    str = '<a href="' + party.get_absolute_url() + '">'
+                    str += party.party_name + '</a>'
+                    intro.append(str)
+            else:
+                intro.append('a candidate')
+            intro.append('in')
+            if post.post.organization == 'House of Commons of the United Kingdom':
+                intro.append('the constituency of')
+            try:
+                postelection = PostElection.objects.get(post=post.post)
+                str = '<a href="' + postelection.get_absolute_url() + '">'
+                str += post.post.label + '</a>'
+            except PostElection.DoesNotExist:
+                str = post.post.label
+            str += ' in the <a href="' + post.election.get_absolute_url()
+            str += '">' + post.election.name + '</a>'
+            intro.append(str)
+        return ' '.join(intro)
 
 
 class EmailPersonView(PersonMixin, DetailView):
