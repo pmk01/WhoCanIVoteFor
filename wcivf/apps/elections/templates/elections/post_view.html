@@ -2,9 +2,9 @@
 
 {% load breadcrumb_tags %}
 
-{% block page_title %}{{ object.label }}{% endblock page_title %}
-{% block og_title %}{{ object.label }}{% endblock og_title %}
-{% block og_description %}'{{ object.label }}' is a post in the {{ object.election.name }} election{% endblock og_description %}
+{% block page_title %}{{ object.post.label }}{% endblock page_title %}
+{% block og_title %}{{ object.post.label }}{% endblock og_title %}
+{% block og_description %}{{ object.post.label }} {% if object.election.in_past %}was{% else %}is{% endif %} a post in the {{ object.election.name }} election{% endblock og_description %}
 
 {% block content %}
 <div class="card">
