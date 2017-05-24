@@ -51,6 +51,26 @@
   </div>
   {% endif %}
 
+  {% if object.leaflets %}
+  <div class="card">
+    <h3>Recent leaflets from {{ object.name }}</h3>
+    {% for leaflet in object.leaflets %}
+    <div class="leaflet">
+      {% if leaflet.thumb_url %}
+      <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}">
+      <img src="{{ leaflet.thumb_url }}" class="cv_thumb" alt="Thumbnail of leaflet from {{ object.name }}" />
+      </a>
+      {% endif %}
+      <p>
+      Uploaded {{ leaflet.date_uploaded_to_electionleaflets|date:"j M Y" }}<br/>
+      <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}">See leaflet</a>
+      </p>
+    </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
 {% if object.personpost_set.all.0.profile %}
 <div class="card">
   <h3>Personal statement</h3>

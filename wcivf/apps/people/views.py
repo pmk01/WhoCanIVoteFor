@@ -5,6 +5,7 @@ from django.utils.html import strip_tags
 
 from .models import Person, PersonPost
 from elections.models import PostElection
+from leaflets.models import Leaflet
 
 
 class PersonMixin(object):
@@ -17,7 +18,7 @@ class PersonMixin(object):
         pk = self.kwargs.get(self.pk_url_kwarg)
         queryset = queryset.filter(
             ynr_id=pk).select_related(
-                'cv',
+                'cv'
             ).prefetch_related(
                 Prefetch(
                     'personpost_set',
@@ -39,6 +40,8 @@ class PersonMixin(object):
                 'post',
                 'election',
             )
+        obj.leaflets = Leaflet.objects.filter(person=obj) \
+            .order_by('-date_uploaded_to_electionleaflets')[:3]
 
         return obj
 
