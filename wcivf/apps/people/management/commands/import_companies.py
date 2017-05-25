@@ -4,7 +4,9 @@ Importer for all the corporate overlords
 import collections
 import csv
 import datetime
+import requests
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
@@ -45,11 +47,40 @@ class Command(BaseCommand):
         """
         AssociatedCompany.objects.all().delete()
 
+    def get_person(self, person_id):
+        try:
+            return Person.objects.get(ynr_id=person_id)
+        except Person.DoesNotExist:
+            # if this person doesn't exist in WhoCIVF
+            # this could be due to a merge.
+            # See if we can get an alternative person id from YNR
+            url = settings.YNR_BASE + '/api/v0.9/person_redirects/' + person_id
+            req = requests.get(url)
+            result = req.json()
+
+            if 'new_person_id' not in result:
+                # we couldn't find an alt person id, re-raise the exception
+                raise
+
+            try:
+                # see if the alt person id exists
+                return Person.objects.get(ynr_id=result['new_person_id'])
+            except Person.DoesNotExist:
+                # this person still doesn't exist in WhoCIVF
+                # re-raise the exception
+                raise
+
     def create_company(self, data):
         """
         Create an individual associated company
         """
-        person = Person.objects.get(ynr_id=data.person_id)
+        try:
+            person = self.get_person(data.person_id)
+        except Person.DoesNotExist:
+            # none of our attempts to match this person id to a
+            # record in our database worked: move on
+            return None
+
         companies = AssociatedCompany.objects.filter(
             person=person, company_number=data.company_number
         )
