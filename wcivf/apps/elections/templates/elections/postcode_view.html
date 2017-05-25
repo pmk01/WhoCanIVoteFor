@@ -3,10 +3,10 @@
 {% load static %}
 {% load humanize %}
 
-{% block page_title %}Elections in {{ postcode }}{% endblock page_title %}
-{% block page_description %}{% if postelections.count == 0 %}The latest news on elections in {{ postcode }}.{% else %}Candidates are currently standing for election in {{ postcode }}. Find out more about them here.{% endif %}{% endblock page_description %}
-{% block og_title %}Elections in {{ postcode }}{% endblock og_title %}
-{% block og_description %}{% regroup postelections by election.election_date as header_elections_by_date %}{% if postelections.count == 0 %}No upcoming elections{% else %}On {{ header_elections_by_date.0.grouper }}, registered voters in {{ postcode }} will be able to vote in {{ header_elections_by_date.0.list|length|apnumber }} election{{ header_elections_by_date.0.list|length|pluralize }}{% endif %}{% endblock og_description %}
+{% block page_title %}{% include "elections/includes/_postcode_meta_title.html" %}{% endblock page_title %}
+{% block page_description %}{% include "elections/includes/_postcode_meta_description.html" %}{% endblock page_description %}
+{% block og_title %}{% include "elections/includes/_postcode_meta_title.html" %}{% endblock og_title %}
+{% block og_description %}{% include "elections/includes/_postcode_meta_description.html" %}{% endblock og_description %}
 
 {% block content %}
 

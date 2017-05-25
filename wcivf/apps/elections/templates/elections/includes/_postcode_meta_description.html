@@ -1,0 +1,2 @@
+{% regroup postelections by election.election_date as header_elections_by_date %}
+{% if postelections.count == 0 %}No upcoming elections in {{ postcode }}{% else %}On {{ header_elections_by_date.0.grouper }}, registered voters in {{ postcode }} can vote in the {{ header_elections_by_date.0.list.0.election.name }}. Find out more about the candidates.{% endif %}

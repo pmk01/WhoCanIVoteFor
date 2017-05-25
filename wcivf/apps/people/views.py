@@ -34,7 +34,7 @@ class PersonMixin(object):
             raise Http404("No %(verbose_name)s found matching the query" %
                           {'verbose_name': queryset.model._meta.verbose_name})
 
-        obj.current_posts = PersonPost.objects.filter(
+        obj.current_personposts = PersonPost.objects.filter(
             person=obj, election__current=True).select_related(
                 'party',
                 'post',
@@ -52,52 +52,65 @@ class PersonView(DetailView, PersonMixin):
     def get_object(self, queryset=None):
         obj = self.get_person(queryset)
 
-        obj.past_posts = PersonPost.objects.filter(
+        obj.past_personposts = PersonPost.objects.filter(
             person=obj, election__current=False).select_related(
                 'party',
                 'post',
                 'election'
             )
+        obj.personpost = None
+        if obj.current_personposts:
+            obj.personpost = obj.current_personposts[0]
+        elif obj.past_personposts:
+            obj.personpost = obj.past_personposts[0]
+        obj.title = self.get_title(obj)
         obj.intro = self.get_intro(obj)
         obj.text_intro = strip_tags(obj.intro)
 
         return obj
 
+    def get_title(self, person):
+        title = person.name
+        if person.personpost:
+            title += ' for ' + person.personpost.post.label + ' in the '
+            title += person.personpost.election.name
+        return title
+
     def get_intro(self, person):
         intro = [person.name]
-        post = None
-        if person.current_posts:
-            post = person.current_posts[0]
+        if person.current_personposts:
             intro.append('is')
-        elif person.past_posts:
-            post = person.past_posts[0]
+        elif person.past_personposts:
             intro.append('was')
-        if post:
-            party = post.party
+        if person.personpost:
+            party = person.personpost.party
             if party:
                 if party.party_name == "Independent":
                     intro.append('an independent candidate')
                 elif party.party_name == "Speaker seeking re-election":
                     intro.append('the Speaker seeking re-election')
                 else:
-                    intro.append('a candidate for the')
+                    intro.append('the')
                     str = '<a href="' + party.get_absolute_url() + '">'
-                    str += party.party_name + '</a>'
+                    str += party.party_name + '</a> candidate'
                     intro.append(str)
             else:
                 intro.append('a candidate')
             intro.append('in')
-            if post.post.organization == 'House of Commons of the United Kingdom':
+            if person.personpost.post.organization ==\
+                    'House of Commons of the United Kingdom':
                 intro.append('the constituency of')
             try:
-                postelection = PostElection.objects.get(post=post.post,
-                                                        election=post.election)
+                postelection = PostElection.objects.get(
+                    post=person.personpost.post,
+                    election=person.personpost.election)
                 str = '<a href="' + postelection.get_absolute_url() + '">'
-                str += post.post.label + '</a>'
+                str += person.personpost.post.label + '</a>'
             except PostElection.DoesNotExist:
-                str = post.post.label
-            str += ' in the <a href="' + post.election.get_absolute_url()
-            str += '">' + post.election.name + '</a>'
+                str = person.personpost.post.label
+            str += ' in the <a href="'
+            str += person.personpost.election.get_absolute_url()
+            str += '">' + person.personpost.election.name + '</a>'
             intro.append(str)
         return ' '.join(intro)
 

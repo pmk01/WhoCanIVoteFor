@@ -1,0 +1,1 @@
+{% autoescape off %}See all {{ person_posts|length }} candidates in {{ object.post.label }} in the {{ object.election.name }} on {{ object.election.election_date }}: {% for pp in person_posts %}{{ pp.person.name|safe }} ({{ pp.party.party_name }}) {% endfor %}{% endautoescape %}}

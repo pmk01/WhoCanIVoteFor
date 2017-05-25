@@ -2,9 +2,10 @@
 
 {% load breadcrumb_tags %}
 
-{% block page_title %}{{ object.post.label }}{% endblock page_title %}
-{% block og_title %}{{ object.post.label }}{% endblock og_title %}
-{% block og_description %}{{ object.post.label }} {% if object.election.in_past %}was{% else %}is{% endif %} a post in the {{ object.election.name }} election{% endblock og_description %}
+{% block page_title %}{% include "elections/includes/_post_meta_title.html" %}{% endblock page_title %}
+{% block page_description %}{% include "elections/includes/_post_meta_description.html" %}{% endblock page_description %}
+{% block og_title %}{% include "elections/includes/_post_meta_title.html" %}{% endblock og_title %}
+{% block og_description %}{% include "elections/includes/_post_meta_description.html" %}{% endblock og_description %}
 
 {% block content %}
 <div class="card">
