@@ -2,6 +2,21 @@
 @import 'cards';
 @import 'feedback_form';
 
+.container {
+  padding: 20px;
+  overflow: auto;
+  box-style: border-box;
+}
+
+footer {
+  ul {
+    overflow: hidden;
+  }
+  li {
+    float: left;
+  }
+}
+
 #bottom_banner {
   margin-top: 2rem;
 
