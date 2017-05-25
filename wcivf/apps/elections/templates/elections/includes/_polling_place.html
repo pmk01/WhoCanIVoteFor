@@ -12,15 +12,9 @@
     </p>
   {% else %}
     {% if polling_station.custom_finder %}
-      {% if polling_station.custom_finder.can_pass_postcode %}
         <p>You can find your polling station by
-        <a href="{{ polling_station.custom_finder.base_url}}{{polling_station.custom_finder.encoded_postcode}}">
-        following this link</a>
-      {% else %}
-        <p>You can find your polling station by
-          <a href="{{ polling_station.custom_finder.base_url}}">following this link and entering your postcode</a>
-        </p>
-      {% endif %}
+        <a href="{{ polling_station.custom_finder }}">
+        following this link</a>.
     {% else %}
       <p>You should get a "poll card" through the post telling you where to vote.</p>
       <p>If you haven't got one, or aren't sure where to vote, you should call
