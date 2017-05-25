@@ -92,6 +92,9 @@
     p {
       margin:0;
     }
+    .card_party {
+      color: black;
+    }
     .more_info {
       position:absolute;
       bottom:0;
@@ -104,7 +107,7 @@
   }
 
 
-  a.person_photo {
+  img.person_photo {
     float: right;
     display: block;
     width: 130px;

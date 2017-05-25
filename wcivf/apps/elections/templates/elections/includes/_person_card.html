@@ -1,28 +1,32 @@
 {% load static %}
-<section class="candidate_card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %}">
-    <a href="{{ person_post.person.get_absolute_url }}" class="person_photo">
+
+<a href="{{ person_post.person.get_absolute_url }}">
+  <section class="candidate_card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %}">
+    <span class="person_photo">
       {% if person_post.person.photo_url %}
-        <img src="{{ person_post.person.photo_url }}" class="candidate_photo" alt="Photo of {{ person_post.person.name }}">
+        <img src="{{ person_post.person.photo_url }}" class="person_photo candidate_photo" alt="Photo of {{ person_post.person.name }}">
       {% elif person_post.person.gender|lower == 'male' %}
-        <img src="{% static 'people/images/blank-man.png' %}" style="background-color: #ddd;" class="candidate_photo">
+        <img src="{% static 'people/images/blank-man.png' %}" style="background-color: #ddd;" class="person_photo candidate_photo">
       {% else %}
-        <img src="{% static 'people/images/blank-woman.png' %}" style="background-color: #ddd;" class="candidate_photo">
+        <img src="{% static 'people/images/blank-woman.png' %}" style="background-color: #ddd;" class="person_photo candidate_photo">
       {% endif %}
-    </a>
+    </span>
 
     <div class="candidate_info">
       <h4 class="candidate_name">
-        <a href="{{ person_post.person.get_absolute_url }}" class="person_name">
+        <span href="{{ person_post.person.get_absolute_url }}" class="person_name">
           {% if person_post.list_position %}
             {{ person_post.list_position }}.
           {% endif %}
           {{ person_post.person.name }}
-        </a>
+        </span>
       </h4>
       {% if not person_post.list_position %}
-      <p>{{ person_post.party.party_name }}</p>
+      <p class="card_party">{{ person_post.party.party_name }}</p>
       {% endif %}
-      <a href="{{ person_post.person.get_absolute_url }}" class="more_info">
-        Learn more</a>
+      <div class="more_info">
+        Learn more
+      </div>
     </div>
-</section>
+  </section>
+</a>
