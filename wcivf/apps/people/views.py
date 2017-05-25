@@ -90,7 +90,8 @@ class PersonView(DetailView, PersonMixin):
             if post.post.organization == 'House of Commons of the United Kingdom':
                 intro.append('the constituency of')
             try:
-                postelection = PostElection.objects.get(post=post.post)
+                postelection = PostElection.objects.get(post=post.post,
+                                                        election=post.election)
                 str = '<a href="' + postelection.get_absolute_url() + '">'
                 str += post.post.label + '</a>'
             except PostElection.DoesNotExist:
