@@ -4,7 +4,7 @@
 {% load humanize %}
 
 {% block page_title %}Elections in {{ postcode }}{% endblock page_title %}
-{% block page_description %}The latest news on elections in {{ postcode }}{% endblock page_description %}
+{% block page_description %}{% if postelections.count == 0 %}The latest news on elections in {{ postcode }}.{% else %}Candidates are currently standing for election in {{ postcode }}. Find out more about them here.{% endif %}{% endblock page_description %}
 {% block og_title %}Elections in {{ postcode }}{% endblock og_title %}
 {% block og_description %}{% regroup postelections by election.election_date as header_elections_by_date %}{% if postelections.count == 0 %}No upcoming elections{% else %}On {{ header_elections_by_date.0.grouper }}, registered voters in {{ postcode }} will be able to vote in {{ header_elections_by_date.0.list|length|apnumber }} election{{ header_elections_by_date.0.list|length|pluralize }}{% endif %}{% endblock og_description %}
 
@@ -55,7 +55,7 @@
     {% endif %}
 
     {% if postelection.people %}
-      <h3>Candidates</h3>
+      <h3>{{ postelection.people|length }} candidates are standing</h3>
       {% if postelection.election.uses_lists %}
       <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
       {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
