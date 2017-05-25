@@ -5,6 +5,9 @@ from .forms import PostcodeLookupForm
 def canonical_url(request):
     return {'CANONICAL_URL': settings.CANONICAL_URL}
 
+def site_title(request):
+    return {'SITE_TITLE': settings.SITE_TITLE}
+
 def use_compress_css(request):
     return {
         'USE_COMPRESSED_CSS': getattr(settings, 'USE_COMPRESSED_CSS', False)

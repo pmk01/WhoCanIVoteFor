@@ -87,6 +87,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'dc_theme.context_processors.dc_theme_context',
                 'core.context_processors.canonical_url',
+                'core.context_processors.site_title',
                 'core.context_processors.use_compress_css',
                 'core.context_processors.postcode_form',
                 'core.context_processors.referer_postcode',

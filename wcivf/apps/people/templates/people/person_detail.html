@@ -7,8 +7,8 @@
 {% block og_image %}{% if object.photo_url %}{{ object.photo_url }}{% endif %}{% endblock og_image %}
 {% block og_title %}{{ object.name }}{% endblock og_title %}
 {% block page_title %}{{ object.name }}{% endblock page_title %}
-{% block page_description %}{{ object.text_intro }}. Get the latest information on this candidate at WhoCanIVoteFor?{% endblock page_description %}
-{% block og_description %}{{ object.text_intro }}. Get the latest information on this candidate at WhoCanIVoteFor?{% endblock og_description %}
+{% block page_description %}{{ object.text_intro }}. Get the latest information on this candidate at {{ SITE_TITLE }}{% endblock page_description %}
+{% block og_description %}{{ object.text_intro }}. Get the latest information on this candidate at {{ SITE_TITLE }}{% endblock og_description %}
 
 {% block content %}
   <div class="card person_banner">
