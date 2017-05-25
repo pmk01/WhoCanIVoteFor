@@ -13,6 +13,22 @@
     float: left;
     margin-right: 20px;
   }
+
+  p.small {
+    font-size: 0.8em;
+    font-weight: bold;
+  }
+
+  .twitter_container {
+    max-width: 600px;
+    @include media(tablet) {
+      width: 100%;
+    }
+  }
+}
+
+.info_card {
+  background: linear-gradient(to bottom, #f7f7f7, #fcfcfc);;
 }
 
 .postcode_card {

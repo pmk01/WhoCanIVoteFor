@@ -13,26 +13,25 @@
 {% block content %}
   <div class="card person_banner">
     <h2 class="person_name">{{ object.name }}</h2>
-
     {% if object.photo_url %}
       <img src="{{ object.photo_url }}" class="person_photo" alt="profile photo of {{ object.name }}">
     {% endif %}
-
     <p>
-    {{ object.intro|safe }}. Learn more below.
+    {{ object.intro|safe }}. See below for everything we know about {{ object.name }}.
     </p>
-
   </div>
 
   {% if object.statement_to_voters %}
-  <div class="card">
+  <div class="card info_card">
     <h3>Statement to voters</h3>
     {{ object.statement_to_voters|linebreaks }}
+
+    <p class="small">This statement was sent directly to us by {{ object.name }}.</p>
   </div>
   {% endif %}
 
   {% if object.wikipedia_bio %}
-  <div class="card">
+  <div class="card info_card">
     <h3>Wikipedia</h3>
     <p>{{ object.wikipedia_bio }}</p>
     <a href="{{ object.wikipedia_url }}" class="link-button">Read more on Wikipedia</a>
@@ -40,7 +39,7 @@
   {% endif %}
 
   {% if object.cv %}
-  <div class="card">
+  <div class="card info_card">
     <h3>{{ object.name }}'s CV</h3>
     <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
       {% if object.cv.thumb_url %}
@@ -52,7 +51,7 @@
   {% endif %}
 
   {% if object.leaflets %}
-  <div class="card">
+  <div class="card info_card">
     <h3>Recent leaflets from {{ object.name }}</h3>
     {% for leaflet in object.leaflets %}
     <div class="leaflet">
@@ -72,9 +71,9 @@
   {% endif %}
 
 {% if object.personpost_set.all.0.profile %}
-<div class="card">
+<div class="card info_card">
   <h3>Personal statement</h3>
-  {% for personpost  in object.personpost_set.all %}
+  {% for personpost in object.personpost_set.all %}
     {% if personpost.profile %}
       <h4>{{ personpost.election.name }}</h4>
       {% if request.user.is_staff %}
@@ -88,7 +87,7 @@
 {% endif %}
 
 {% if object.associatedcompany_set.exists %}
-  <div class="card">
+  <div class="card info_card">
     <h3>Associated companies</h3>
     <p>{{object.name}} is associated with the following companies:</p>
     <ul>
@@ -109,27 +108,19 @@
 {% endif %}
 
   {% if object.twitter_username %}
-  <div class="card">
-    <h3>Twitter</h3>
-    <a data-width="80%" data-height="500" class="twitter-timeline" href="https://twitter.com/{{ object.twitter_username }}">
+  <div class="card info_card">
+    <h3>Latest tweets</h3>
+    <div class="twitter_container">
+    <a data-width="100%" data-height="500" class="twitter-timeline" href="https://twitter.com/{{ object.twitter_username }}">
       Loading Tweets...</a>
       <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
   </div>
   {% endif %}
 
-
-
-  <div class="card">
-    <h3>Learn more about this candidate</h3>
+  <div class="card info_card">
+    <h3>Homepage, contact etc</h3>
     <dl>
-      {% if object.email %}
-      <dt>Email</dt>
-      <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
-      {% else %}
-      We don't know {{ object.name }}'s email address.
-      <a href="{{ object.get_ynr_url }}">Can you add it?</a>
-      {% endif %}
-
         {% if object.facebook_page_url %}
         <dt>Facebook</dt>
         <dd>
@@ -154,56 +145,42 @@
           </a>
         </dd>
         {% endif %}
-
-        <dt>Google</dt>
-        <dd><a href='https://www.google.co.uk/search?q=%22{{object.name}}%22+candidate' target="_blank">
-            Search</a></dd>
-        <dd><a href='https://www.google.co.uk/search?q=%22{{object.name}}%22+candidate&tbm=nws' target="_blank">
-          News</a></dd>
-
+        {% if object.email %}
+        <dt>Email</dt>
+        <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
+        {% else %}
+        We don't know {{ object.name }}'s email address.
+        <a href="{{ object.get_ynr_url }}">Can you add it?</a>
+        {% endif %}
     </dl>
   </div>
 
-{% if object.should_show_email_cta %}
-<div class="card">
-  <h4>Will you help us find more information about this candidate?</h4>
-  Thousands of voters will rely on this site. You can help them by emailing the
-  candidate to ask them to provide more information.
-  <p><a href="{% url 'email_person_view' pk=object.pk ignored_slug=person.name|slugify %}" class="link-button">Ask {{ object.name }} for more information</a></p>
-</div>
-
-
-{% endif %}
-
-<div class="card">
-  <h3>Elections</h3>
-  {% if object.current_posts %}
-    <p>{{ object.name }} is a candidate in the following upcoming elections:</p>
-    <ul>
-    {% for person_post in object.current_posts %}
-      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }} on {{ person_post.election.election_date }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-
-  {% if object.past_posts %}
-    <p>{{ object.name }} previously stood in the following elections:</p>
+{% if object.past_posts %}
+<div class="card info_card">
+  <h3>Previous elections</h3>
+    <p>{{ object.name }} has previously stood in the following elections:</p>
     <ul>
     {% for person_post in object.past_posts %}
-      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, {{ person_post.party.party_name }} on {{ person_post.election.election_date }}</li>
+      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, for the {{ person_post.party.party_name }} on {{ person_post.election.election_date }}</li>
     {% endfor %}
     </ul>
-  {% endif %}
 </div>
+{% endif %}
 
   {# Edit link #}
   <div class="card">
-    <h3>Edit this information</h3>
-    <p>If you know something about this candidate that should be on this
-      page, please log in to our crowdsourcing website to add it.</p>
+  <h3>That's all we know! Will you help us find more about this candidate?</h3>
+  {% if object.should_show_email_cta %}
+  <p>Thousands of voters will rely on this site.{% else %}<p>{% endif %}
+    If you know something about this candidate that should be on this
+      page, please use our crowdsourcing website to add it.</p>
     <a href="{{ object.get_ynr_url }}update/" class="link-button">
-      Edit details
+      Add or edit details &raquo;
     </a>
+  {% if object.should_show_email_cta %}
+    <p>You can also email {{ object.name }} to ask them to add information to this page.
+  <p><a href="{% url 'email_person_view' pk=object.pk ignored_slug=person.name|slugify %}" class="link-button">Ask the candidate for more information &raquo;</a></p>
+{% endif %}
   </div>
 
   {# {% if object.mention_set.all %} #}
@@ -211,7 +188,9 @@
   {# {% endif %} #}
 
 
+{% if not referer_postcode %}
 {% include "elections/includes/_postcode_search_form.html" %}
+{% endif %}
 
 {% include "feedback/feedback_form.html" %}
 
