@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, DetailView
 from django.http import Http404
+from django.db.models import Prefetch
 
 
 from people.helpers import peopleposts_for_election_post
@@ -31,7 +32,13 @@ class ElectionView(DetailView):
         if queryset is None:
             queryset = self.get_queryset()
         pk = self.kwargs.get(self.pk_url_kwarg)
-        queryset = queryset.filter(slug=pk)
+        queryset = queryset.filter(slug=pk).prefetch_related(
+            Prefetch(
+                'postelection_set',
+                queryset=PostElection.objects.all().select_related(
+                    'election', 'post').order_by('post__label')
+            )
+        )
         try:
             # Get the single item from the filtered queryset
             obj = queryset.get()

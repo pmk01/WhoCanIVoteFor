@@ -23,10 +23,11 @@ class ElectionViewTests(TestCase):
 
     def test_election_list_view(self):
         # TODO Use reverse here
-        response = self.client.get("/elections/", follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'elections/elections_view.html')
-        self.assertContains(response, self.election.name)
+        with self.assertNumQueries(2):
+            response = self.client.get("/elections/", follow=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertTemplateUsed(response, 'elections/elections_view.html')
+            self.assertContains(response, self.election.name)
 
     def test_election_detail_view(self):
         # TODO Use reverse here
