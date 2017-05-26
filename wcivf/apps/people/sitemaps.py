@@ -9,4 +9,3 @@ class PersonSitemap(Sitemap):
 
     def items(self):
         return Person.objects.all()
-

@@ -5,13 +5,13 @@ from django.conf import settings
 from django.contrib.sitemaps.views import sitemap
 from django.views.decorators.cache import cache_page
 
-from elections.sitemaps import ElectionSitemap, PostSitemap
+from elections.sitemaps import ElectionSitemap, PostElectionSitemap
 from people.sitemaps import PersonSitemap
 from parties.sitemaps import PartySitemap
 
 sitemaps = {
     'elections': ElectionSitemap,
-    'posts': PostSitemap,
+    'postelections': PostElectionSitemap,
     'people': PersonSitemap,
     'parties': PartySitemap,
 }

@@ -4,9 +4,8 @@ from .models import Party
 
 class PartySitemap(Sitemap):
     changefreq = "daily"
-    priority = 0.9
+    priority = 0.5
     protocol = "https"
 
     def items(self):
         return Party.objects.all()
-

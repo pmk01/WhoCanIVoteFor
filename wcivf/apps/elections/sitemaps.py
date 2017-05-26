@@ -1,5 +1,6 @@
 from django.contrib.sitemaps import Sitemap
-from .models import Election, Post
+from django.db.models import Q
+from .models import Election, PostElection
 
 
 class ElectionSitemap(Sitemap):
@@ -11,10 +12,17 @@ class ElectionSitemap(Sitemap):
         return Election.objects.all()
 
 
-class PostSitemap(Sitemap):
+class PostElectionSitemap(Sitemap):
     changefreq = "weekly"
-    priority = 0.2
+    priority = 0.9
     protocol = "https"
 
+    # Only include posts for general elections, since
+    # otherwise the sitemap gets close to the Google limit.
+    # of 50,000 URLs.
     def items(self):
-        return Post.objects.all()
+        return PostElection.objects.filter(
+            Q(election__election_type='parl') |
+            Q(election__election_type='2010') |
+            Q(election__election_type='2015')
+        )
