@@ -176,7 +176,7 @@ WDIV_BASE = "https://wheredoivote.co.uk"
 WDIV_API = "/api/beta"
 
 CANONICAL_URL = "https://whocanivotefor.co.uk"
-
+ROBOTS_USE_HOST = False
 
 # DC Base Theme settings
 SITE_TITLE = "Who Can I Vote For?"
