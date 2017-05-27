@@ -26,7 +26,7 @@
     <h3>Statement to voters</h3>
     {{ object.statement_to_voters|linebreaks }}
 
-    <p class="small">This statement was sent directly to us by {{ object.name }}.</p>
+    <p class="small">This statement was added by {{ object.name }}, their team, or by a <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Democracy Club volunteer</a>, based on information published by the candidate elsewhere.</p>
   </div>
   {% endif %}
 
