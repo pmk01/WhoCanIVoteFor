@@ -3,7 +3,7 @@
 {% load breadcrumb_tags %}
 {% load markdown_deux_tags %}
 
-{% block og_image %}{% if object.emblem %}{{ object.emblem.url }}{% endif %}{% endblock og_image %}
+{% block og_image %}{% if object.emblem %}{{ CANONICAL_URL }}{{ object.emblem.url }}{% endif %}{% endblock og_image %}
 {% block og_title %}{{ object.party_name }}{% endblock og_title %}
 {% block page_title %}{{ object.party_name }}{% endblock page_title %}
 {% block og_description %}{{ object.personpost_set.all.count }} candidates{% endblock og_description %}
