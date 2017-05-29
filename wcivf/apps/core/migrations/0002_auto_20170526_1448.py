@@ -8,9 +8,11 @@ from django.db import migrations
 def add_site(apps, schema_editor):
     Site = apps.get_model('sites', 'Site')
 
-    site = Site.objects.get(pk=1)
-    site.domain = 'whocanivotefor.co.uk'
-    site.name = 'whocanivotefor.co.uk'
+    site = Site(
+        pk=1,
+        name='whocanivotefor.co.uk',
+        domain='whocanivotefor.co.uk',
+        )
     site.save()
 
 
