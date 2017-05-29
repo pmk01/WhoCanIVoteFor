@@ -16,6 +16,4 @@ class LoggerRouter(object):
         return None
 
     def allow_migrate(self, db, app_label, model_name=None, **hints):
-        if app_label in self.apps_that_use_logger:
-            return db == 'logger'
-        return None
+        return True
