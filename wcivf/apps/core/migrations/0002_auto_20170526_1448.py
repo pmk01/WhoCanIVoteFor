@@ -7,12 +7,11 @@ from django.db import migrations
 
 def add_site(apps, schema_editor):
     Site = apps.get_model('sites', 'Site')
-    Site.objects.all().delete()
 
-    Site.objects.create(
-        domain='whocanivotefor.co.uk',
-        name='whocanivotefor.co.uk'
-    )
+    site = Site.objects.get(pk=1)
+    site.domain = 'whocanivotefor.co.uk'
+    site.name = 'whocanivotefor.co.uk'
+    site.save()
 
 
 class Migration(migrations.Migration):
