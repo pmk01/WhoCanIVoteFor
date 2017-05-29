@@ -33,8 +33,15 @@
       {% endif %}
     {% endif %}
     {% if postcode|ni_postcode %}
-      <p>You will need photographic identification.</p>
+        <p>You will need photographic identification.</p>
     {% endif %}
+  {% endif %}
+  {% if postcode|ni_postcode %}
+      <p><a href="http://www.eoni.org.uk/Vote/Voting-at-a-polling-place" target="_top">
+      Read more about voting in Northern Ireland</a>.</p>
+    {% else %}
+      <a href="https://www.gov.uk/voting-in-the-uk/polling-stations" target="_top">
+      Read more about voting in Great Britain</a>.</p>
   {% endif %}
 
   {% if not polling_station.custom_finder and polling_station.polling_station_known %}
