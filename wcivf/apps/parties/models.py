@@ -80,6 +80,13 @@ class Party(models.Model):
             slugify(self.party_name)
         ])
 
+    @property
+    def ynr_emblem_url(self):
+        return "{}/media/images/images/{}".format(
+            settings.YNR_BASE,
+            self.emblem.path.split('/')[-1]
+            )
+
 
 class Manifesto(models.Model):
     COUNTRY_CHOICES = (
