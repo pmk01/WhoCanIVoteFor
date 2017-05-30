@@ -86,6 +86,23 @@
 </div>
 {% endif %}
 
+{% if object.manifestos_2017 %}
+{% with object.personpost.party as party %}
+<div class="card info_card">
+  <h3>Party manifesto</h3>
+  <p>
+  {% if party.emblem %}
+    <a href="{{ object.manifestos_2017.0.web_url }}"><img src="{{ party.emblem }}" class="manifesto_image"></a>
+  {% endif %}
+  {{ object.name }} is the {{ party.party_name }} candidate. Find out more about their policies from the {{ party.party_name }} {{ object.personpost.election.name }}
+  {% for manifesto in object.manifestos_2017 %}
+  {{ manifesto|safe }}{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} or {% else %}, {% endifequal %}{% else %}.{% endif %}
+  {% endfor %}
+  </p>
+</div>
+{% endwith %}
+{% endif %}
+
 {% if object.associatedcompany_set.exists %}
   <div class="card info_card">
     <h3>Associated companies</h3>

@@ -9,6 +9,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
 
+from elections.models import Election
+
 
 class PartyManager(models.Manager):
     def update_or_create_from_ynr(self, party):
@@ -77,3 +79,58 @@ class Party(models.Model):
             str(self.pk),
             slugify(self.party_name)
         ])
+
+
+class Manifesto(models.Model):
+    COUNTRY_CHOICES = (
+        ('UK', 'UK'),
+        ('England', 'England'),
+        ('Scotland', 'Scotland'),
+        ('Wales', 'Wales'),
+        ('Northern Ireland', 'Northern Ireland')
+    )
+    LANGUAGE_CHOICES = (
+        ('English', 'English'),
+        ('Welsh', 'Welsh')
+    )
+    party = models.ForeignKey(Party)
+    election = models.ForeignKey(Election)
+    country = models.CharField(
+        max_length=200,
+        choices=COUNTRY_CHOICES,
+        default='UK'
+    )
+    language = models.CharField(
+        max_length=200,
+        choices=LANGUAGE_CHOICES,
+        default='English'
+    )
+    pdf_url = models.URLField(blank=True)
+    web_url = models.URLField(blank=True)
+
+    def __str__(self):
+        canonical_url = self.canonical_url()
+        str = "<a href='%s'>" % canonical_url
+        str += "%s manifesto" % (self.country)
+        if self.language != 'English':
+            str += ' in %s' % self.language
+        str += "</a>"
+        if canonical_url == self.pdf_url:
+            str += ' (PDF)'
+        return str
+
+    def canonical_url(self):
+        canonical_url = self.pdf_url
+        if self.web_url:
+            canonical_url = self.web_url
+        return canonical_url
+
+    def save(self, *args, **kwargs):
+        if self.pdf_url or self.web_url:
+            super(Manifesto, self).save(*args, **kwargs)
+        else:
+            print('Manifesto must have either a web or PDF URL')
+
+    class Meta:
+        ordering = ['-country', 'language']
+        unique_together = ('party', 'election', 'country', 'language')
