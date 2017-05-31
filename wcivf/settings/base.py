@@ -196,6 +196,12 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
+GO_CARDLESS_PAYMENT_NAME = "Democracy Club Donation"
+GO_CARDLESS_PAYMENT_DESCRIPTION = "Helping Democracy Club increase the quantity,"\
+" quality and accessibility of information on election candidates, politicians and democratic processes"
+GOCARDLESS_REDIRECT_URL = "https://democracyclub.org.uk/"
+
+
 # .local.py overrides all the common settings.
 try:
     from .local import *  # noqa
