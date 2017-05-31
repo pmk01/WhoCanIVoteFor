@@ -14,13 +14,6 @@
     margin-right: 20px;
   }
 
-  img.cv_thumb {
-    border: 1px solid #ccc;
-    height: 120px;
-    float: left;
-    margin-right: 10px;
-  }
-
   p.small {
     font-size: 0.8em;
     font-weight: bold;
@@ -32,12 +25,28 @@
       width: 100%;
     }
   }
-
-  .manifesto_image {
-    float: left;
-    margin: 5px 20px 20px 0;
+  .cv_thumb, .manifesto_image {
     height: 120px;
+    float: left;
     border: 1px solid #ccc;
+    margin: 5px 20px 20px 0;
+    @include media(mobile) {
+      display: block !important;
+      float: none !important;
+      clear: both;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100px;
+    }
+  }
+  .person_photo.detail {
+      @include media(mobile) {
+        display: block;
+        float: none;
+        clear: both;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
   }
 }
 
@@ -155,19 +164,15 @@
     }
   }
 
-
   img.person_photo {
     float: right;
     display: block;
     width: 130px;
     margin: 0 0 0 5px;
-//    margin-top: 0.7em;
-
     @include media(mobile) {
       text-align:center;
       float: none;
       margin: auto;
-
       img {
         width:100px;
       }

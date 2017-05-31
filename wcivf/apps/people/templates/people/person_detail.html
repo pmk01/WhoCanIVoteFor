@@ -13,7 +13,7 @@
   <div class="card person_banner">
     <h2 class="person_name">{{ object.name }}</h2>
     {% if object.photo_url %}
-      <img src="{{ object.photo_url }}" class="person_photo" alt="profile photo of {{ object.name }}">
+      <img src="{{ object.photo_url }}" class="person_photo detail" alt="profile photo of {{ object.name }}">
     {% endif %}
     <p>
     {{ object.intro|safe }}. Our volunteers have been adding information on {{ object.name }} - here's everything we know so far!
