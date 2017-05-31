@@ -138,12 +138,19 @@
   <div class="card info_card">
     <h3>Homepage, contact etc</h3>
     <dl>
-        {% if object.facebook_page_url %}
+        {% if object.facebook_page_url or object.facebook_personal_url %}
         <dt>Facebook</dt>
         <dd>
-          <a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
+          {% if object.facebook_personal_url %}
+          {% if object.facebook_page_url and object.facebook_personal_url %}Personal profile: {% endif %}<a href="{{ object.facebook_personal_url }}" title="{{ object.name }}'s Facebook page">
+            {{ object.facebook_personal_url }}
+          </a><br/>
+          {% endif %}
+          {% if object.facebook_page_url %}
+          {% if object.facebook_page_url and object.facebook_personal_url %}Public page: {% endif %}<a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
             {{ object.facebook_page_url }}
           </a>
+          {% endif %}
         </dd>
         {% endif %}
         {% if object.linkedin_url %}
