@@ -22,7 +22,7 @@
             <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
           {% endif %}
           {% else %}
-            {% if not object.in_past %}
+            {% if not object.in_past and not election.slug == 'parl.2017-06-08' %}
               <p><a href="https://candidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
             {% endif %}
         {% endif %}
