@@ -134,7 +134,7 @@
     float: right;
     display: block;
     width: 130px;
-    margin: 0px;
+    margin: 0 0 0 5px;
 //    margin-top: 0.7em;
 
     @include media(mobile) {
