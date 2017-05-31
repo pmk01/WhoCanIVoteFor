@@ -211,7 +211,7 @@
     If you can add information that should be on this page
       {% if not object.cv or not object.statement_to_voters %}
       - such as {{ object.name }}'s
-      {% if not object.statement_to_voters %}statement to voters{% else %}CV,{% endif %} -
+      {% if not object.statement_to_voters %}statement to voters{% else %}CV{% endif %} -
       {% else %},{% endif %}
       please use our crowdsourcing website to add it.</p>
     <a href="{{ object.get_ynr_url }}update/" class="link-button">
