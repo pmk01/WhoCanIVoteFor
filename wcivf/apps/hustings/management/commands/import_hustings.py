@@ -7,6 +7,7 @@ import datetime
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.utils import timezone
 
 from elections.models import Election, PostElection
 from hustings.models import Husting
@@ -34,10 +35,13 @@ def dt_from_string(dt):
     Try multiple strptime formats b/c Google sheets doesn't
     understand counting to three.
     """
+    date = None
     try:
-        return datetime.datetime.strptime(dt, '%Y-%b-%d')
+        date = datetime.datetime.strptime(dt, '%Y-%b-%d')
     except ValueError:
-        return datetime.datetime.strptime(dt, '%Y-%B-%d')
+        date = datetime.datetime.strptime(dt, '%Y-%B-%d')
+    if date:
+        return timezone.make_aware(date, timezone.get_current_timezone())
 
 
 def stringy_time_to_inty_time(stringy_time):
