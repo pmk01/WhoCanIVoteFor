@@ -22,8 +22,8 @@
 
   <div class="card info_card">
     <h3>Statement to voters</h3>
-    {{ object.statement_to_voters|linebreaks }}
     {% if object.statement_to_voters %}
+    {{ object.statement_to_voters|linebreaks }}
     <p class="small">This statement was added by {{ object.name }}, their team, or by a <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Democracy Club volunteer</a>, based on information published by the candidate elsewhere.</p>
     {% else %}
     We haven't got a statement to voters from {{ object.name }} yet. This is a brief statement in their own words on why they deserve your vote. Can you <a href="#findmore">find one</a>, or <a href="#findmore">ask them to add one</a>?
