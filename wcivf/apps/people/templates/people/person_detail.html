@@ -37,7 +37,7 @@
       <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
       <img src="{{ object.cv.thumb_url }}" class="cv_thumb" style="float: left" alt="Thumbnail of CV for {{ object.name }}" /></a>
       {% endif %}
-      Hurrah! {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>
+      {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>
       {% else %}
       We haven't got {{ object.name }}'s CV yet. We think candidates should share their full CV with voters, to help us assess their skills and experience. Can you <a href="#findmore">ask {{ object.name }} to add a CV</a>?
       {% endif %}
