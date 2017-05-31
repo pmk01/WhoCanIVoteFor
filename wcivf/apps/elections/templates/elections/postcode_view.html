@@ -46,7 +46,7 @@
   <div id="election_{{ postelection.election.slug }}" class="card">
     <h2>Your candidates in the {{ postelection.election.name }}</h2>
 
-    <p>It will be held on <strong>{{ postelection.election.election_date|date:"l j F Y" }}</strong>. You can choose from <strong>{{ postelection.people|length }} candidates</strong> in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a></p>
+    <p>The {{ postelection.election.name }} will be held on <strong>{{ postelection.election.election_date|date:"l j F Y" }}</strong>. You can choose from <strong>{{ postelection.people|length }} candidates</strong> in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a></p>
 
     {% if not postelection.contested %}
     <div class="panel callout radius" style="background-color:#ffff99">
