@@ -17,36 +17,38 @@
       <img src="{{ object.photo_url }}" class="person_photo" alt="profile photo of {{ object.name }}">
     {% endif %}
     <p>
-    {{ object.intro|safe }}. See below for everything we know about {{ object.name }}.
+    {{ object.intro|safe }}. Our volunteers have been adding information on {{ object.name }} - here's everything we know so far!
     </p>
   </div>
 
-  {% if object.statement_to_voters %}
   <div class="card info_card">
     <h3>Statement to voters</h3>
     {{ object.statement_to_voters|linebreaks }}
-
+    {% if object.statement_to_voters %}
     <p class="small">This statement was added by {{ object.name }}, their team, or by a <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Democracy Club volunteer</a>, based on information published by the candidate elsewhere.</p>
+    {% else %}
+    We haven't got a statement to voters from {{ object.name }} yet. This is a brief statement in their own words on why they deserve your vote. Can you <a href="#findmore">find one</a>, or <a href="#findmore">ask them to add one</a>?
+    {% endif %}
   </div>
-  {% endif %}
+
+  <div class="card info_card">
+    <h3>{{ object.name }}'s CV</h3>
+      {% if object.cv %}
+      {% if object.cv.thumb_url %}
+      <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
+      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" style="float: left" alt="Thumbnail of CV for {{ object.name }}" /></a>
+      {% endif %}
+      Hurrah! {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>
+      {% else %}
+      We haven't got {{ object.name }}'s CV yet. We think candidates should share their full CV with voters, to help us assess their skills and experience. Can you <a href="#findmore">ask {{ object.name }} to add a CV</a>?
+      {% endif %}
+  </div>
 
   {% if object.wikipedia_bio %}
   <div class="card info_card">
     <h3>Wikipedia</h3>
     <p>{{ object.wikipedia_bio }}</p>
     <a href="{{ object.wikipedia_url }}" class="link-button">Read more on Wikipedia</a>
-  </div>
-  {% endif %}
-
-  {% if object.cv %}
-  <div class="card info_card">
-    <h3>{{ object.name }}'s CV</h3>
-    <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
-      {% if object.cv.thumb_url %}
-      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" alt="Thumbnail of CV for {{ object.name }}" />
-      {% endif %}
-      <p>See {{ object.name }}'s CV</p>
-    </a>
   </div>
   {% endif %}
 
@@ -192,17 +194,24 @@
 {% endif %}
 
   {# Edit link #}
-  <div class="card">
+  <div class="card" id="findmore">
   <h3>That's all we know! Will you help us find more about this candidate?</h3>
+
+  <p>Our volunteers have been working tirelessly to add information on as many candidates as possible, but they need help.</p>
+
   {% if object.should_show_email_cta %}
   <p>Thousands of voters will rely on this site.{% else %}<p>{% endif %}
-    If you know something about this candidate that should be on this
-      page, please use our crowdsourcing website to add it.</p>
+    If you can add information that should be on this page
+      {% if not object.cv or not object.statement_to_voters %}
+      - such as {{ object.name }}'s
+      {% if not object.statement_to_voters %}statement to voters{% else %}CV,{% endif %} -
+      {% else %},{% endif %}
+      please use our crowdsourcing website to add it.</p>
     <a href="{{ object.get_ynr_url }}update/" class="link-button">
       Add or edit details &raquo;
     </a>
   {% if object.should_show_email_cta %}
-    <p>You can also email {{ object.name }} to ask them to add information to this page.
+    <p>You can also email {{ object.name }} directly to ask them to add information to this page.
   <p><a href="{% url 'email_person_view' pk=object.pk ignored_slug=person.name|slugify %}" class="link-button">Ask the candidate for more information &raquo;</a></p>
 {% endif %}
   </div>
