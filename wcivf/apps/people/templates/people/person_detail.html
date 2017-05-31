@@ -239,7 +239,16 @@
     {% url 'home_view' as home_view %}
     {% breadcrumb_item home_view 'Home' 1 %}
     {% url 'postcode_view' referer_postcode as postcode_view %}
-    {% breadcrumb_item postcode_view 'Candidates' 2 %}
+    {% breadcrumb_item postcode_view 'Candidates in '|add:referer_postcode 2 %}
+    <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
+  </ol>
+{% elif object.personpost %}
+  {# There's a current post #}
+  <ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+    {% url 'home_view' as home_view %}
+    {% breadcrumb_item home_view 'Home' 1 %}
+    {% url 'post_view' object.personpost.election.slug object.personpost.post.ynr_id object.personpost.post.label|slugify as post_view %}
+    {% breadcrumb_item post_view 'Candidates in '|add:object.personpost.post.label 2 %}
     <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
   </ol>
 {% endif %}
