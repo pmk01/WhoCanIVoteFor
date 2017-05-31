@@ -3,7 +3,6 @@
 {% load markdown_deux_tags %}
 {% load breadcrumb_tags %}
 
-
 {% block page_title %}{% include "people/includes/_person_meta_title.html" %}{% endblock page_title %}
 {% block page_description %}{% include "people/includes/_person_meta_description.html" %}{% endblock page_description %}
 {% block og_title %}{% include "people/includes/_person_meta_title.html" %}{% endblock og_title %}
@@ -192,6 +191,14 @@
     </ul>
 </div>
 {% endif %}
+
+  {% if referer_postcode %}
+  <div class="back">
+  <p>
+  <a href="{% url 'postcode_view' referer_postcode %}">&laquo; Back to candidates in {{ referer_postcode }}</a>
+  </p>
+  </div>
+  {% endif %}
 
   {# Edit link #}
   <div class="card" id="findmore">
