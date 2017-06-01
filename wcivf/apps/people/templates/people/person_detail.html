@@ -3,7 +3,6 @@
 {% load markdown_deux_tags %}
 {% load breadcrumb_tags %}
 
-
 {% block page_title %}{% include "people/includes/_person_meta_title.html" %}{% endblock page_title %}
 {% block page_description %}{% include "people/includes/_person_meta_description.html" %}{% endblock page_description %}
 {% block og_title %}{% include "people/includes/_person_meta_title.html" %}{% endblock og_title %}
@@ -14,39 +13,41 @@
   <div class="card person_banner">
     <h2 class="person_name">{{ object.name }}</h2>
     {% if object.photo_url %}
-      <img src="{{ object.photo_url }}" class="person_photo" alt="profile photo of {{ object.name }}">
+      <img src="{{ object.photo_url }}" class="person_photo detail" alt="profile photo of {{ object.name }}">
     {% endif %}
     <p>
-    {{ object.intro|safe }}. See below for everything we know about {{ object.name }}.
+    {{ object.intro|safe }}. Our volunteers have been adding information on {{ object.name }} - here's everything we know so far!
     </p>
   </div>
 
-  {% if object.statement_to_voters %}
   <div class="card info_card">
     <h3>Statement to voters</h3>
+    {% if object.statement_to_voters %}
     {{ object.statement_to_voters|linebreaks }}
-
     <p class="small">This statement was added by {{ object.name }}, their team, or by a <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Democracy Club volunteer</a>, based on information published by the candidate elsewhere.</p>
+    {% else %}
+    We haven't got a statement to voters from {{ object.name }} yet. This is a brief statement in their own words on why they deserve your vote. Can you <a href="#findmore">find one</a>, or <a href="#findmore">ask them to add one</a>?
+    {% endif %}
   </div>
-  {% endif %}
+
+  <div class="card info_card">
+    <h3>{{ object.name }}'s CV</h3>
+      {% if object.cv %}
+      {% if object.cv.thumb_url %}
+      <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
+      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" style="float: left" alt="Thumbnail of CV for {{ object.name }}" /></a>
+      {% endif %}
+      {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>
+      {% else %}
+      We haven't got {{ object.name }}'s CV yet. We think candidates should share their full CV with voters, to help us assess their skills and experience. Can you <a href="#findmore">ask {{ object.name }} to add a CV</a>?
+      {% endif %}
+  </div>
 
   {% if object.wikipedia_bio %}
   <div class="card info_card">
     <h3>Wikipedia</h3>
     <p>{{ object.wikipedia_bio }}</p>
     <a href="{{ object.wikipedia_url }}" class="link-button">Read more on Wikipedia</a>
-  </div>
-  {% endif %}
-
-  {% if object.cv %}
-  <div class="card info_card">
-    <h3>{{ object.name }}'s CV</h3>
-    <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
-      {% if object.cv.thumb_url %}
-      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" alt="Thumbnail of CV for {{ object.name }}" />
-      {% endif %}
-      <p>See {{ object.name }}'s CV</p>
-    </a>
   </div>
   {% endif %}
 
@@ -86,6 +87,23 @@
 </div>
 {% endif %}
 
+{% if object.manifestos_2017 %}
+{% with object.personpost.party as party %}
+<div class="card info_card">
+  <h3>Party manifesto</h3>
+  <p>
+  {% if party.emblem %}
+    <a href="{{ object.manifestos_2017.0.web_url }}"><img src="{{ party.ynr_emblem_url }}" class="manifesto_image"></a>
+  {% endif %}
+  {{ object.name }} is the {{ party.party_name }} candidate. Find out more about their policies from the {{ party.party_name }} {{ object.personpost.election.name }}
+  {% for manifesto in object.manifestos_2017 %}
+  {{ manifesto|safe }}{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} or {% else %}, {% endifequal %}{% else %}.{% endif %}
+  {% endfor %}
+  </p>
+</div>
+{% endwith %}
+{% endif %}
+
 {% if object.associatedcompany_set.exists %}
   <div class="card info_card">
     <h3>Associated companies</h3>
@@ -121,12 +139,19 @@
   <div class="card info_card">
     <h3>Homepage, contact etc</h3>
     <dl>
-        {% if object.facebook_page_url %}
+        {% if object.facebook_page_url or object.facebook_personal_url %}
         <dt>Facebook</dt>
         <dd>
-          <a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
+          {% if object.facebook_personal_url %}
+          {% if object.facebook_page_url and object.facebook_personal_url %}Personal profile: {% endif %}<a href="{{ object.facebook_personal_url }}" title="{{ object.name }}'s Facebook page">
+            {{ object.facebook_personal_url }}
+          </a><br/>
+          {% endif %}
+          {% if object.facebook_page_url %}
+          {% if object.facebook_page_url and object.facebook_personal_url %}Public page: {% endif %}<a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
             {{ object.facebook_page_url }}
           </a>
+          {% endif %}
         </dd>
         {% endif %}
         {% if object.linkedin_url %}
@@ -138,7 +163,7 @@
         </dd>
         {% endif %}
         {% if object.homepage_url %}
-        <dt>Home Page</dt>
+        <dt>Home page</dt>
         <dd>
           <a href="{{ object.homepage_url }}" title="{{ object.name }}'s home page">
             {{ object.homepage_url }}
@@ -167,18 +192,33 @@
 </div>
 {% endif %}
 
+  {% if referer_postcode %}
+  <div class="back">
+  <p>
+  <a href="{% url 'postcode_view' referer_postcode %}">&laquo; Back to candidates in {{ referer_postcode }}</a>
+  </p>
+  </div>
+  {% endif %}
+
   {# Edit link #}
-  <div class="card">
+  <div class="card" id="findmore">
   <h3>That's all we know! Will you help us find more about this candidate?</h3>
+
+  <p>Our volunteers have been working hard to add information on as many candidates as possible, but they need help.</p>
+
   {% if object.should_show_email_cta %}
   <p>Thousands of voters will rely on this site.{% else %}<p>{% endif %}
-    If you know something about this candidate that should be on this
-      page, please use our crowdsourcing website to add it.</p>
+    If you can add information that should be on this page
+      {% if not object.cv or not object.statement_to_voters %}
+      - such as {{ object.name }}'s
+      {% if not object.statement_to_voters %}statement to voters{% else %}CV{% endif %} -
+      {% else %},{% endif %}
+      please use our crowdsourcing website to add it.</p>
     <a href="{{ object.get_ynr_url }}update/" class="link-button">
       Add or edit details &raquo;
     </a>
   {% if object.should_show_email_cta %}
-    <p>You can also email {{ object.name }} to ask them to add information to this page.
+    <p>You can also email {{ object.name }} directly to ask them to add information to this page.
   <p><a href="{% url 'email_person_view' pk=object.pk ignored_slug=person.name|slugify %}" class="link-button">Ask the candidate for more information &raquo;</a></p>
 {% endif %}
   </div>
@@ -206,7 +246,16 @@
     {% url 'home_view' as home_view %}
     {% breadcrumb_item home_view 'Home' 1 %}
     {% url 'postcode_view' referer_postcode as postcode_view %}
-    {% breadcrumb_item postcode_view 'Candidates' 2 %}
+    {% breadcrumb_item postcode_view 'Candidates in '|add:referer_postcode 2 %}
+    <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
+  </ol>
+{% elif object.personpost %}
+  {# There's a current post #}
+  <ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
+    {% url 'home_view' as home_view %}
+    {% breadcrumb_item home_view 'Home' 1 %}
+    {% url 'post_view' object.personpost.election.slug object.personpost.post.ynr_id object.personpost.post.label|slugify as post_view %}
+    {% breadcrumb_item post_view 'Candidates in '|add:object.personpost.post.label 2 %}
     <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
   </ol>
 {% endif %}

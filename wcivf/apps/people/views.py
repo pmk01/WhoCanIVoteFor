@@ -1,11 +1,12 @@
 from django.views.generic import DetailView
 from django.http import Http404
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 from django.utils.html import strip_tags
 
 from .models import Person, PersonPost
 from elections.models import PostElection
 from leaflets.models import Leaflet
+from parties.models import Manifesto
 
 
 class PersonMixin(object):
@@ -66,8 +67,36 @@ class PersonView(DetailView, PersonMixin):
         obj.title = self.get_title(obj)
         obj.intro = self.get_intro(obj)
         obj.text_intro = strip_tags(obj.intro)
-
+        obj.post_country = self.get_post_country(obj)
+        if obj.personpost and\
+                (obj.personpost.election.slug == "parl.2017-06-08"):
+            # We only care about the UK manifesto, and the candidate's own
+            # country manifesto. Return the UK manifesto first.
+            obj.manifestos_2017 = Manifesto.objects.filter(
+                party=obj.personpost.party,
+                election=obj.personpost.election).filter(
+                Q(country='UK') | Q(country=obj.post_country))
+            obj.manifestos_2017 = sorted(
+                obj.manifestos_2017,
+                key=lambda n: n.country != 'UK')
         return obj
+
+    def get_post_country(self, person):
+        country = None
+        if person.personpost:
+            post_id = person.personpost.post_id
+            # Hack to get candidate's country.
+            if post_id.startswith('gss:') or post_id.startswith('WMC:'):
+                id = post_id.split(':')[1]
+                if id.startswith('E'):
+                    country = 'England'
+                elif id.startswith('W'):
+                    country = 'Wales'
+                elif id.startswith('S'):
+                    country = 'Scotland'
+                elif id.startswith('N'):
+                    country = 'Northern Ireland'
+        return country
 
     def get_title(self, person):
         title = person.name

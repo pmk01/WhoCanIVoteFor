@@ -44,8 +44,9 @@
 {% for election_group in elections_by_date %}
   {% for postelection in election_group.list %}
   <div id="election_{{ postelection.election.slug }}" class="card">
-    <h2>{{ postelection.election.name }} - {{ postelection.election.election_date }}</h2>
-    <h3>{{ postelection.post.label }}</h3>
+    <h2>Your candidates in the {{ postelection.election.name }}</h2>
+
+    <p>The {{ postelection.election.name }} will be held on <strong>{{ postelection.election.election_date|date:"l j F Y" }}</strong>. You can choose from <strong>{{ postelection.people|length }} candidates</strong> in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a></p>
 
     {% if not postelection.contested %}
     <div class="panel callout radius" style="background-color:#ffff99">
@@ -55,7 +56,6 @@
     {% endif %}
 
     {% if postelection.people %}
-      <h3>{{ postelection.people|length }} candidates are standing</h3>
       {% if postelection.election.uses_lists %}
       <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
       {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
@@ -134,7 +134,7 @@
 {% endfor %}
 
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
-{% include "elections/includes/_polling_place.html" %}
+{% include "elections/includes/_polling_place.html" with elections_by_date=elections_by_date %}
 
 <div class="card">
   {% include "notifications/includes/election_notification_form.html" %}

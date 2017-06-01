@@ -121,9 +121,6 @@ class PostelectionsToPeopleMixin(object):
         people_for_post = PersonPost.objects.filter(
             post=postelection.post,
             election=postelection.election
-            ).select_related(
-                'person',
-                'party'
             )
 
         if postelection.election.uses_lists:
@@ -132,8 +129,13 @@ class PostelectionsToPeopleMixin(object):
             order_by = ['person__name']
 
         people_for_post = people_for_post.order_by(*order_by)
-        people_for_post = people_for_post.select_related('post')
-        people_for_post = people_for_post.select_related('election')
+        people_for_post = people_for_post.select_related(
+            'post',
+            'election',
+            'person',
+            'party',
+            'person__cv',
+        ).prefetch_related('person__leaflet_set')
         cache.set(key, people_for_post)
         return people_for_post
 

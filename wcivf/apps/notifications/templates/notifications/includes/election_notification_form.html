@@ -7,7 +7,7 @@
   <form method="post">
     {% csrf_token %}
     {{ notification_form.errors }}
-    <p>We will email you when there is an election in this area.</p>
+    <p>We can email you the next time there is an election in {{ postcode }}.</p>
 
     <input type="hidden" value="{{ postcode }}" id="{{ notification_form.postcode.id_for_label }}" name="{{ notification_form.postcode.name }}">
     {{ notification_form.email|dc_form }}

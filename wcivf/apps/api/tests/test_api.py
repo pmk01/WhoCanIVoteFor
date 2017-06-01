@@ -59,7 +59,7 @@ class TestAPI(APITestCase):
             party=PartyFactory()
         )
         url = reverse('api:candidates-for-postcode-list')
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(3):
             req = self.client.get("{}?postcode=EC1A4EU".format(url))
         assert req.status_code == 200
         assert req.data == [{

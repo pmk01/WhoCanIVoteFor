@@ -1,12 +1,14 @@
 """
 Importer for all our important Hustings data
 """
+import os
 import collections
 import csv
 import datetime
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
+from django.utils import timezone
 
 from elections.models import Election, PostElection
 from hustings.models import Husting
@@ -34,10 +36,13 @@ def dt_from_string(dt):
     Try multiple strptime formats b/c Google sheets doesn't
     understand counting to three.
     """
+    date = None
     try:
-        return datetime.datetime.strptime(dt, '%Y-%b-%d')
+        date = datetime.datetime.strptime(dt, '%Y-%b-%d')
     except ValueError:
-        return datetime.datetime.strptime(dt, '%Y-%B-%d')
+        date = datetime.datetime.strptime(dt, '%Y-%B-%d')
+    if date:
+        return timezone.make_aware(date, timezone.get_current_timezone())
 
 
 def stringy_time_to_inty_time(stringy_time):
@@ -65,6 +70,13 @@ class Command(BaseCommand):
         parser.add_argument(
             'filename',
             help='Path to the file with the hustings in it'
+        )
+        parser.add_argument(
+            '--quiet',
+            action='store_true',
+            dest='quiet',
+            default=False,
+            help='Only output errors',
         )
 
     def delete_all_hustings(self):
@@ -115,6 +127,9 @@ class Command(BaseCommand):
         """
         Entrypoint for our command.
         """
+        if options['quiet']:
+            self.stdout = open(os.devnull, "w")
+
         self.delete_all_hustings()
         hustings_counter = 0
         self.not_a_constituency_friend = []
@@ -126,15 +141,15 @@ class Command(BaseCommand):
                 husting = self.create_husting(data)
                 if husting:
                     hustings_counter += 1
-                    print ('Created husting {0} <{1}>'.format(
+                    self.stdout.write('Created husting {0} <{1}>'.format(
                         hustings_counter, husting)
                     )
 
         if len(self.not_a_constituency_friend) > 0:
-            print(
+            self.stderr.write(
                 '\n\n\nUnfortunately your data contains "hustings" for ' \
                 'things that are not a constituency. They have been ' \
                 'ignored. Please do complain to your upstream data source.'
             )
             for place in self.not_a_constituency_friend:
-                print(place)
+                self.stderr.write(place)

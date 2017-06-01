@@ -1,5 +1,6 @@
 Django>=1.10,<1.11
 
+six
 psycopg2==2.6.1
 requests==2.9.1
 django-model-utils==2.4
@@ -14,6 +15,7 @@ icalendar
 dealer
 django-robots
 django-debug-toolbar
+gocardless==0.5.3
 
-git+git://github.com/DemocracyClub/dc_base_theme.git@78ddbed0be96625bab9a231d486f4635ed7d5ef0
+git+git://github.com/DemocracyClub/dc_base_theme.git@e8e3820328c38b64c7b00146c29be6360db49ec4
 libsass

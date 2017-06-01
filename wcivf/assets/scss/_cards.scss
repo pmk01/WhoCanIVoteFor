@@ -5,8 +5,12 @@
   box-sizing: border-box;
   float: left;
 
+  a {
+    word-wrap: break-word;
+  }
+
   h3 {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .leaflet {
@@ -24,6 +28,29 @@
     @include media(tablet) {
       width: 100%;
     }
+  }
+  .cv_thumb, .manifesto_image {
+    height: 120px;
+    float: left;
+    border: 1px solid #ccc;
+    margin: 5px 20px 20px 0;
+    @include media(mobile) {
+      display: block !important;
+      float: none !important;
+      clear: both;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100px;
+    }
+  }
+  .person_photo.detail {
+      @include media(mobile) {
+        display: block;
+        float: none;
+        clear: both;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
   }
 }
 
@@ -89,7 +116,8 @@
     height: 13rem;
   }
 
-  div.candidate_info {
+  span.candidate_info {
+    display: block;
     padding: 5px 2px 0 0px;
     font-size:0.8em;
 
@@ -111,30 +139,44 @@
     .card_party {
       color: black;
     }
+    .icons {
+      color: #BEBEBE;
+      cursor: pointer;
+      .text-icon {
+        color: #A9A9A9;
+        font-size: 0.6em;
+        border: 1px solid #ccc;
+        padding: 2px;
+        border-radius: 2px;
+        position: relative;
+        top: -2px;
+      }
+      [class^="icon-"]:before, [class*=" icon-"]:before {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
     .more_info {
+      display: block;
       position:absolute;
       bottom:0;
+      width: 100%;
       @include media(mobile) {
         position:relative;
         text-align:center;
       }
-
     }
   }
-
 
   img.person_photo {
     float: right;
     display: block;
     width: 130px;
-    margin: 0px;
-//    margin-top: 0.7em;
-
+    margin: 0 0 0 5px;
     @include media(mobile) {
       text-align:center;
       float: none;
       margin: auto;
-
       img {
         width:100px;
       }
@@ -143,6 +185,14 @@
 
 }
 
+.back {
+  width: 100%;
+  overflow: auto;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  border-bottom: 1px dotted #ccc;
+  padding-bottom: 0;
+}
 
 .party_header  {
   overflow:auto;
