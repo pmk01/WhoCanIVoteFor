@@ -104,7 +104,7 @@
   {% if postelection.husting_set.exists %}
     <div class="card">
       <h3>Election events near you</h3>
-      <p>You can meet candidates and question them at local hustings. Here are hustings where your candidates will be appearing.</p>
+      <p>You can meet candidates and question them at local hustings.</p>
       {% include "elections/includes/_hustings_list.html" with hustings=postelection.husting_set.all %}
     </div>
   {% endif %}

@@ -14,6 +14,7 @@ class PostcodeNotProvided(APIException):
 
 
 class PersonViewSet(viewsets.ModelViewSet):
+    http_method_names = ['get', 'head']
     queryset = Person.objects.all()
     serializer_class = serializers.PersonSerializer
 
@@ -23,6 +24,7 @@ class CandidatesAndElectionsForPostcodeViewSet(
         mixins.PostelectionsToPeopleMixin):
 
     def list(self, request, *args, **kwargs):
+        http_method_names = ['get', 'head']
         postcode = request.GET.get('postcode', None)
         if not postcode:
             raise PostcodeNotProvided()
