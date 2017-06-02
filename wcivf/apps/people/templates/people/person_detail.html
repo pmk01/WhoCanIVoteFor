@@ -188,13 +188,13 @@
     </dl>
   </div>
 
-{% if object.past_posts %}
+{% if object.past_personposts %}
 <div class="card info_card">
   <h3>Previous elections</h3>
-    <p>{{ object.name }} has previously stood in the following elections:</p>
+    <p>This candidate has previously stood for election in:</p>
     <ul>
-    {% for person_post in object.past_posts %}
-      <li><strong>{{ person_post.post.label }}</strong>: {{ person_post.election }}, for the {{ person_post.party.party_name }} on {{ person_post.election.election_date }}</li>
+    {% for person_post in object.past_personposts %}
+    <li><strong>{{ person_post.election.election_date|date:"Y" }}:</strong> The <strong>{{ person_post.election }}</strong>, as the {{ person_post.party.party_name }} candidate for the {{ person_post.post.label }}
     {% endfor %}
     </ul>
 </div>
