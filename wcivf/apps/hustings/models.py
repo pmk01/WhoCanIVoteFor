@@ -19,6 +19,7 @@ class Husting(models.Model):
     ends          = models.DateTimeField(blank=True, null=True)
     location      = models.CharField(max_length=250, blank=True, null=True)
     postcode      = models.CharField(max_length=10, blank=True, null=True)
+    postevent_url = models.URLField(blank=True, null=True)
 
     class Meta:
         ordering = ['-starts']
