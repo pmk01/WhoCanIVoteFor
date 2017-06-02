@@ -22,9 +22,9 @@ class PersonViewSet(viewsets.ModelViewSet):
 class CandidatesAndElectionsForPostcodeViewSet(
         viewsets.ViewSet, mixins.PostcodeToPostsMixin,
         mixins.PostelectionsToPeopleMixin):
+    http_method_names = ['get', 'head']
 
     def list(self, request, *args, **kwargs):
-        http_method_names = ['get', 'head']
         postcode = request.GET.get('postcode', None)
         if not postcode:
             raise PostcodeNotProvided()
