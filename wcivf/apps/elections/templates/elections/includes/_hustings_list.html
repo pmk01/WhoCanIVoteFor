@@ -1,0 +1,5 @@
+{% for husting in hustings %}
+<p>
+{% if husting.in_past %}(Past event) {% endif %}<strong> {{ husting.starts|date:"l j F Y H:i"}}{% if husting.ends %}&ndash;{{ husting.ends | date:"H:i"}}{% endif %}:</strong> {% if husting.url %}<a href="{{ husting.url }}">{% endif %}{{ husting.title}}{% if husting.url %}</a>{% endif %}, {{ husting.location }} {{ husting.postcode }}
+</p>
+{% endfor %}

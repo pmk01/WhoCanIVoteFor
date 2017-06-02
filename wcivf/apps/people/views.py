@@ -64,6 +64,14 @@ class PersonView(DetailView, PersonMixin):
             obj.personpost = obj.current_personposts[0]
         elif obj.past_personposts:
             obj.personpost = obj.past_personposts[0]
+        obj.postelection = None
+        if obj.personpost:
+            try:
+                obj.postelection = PostElection.objects.get(
+                    post=obj.personpost.post,
+                    election=obj.personpost.election)
+            except PostElection.DoesNotExist:
+                pass
         obj.title = self.get_title(obj)
         obj.intro = self.get_intro(obj)
         obj.text_intro = strip_tags(obj.intro)
@@ -129,13 +137,10 @@ class PersonView(DetailView, PersonMixin):
             if person.personpost.post.organization ==\
                     'House of Commons of the United Kingdom':
                 intro.append('the constituency of')
-            try:
-                postelection = PostElection.objects.get(
-                    post=person.personpost.post,
-                    election=person.personpost.election)
-                str = '<a href="' + postelection.get_absolute_url() + '">'
-                str += person.personpost.post.label + '</a>'
-            except PostElection.DoesNotExist:
+            if person.postelection:
+                str = '<a href="' + person.postelection.get_absolute_url()
+                str += '">' + person.personpost.post.label + '</a>'
+            else:
                 str = person.personpost.post.label
             str += ' in the <a href="'
             str += person.personpost.election.get_absolute_url()
