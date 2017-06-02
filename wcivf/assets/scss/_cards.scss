@@ -138,6 +138,9 @@
     }
     .card_party {
       color: black;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .icons {
       color: #BEBEBE;
