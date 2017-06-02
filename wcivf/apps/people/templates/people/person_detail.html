@@ -56,7 +56,7 @@
       {% endif %}
       {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>
       {% else %}
-      We haven't got {{ object.name }}'s CV yet. We think candidates should share their full CV with voters, to help us assess their skills and experience. Can you <a href="#findmore">ask {{ object.name }} to add a CV</a>?
+      We haven't got {{ object.name }}'s CV yet. We think candidates should share their full CV with voters, to help us assess their skills and experience. Can you <a href="http://cv.democracyclub.org.uk/candidates/{{ object.personpost.post.ynr_id }}">ask {{ object.name }} to add a CV</a>?
       {% endif %}
   </div>
 
