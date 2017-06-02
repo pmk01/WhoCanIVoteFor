@@ -178,6 +178,12 @@
           </a>
         </dd>
         {% endif %}
+        {% if object.favourite_biscuit %}
+        <dt>Favourite biscuit</dt>
+        <dd>
+            &ldquo;{{ object.favourite_biscuit }}&rdquo;
+        </dd>
+        {% endif %}
         {% if object.email %}
         <dt>Email</dt>
         <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>

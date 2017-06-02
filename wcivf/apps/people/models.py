@@ -38,6 +38,7 @@ class Person(models.Model):
     gender = models.CharField(blank=True, max_length=255, null=True)
     birth_date = models.CharField(null=True, max_length=255)
     photo_url = models.URLField(blank=True, null=True)
+    favourite_biscuit = models.CharField(null=True, max_length=800)
 
     # contact points
     twitter_username = models.CharField(blank=True, null=True, max_length=100)
