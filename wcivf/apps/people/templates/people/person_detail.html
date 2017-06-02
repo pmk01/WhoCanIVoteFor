@@ -96,6 +96,15 @@
   </div>
   {% endif %}
 
+  {% if object.twfy_id %}
+  <div class="card info_card">
+    <h3>Record in office</h3>
+    <p>
+    See this candidate's <a href="https://www.theyworkforyou.com/mp/{{ twfy_id }}">record on TheyWorkForYou</a> - their speeches, voting history and more.
+    </p>
+  </div>
+  {% endif %}
+
 {% if object.personpost_set.all.0.profile %}
 <div class="card info_card">
   <h3>Personal statement</h3>

@@ -65,6 +65,11 @@ class PersonManager(models.Manager):
                 and 'favourite_biscuits' in version_data['extra_fields']:
             defaults['favourite_biscuit'] = \
                 version_data['extra_fields']['favourite_biscuits']
+        if 'identifiers' in version_data:
+            for i in version_data['identifiers']:
+                if i['scheme'] == 'uk.org.publicwhip':
+                    defaults['twfy_id'] = i['identifier'].replace(
+                        "uk.org.publicwhip/person/", "")
 
         if person['memberships']:
             for membership in person['memberships']:
