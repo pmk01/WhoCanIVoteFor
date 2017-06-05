@@ -59,6 +59,7 @@ class PostcodeToPostsMixin(object):
         return self.render_to_response(context)
 
     def clean_postcode(self, postcode):
+        postcode = postcode.replace('+', '')
         incode_pattern = '[0-9][ABD-HJLNP-UW-Z]{2}'
         space_regex = re.compile(r' *(%s)$' % incode_pattern)
         postcode = space_regex.sub(r' \1', postcode.upper())

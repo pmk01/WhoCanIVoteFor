@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, **options):
-        url = 'https://staging.electionleaflets.org/'
+        url = 'https://electionleaflets.org/'
         url += 'api/latest_by_person?format=json'
         req = requests.get(url)
         results = req.json()

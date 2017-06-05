@@ -117,7 +117,8 @@ class Command(BaseCommand):
             starts= starts,
             ends=ends,
             location=data.location,
-            postcode=data.postcode
+            postcode=data.postcode,
+            postevent_url=data.info
         )
         husting.save()
         return husting
