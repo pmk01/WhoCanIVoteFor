@@ -30,7 +30,6 @@ class PersonPost(models.Model):
         unique_together = ('person', 'post', 'election')
 
 
-
 class Person(models.Model):
     ynr_id = models.CharField(max_length=255, primary_key=True)
     twfy_id = models.IntegerField(null=True, blank=True)
@@ -48,10 +47,27 @@ class Person(models.Model):
     linkedin_url = models.CharField(blank=True, null=True, max_length=800)
     homepage_url = models.CharField(blank=True, null=True, max_length=800)
 
-    #Bios
+    # Bios
     wikipedia_url = models.CharField(blank=True, null=True, max_length=800)
     wikipedia_bio = models.TextField(null=True)
     statement_to_voters = models.TextField(null=True)
+
+    # Background data from Nesta research
+    place_of_birth = models.CharField(null=True, max_length=800)
+    secondary_school = models.CharField(null=True, max_length=800)
+    university_undergrad = models.CharField(null=True,
+                                            max_length=800)
+    field_undergrad = models.CharField(null=True, max_length=800)
+    stem_undergrad = models.CharField(null=True, max_length=800)
+    university_postgrad = models.CharField(null=True,
+                                           max_length=800)
+    field_postgrad = models.CharField(null=True, max_length=800)
+    stem_postgrad = models.CharField(null=True, max_length=800)
+    degree_cat = models.CharField(null=True, max_length=800)
+    last_or_current_job = models.CharField(null=True,
+                                           max_length=800)
+    previously_in_parliament = models.CharField(null=True,
+                                                max_length=800)
 
     objects = PersonManager()
 
@@ -63,6 +79,15 @@ class Person(models.Model):
                 str(self.ynr_id),
                 slugify(self.name)
             ])
+
+    def has_biographical_info(self):
+        attrs = ['place_of_birth', 'secondary_school', 'university_undergrad',
+                 'last_or_current_job']
+        attr_count = 0
+        for a in attrs:
+            if getattr(self, a) is not None:
+                attr_count += 1
+        return (attr_count > 1)
 
     def get_ynr_url(self):
         return "{}/person/{}/".format(settings.YNR_BASE, self.ynr_id)
