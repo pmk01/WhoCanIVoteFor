@@ -23,7 +23,6 @@ class Command(BaseCommand):
                 row[k] = None
         dob = row['Date of birth']
         if dob and not person.birth_date:
-            dob = datetime.datetime.strptime(dob, '%Y/%m/%d')
             person.birth_date = dob
         if not person.gender:
             person.gender = row['Gender']
