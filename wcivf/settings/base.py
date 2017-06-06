@@ -199,7 +199,7 @@ REST_FRAMEWORK = {
 GO_CARDLESS_PAYMENT_NAME = "Democracy Club Donation"
 GO_CARDLESS_PAYMENT_DESCRIPTION = "Helping Democracy Club increase the quantity,"\
 " quality and accessibility of information on election candidates, politicians and democratic processes"
-GOCARDLESS_REDIRECT_URL = "https://democracyclub.org.uk/"
+GOCARDLESS_REDIRECT_URL = "https://democracyclub.org.uk/donate/thanks/"
 
 
 # .local.py overrides all the common settings.
