@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+twfy_id{% extends "base.html" %}
 {% load static %}
 {% load markdown_deux_tags %}
 {% load breadcrumb_tags %}
@@ -100,7 +100,7 @@
   <div class="card info_card">
     <h3>Record in office</h3>
     <p>
-    See this candidate's <a href="https://www.theyworkforyou.com/mp/{{ twfy_id }}">record on TheyWorkForYou</a> - their speeches, voting history and more.
+    See this candidate's <a href="https://www.theyworkforyou.com/mp/{{ object.twfy_id }}">record on TheyWorkForYou</a> - their speeches, voting history and more.
     </p>
   </div>
   {% endif %}
