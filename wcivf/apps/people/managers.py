@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from django.db import models
 from django.db.models import Count
 
@@ -99,7 +101,12 @@ class PersonManager(models.Manager):
                     post.party_id = membership['on_behalf_of']['id']
                 else:
                     post.party_id = None
-                posts.append(post)
+                # If the same post occurs twice (e.g. if the candidate has
+                # stood twice as an MP in the same seat), make
+                # sure we have the correct election/party information for
+                # each post, by taking a deep copy.
+                post_copy = deepcopy(post)
+                posts.append(post_copy)
 
         person_id = person['id']
         person_obj, _ = self.update_or_create(
