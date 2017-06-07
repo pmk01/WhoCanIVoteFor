@@ -46,15 +46,24 @@
   <div id="election_{{ postelection.election.slug }}" class="card">
     <h2>Your candidates in the {{ postelection.election.name }}</h2>
 
-    <p>The {{ postelection.election.name }}
+    <p>
+      The {{ postelection.election.name }}
       {% now "j F Y" as current_day %}
       {% if postelection.election.election_date|date:"j F Y" == current_day %}
       <strong>is being held today</strong>. Polls are open till 10pm.
       {% else %}
-      will be held
+      {{ postelection.election.is_past|yesno:"will be,was" }} held on
       <strong>{{ postelection.election.election_date|naturalday:"\o\n l j F Y" }}</strong>.
       {% endif %}
-      You can choose from <strong>{{ postelection.people|length }} candidates</strong> in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a></p>
+
+      {% if postelection.election.is_past %}
+      You can choose from <strong>{{ postelection.people|length }} candidates</strong>
+      in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a>
+      {% else %}
+      <strong>{{ postelection.people|length }} candidates</strong> stood in
+      {{ postelection.post.label }}&nbsp;constituency
+      {% endif %}
+    </p>
 
     {% if not postelection.contested %}
     <div class="panel callout radius" style="background-color:#ffff99">

@@ -115,9 +115,13 @@ class PersonView(DetailView, PersonMixin):
 
     def get_intro(self, person):
         intro = [person.name]
-        if person.current_personposts:
+        currently_has_election = any([
+            not pp.election.in_past for pp in  person.current_personposts
+        ])
+
+        if currently_has_election:
             intro.append('is')
-        elif person.past_personposts:
+        else:
             intro.append('was')
         if person.personpost:
             party = person.personpost.party
