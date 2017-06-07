@@ -19,3 +19,4 @@ gocardless==0.5.3
 
 git+git://github.com/DemocracyClub/dc_base_theme.git@e8e3820328c38b64c7b00146c29be6360db49ec4
 libsass
+djangorestframework-jsonp
