@@ -30,6 +30,9 @@ class Command(BaseCommand):
 
             result_event, _ = ResultEvent.objects.update_or_create(
                 post_election=post_election,
+                defaults={
+                    'declaration_time': entry['published'],
+                }
             )
 
             if int(entry['retraction']) == 1:

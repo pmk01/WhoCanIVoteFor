@@ -1,10 +1,10 @@
 from django.views.generic import TemplateView
 
 from elections.models import Election
-from people.models import PersonPost
+from results.models import ResultEvent
 
 class ResultsListView(TemplateView):
-    template_name = "results/results.list.html"
+    template_name = "results/results_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -14,8 +14,12 @@ class ResultsListView(TemplateView):
         for election in election_qs:
             election_dict = {
                 'election': election,
-                'winners': PersonPost.objects.filter(
-                    election=election, elected=True)
+                'results': ResultEvent.objects.filter(
+                    post_election__election=election,
+                    person_posts__elected=True,
+                ).order_by(
+                    '-declaration_time'
+                )
             }
             context['elections'].append(election_dict)
         return context
