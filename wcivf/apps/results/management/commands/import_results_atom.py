@@ -5,6 +5,8 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 
 from people.models import PersonPost
+from elections.models import PostElection
+from results.models import ResultEvent
 
 
 class Command(BaseCommand):
@@ -21,10 +23,22 @@ class Command(BaseCommand):
                 election__slug=entry['election_slug'],
                 post__ynr_id=entry['post_id'],
                 )
+            post_election = PostElection.objects.get(
+                election__slug=entry['election_slug'],
+                post__ynr_id=entry['post_id'],
+            )
+
+            result_event, _ = ResultEvent.objects.update_or_create(
+                post_election=post_election,
+            )
+
             if int(entry['retraction']) == 1:
                 # The result has been retracted due to an error
                 # Unset the elected flag
                 person_post.elected = None
+                result_event.person_posts.remove(person_post)
             else:
                 person_post.elected = True
+                result_event.person_posts.add(person_post)
             person_post.save()
+            result_event.save()
