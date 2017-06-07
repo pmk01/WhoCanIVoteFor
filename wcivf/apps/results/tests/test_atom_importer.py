@@ -76,3 +76,8 @@ class TestResults(TestCase):
         # We saw 4 elements in the Atom feed, but one was retracted
         assert PersonPost.objects.filter(elected=True).count() == 3
         assert ResultEvent.objects.all().count() == 3
+
+        req = self.client.get('/results/')
+        assert req.status_code == 200
+        self.assertContains(req, 'Maidenhead')
+

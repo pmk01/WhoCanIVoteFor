@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from elections.models import Election
 from results.models import ResultEvent
 
+
 class ResultsListView(TemplateView):
     template_name = "results/results_list.html"
 
