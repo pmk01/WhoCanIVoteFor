@@ -19,8 +19,9 @@
           {% if person_post.list_position %}
             {{ person_post.list_position }}.
           {% endif %}
-          {% if person_post.elected %}Elected: {% endif %}
+          {% if person_post.elected %}🌟 <span class="elected_text">Elected:</span> {% endif %}
           {{ person_post.person.name }}
+          {% if person_post.elected %}🌟{% endif %}
         </span>
       </h4>
 
