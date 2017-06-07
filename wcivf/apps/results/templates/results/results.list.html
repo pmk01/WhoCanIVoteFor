@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="card">
+  <h1>Election results</h1>
+  {% for election_dict in elections %}
+    <h2>{{ election_dict.election }}</h2>
+    {% for winner in election_dict.winners %}
+      <div>
+        <h3>{{ winner.post.label }}</h3>
+        {% include "elections/includes/_person_card.html" with person_post=winner %}
+      </div>
+    {% empty %}
+    <p>No results yet</p>
+    {% endfor %}
+  {% endfor %}
+</section>
+{% endblock content %}
