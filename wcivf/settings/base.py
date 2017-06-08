@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'robots',
     'api',
+    'results',
 )
 
 MIDDLEWARE_CLASSES = (
