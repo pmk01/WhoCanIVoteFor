@@ -66,7 +66,10 @@ class Command(BaseCommand):
         with open(options['filename'], 'r') as fh:
             reader = csv.DictReader(fh)
             for row in reader:
-                postelection = self.get_constituency(row['constituency'])[0]
+                results = self.get_constituency(row['constituency'])
+                if not results:
+                    print(row['constituency'], 'not found')
+                postelection = results[0]
                 # Hack for GE2017!
                 if row['time'].startswith('23'):
                     t = '2016-06-08 %s' % (row['time'])
