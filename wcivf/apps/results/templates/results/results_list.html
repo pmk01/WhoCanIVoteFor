@@ -6,7 +6,7 @@
   {% for election_dict in elections %}
     <h2>{{ election_dict.election }}</h2>
     {% for result in election_dict.results %}
-      {% for person_post in result.person_posts.all %}
+      {% for person_post in result.person_posts.elected %}
         <div>
           <h3>{{ person_post.post.label }}</h3>
           <p>Updated: {{ result.declaration_time }}</p>
