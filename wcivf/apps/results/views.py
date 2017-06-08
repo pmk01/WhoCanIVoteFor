@@ -11,7 +11,7 @@ class ResultsListView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['elections'] = []
         election_qs = Election.objects.filter(
-            current=True).order_by('election_date', '-election_weight')
+            current=True).order_by('-election_date', '-election_weight')
         for election in election_qs:
             election_dict = {
                 'election': election,
