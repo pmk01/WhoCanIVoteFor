@@ -7,7 +7,8 @@
 {% block content %}
 
   <div class="card postcode_card">
-    <h2>Find out about candidates in your area</h2>
+    <h2>Voting for General Election 2017 has finished</h2>
+    <h2>Find out which candidate won in your area</h2>
     <form method=post>
       {% csrf_token %}
         {{ form|dc_form }}
@@ -17,7 +18,7 @@
           Is there another one you can try?</strong>
       </p>
       {% endif %}
-      <button type="submit">Find your candidates</button>
+      <button type="submit">Find your MP</button>
     </form>
   </div>
 
