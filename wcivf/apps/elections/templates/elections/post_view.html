@@ -18,7 +18,7 @@
     {% if object.election.election_date|date:"j F Y" == current_day %}
       <strong>which is being held today</strong>. Polls are open till 10pm.
     {% else %}
-      on {{ object.election.election_date|naturalday:"\o\n l j F Y" }}.
+      which was held {{ object.election.election_date|naturalday:"\o\n l j F Y" }}.
     {% endif %}
   </p>
 
