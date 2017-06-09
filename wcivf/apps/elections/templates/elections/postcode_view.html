@@ -52,7 +52,7 @@
       {% if postelection.election.election_date|date:"j F Y" == current_day %}
       <strong>is being held today</strong>. Polls are open till 10pm.
       {% else %}
-      {{ postelection.election.is_past|yesno:"will be,was" }} held on
+      {{ postelection.election.is_past|yesno:"will be,was" }} held
       <strong>{{ postelection.election.election_date|naturalday:"\o\n l j F Y" }}</strong>.
       {% endif %}
 
@@ -61,7 +61,7 @@
       in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a>
       {% else %}
       <strong>{{ postelection.people|length }} candidates</strong> stood in
-      {{ postelection.post.label }}&nbsp;constituency
+      {{ postelection.post.label }}&nbsp;constituency.
       {% endif %}
     </p>
 
