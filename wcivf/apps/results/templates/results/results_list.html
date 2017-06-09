@@ -6,6 +6,11 @@
 {% block content %}
 <section class="card">
   <h1>Latest election results</h1>
+  <p>
+    <a href="http://odileeds.org/projects/ge2017/">
+      See these results on a map, thanks to our friends at ODI Leeds
+    </a>
+  </p>
   {% for election_dict in elections %}
     <h2>{{ election_dict.election }}</h2>
     {% for result in election_dict.results %}
