@@ -16,17 +16,35 @@ class ResultsListView(TemplateView):
         election_qs = Election.objects.filter(
             current=True).order_by('-election_weight')
         for election in election_qs:
+
             results1 = ResultEvent.objects.filter(
                 post_election__election=election,
                 declaration_time__isnull=False
-            ).order_by('-declaration_time')
-            if results1:
-                print(results1[0].post_election.post.area_name)
+            ).order_by('-declaration_time').select_related(
+                'post_election',
+                'post_election__election',
+                'post_election__post',
+            ).prefetch_related(
+                'person_posts',
+                'person_posts__post',
+                'person_posts__person',
+                'person_posts__party',
+            )
+
             results2 = ResultEvent.objects.filter(
                 post_election__election=election,
                 declaration_time__isnull=True
-            ).order_by('-expected_declaration_time')
+            ).order_by('-expected_declaration_time').select_related(
+                'post_election',
+                'post_election__election',
+                'post_election__post',
+            ).prefetch_related(
+                'person_posts__post__area_name',
+                'person_posts__person',
+                'person_posts__party',
+            )
             results = []
+
             for r in results1:
                 r.declaration_time = \
                     r.declaration_time + timedelta(hours=1)
