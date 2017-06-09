@@ -69,7 +69,7 @@ class PostcodeToPostsMixin(object):
         key = "upcoming_elections_{}".format(postcode)
         results_json = cache.get(key)
         if not results_json:
-            url = '{0}/api/elections?postcode={1}&future=1'.format(
+            url = '{0}/api/elections?postcode={1}&current=1'.format(
                 settings.EE_BASE,
                 postcode
             )
