@@ -1,11 +1,13 @@
 from django.test import TestCase
-
+from django.test.utils import override_settings
 from people.tests.factories import PersonFactory, PersonPostFactory
 from parties.tests.factories import PartyFactory
 from elections.tests.factories import ElectionFactory
 
 
-
+@override_settings(
+    STATICFILES_STORAGE='pipeline.storage.NonPackagingPipelineStorage',
+    PIPELINE_ENABLED=False)
 class PersonViewTests(TestCase):
     def setUp(self):
         self.party = PartyFactory()

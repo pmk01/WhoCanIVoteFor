@@ -7,11 +7,15 @@ shown before and after template changes.
 
 
 from django.test import TestCase
+from django.test.utils import override_settings
 from django.core.urlresolvers import reverse
 
 import vcr
 
 
+@override_settings(
+    STATICFILES_STORAGE='pipeline.storage.NonPackagingPipelineStorage',
+    PIPELINE_ENABLED=False)
 class TestMetaTags(TestCase):
     important_urls = {
         'homepage': reverse('home_view'),
