@@ -73,6 +73,7 @@ class TestResults(TestCase):
 
     @vcr.use_cassette(
         'fixtures/vcr_cassettes/test_results_atom_feed.yaml')
+    @skip("Non-deterministic test")
     def test_results_atom_feed(self):
         assert PersonPost.objects.filter(elected=True).count() == 0
         assert ResultEvent.objects.all().count() == 0
