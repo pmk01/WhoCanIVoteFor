@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'elections',
     'markdown_deux',
     'core',
-    'notifications',
     'people',
     'mentions',
     'parties',
