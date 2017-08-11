@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'dc_theme',
+    'dc_signup_form',
     'pipeline',
     'elections',
     'markdown_deux',
@@ -87,6 +88,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'dc_theme.context_processors.dc_theme_context',
+                'dc_signup_form.context_processors.signup_form',
                 'core.context_processors.canonical_url',
                 'core.context_processors.site_title',
                 'core.context_processors.use_compress_css',
@@ -178,6 +180,9 @@ WDIV_API = "/api/beta"
 
 CANONICAL_URL = "https://whocanivotefor.co.uk"
 ROBOTS_USE_HOST = False
+
+EMAIL_SIGNUP_ENDPOINT = 'https://democracyclub.org.uk/mailing_list/api_signup/'
+EMAIL_SIGNUP_API_KEY = ''
 
 # DC Base Theme settings
 SITE_TITLE = "Who Can I Vote For?"

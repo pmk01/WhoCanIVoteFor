@@ -18,6 +18,7 @@ django-debug-toolbar
 gocardless==0.5.3
 
 git+git://github.com/DemocracyClub/dc_base_theme.git@7c2bc0b01024cb9115953b6e8b6752eaf7412f07
+git+https://github.com/DemocracyClub/dc_signup_form.git
 libsass
 djangorestframework-jsonp
 feedparser
