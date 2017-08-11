@@ -1,5 +1,4 @@
-import itertools
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.views.generic import TemplateView
 
