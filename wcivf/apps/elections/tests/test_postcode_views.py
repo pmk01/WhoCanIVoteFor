@@ -7,6 +7,9 @@ from elections.tests.factories import (
 from core.models import LoggedPostcode, write_logged_postcodes
 
 
+@override_settings(
+    STATICFILES_STORAGE='pipeline.storage.NonPackagingPipelineStorage',
+    PIPELINE_ENABLED=False)
 class PostcodeViewTests(TestCase):
     def setUp(self):
         self.election = ElectionFactory(

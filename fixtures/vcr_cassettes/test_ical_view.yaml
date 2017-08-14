@@ -35,14 +35,14 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.9.1]
     method: GET
-    uri: https://elections.democracyclub.org.uk/api/elections?postcode=CB13HU&future=1
+    uri: https://elections.democracyclub.org.uk/api/elections?postcode=CB13HU&current=1
   response:
     body: {string: ''}
     headers:
       Connection: [keep-alive]
       Content-Type: [text/html; charset=utf-8]
       Date: ['Fri, 12 May 2017 09:33:25 GMT']
-      Location: ['/api/elections/?postcode=CB13HU&future=1']
+      Location: ['/api/elections/?postcode=CB13HU&current=1']
       Server: [nginx]
       Strict-Transport-Security: [max-age=15768000]
       X-Frame-Options: [SAMEORIGIN]
@@ -55,7 +55,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.9.1]
     method: GET
-    uri: https://elections.democracyclub.org.uk/api/elections/?postcode=CB13HU&future=1
+    uri: https://elections.democracyclub.org.uk/api/elections/?postcode=CB13HU&current=1
   response:
     body: {string: '{"count":1,"next":null,"previous":null,"results":[{"election_id":"parl.cambridge.2017-06-08","tmp_election_id":null,"election_title":"Cambridge","poll_open_date":"2017-06-08","election_type":{"name":"UK
         Parliament","election_type":"parl"},"election_subtype":null,"organisation":{"official_identifier":"parl-hoc","organisation_type":"parl","organisation_subtype":"","official_name":"House

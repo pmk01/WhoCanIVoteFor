@@ -1,9 +1,12 @@
 from django.test import TestCase
-
+from django.test.utils import override_settings
 from elections.tests.factories import ElectionFactory, PostFactory
 from elections.models import PostElection
 
 
+@override_settings(
+    STATICFILES_STORAGE='pipeline.storage.NonPackagingPipelineStorage',
+    PIPELINE_ENABLED=False)
 class ElectionViewTests(TestCase):
     def setUp(self):
         self.election = ElectionFactory(
