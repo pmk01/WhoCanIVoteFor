@@ -132,10 +132,13 @@
 {# Add this at the top of the page if it's known, or at the bottom if it's not #}
 {% include "elections/includes/_polling_place.html" with elections_by_date=elections_by_date %}
 
-<div class="card">
-  {% include "notifications/includes/election_notification_form.html" %}
-</div>
-
+{% if not messages %}
+  <div class="card">
+    <h2>Free election reminders</h2>
+    <p>We can email you the next time there is an election in {{ postcode }}.</p>
+    {% include "email_form/election_reminders_form.html" %}
+  </div>
+{% endif %}
 
 <div class="card">
   <p>
