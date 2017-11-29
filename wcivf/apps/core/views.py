@@ -1,4 +1,5 @@
 import os
+import datetime
 
 from django import http
 from django.conf import settings
@@ -6,6 +7,8 @@ from django.views.generic import View, FormView, TemplateView
 from django.core.urlresolvers import reverse
 
 from .forms import PostcodeLookupForm
+
+from elections.models import PostElection
 
 
 class PostcodeFormView(FormView):
@@ -43,6 +46,19 @@ class PostcodeFormView(FormView):
 
 class HomePageView(PostcodeFormView):
     template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        today = datetime.datetime.today()
+        cut_off_date = today + datetime.timedelta(weeks=2)
+
+        context['upcoming_elections'] = PostElection.objects.filter(
+            election__election_date__gte=today,
+            election__election_date__lte=cut_off_date,
+        ).order_by('election__election_date')
+        return context
+
 
 class OpenSearchView(TemplateView):
     template_name = 'opensearch.xml'

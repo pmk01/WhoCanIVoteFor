@@ -5,7 +5,6 @@
 {% block og_title %}Who Can I Vote For?{% endblock og_title %}
 
 {% block content %}
-
   <div class="card postcode_card">
     <h2>Find out about candidates in your area</h2>
     <form method=post>
@@ -20,13 +19,26 @@
       <button type="submit">Find your candidates</button>
     </form>
   </div>
+  {% if upcoming_elections %}
+    <div class="card upcoming_elections">
+      <h2>Upcoming by-elections</h2>
+      {% regroup upcoming_elections by election.election_date as elections_by_date %}
 
-  <div style="margin-top:2rem;">
-    {% block post_post_code_copy %}
-    {% endblock %}
-  </div>
+      {% for election_group in elections_by_date %}
+      <h3>{{ election_group.grouper }}</h3>
+      {% regroup election_group.list by election.name as named_postelections %}
+      <ul>
+        {% for election in named_postelections %}
+          <li><strong>{{ election.grouper }}{{ election.list|length|pluralize }}</stroug>
+          {% for postelection in election.list %}
+            <br><a href="{{ postelection.get_absolute_url }}">{{ postelection.friendly_name }}</a>
+          {% endfor %}
+          </li>
+        {% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+  {% endif %}
 
-
-</section>
 
 {% endblock content %}

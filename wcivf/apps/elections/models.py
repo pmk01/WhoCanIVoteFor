@@ -145,15 +145,29 @@ class Post(models.Model):
 
     objects = PostManager()
 
-    def friendly_name(self):
-        if self.ynr_id == "ref.2016-06-23":
-            return self.label
-        return "{} for {}".format(self.election.for_post_role, self.area_name)
-
 class PostElection(models.Model):
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
     contested = models.BooleanField(default=True)
+
+
+    def friendly_name(self):
+        # TODO Take more info from YNR/EE about the election
+        # rather than hard coding not_wards and not_by_elections
+        name = self.post.area_name
+
+        not_wards = [
+           'W09000007',
+        ]
+        if not any([code in self.post.ynr_id for code in not_wards]):
+            name = "{} ward".format(name)
+
+        not_by_elections = []
+        if not any([code in self.post.ynr_id for code in not_by_elections]):
+            name = "{} by-election".format(name)
+
+        return name
+
 
     def get_absolute_url(self):
         return reverse('post_view', args=[
