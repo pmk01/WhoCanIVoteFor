@@ -152,11 +152,21 @@ class PostElection(models.Model):
 
 
     def friendly_name(self):
-        # TODO clearly not every election is a by-election
-        # This will get better once we import more info from YNR/EE
-        return "{} ward by-election".format(
-            self.post.area_name
-        )
+        # TODO Take more info from YNR/EE about the election
+        # rather than hard coding not_wards and not_by_elections
+        name = self.post.area_name
+
+        not_wards = [
+           'W09000007',
+        ]
+        if not any([code in self.post.ynr_id for code in not_wards]):
+            name = "{} ward".format(name)
+
+        not_by_elections = []
+        if not any([code in self.post.ynr_id for code in not_by_elections]):
+            name = "{} by-election".format(name)
+
+        return name
 
 
     def get_absolute_url(self):
