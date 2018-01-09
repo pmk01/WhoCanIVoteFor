@@ -3,11 +3,12 @@ sudo: false
 language: python
 python:
   - '3.4'
+  - '3.5'
 addons:
-  postgresql: '9.3'
+  postgresql: '9.5'
   apt:
     packages:
-      - postgresql-9.3-postgis-2.3
+      - postgresql-9.5-postgis-2.3
 services:
   - redis-server
 cache:
@@ -18,7 +19,7 @@ cache:
     - $HOME/.tox/
     - .tox
 install:
-  - pip install tox coveralls
+  - pip install tox tox-travis coveralls
 before_script:
   - psql -U postgres -c "create extension postgis"
 script:
@@ -26,7 +27,8 @@ script:
 after_success:
   - coveralls
 before_cache:
-    - rm -f .tox/py34-django110/log/*.log
+    - rm -f .tox/py34-django111/log/*.log
+    - rm -f .tox/py35-django111/log/*.log
     - rm -f .cache/pip/log/*.log
 notifications:
   slack:
