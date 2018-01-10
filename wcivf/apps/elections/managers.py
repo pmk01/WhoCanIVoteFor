@@ -59,8 +59,8 @@ class PostManager(models.Manager):
                 'role': post_dict['role'],
                 'group': post_dict['group'],
                 'organization': post_dict['organization']['name'],
-                'area_name': post_dict['area']['name'],
-                'area_id': post_dict['area']['identifier'],
+                'area_name': post_dict['label'],
+                'area_id': post_dict['id'],
             }
         )
 
