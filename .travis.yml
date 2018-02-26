@@ -2,7 +2,6 @@ dist: trusty
 sudo: false
 language: python
 python:
-  - '3.4'
   - '3.5'
 addons:
   postgresql: '9.5'
@@ -27,7 +26,6 @@ script:
 after_success:
   - coveralls
 before_cache:
-    - rm -f .tox/py34-django111/log/*.log
     - rm -f .tox/py35-django111/log/*.log
     - rm -f .cache/pip/log/*.log
 notifications:
