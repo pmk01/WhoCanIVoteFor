@@ -128,6 +128,14 @@ class Election(models.Model):
         }
         return election_to_booklet.get(self.slug)
 
+    @property
+    def ynr_link(self):
+        return "{}/election/{}/constituencies?{}".format(
+            settings.YNR_BASE,
+            self.slug,
+            settings.YNR_UTM_QUERY_STRING,
+        )
+
 
 class Post(models.Model):
     """
@@ -176,6 +184,19 @@ class PostElection(models.Model):
                 slugify(self.post.label)
             ])
 
+<<<<<<< HEAD
+=======
+    @property
+    def ynr_link(self):
+        return "{}election/{}/post/{}?{}".format(
+            settings.YNR_BASE,
+            self.election.slug,
+            self.post.ynr_id,
+            settings.YNR_UTM_QUERY_STRING,
+        )
+
+
+>>>>>>> 31502e1... fixup! Display YNR CTA if we don't have any candidates yet
 class VotingSystem(models.Model):
     slug = models.SlugField(primary_key=True)
     name = models.CharField(blank=True, max_length=100)

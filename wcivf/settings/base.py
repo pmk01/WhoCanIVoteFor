@@ -174,6 +174,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_CACHE_ALIAS = "default"
 
 YNR_BASE = "https://candidates.democracyclub.org.uk"
+YNR_UTM_QUERY_STRING = "utm_source=who&utm_campaign=ynr_cta"
 EE_BASE = "https://elections.democracyclub.org.uk"
 
 WDIV_BASE = "https://wheredoivote.co.uk"
@@ -213,7 +214,6 @@ GO_CARDLESS_PAYMENT_DESCRIPTION = "Helping Democracy Club "\
 "increase the quality of information on elections & the democratic processes"
 
 GOCARDLESS_REDIRECT_URL = "https://whocanivotefor.co.uk/donate/process/"
-
 
 # .local.py overrides all the common settings.
 try:

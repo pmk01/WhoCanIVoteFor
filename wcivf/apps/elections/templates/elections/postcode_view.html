@@ -55,13 +55,22 @@
       {{ postelection.election.in_past|yesno:"was,will be" }} held
       <strong>{{ postelection.election.election_date|naturalday:"\o\n l j F Y" }}</strong>.
       {% endif %}
+    </p>
 
+    <p>
       {% if postelection.election.in_past %}
       <strong>{{ postelection.people|length }} candidates</strong> stood in
       {{ postelection.post.label }}&nbsp;constituency.
       {% else %}
-      You can choose from <strong>{{ postelection.people|length }} candidates</strong>
-      in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a>
+        {# Display different messages depending on the number of candidates #}
+        {% if not postelection.people and postelection.contested %}
+          We don't know of any candidates standing yet, you can
+          <a href="{{ postelection.ynr_link }}">
+            help improve this page by adding some information to our database</a>.
+        {% else %}
+          You can choose from <strong>{{ postelection.people|length }} candidates</strong>
+          in the {{ postelection.post.label }} constituency. <a href='#where'>Where do I vote?</a>
+        {% endif %}
       {% endif %}
     </p>
 
