@@ -23,10 +23,10 @@
 
     {% if object.election_type != "ref" %}
         {% if election.person_set.count %}
-          <p>We know about <strong>{{ election.person_set.count }}</strong> candidates
+          <p>{% if object.locked %}There are {% else %}We know about {% endif %}<strong>{{ election.person_set.count }}</strong> candidates
             {% if object.in_past %}that stood{% else %}standing{% endif %} for this election,
             in <strong>{{ object.post_set.count }}</strong> posts.</p>
-          {% if not object.in_past %}
+          {% if not object.in_past and not object.locked %}
             <p><a href="{{ object.ynr_link }}">Add more at our candidate crowd-sourcing site</a></p>
           {% endif %}
           {% else %}
