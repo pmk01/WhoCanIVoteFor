@@ -157,7 +157,7 @@ class PostElection(models.Model):
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
     contested = models.BooleanField(default=True)
-
+    locked = models.BooleanField(default=False)
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election

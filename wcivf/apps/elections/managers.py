@@ -67,7 +67,8 @@ class PostManager(models.Manager):
         for election_dict in post_dict['elections']:
             election = Election.objects.get(slug=election_dict['id'])
             kwargs = {}
-            if post_dict.get('candidates_locked'):
+            kwargs['locked'] = election_dict.get('candidates_locked', False)
+            if kwargs['locked']:
                 if election_dict['winner_count'] == \
                         len(post_dict['memberships']):
                     kwargs['contested'] = False
