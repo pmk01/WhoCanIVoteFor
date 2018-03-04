@@ -1,8 +1,9 @@
 import datetime
 import pytz
 
-from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.text import slugify
 
 
@@ -184,8 +185,6 @@ class PostElection(models.Model):
                 slugify(self.post.label)
             ])
 
-<<<<<<< HEAD
-=======
     @property
     def ynr_link(self):
         return "{}election/{}/post/{}?{}".format(
@@ -196,7 +195,6 @@ class PostElection(models.Model):
         )
 
 
->>>>>>> 31502e1... fixup! Display YNR CTA if we don't have any candidates yet
 class VotingSystem(models.Model):
     slug = models.SlugField(primary_key=True)
     name = models.CharField(blank=True, max_length=100)
