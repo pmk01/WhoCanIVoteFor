@@ -31,7 +31,7 @@
       <p>We know about <strong>{{ person_posts.count }} candidates</strong>
       {% if object.election.in_past %}that stood{% else %}standing{% endif %} in this post.</p>
       {% if not object.election.in_past %}
-        <p><a href="https://candidates.democracyclub.org.uk">Add more at our candidate crowd-sourcing site</a></p>
+        <p><a href="{{ object.ynr_link }}">Add more at our candidate crowd-sourcing site</a></p>
       {% endif %}
       {% endif %}
 
@@ -44,7 +44,7 @@
       {% endif %}
     {% else %}
       {% if not object.election.in_past %}
-          <p><a href="https://candidates.democracyclub.org.uk">Add some candidates at our candidate crowd-sourcing site</a></p>
+          <p><a href="{{ object.ynr_link }}">Add some candidates at our candidate crowd-sourcing site</a></p>
       {% endif %}
     {% endif %}
   </div>

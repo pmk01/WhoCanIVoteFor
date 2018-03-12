@@ -1,8 +1,9 @@
 import datetime
 import pytz
 
-from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.text import slugify
 
 
@@ -128,6 +129,14 @@ class Election(models.Model):
         }
         return election_to_booklet.get(self.slug)
 
+    @property
+    def ynr_link(self):
+        return "{}/election/{}/constituencies?{}".format(
+            settings.YNR_BASE,
+            self.slug,
+            settings.YNR_UTM_QUERY_STRING,
+        )
+
 
 class Post(models.Model):
     """
@@ -149,7 +158,7 @@ class PostElection(models.Model):
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
     contested = models.BooleanField(default=True)
-
+    locked = models.BooleanField(default=False)
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
@@ -175,6 +184,16 @@ class PostElection(models.Model):
                 str(self.post.ynr_id),
                 slugify(self.post.label)
             ])
+
+    @property
+    def ynr_link(self):
+        return "{}election/{}/post/{}?{}".format(
+            settings.YNR_BASE,
+            self.election.slug,
+            self.post.ynr_id,
+            settings.YNR_UTM_QUERY_STRING,
+        )
+
 
 class VotingSystem(models.Model):
     slug = models.SlugField(primary_key=True)
