@@ -187,7 +187,7 @@ class PostElection(models.Model):
 
     @property
     def ynr_link(self):
-        return "{}election/{}/post/{}?{}".format(
+        return "{}/election/{}/post/{}?{}".format(
             settings.YNR_BASE,
             self.election.slug,
             self.post.ynr_id,
