@@ -28,6 +28,12 @@ class PostcodeView(PostcodeToPostsMixin,
         context['postcode'] = self.postcode
         self.log_postcode(context['postcode'])
         context['postelections'] = self.postcode_to_posts(context['postcode'])
+
+        context['voter_id_required'] = [
+            (pe, pe.election.metadata.get('2018-05-03-id-pilot'))
+            for pe in context['postelections']
+            if pe.election.metadata.get('2018-05-03-id-pilot')
+        ]
         context['people_for_post'] = {}
         for postelection in context['postelections']:
             postelection.people = self.postelections_to_people(postelection)
