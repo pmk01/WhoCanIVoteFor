@@ -30,7 +30,7 @@ class PostcodeToPostsMixin(object):
         return postcode
 
     def postcode_to_posts(self, postcode, compact=False):
-        key = "upcoming_elections_{}".format(postcode)
+        key = "upcoming_elections_{}".format(postcode.replace(' ', ''))
         results_json = cache.get(key)
         if not results_json:
             url = '{0}/api/elections?postcode={1}&current=1'.format(
@@ -107,7 +107,7 @@ class PostelectionsToPeopleMixin(object):
 
 class PollingStationInfoMixin(object):
     def get_polling_station_info(self, postcode):
-        key = "pollingstations_{}".format(postcode)
+        key = "pollingstations_{}".format(postcode.replace(' ', ''))
         info = cache.get(key)
         if info:
             return info

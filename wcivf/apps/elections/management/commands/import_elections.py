@@ -23,7 +23,8 @@ class Command(BaseCommand):
             election_obj, created = Election.objects.update_or_create_from_ynr(
                 election)
             if created:
-                print("Added new election: {0}".format(election['name']))
+                self.stdout.write(
+                    "Added new election: {0}".format(election['name']))
 
     def import_metadata(self):
         next_page = '{}/api/elections/?current=true&metadata=1'.format(

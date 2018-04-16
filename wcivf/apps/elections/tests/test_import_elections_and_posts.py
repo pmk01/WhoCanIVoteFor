@@ -1,4 +1,5 @@
 from django.test import TestCase
+from io import StringIO
 
 import vcr
 import requests
@@ -13,7 +14,8 @@ class TestElectionAndPostImporter(TestCase):
     base_url = settings.YNR_BASE
 
     def _import_elections(self):
-        call_command('import_elections')
+        command_stdout = StringIO(newline=None)
+        call_command('import_elections', stdout=command_stdout)
 
     def _import_posts(self):
         url = self.base_url + '/api/v0.9/posts/'
