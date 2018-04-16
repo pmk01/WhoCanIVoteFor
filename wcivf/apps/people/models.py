@@ -105,6 +105,31 @@ class Person(models.Model):
 
         return all([show_cta, all_conditions])
 
+    @property
+    def has_any_contact_info(self):
+        """
+        Does this person have any info to display in the contact info box?
+        """
+        return any((
+            self.email,
+            self.twitter_username,
+            self.facebook_page_url,
+            self.facebook_personal_url,
+            self.linkedin_url,
+            self.homepage_url,
+        ))
+
+    @property
+    def cta_example_details(self):
+        attrs = (
+            ('cv', 'CV'),
+            ('statement_to_voters', 'statement to voters'),
+            ('email', 'email'),
+            ('homepage_url', 'homepage'),
+            ('twitter_username', 'twitter account'),
+        )
+        return [a[1] for a in attrs if not getattr(self, a[0], False)]
+
 
 class AssociatedCompany(models.Model):
     person              = models.ForeignKey(Person)
