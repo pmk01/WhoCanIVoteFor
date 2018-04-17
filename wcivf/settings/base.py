@@ -221,8 +221,8 @@ try:
 except ImportError:
     pass
 
-if os.environ.get('TRAVIS'):
+if os.environ.get('TRAVIS') or os.environ.get('CIRCLECI'):
     try:
-        from .travis import *  # noqa
+        from .ci import *  # noqa
     except ImportError:
         pass
