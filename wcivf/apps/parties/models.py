@@ -94,7 +94,8 @@ class Manifesto(models.Model):
         ('England', 'England'),
         ('Scotland', 'Scotland'),
         ('Wales', 'Wales'),
-        ('Northern Ireland', 'Northern Ireland')
+        ('Northern Ireland', 'Northern Ireland'),
+        ('Local', 'Local'),
     )
     LANGUAGE_CHOICES = (
         ('English', 'English'),

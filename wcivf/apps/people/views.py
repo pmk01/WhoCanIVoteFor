@@ -76,16 +76,15 @@ class PersonView(DetailView, PersonMixin):
         obj.intro = self.get_intro(obj)
         obj.text_intro = strip_tags(obj.intro)
         obj.post_country = self.get_post_country(obj)
-        if obj.personpost and\
-                (obj.personpost.election.slug == "parl.2017-06-08"):
-            # We only care about the UK manifesto, and the candidate's own
-            # country manifesto. Return the UK manifesto first.
-            obj.manifestos_2017 = Manifesto.objects.filter(
+
+        if obj.personpost:
+            # We can't show manifestos if they've never stood for a party
+            obj.manifestos = Manifesto.objects.filter(
                 party=obj.personpost.party,
                 election=obj.personpost.election).filter(
-                Q(country='UK') | Q(country=obj.post_country))
-            obj.manifestos_2017 = sorted(
-                obj.manifestos_2017,
+                Q(country='Local') | Q(country='UK') | Q(country=obj.post_country))
+            obj.manifestos = sorted(
+                obj.manifestos,
                 key=lambda n: n.country != 'UK')
         return obj
 

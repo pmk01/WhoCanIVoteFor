@@ -25,7 +25,7 @@ class Command(BaseCommand):
             for row in reader:
                 party_id = row['party_id'].strip()
                 election = Election.objects.get(
-                        slug="parl.2017-06-08")
+                        slug=row['election_id'])
                 try:
                     party = Party.objects.get(party_id='party:%s' % party_id)
                     self.add_manifesto(row, party, election)
@@ -33,8 +33,10 @@ class Command(BaseCommand):
                     print("Party not found with ID %s" % party_id)
 
     def add_manifesto(self, row, party, election):
-        country = row['country'].strip()
-        language = row['language'].strip()
+        country = row.get('country', 'UK').strip()
+        if 'local.' in election.slug:
+            country = "Local"
+        language = row.get('language', 'English').strip()
         manifesto_obj, created = Manifesto.objects.update_or_create(
             election=election, party=party, country=country, language=language,
             web_url=row['web'].strip(), pdf_url=row['pdf'].strip())
