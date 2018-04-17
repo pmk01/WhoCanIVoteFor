@@ -64,7 +64,7 @@ class PostcodeViewTests(TestCase):
         'fixtures/vcr_cassettes/test_mayor_elections.yaml')
     def test_mayor_election_postcode_lookup(self):
         election = ElectionFactory(
-            slug="mayor.2018-05-03",
+            slug="mayor.tower-hamlets.2018-05-03",
         )
         post = PostFactory(
             ynr_id="tower-hamlets",
@@ -76,7 +76,7 @@ class PostcodeViewTests(TestCase):
             post=post,
             election=election
         )
-        response = self.client.get("/elections/e32nx", follow=True)
+        response = self.client.get("/elections/e32nx/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.context['postelections'].count(),
