@@ -88,6 +88,16 @@ class Party(models.Model):
             )
 
 
+class LocalParty(models.Model):
+    parent = models.ForeignKey(Party, related_name="local_parties")
+    ballot_papers = models.ManyToManyField('elections.PostElection')
+    name = models.CharField(blank=True, max_length=100)
+    twitter = models.CharField(blank=True, max_length=100)
+    facebook_page = models.URLField(blank=True, max_length=800)
+    homepage = models.URLField(blank=True, max_length=800)
+    email = models.EmailField(blank=True)
+
+
 class Manifesto(models.Model):
     COUNTRY_CHOICES = (
         ('UK', 'UK'),
