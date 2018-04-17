@@ -49,8 +49,6 @@ class PostcodeToPostsMixin(object):
         all_posts = []
         all_elections = []
         for election in results_json:
-            if election['group_type'] in ['organisation', 'election']:
-                continue
 
             # Convert an EE election dict in to a YNR ID
             if election['division']:
@@ -58,11 +56,12 @@ class PostcodeToPostsMixin(object):
                     election['division']['division_type'],
                     election['division']['official_identifier'].split(':')[-1]
                 ])
+                all_elections.append(election['group'])
             else:
                 post_id = election['organisation']['slug']
+                all_elections.append(election['election_id'])
 
             all_posts.append(post_id)
-            all_elections.append(election['group'])
 
         pes = PostElection.objects.filter(
             post__ynr_id__in=all_posts,
@@ -76,6 +75,7 @@ class PostcodeToPostsMixin(object):
             'election__election_date',
             'election__election_weight'
         )
+
         return pes
 
 
