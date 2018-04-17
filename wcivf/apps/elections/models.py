@@ -2,6 +2,7 @@ import datetime
 import pytz
 
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
@@ -34,6 +35,7 @@ class Election(models.Model):
     voter_citizenship = models.TextField(blank=True)
     for_post_role = models.TextField(blank=True)
     election_weight = models.IntegerField(default=10)
+    metadata = JSONField(null=True)
 
     objects = ElectionManager()
 

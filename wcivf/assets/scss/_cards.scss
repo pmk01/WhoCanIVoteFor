@@ -58,16 +58,6 @@
   background: linear-gradient(to bottom, #f7f7f7, #fcfcfc);;
 }
 
-.postcode_card {
-  text-align:center;
-  h2 {
-    margin-bottom:0.5em;
-  }
-  button {
-    margin-top:1em;
-  }
-}
-
 .party_card {
   width:400px;
   @include media(tablet) {
