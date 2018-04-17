@@ -53,10 +53,13 @@ class PostcodeToPostsMixin(object):
                 continue
 
             # Convert an EE election dict in to a YNR ID
-            post_id = ":".join([
-                election['division']['division_type'],
-                election['division']['official_identifier'].split(':')[-1]
-            ])
+            if election['division']:
+                post_id = ":".join([
+                    election['division']['division_type'],
+                    election['division']['official_identifier'].split(':')[-1]
+                ])
+            else:
+                post_id = election['organisation']['slug']
 
             all_posts.append(post_id)
             all_elections.append(election['group'])
