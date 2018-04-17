@@ -12,6 +12,7 @@ from .managers import PersonPostManager, PersonManager
 
 class PersonPost(models.Model):
     person = models.ForeignKey('Person')
+    post_election = models.ForeignKey('elections.PostElection', null=False)
     post = models.ForeignKey(Post)
     party = models.ForeignKey(Party, null=True)
     election = models.ForeignKey(Election, null=False)
