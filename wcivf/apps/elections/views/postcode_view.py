@@ -32,7 +32,8 @@ class PostcodeView(PostcodeToPostsMixin,
         context['voter_id_required'] = [
             (pe, pe.election.metadata.get('2018-05-03-id-pilot'))
             for pe in context['postelections']
-            if pe.election.metadata.get('2018-05-03-id-pilot')
+            if pe.election.metadata
+            and pe.election.metadata.get('2018-05-03-id-pilot')
         ]
         context['people_for_post'] = {}
         for postelection in context['postelections']:
