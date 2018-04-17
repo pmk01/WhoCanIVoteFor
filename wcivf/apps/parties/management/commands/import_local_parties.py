@@ -4,7 +4,7 @@ from django.db import transaction
 import csv
 
 from parties.models import Party, LocalParty
-from elections.models import Election
+from elections.models import Election, PostElection
 
 
 class Command(BaseCommand):
@@ -22,20 +22,39 @@ class Command(BaseCommand):
             reader = csv.DictReader(fh)
             for row in reader:
                 party_id = row['party_id'].strip()
-                election = Election.objects.get(
-                        slug=row['election_id'])
+                # Try to get a post election
+                print(row['election_id'])
+                post_elections = PostElection.objects.filter(
+                    ballot_paper_id=row['election_id'])
+
+                if not post_elections.exists():
+                    # This might be an election ID, in that case,
+                    # apply thie row to all post elections without
+                    # info already
+                    post_elections = PostElection.objects.filter(
+                        election__slug=row['election_id'],
+                        localparty=None,
+                    )
+
                 try:
                     party = Party.objects.get(party_id='party:%s' % party_id)
-                    self.local_party(row, party, election)
+                    self.add_local_party(row, party, post_elections)
                 except Party.DoesNotExist:
                     print("Parent party not found with ID %s" % party_id)
 
-    def add_manifesto(self, row, party, election):
-        country = row.get('country', 'UK').strip()
-        if 'local.' in election.slug:
-            country = "Local"
-        language = row.get('language', 'English').strip()
-        manifesto_obj, created = Manifesto.objects.update_or_create(
-            election=election, party=party, country=country, language=language,
-            web_url=row['web'].strip(), pdf_url=row['pdf'].strip())
-        manifesto_obj.save()
+    def add_local_party(self, row, party, post_elections):
+        twitter = row['Twitter'].replace('https://twitter.com/', '')
+        twitter = twitter.split('/')[0]
+        twitter = twitter.split('?')[0]
+        for post_election in post_elections:
+            LocalParty.objects.update_or_create(
+                parent=party,
+                post_election=post_election,
+                defaults={
+                    'name': row['Local party name'],
+                    'twitter': twitter,
+                    'facebook_page': row['Facebook'],
+                    'homepage': row['Website'],
+                    'email': row['Email'],
+                }
+            )
