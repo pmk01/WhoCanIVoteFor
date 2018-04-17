@@ -157,6 +157,7 @@ class Post(models.Model):
     objects = PostManager()
 
 class PostElection(models.Model):
+    ballot_paper_id = models.CharField(blank=True, max_length=800)
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
     contested = models.BooleanField(default=True)
