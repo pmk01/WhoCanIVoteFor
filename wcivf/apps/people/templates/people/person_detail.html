@@ -233,6 +233,42 @@
   </div>
   {% endif %}
 
+
+  {% if object.local_party %}
+  <div class="card info_card">
+    <h3>{{ object.local_party.name }}</h3>
+    <p>{{ object.name }}'s local party is the {{ object.local_party.name }}.</p>
+    {% if object.local_party.twitter %}
+      <p>
+        <a href="https://twitter.com/{{ object.local_party.twitter }}">
+          @{{ object.local_party.twitter }}</a>
+        on Twitter</p>
+    {% endif %}
+
+    {% if object.local_party.facebook_page %}
+      <p>
+        <a href="{{ object.local_party.facebook_page }}">
+          {{ object.local_party.facebook_page }}</a>
+        on Facebook</p>
+    {% endif %}
+
+    {% if object.local_party.homepage %}
+      <p>
+        <a href="{{ object.local_party.homepage }}">
+          {{ object.local_party.name }}'s website</a>
+        </p>
+    {% endif %}
+
+    {% if object.local_party.email %}
+      <p>
+        <a href="mailto:{{ object.local_party.email }}">
+          Email {{ object.local_party.email }}</a>
+        </p>
+    {% endif %}
+
+  </div>
+  {% endif %}
+
 {% if object.past_personposts %}
 <div class="card info_card">
   <h3>Previous elections</h3>

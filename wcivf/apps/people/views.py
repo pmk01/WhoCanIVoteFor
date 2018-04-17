@@ -24,7 +24,7 @@ class PersonMixin(object):
                 Prefetch(
                     'personpost_set',
                     queryset=PersonPost.objects.all().select_related(
-                        'election', 'post', 'party')
+                        'election', 'post', 'party', 'post_election')
                 )
             )
 
@@ -40,6 +40,7 @@ class PersonMixin(object):
                 'party',
                 'post',
                 'election',
+                'post_election',
             )
         obj.leaflets = Leaflet.objects.filter(person=obj) \
             .order_by('-date_uploaded_to_electionleaflets')[:3]
@@ -57,7 +58,7 @@ class PersonView(DetailView, PersonMixin):
             person=obj, election__current=False).select_related(
                 'party',
                 'post',
-                'election'
+                'election',
             )
         obj.personpost = None
         if obj.current_personposts:
@@ -86,6 +87,12 @@ class PersonView(DetailView, PersonMixin):
             obj.manifestos = sorted(
                 obj.manifestos,
                 key=lambda n: n.country != 'UK')
+
+            obj.local_party \
+                = obj.personpost.post_election.localparty_set.filter(
+                    parent=obj.personpost.party
+                ).first()
+
         return obj
 
     def get_post_country(self, person):
