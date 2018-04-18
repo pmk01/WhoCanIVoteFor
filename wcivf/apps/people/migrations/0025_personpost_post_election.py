@@ -9,8 +9,16 @@ import django.db.models.deletion
 def add_post_election(apps, schema_editor):
     PersonPost = apps.get_model('people', 'PersonPost')
     PostElection = apps.get_model('elections', 'PostElection')
+    post_election_cache = {}
+    for post_election in PostElection.objects.all():
+        PersonPost.objects.filter(
+            election=post_election.election,
+            post=post_election.post
+        ).update(
+            post_election=post_election
+        )
 
-    for person_post in PersonPost.objects.all():
+    for person_post in PersonPost.objects.filter(post_election=None):
         person_post.post_election = PostElection.objects.get(
             election=person_post.election,
             post=person_post.post,
@@ -30,6 +38,6 @@ class Migration(migrations.Migration):
             name='post_election',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='elections.PostElection'),
         ),
-        migrations.RunPython(add_post_election)
+        migrations.RunPython(add_post_election, migrations.RunPython.noop)
 
     ]
