@@ -23,7 +23,12 @@ class Command(BaseCommand):
             for row in reader:
                 party_id = row['party_id'].strip()
                 # Try to get a post election
-                print(row['election_id'])
+                try:
+                    party = Party.objects.get(party_id='party:%s' % party_id)
+                except Party.DoesNotExist:
+                    print("Parent party not found with ID %s" % party_id)
+                    continue
+
                 post_elections = PostElection.objects.filter(
                     ballot_paper_id=row['election_id'])
 
@@ -33,14 +38,11 @@ class Command(BaseCommand):
                     # info already
                     post_elections = PostElection.objects.filter(
                         election__slug=row['election_id'],
-                        localparty=None,
+                    ).exclude(
+                        localparty__parent=party
                     )
 
-                try:
-                    party = Party.objects.get(party_id='party:%s' % party_id)
-                    self.add_local_party(row, party, post_elections)
-                except Party.DoesNotExist:
-                    print("Parent party not found with ID %s" % party_id)
+                self.add_local_party(row, party, post_elections)
 
     def add_local_party(self, row, party, post_elections):
         twitter = row['Twitter'].replace('https://twitter.com/', '')
