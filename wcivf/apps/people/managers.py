@@ -3,7 +3,7 @@ from copy import deepcopy
 from django.db import models
 from django.db.models import Count
 
-from elections.models import Election, Post
+from elections.models import Election, Post, PostElection
 from parties.models import Party
 
 
@@ -135,10 +135,14 @@ class PersonManager(models.Manager):
                     except KeyError:
                         defaults['party'] = Party.objects.get(
                             party_id=post.party_id)
+                post_election = PostElection.objects.get(
+                    post=post, election=election
+                )
                 PersonPost.objects.update_or_create(
                     post=post,
                     election=post.election,
                     person_id=person_id,
+                    post_election=post_election,
                     defaults=defaults
                 )
 
