@@ -24,8 +24,11 @@ class Command(BaseCommand):
             reader = csv.DictReader(fh)
             for row in reader:
                 party_id = row['party_id'].strip()
-                election = Election.objects.get(
-                        slug=row['election_id'])
+                try:
+                    election = Election.objects.get(
+                            slug=row['election_id'])
+                except:
+                    continue
                 try:
                     party = Party.objects.get(party_id='party:%s' % party_id)
                     self.add_manifesto(row, party, election)
@@ -37,7 +40,16 @@ class Command(BaseCommand):
         if 'local.' in election.slug:
             country = "Local"
         language = row.get('language', 'English').strip()
-        manifesto_obj, created = Manifesto.objects.update_or_create(
-            election=election, party=party, country=country, language=language,
-            web_url=row['web'].strip(), pdf_url=row['pdf'].strip())
-        manifesto_obj.save()
+
+        manifesto_web = row['manifesto website'].strip()
+        manifesto_pdf = row['manifesto pdf'].strip()
+        if any([manifesto_web, manifesto_pdf]):
+            manifesto_obj, created = Manifesto.objects.update_or_create(
+                election=election,
+                party=party,
+                country=country,
+                language=language,
+                web_url=manifesto_web,
+                pdf_url=manifesto_pdf,
+            )
+            manifesto_obj.save()
