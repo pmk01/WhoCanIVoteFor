@@ -135,8 +135,9 @@ class PersonManager(models.Manager):
                     except KeyError:
                         defaults['party'] = Party.objects.get(
                             party_id=post.party_id)
+
                 post_election = PostElection.objects.get(
-                    post=post, election=election
+                    post=post, election=post.election
                 )
                 PersonPost.objects.update_or_create(
                     post=post,
