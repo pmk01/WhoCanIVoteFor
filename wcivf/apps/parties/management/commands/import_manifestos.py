@@ -49,7 +49,9 @@ class Command(BaseCommand):
                 party=party,
                 country=country,
                 language=language,
-                web_url=manifesto_web,
-                pdf_url=manifesto_pdf,
+                defaults={
+                    'web_url': manifesto_web,
+                    'pdf_url': manifesto_pdf,
+                }
             )
             manifesto_obj.save()
