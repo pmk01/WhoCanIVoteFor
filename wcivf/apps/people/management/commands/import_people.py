@@ -73,4 +73,5 @@ class Command(BaseCommand):
                 all_posts=self.all_posts,
                 all_parties=self.all_parties
             )
-            self.seen_people.add(person_obj.pk)
+            if person['memberships']:
+                self.seen_people.add(person_obj.pk)
