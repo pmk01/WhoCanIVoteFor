@@ -30,7 +30,7 @@
       {% else %}
       <p>We know about <strong>{{ person_posts.count }} candidates</strong>
       {% if object.election.in_past %}that stood{% else %}standing{% endif %} in this post.</p>
-      {% if not object.election.in_past %}
+      {% if not object.election.in_past and not object.locked %}
         <p><a href="{{ object.ynr_link }}">Add more at our candidate crowd-sourcing site</a></p>
       {% endif %}
       {% endif %}
