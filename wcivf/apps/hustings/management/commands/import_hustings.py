@@ -13,22 +13,6 @@ from django.utils import timezone
 from elections.models import Election, PostElection
 from hustings.models import Husting
 
-Hust = collections.namedtuple(
-    'Hust',
-    [
-        'electionid',
-        'constituency',
-        'gss_code',
-        'title',
-        'url',
-        'date',
-        'start_time',
-        'end_time',
-        'location',
-        'postcode',
-        'info'
-    ]
-)
 
 def dt_from_string(dt):
     """
@@ -85,43 +69,39 @@ class Command(BaseCommand):
         """
         Husting.objects.all().delete()
 
-    def create_husting(self, data):
+    def create_husting(self, row):
         """
         Create an individual husting
         """
-        starts = dt_from_string(data.date)
+        starts = dt_from_string(row['Date (YYYY-Month-DD)'])
         ends = None
-        if data.start_time:
+        if row['Start time (00:00)']:
             starts = set_time_string_on_datetime(
-                starts, data.start_time
+                starts, row['Start time (00:00)']
             )
-        if data.end_time:
-            ends = dt_from_string(data.date)
+        if row['End time (if known)']:
             ends = set_time_string_on_datetime(
-                ends, data.end_time
+                starts, row['End time (if known)']
             )
-        # This seems absurd. Maybe there's a better way to spell this
-        # in the ORM ? Maybe I don't understand the data model properly?
-        election = Election.objects.get(slug=data.electionid)
-        try:
-            post_election = election.postelection_set.get(
-                post__area_name=data.constituency)
-        except PostElection.DoesNotExist:
-            self.not_a_constituency_friend.append(data.constituency)
-            return None
 
-        husting = Husting(
-            post_election=post_election,
-            title=data.title,
-            url=data.url,
-            starts= starts,
-            ends=ends,
-            location=data.location,
-            postcode=data.postcode,
-            postevent_url=data.info
-        )
-        husting.save()
-        return husting
+        # Get the post_election
+        pes = PostElection.objects.filter(ballot_paper_id=row['Election ID'])
+        if not pes.exists():
+            # This might be a parent election ID
+            pes = PostElection.objects.filter(
+                election__slug=row['Election ID'])
+        for pe in pes:
+            husting = Husting(
+                post_election=pe,
+                title=row["Title of event"],
+                url=row['Link to event information'],
+                starts=starts,
+                ends=ends,
+                location=row['Name of event location (e.g. Church hall)'],
+                postcode=row['Postcode of event location'],
+                postevent_url=row['Link to post-event information (e.g. blog post, video)']
+            )
+            husting.save()
 
     @transaction.atomic
     def handle(self, **options):
@@ -135,22 +115,11 @@ class Command(BaseCommand):
         hustings_counter = 0
         self.not_a_constituency_friend = []
         with open(options['filename'], 'r') as fh:
-            reader = csv.reader(fh)
-            next(reader)
+            reader = csv.DictReader(fh)
             for row in reader:
-                data = Hust(*row)
-                husting = self.create_husting(data)
+                husting = self.create_husting(row)
                 if husting:
                     hustings_counter += 1
                     self.stdout.write('Created husting {0} <{1}>'.format(
                         hustings_counter, husting)
                     )
-
-        if len(self.not_a_constituency_friend) > 0:
-            self.stderr.write(
-                '\n\n\nUnfortunately your data contains "hustings" for ' \
-                'things that are not a constituency. They have been ' \
-                'ignored. Please do complain to your upstream data source.'
-            )
-            for place in self.not_a_constituency_friend:
-                self.stderr.write(place)
