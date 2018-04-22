@@ -123,8 +123,8 @@ class Manifesto(models.Model):
         choices=LANGUAGE_CHOICES,
         default='English'
     )
-    pdf_url = models.URLField(blank=True)
-    web_url = models.URLField(blank=True)
+    pdf_url = models.URLField(blank=True, max_length=800)
+    web_url = models.URLField(blank=True, max_length=800)
 
     def __str__(self):
         canonical_url = self.canonical_url()
