@@ -44,10 +44,10 @@
 {% for election_group in elections_by_date %}
   {% for postelection in election_group.list %}
   <div id="election_{{ postelection.election.slug }}" class="card">
-    <h2>Your candidates in the {{ postelection.election.name }}</h2>
+    <h2>Your candidates in the {{ postelection.election.nice_election_name }}</h2>
 
     <p>
-      The {{ postelection.election.name }}
+      The {{ postelection.election.nice_election_name }}
       {% now "j F Y" as current_day %}
       {% if postelection.election.election_date|date:"j F Y" == current_day %}
       <strong>is being held today</strong>. Polls are open till 10pm.
@@ -72,7 +72,14 @@
           {% if postelection.locked %}
           {# Case: Candidates and the post is locked #}
             You can choose from <strong>{{ postelection.people|length }} candidates</strong>
-            in the {{ postelection.post.label }} ward. <a href='#where'>Where do I vote?</a>
+            in the
+            {% if 'mayor' in postelection.election.slug %}
+            {{ postelection.election.nice_election_name }}.
+            {% else %}
+            {{ postelection.post.label }} ward.
+            {% endif %}
+
+            <a href='#where'>Where do I vote?</a>
           {% else %}
           {# Case: Candidates and the post is NOT locked (add CTA) #}
             The official candidate list has not yet been published.
