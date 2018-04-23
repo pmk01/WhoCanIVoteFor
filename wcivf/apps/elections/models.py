@@ -132,6 +132,8 @@ class Election(models.Model):
                 "booklets/2017-05-04/mayoral/mayor.doncaster.2017-05-04.pdf",
             'mayor.hackney.2018-05-03':
                 "booklets/2018-05-03/mayoral/mayor.hackney.2018-05-03.pdf",
+            'mayor.sheffield-city-ca.2018-05-03':
+                "booklets/2018-05-03/mayoral/mayor.sheffield-city-ca.2018-05-03.pdf",
         }
         return election_to_booklet.get(self.slug)
 
