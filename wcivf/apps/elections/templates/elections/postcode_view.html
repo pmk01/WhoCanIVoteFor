@@ -29,7 +29,12 @@
 
         <ul>
           {% for post in election_group.list %}
-          <li><a href="#election_{{ post.election.slug }}">{{ post.election }}{% if post.post.label != post.election %}: {{ post.post.label }}
+          <li><a href="#election_{{ post.election.slug }}">
+            {{ post.election.nice_election_name }}
+            {% if post.post.label != post.election %}
+              {% if 'mayor' not in post.election.slug %}
+                : {{ post.post.label }}
+              {% endif %}
             {% endif %}
 
           </a></li>
