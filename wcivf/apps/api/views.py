@@ -43,7 +43,7 @@ class CandidatesAndElectionsForPostcodeViewSet(
 
             election = {
                 'election_date': postelection.election.election_date,
-                'election_name': postelection.election.name,
+                'election_name': postelection.election.nice_election_name,
                 'election_id': postelection.election.slug,
                 'post': {
                     'post_name': postelection.post.label,
