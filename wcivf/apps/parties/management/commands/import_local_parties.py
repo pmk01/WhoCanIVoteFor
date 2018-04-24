@@ -14,6 +14,18 @@ class Command(BaseCommand):
             help='Path to the file with the manifestos'
         )
 
+    def get_party_list_from_party_id(self, party_id):
+        party_id = "party:{}".format(party_id)
+
+        PARTIES = [
+            ['party:53', 'party:84', 'joint-party:53-119'],
+        ]
+
+        for party_list in PARTIES:
+            if party_id in party_list:
+                return party_list
+        return [party_id]
+
     @transaction.atomic
     def handle(self, **options):
         # Delete all data first, as rows in the source might have been deleted
@@ -24,7 +36,9 @@ class Command(BaseCommand):
                 party_id = row['party_id'].strip()
                 # Try to get a post election
                 try:
-                    party = Party.objects.get(party_id='party:%s' % party_id)
+                    party_list = self.get_party_list_from_party_id(party_id)
+                    parties = Party.objects.filter(
+                        party_id__in=party_list)
                 except Party.DoesNotExist:
                     print("Parent party not found with ID %s" % party_id)
                     continue
@@ -39,10 +53,10 @@ class Command(BaseCommand):
                     post_elections = PostElection.objects.filter(
                         election__slug=row['election_id'],
                     ).exclude(
-                        localparty__parent=party
+                        localparty__parent__in=parties
                     )
-
-                self.add_local_party(row, party, post_elections)
+                for party in parties:
+                    self.add_local_party(row, party, post_elections)
 
     def add_local_party(self, row, party, post_elections):
         twitter = row['Twitter'].replace('https://twitter.com/', '')
