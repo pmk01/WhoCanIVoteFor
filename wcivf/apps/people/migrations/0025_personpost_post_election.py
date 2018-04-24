@@ -9,7 +9,7 @@ import django.db.models.deletion
 def add_post_election(apps, schema_editor):
     PersonPost = apps.get_model('people', 'PersonPost')
     PostElection = apps.get_model('elections', 'PostElection')
-    post_election_cache = {}
+
     for post_election in PostElection.objects.all():
         PersonPost.objects.filter(
             election=post_election.election,

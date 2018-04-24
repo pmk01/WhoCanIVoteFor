@@ -2,7 +2,6 @@
 Importer for all our important Hustings data
 """
 import os
-import collections
 import csv
 import datetime
 
@@ -10,7 +9,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils import timezone
 
-from elections.models import Election, PostElection
+from elections.models import PostElection
 from hustings.models import Husting
 
 
