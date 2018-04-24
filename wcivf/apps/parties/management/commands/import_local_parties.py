@@ -4,7 +4,7 @@ from django.db import transaction
 import csv
 
 from parties.models import Party, LocalParty
-from elections.models import Election, PostElection
+from elections.models import PostElection
 
 
 class Command(BaseCommand):
