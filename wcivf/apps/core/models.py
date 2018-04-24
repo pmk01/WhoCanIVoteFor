@@ -2,7 +2,7 @@ import json
 
 from django.conf import settings
 from django.utils.timezone import now
-from django.contrib.gis.db import models
+from django.db import models
 
 from django_extensions.db.models import TimeStampedModel
 import redis

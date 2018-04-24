@@ -7,5 +7,16 @@ CACHES = {
     }
 }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'wcivf',
+        'USER': 'wcivf',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
 GOCARDLESS_USE_SANDBOX = True
 GOCARDLESS_ACCESS_TOKEN = "Made Up"

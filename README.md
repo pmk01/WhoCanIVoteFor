@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/DemocracyClub/WhoCanIVoteFor.svg?branch=master)](https://travis-ci.org/DemocracyClub/WhoCanIVoteFor)
+[![CircleCI](https://circleci.com/gh/DemocracyClub/WhoCanIVoteFor.svg?style=svg)](https://circleci.com/gh/DemocracyClub/WhoCanIVoteFor)
 
 [![Coverage Status](https://coveralls.io/repos/github/DemocracyClub/WhoCanIVoteFor/badge.svg?branch=master)](https://coveralls.io/github/DemocracyClub/WhoCanIVoteFor?branch=master)
 
