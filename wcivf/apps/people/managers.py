@@ -124,7 +124,6 @@ class PersonManager(models.Manager):
             from .models import PersonPost
             # Delete old posts for this person
             PersonPost.objects.filter(person_id=person_id).delete()
-            # import ipdb; ipdb.set_trace()
             for post in posts:
                 defaults = {
                     'list_position': post.party_list_position

@@ -2,7 +2,8 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from people.tests.factories import PersonFactory, PersonPostFactory
 from parties.tests.factories import PartyFactory
-from elections.tests.factories import ElectionFactory
+from elections.tests.factories import (
+    ElectionFactory, PostFactory, PostElectionFactory)
 
 
 @override_settings(
@@ -31,7 +32,10 @@ class PersonViewTests(TestCase):
             current=True,
             election_date="2040-01-01",
             slug="foobar")
+        post = PostFactory()
+        pe = PostElectionFactory(election=election, post=post)
         PersonPostFactory(
+            post_election=pe,
             election=election,
             person=self.person,
             party=self.party,
@@ -52,7 +56,10 @@ class PersonViewTests(TestCase):
             current=True,
             election_date="2017-01-01",
             slug="foobar")
+        post = PostFactory()
+        pe = PostElectionFactory(election=election, post=post)
         PersonPostFactory(
+            post_election=pe,
             election=election,
             person=self.person,
             party=self.party,

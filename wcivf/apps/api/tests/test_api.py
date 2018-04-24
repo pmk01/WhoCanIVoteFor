@@ -52,7 +52,9 @@ class TestAPI(APITestCase):
         'fixtures/vcr_cassettes/test_postcode_view.yaml')
     def test_candidates_for_postcode_view(self):
         person = PersonFactory()  # Make a person
+        pe = PostElectionFactory(election=self.election, post=self.post)
         PersonPostFactory(
+            post_election=pe,
             election=self.election,
             person=person,
             post=self.post,
@@ -62,8 +64,8 @@ class TestAPI(APITestCase):
         with self.assertNumQueries(3):
             req = self.client.get("{}?postcode=EC1A4EU".format(url))
         assert req.status_code == 200
-        assert req.data == [{
-            'election_date': datetime.date(2017, 6, 8),
+        assert req.json() == [{
+            'election_date': "2017-06-08",
             'election_id': 'parl.2017-06-08',
             'election_name': '2017 General Election',
             'post': {
