@@ -40,7 +40,7 @@
   {% if object.statement_to_voters %}
   <div class="card info_card">
     <h3>Statement to voters</h3>
-    {{ object.statement_to_voters|linebreaks }}
+    <blockquote>{{ object.statement_to_voters|linebreaks }}</blockquote>
     <p class="small">This statement was added by {{ object.name }}, their team, or by a <a href="https://candidates.democracyclub.org.uk/person/{{ object.ynr_id }}">Democracy Club volunteer</a>, based on information published by the candidate elsewhere.</p>
   </div>
   {% endif %}
@@ -65,7 +65,7 @@
   {% endif %}
 
   {% if object.postelection.husting_set.exists %}
-    <div class="card">
+    <div class="card info_card">
       <h3>Local hustings</h3>
       <p>You can meet candidates and question them at local hustings. Here are hustings where {{ object.name }} may be appearing.</p>
       {% include "elections/includes/_hustings_list.html" with hustings=object.postelection.husting_set.all %}

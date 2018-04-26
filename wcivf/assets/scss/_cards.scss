@@ -55,7 +55,7 @@
 }
 
 .info_card {
-  background: linear-gradient(to bottom, #f7f7f7, #fcfcfc);;
+  background: #FFF;
 }
 
 .party_card {
@@ -211,4 +211,8 @@
   & > img {
     padding:0 0.5em 0 0;
   }
+}
+
+blockquote {
+  font-style:italic;
 }
