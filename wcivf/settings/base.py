@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'api',
     'results',
     'donations',
+    'pledges',
 )
 
 MIDDLEWARE_CLASSES = (

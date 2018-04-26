@@ -150,6 +150,19 @@
   {% endif %}
 
 
+  {% if object.pledges.exists %}
+  <div class="card info_card">
+    <h3>Candidate pledges</h3>
+    <p>Hope Not Hate, a London-based charity, canvassed local residents and community organisations to establish the following questions to the candidates in this ward.</p>
+    {% for pledge in object.pledges.all %}
+      <h4>{{ pledge.question }}</h4>
+      <blockquote>{{ pledge.answer|markdown }}</blockquote>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+
   {% if object.has_biographical_info %}
   <div class="card info_card">
     <h3>Biographical summary</h3>
