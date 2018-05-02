@@ -73,6 +73,7 @@ class PostManager(models.Manager):
                 if election_dict['winner_count'] == \
                         len(post_dict['memberships']):
                     kwargs['contested'] = False
+                kwargs['winner_count'] = election_dict['winner_count']
 
             PostElection.objects.update_or_create(
                 election=election,

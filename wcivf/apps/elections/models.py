@@ -175,6 +175,7 @@ class PostElection(models.Model):
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
     contested = models.BooleanField(default=True)
+    winner_count = models.IntegerField(blank=True, null=True)
     locked = models.BooleanField(default=False)
 
     def friendly_name(self):

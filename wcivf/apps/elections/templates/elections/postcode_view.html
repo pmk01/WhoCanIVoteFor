@@ -84,7 +84,11 @@
             {{ postelection.post.label }} ward.
             {% endif %}
 
-            <a href='#where'>Where do I vote?</a>
+            {% if postelection.winner_count %}
+            You will have {{ postelection.winner_count|intword }} vote{{ postelection.winner_count|pluralize }}.
+            {% endif %}
+
+            <p><a href='#where'>Where do I vote?</a></p>
           {% else %}
           {# Case: Candidates and the post is NOT locked (add CTA) #}
             The official candidate list has not yet been published.
