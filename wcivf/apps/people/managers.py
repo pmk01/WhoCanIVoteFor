@@ -100,6 +100,8 @@ class PersonManager(models.Manager):
                         post = Post.objects.get(ynr_id=post_id)
                     if election:
                         post.election = election
+                    if not election:
+                        continue
 
                 post.party_list_position = membership['party_list_position']
 
