@@ -27,7 +27,8 @@ class FeedbackFormView(UpdateView):
             self.request,
             render_to_string(
                 'feedback/feedback_thanks.html',
-                request=self.request
+                request=self.request,
+                context={'object': self.object}
             ),
             extra_tags='template',
         )
