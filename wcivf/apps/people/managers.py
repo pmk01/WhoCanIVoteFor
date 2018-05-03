@@ -40,7 +40,8 @@ class PersonManager(models.Manager):
     def update_or_create_from_ynr(self, person,
                                   all_elections=None,
                                   all_posts=None,
-                                  all_parties=None):
+                                  all_parties=None,
+                                  update_info_only=False):
         posts = []
         elections = []
 
@@ -81,7 +82,7 @@ class PersonManager(models.Manager):
                     defaults['twfy_id'] = i['identifier'].replace(
                         "uk.org.publicwhip/person/", "")
 
-        if person['memberships']:
+        if person['memberships'] and not update_info_only:
             for membership in person['memberships']:
                 election = None
                 post = None
@@ -124,7 +125,7 @@ class PersonManager(models.Manager):
             defaults=defaults
         )
 
-        if posts:
+        if posts and not update_info_only:
             from .models import PersonPost
             # Delete old posts for this person
             PersonPost.objects.filter(person_id=person_id).delete()

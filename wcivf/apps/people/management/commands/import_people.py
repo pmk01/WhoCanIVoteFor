@@ -29,6 +29,12 @@ class Command(BaseCommand):
             type=int,
             help='Number of minutes to look back for changes',
         )
+        parser.add_argument(
+            '--update-info-only',
+            action='store_true',
+            help='Only update person info, not posts',
+        )
+
 
     @transaction.atomic
     def handle(self, **options):
@@ -57,21 +63,25 @@ class Command(BaseCommand):
             print(next_page)
             req = requests.get(next_page)
             results = req.json()
-            self.add_people(results)
+            self.add_people(
+                results,
+                update_info_only=options['update_info_only']
+            )
             next_page = results.get('next')
 
         PersonPost.objects.filter(party=None).delete()
-        if not options['recent']:
+        if not options['recent'] or not options['update_info_only']:
             deleted_ids = self.existing_people.difference(self.seen_people)
             Person.objects.filter(ynr_id__in=deleted_ids).delete()
 
-    def add_people(self, results):
+    def add_people(self, results, update_info_only=False):
         for person in results['results']:
             person_obj = Person.objects.update_or_create_from_ynr(
                 person,
                 all_elections=self.all_elections,
                 all_posts=self.all_posts,
-                all_parties=self.all_parties
+                all_parties=self.all_parties,
+                update_info_only=update_info_only,
             )
             if person['memberships']:
                 self.seen_people.add(person_obj.pk)
