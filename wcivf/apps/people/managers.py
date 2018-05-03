@@ -63,6 +63,8 @@ class PersonManager(models.Manager):
             defaults['linkedin_url'] = version_data['linkedin_url']
         if 'homepage_url' in version_data:
             defaults['homepage_url'] = version_data['homepage_url']
+        if 'party_ppc_page_url' in version_data:
+            defaults['party_ppc_page_url'] = version_data['party_ppc_page_url']
         if 'wikipedia_url' in version_data:
             defaults['wikipedia_url'] = version_data['wikipedia_url']
         if 'biography' in version_data:

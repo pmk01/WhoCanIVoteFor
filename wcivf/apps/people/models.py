@@ -48,6 +48,8 @@ class Person(models.Model):
     facebook_personal_url = models.CharField(blank=True, null=True, max_length=800)
     linkedin_url = models.CharField(blank=True, null=True, max_length=800)
     homepage_url = models.CharField(blank=True, null=True, max_length=800)
+    party_ppc_page_url = \
+        models.CharField(blank=True, null=True, max_length=800)
 
     # Bios
     wikipedia_url = models.CharField(blank=True, null=True, max_length=800)

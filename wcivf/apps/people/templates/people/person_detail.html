@@ -229,6 +229,14 @@
           </a>
         </dd>
         {% endif %}
+        {% if object.party_ppc_page_url %}
+        <dt>The party's candidate page for this person</dt>
+        <dd>
+          <a href="{{ object.party_ppc_page_url }}" title="Party page for {{ object.name }}">
+            {{ object.party_ppc_page_url }}
+          </a>
+        </dd>
+        {% endif %}
         {% if object.favourite_biscuit %}
         <dt>Favourite biscuit</dt>
         <dd>
