@@ -56,7 +56,7 @@ class HomePageView(PostcodeFormView):
 
         # TMP changes for 3rd of May elections:
         may_elections = datetime.datetime(2018,5,3)
-        if today < may_elections and today >= (may_elections - delta):
+        if today < may_elections or today >= (may_elections - delta):
             # Don't show upcoming elections within `delta` weeks
             context['upcoming_elections'] = None
         else:
