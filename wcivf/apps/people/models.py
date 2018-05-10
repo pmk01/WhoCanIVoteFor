@@ -1,12 +1,10 @@
-from django.db import models
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.text import slugify
-
-from wcivf import settings
-
 from elections.models import Election, Post
 from parties.models import Party
 
+from wcivf import settings
 from .managers import PersonPostManager, PersonManager
 
 

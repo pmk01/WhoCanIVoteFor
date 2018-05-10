@@ -15,6 +15,7 @@
     {% if object.photo_url %}
       <img src="{{ object.photo_url }}" class="person_photo detail" alt="profile photo of {{ object.name }}">
     {% endif %}
+  
     <p>
     {{ object.intro|safe }}. Our volunteers have been adding information on {{ object.name }} - here's everything we know so far!
     </p>

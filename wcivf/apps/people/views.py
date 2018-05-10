@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from django.http import Http404
 from django.db.models import Prefetch, Q
 from django.utils.html import strip_tags
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 from .models import Person, PersonPost
 from elections.models import PostElection
@@ -157,6 +158,18 @@ class PersonView(DetailView, PersonMixin):
             str += person.personpost.election.get_absolute_url()
             str += '">' + person.personpost.election.name + '</a>'
             intro.append(str)
+
+            if hasattr(person.personpost, 'result'):
+                votes = intcomma(person.personpost.results.votes_cast)
+                if person.personpost.elected:
+                    intro[-1] = intro[-1] + '.'
+                    results_str = \
+                        'They were elected with <strong>{}</strong> votes'
+                else:
+                    results_str = '. They got <strong>{}</strong> votes'
+                results_str = results_str.format(votes)
+                intro.append(results_str)
+
         return ' '.join(intro)
 
 

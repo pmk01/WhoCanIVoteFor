@@ -82,8 +82,10 @@ class PostView(DetailView):
             'person',
             'person__cv',
             'party',
+            'results',
         ).prefetch_related(
-            'person__leaflet_set'
-        ).order_by('elected')
+            'person__leaflet_set',
+            'person__pledges',
+        ).order_by('-elected')
 
         return context

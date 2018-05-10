@@ -96,14 +96,18 @@ class PostelectionsToPeopleMixin(object):
         else:
             order_by = ['person__name']
 
-        people_for_post = people_for_post.order_by('elected', *order_by)
+        people_for_post = people_for_post.order_by('-elected', *order_by)
         people_for_post = people_for_post.select_related(
             'post',
             'election',
             'person',
             'party',
             'person__cv',
-        ).prefetch_related('person__leaflet_set')
+            'results',
+        ).prefetch_related(
+            'person__leaflet_set',
+            'person__pledges',
+        )
         cache.set(key, people_for_post)
         return people_for_post
 

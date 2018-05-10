@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
   <section class="candidate_card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %} {% if person_post.elected %}person_elected{% endif %}">
     <a href="{{ person_post.person.get_absolute_url }}">
     <span class="person_photo">
@@ -26,10 +27,16 @@
       </h4>
 
       {% if not person_post.list_position %}
-      <p class="card_party">{{ person_post.party.party_name }}</p>
+      <p class="card_party">
+        {{ person_post.party.party_name }}
+      </p>
       {% endif %}
 
       <span class="icons">
+      {% if person_post.results.votes_cast %}
+      {{ person_post.results.votes_cast|intcomma }} vote{{ person_post.results.votes_cast|pluralize }}
+      {% endif %}
+
       {% if person_post.person.statement_to_voters %}<span class="text-icon">Statement</span>{% endif %}
       {% if person_post.person.pledges.exists %}<span class="text-icon">Pledge</span>{% endif %}
       {% if person_post.person.cv %}<span class="text-icon">CV</span>{% endif %}
