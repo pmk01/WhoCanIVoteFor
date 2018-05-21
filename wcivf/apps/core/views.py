@@ -51,7 +51,7 @@ class HomePageView(PostcodeFormView):
         context = super().get_context_data(**kwargs)
 
         today = datetime.datetime.today()
-        delta = datetime.timedelta(weeks=2)
+        delta = datetime.timedelta(weeks=4)
         cut_off_date = today + delta
 
         context['upcoming_elections'] = PostElection.objects.filter(
