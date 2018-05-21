@@ -70,7 +70,7 @@ class Command(BaseCommand):
             next_page = results.get('next')
 
         PersonPost.objects.filter(party=None).delete()
-        if not options['recent'] or not options['update_info_only']:
+        if not options['recent'] or options['update_info_only']:
             deleted_ids = self.existing_people.difference(self.seen_people)
             Person.objects.filter(ynr_id__in=deleted_ids).delete()
 
