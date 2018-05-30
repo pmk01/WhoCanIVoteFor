@@ -5,7 +5,7 @@ from django.conf import settings
 
 from people.models import PersonPost
 from results.models import PersonPostResult
-from elections.models import PostElection
+from elections.models import PostElection, Election
 
 
 class Command(BaseCommand):
@@ -16,21 +16,35 @@ class Command(BaseCommand):
             '--date',
             action='store',
             dest='date',
-            required=True,
             help='The election date',
         )
 
     def handle(self, *args, **options):
-        base_url = "{}/api/v0.9/result_sets/?election_date={}".format(
-            settings.YNR_BASE,
-            options['date']
-        )
-        next_page = base_url
-        while next_page:
-            req = requests.get(next_page)
-            data = req.json()
-            self.import_page(data['results'])
-            next_page = data.get('next')
+        if options['date']:
+            dates = [
+                options['date'],
+            ]
+        else:
+            qs = Election.objects.filter(
+                        current=True
+                    ).order_by(
+                        'election_date'
+                    ).values_list(
+                        'election_date', flat=True
+                    ).distinct()
+            dates = [d.strftime("%Y-%m-%d") for d in qs]
+
+        for date in dates:
+            base_url = "{}/api/v0.9/result_sets/?election_date={}".format(
+                settings.YNR_BASE,
+                date
+            )
+            next_page = base_url
+            while next_page:
+                req = requests.get(next_page)
+                data = req.json()
+                self.import_page(data['results'])
+                next_page = data.get('next')
 
     def import_page(self, results):
         for resultset in results:
