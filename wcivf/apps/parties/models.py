@@ -32,7 +32,7 @@ class PartyManager(models.Manager):
 
             photo_filename = selected_image['image_url'].split('/')[-1]
 
-            url = "{}{}".format(settings.YNR_BASE, selected_image['image_url'])
+            url = selected_image['image_url']
 
             try:
                 file_path = party_obj.emblem.file.name
