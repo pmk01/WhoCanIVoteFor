@@ -1,13 +1,17 @@
 from django.conf.urls import url
 from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 
 from .views import HomePageView, PostcodeFormView, StatusCheckView, OpenSearchView
 
 urlpatterns = [
     url(r'^$', HomePageView.as_view(), name="home_view"),
     url(r'^privacy/$',
-        TemplateView.as_view(template_name="privacy.html"),
-        name="privacy_view"),
+        RedirectView.as_view(
+            url='https://democracyclub.org.uk/privacy/',
+            permanent=True
+        ), name='privacy_view'
+    ),
     url(r'^about/$',
         TemplateView.as_view(template_name="about.html"),
         name="about_view"),
