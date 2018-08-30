@@ -10,7 +10,7 @@ django-extensions
 djangorestframework==3.6.3
 django-redis
 hiredis
-Pillow==5.0.0
+Pillow==5.2.0
 icalendar
 dealer
 django-robots
