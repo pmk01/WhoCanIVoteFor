@@ -8,11 +8,11 @@ from django.core.cache import cache
 
 from core.models import log_postcode
 from people.models import PersonPost
-from ..models import PostElection, InvalidPostcodeError
 
 
 class PostcodeToPostsMixin(object):
     def get(self, request, *args, **kwargs):
+        from ..models import InvalidPostcodeError
         try:
             context = self.get_context_data(**kwargs)
         except InvalidPostcodeError:
@@ -40,6 +40,7 @@ class PostcodeToPostsMixin(object):
             req = requests.get(url)
 
             # Don't cache bad postcodes
+            from ..models import InvalidPostcodeError
             if req.status_code != 200:
                 raise InvalidPostcodeError(postcode)
 
@@ -63,6 +64,7 @@ class PostcodeToPostsMixin(object):
 
             all_posts.append(post_id)
 
+        from ..models import PostElection
         pes = PostElection.objects.filter(
             post__ynr_id__in=all_posts,
             election__slug__in=all_elections)
@@ -95,7 +97,6 @@ class PostelectionsToPeopleMixin(object):
             order_by = ['party__party_name', 'list_position']
         else:
             order_by = ['person__name']
-
         people_for_post = people_for_post.order_by('-elected', *order_by)
         people_for_post = people_for_post.select_related(
             'post',

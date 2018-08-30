@@ -77,7 +77,7 @@ class TestAPI(APITestCase):
                     'party_name': 'Test Party'
                 },
                 'person': {
-                    'ynr_id': '0',
+                    'ynr_id': 0,
                     'name': 'Candidate 0'
                 }
             }],

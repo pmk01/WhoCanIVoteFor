@@ -1,10 +1,10 @@
 from django.views.generic import TemplateView, DetailView
 from django.http import Http404
 from django.db.models import Prefetch
+from django.apps import apps
 
 
 from people.helpers import peopleposts_for_election_post
-from ..models import Election, PostElection
 
 
 class ElectionsView(TemplateView):
@@ -12,6 +12,7 @@ class ElectionsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        Election = apps.get_model('elections.Election')
         all_elections = Election.objects.all().order_by(
             '-election_date', 'election_type', 'name')
 
@@ -26,12 +27,13 @@ class ElectionsView(TemplateView):
 
 class ElectionView(DetailView):
     template_name = "elections/election_view.html"
-    model = Election
+    model = apps.get_model('elections.Election')
 
     def get_object(self, queryset=None):
         if queryset is None:
             queryset = self.get_queryset()
         pk = self.kwargs.get(self.pk_url_kwarg)
+        PostElection = apps.get_model('elections.PostElection')
         queryset = queryset.filter(slug=pk).prefetch_related(
             Prefetch(
                 'postelection_set',
@@ -50,7 +52,7 @@ class ElectionView(DetailView):
 
 class PostView(DetailView):
     template_name = "elections/post_view.html"
-    model = PostElection
+    model = apps.get_model('elections.PostElection')
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -72,6 +74,7 @@ class PostView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        Election = apps.get_model('elections.Election')
         context['election'] = Election.objects.get(
             slug=self.kwargs['election_id'])
         context['person_posts'] = peopleposts_for_election_post(

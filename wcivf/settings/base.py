@@ -193,7 +193,7 @@ SITE_LOGO = "images/logo.png"
 SITE_LOGO_WIDTH = "440px"
 
 import redis
-REDIS_POOL = redis.ConnectionPool(port=6379, db=5)
+REDIS_POOL = redis.ConnectionPool(host="127.0.0.1", port=6379, db=5)
 REDIS_KEY_PREFIX = "WCIVF"
 
 REST_FRAMEWORK = {
