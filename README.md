@@ -63,8 +63,6 @@ Both workflow should consoder the following:
 
 * There are different voting systems – for example [Single Transferable Vote](https://en.m.wikipedia.org/wiki/Single_transferable_vote), as used in Northern Ireland.  This could be out of scope for this initial phase of work – more research time is needed to see how complex this will be to model.
 
+## Getting started
 
-
-## Technical
-
-This project is built in python 3.4 and Django 1.9.
+See [INSTALL.md](INSTALL.md) for setup instructions.
