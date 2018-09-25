@@ -19,27 +19,22 @@ class PartyManager(models.Manager):
         }
 
         party_obj, _ = self.update_or_create(
-            party_id=party['id'],
+            party_id=party['legacy_slug'],
             defaults=defaults
         )
-        if party['images']:
+        if party['emblems']:
             same_photo = False
 
-            selected_image = party['images'][0]
-            for image in party['images']:
-                if image['is_primary']:
-                    selected_image = image
-
-            photo_filename = selected_image['image_url'].split('/')[-1]
-
-            url = selected_image['image_url']
+            selected_image = party['default_emblem']
+            url = selected_image['image']
+            photo_filename = url.split('/')[-1]
 
             try:
                 file_path = party_obj.emblem.file.name
             except:
                 file_path = None
 
-            # This person has a photo already, check if it's the same
+            # This party has an emblem already, check if it's the same
             if file_path and os.path.exists(file_path):
                 if party_obj.emblem.name.endswith(photo_filename):
                     same_photo = True

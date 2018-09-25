@@ -9,7 +9,7 @@ from parties.models import Party
 class Command(BaseCommand):
     def handle(self, **options):
 
-        next_page = settings.YNR_BASE + '/api/v0.9/organizations/?page_size=200'
+        next_page = settings.YNR_BASE + '/api/next/parties/?page_size=200'
         while next_page:
             req = requests.get(next_page)
             results = req.json()
@@ -18,9 +18,6 @@ class Command(BaseCommand):
 
     def add_people(self, results):
         for party in results['results']:
-            if not party['classification'] == "Party":
-                continue
-
             party_obj, created = Party.objects.update_or_create_from_ynr(
                 party)
             if created:
