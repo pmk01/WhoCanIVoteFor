@@ -108,8 +108,8 @@ class PersonManager(models.Manager):
 
                 post.party_list_position = membership['party_list_position']
 
-                if membership['on_behalf_of']:
-                    post.party_id = membership['on_behalf_of']['id']
+                if membership['party']:
+                    post.party_id = membership['party']['legacy_slug']
                 else:
                     post.party_id = None
                 # If the same post occurs twice (e.g. if the candidate has
