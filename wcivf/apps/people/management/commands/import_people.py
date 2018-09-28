@@ -44,7 +44,7 @@ class Command(BaseCommand):
 
         if options['recent']:
             next_page = settings.YNR_BASE + \
-                '/api/v0.9/persons/?page_size=200'
+                '/api/next/persons/?page_size=200'
         else:
             self.existing_people = set(Person.objects.values_list('pk', flat=True))
             next_page = settings.YNR_BASE + \
