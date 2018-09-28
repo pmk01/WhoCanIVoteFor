@@ -8,7 +8,7 @@ from elections.models import Election
 
 class Command(BaseCommand):
     def handle(self, **options):
-        next_page = settings.YNR_BASE + '/api/v0.9/elections/'
+        next_page = settings.YNR_BASE + '/api/v0.9/elections/?page_size=200'
         while next_page:
             req = requests.get(next_page)
             results = req.json()
