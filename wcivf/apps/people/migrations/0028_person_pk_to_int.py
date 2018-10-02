@@ -7,8 +7,6 @@ from django.db import migrations, models
 
 def drop_varchar_pattern_ops_index(apps, schemaEditor):
     models = [
-        apps.get_model("mentions", "mention_people"),
-        apps.get_model("mentions", "mention"),
         apps.get_model("people", "AssociatedCompany"),
         apps.get_model("people", "Person"),
         apps.get_model("peoplecvs", "CV"),
@@ -19,13 +17,6 @@ def drop_varchar_pattern_ops_index(apps, schemaEditor):
     for model in models:
         index_names = schemaEditor._constraint_names(model)
         for index_name in index_names:
-            if 'mentions_mention_peo_person_id_' in index_name:
-                # This is a M2M constraint
-                indexes_to_delete.append((
-                    model,
-                    index_name,
-                    schemaEditor.sql_delete_unique
-                ))
             if index_name.endswith('_like'):
                 # Django makes 'like' indexed by default, remove these because
                 # they break on integer fields
@@ -50,7 +41,6 @@ class Migration(migrations.Migration):
         ('people', '0027_person_party_ppc_page_url'),
         ('peoplecvs', '0002_auto_20170522_1324'),
         ('pledges', '0002_auto_20180502_0946'),
-        ('mentions', '0002_auto_20160412_1707'),
     ]
 
     operations = [
