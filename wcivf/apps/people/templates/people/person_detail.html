@@ -15,7 +15,7 @@
     {% if object.photo_url %}
       <img src="{{ object.photo_url }}" class="person_photo detail" alt="profile photo of {{ object.name }}">
     {% endif %}
-  
+
     <p>
     {{ object.intro|safe }}. Our volunteers have been adding information on {{ object.name }} - here's everything we know so far!
     </p>
@@ -334,11 +334,6 @@
   <p><a href="{% url 'email_person_view' pk=object.pk ignored_slug=person.name|slugify %}" class="link-button">Ask the candidate for more information &raquo;</a></p>
 {% endif %}
   </div>
-
-  {# {% if object.mention_set.all %} #}
-  {# {% include "mentions/includes/_mentions_list.html" with mentions=object.mention_set.all %} #}
-  {# {% endif %} #}
-
 
 {% if not referer_postcode %}
 {% include "elections/includes/_postcode_search_form.html" %}
