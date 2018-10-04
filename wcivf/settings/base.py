@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'markdown_deux',
     'core',
     'people',
-    'mentions',
     'parties',
     'profiles',
     'feedback',
