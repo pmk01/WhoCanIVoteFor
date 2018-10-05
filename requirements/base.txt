@@ -15,7 +15,7 @@ icalendar
 dealer
 django-robots
 django-debug-toolbar
-gocardless_pro==1.8.0
+gocardless_pro==1.9.0
 
 git+git://github.com/DemocracyClub/dc_base_theme.git@0.3.7
 git+https://github.com/DemocracyClub/dc_signup_form.git@2.0.0
