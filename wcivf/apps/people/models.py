@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
+from django.utils.timezone import now
 from elections.models import Election, Post
 from parties.models import Party
 
@@ -39,6 +40,7 @@ class Person(models.Model):
     birth_date = models.CharField(null=True, max_length=255)
     photo_url = models.URLField(blank=True, null=True)
     favourite_biscuit = models.CharField(null=True, max_length=800)
+    last_updated = models.DateTimeField(default=now)
 
     # contact points
     twitter_username = models.CharField(blank=True, null=True, max_length=100)
@@ -72,6 +74,9 @@ class Person(models.Model):
                                                 max_length=800)
 
     objects = PersonManager()
+
+    class Meta:
+        get_latest_by = 'last_updated'
 
     def __str__(self):
         return self.name

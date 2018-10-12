@@ -2,6 +2,8 @@ from copy import deepcopy
 
 from django.db import models
 from django.db.models import Count
+from django.utils.dateparse import parse_datetime
+from django.utils.timezone import make_aware
 
 from elections.models import Election, Post, PostElection
 from parties.models import Party
@@ -45,11 +47,18 @@ class PersonManager(models.Manager):
         posts = []
         elections = []
 
+        last_updated = make_aware(
+            parse_datetime(
+                person['versions'][0]['timestamp']
+            )
+        )
+
         defaults = {
             'name': person['name'],
             'email': person['email'] or None,
             'gender': person['gender'] or None,
             'birth_date': person['birth_date'] or None,
+            'last_updated': last_updated,
         }
 
         version_data = person['versions'][0]['data']
