@@ -2,7 +2,6 @@ import os
 import json
 import tempfile
 import shutil
-from datetime import datetime, timedelta
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -88,7 +87,7 @@ class Command(BaseCommand):
             f.write(page)
 
     def download_pages(self):
-        if self.options["recent"]:
+        if self.options["recent"] or self.options["since"]:
             next_page = settings.YNR_BASE + "/api/next/persons/?page_size=200"
         else:
             self.existing_people = set(
@@ -100,12 +99,15 @@ class Command(BaseCommand):
             )
 
         if self.options["recent"]:
-            past_time = datetime.now() - timedelta(
-                minutes=self.options["recent_minutes"]
-            )
-            next_page = "{}&updated_gte={}".format(
-                next_page, past_time.isoformat()
-            )
+            past_time_str = Person.objects.latest().last_updated.isoformat()
+
+        if self.options["since"]:
+            past_time_str = self.options["since"]
+
+        next_page = "{}&updated_gte={}".format(
+            next_page, past_time_str
+        )
+
 
         while next_page:
             self.stdout.write("Downloading {}".format(next_page))
