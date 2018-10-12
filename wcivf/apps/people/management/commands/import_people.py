@@ -1,3 +1,7 @@
+import os
+import json
+import tempfile
+import shutil
 from datetime import datetime, timedelta
 
 from django.core.management.base import BaseCommand
@@ -35,44 +39,82 @@ class Command(BaseCommand):
             help='Only update person info, not posts',
         )
 
+    def handle(self, **options):
+        self.options = options
+        self.dirpath = tempfile.mkdtemp()
+
+        try:
+            self.download_pages()
+            self.add_to_db()
+        finally:
+            shutil.rmtree(self.dirpath)
 
     @transaction.atomic
-    def handle(self, **options):
+    def add_to_db(self):
         self.all_parties = {p.party_id: p for p in Party.objects.all()}
         self.all_elections = {e.slug: e for e in Election.objects.all()}
         self.all_posts = {p.ynr_id: p for p in Post.objects.all()}
-
-        if options['recent']:
-            next_page = settings.YNR_BASE + \
-                '/api/next/persons/?page_size=200'
-        else:
-            self.existing_people = set(Person.objects.values_list('pk', flat=True))
-            next_page = settings.YNR_BASE + \
-                '/media/cached-api/latest/persons-000001.json'
         self.seen_people = set()
 
+        files = [f for f in os.listdir(self.dirpath) if f.endswith(".json")]
+        for file in files:
+            self.stdout.write("Importing {}".format(file))
+            with open(os.path.join(self.dirpath, file), "r") as f:
+                results = json.loads(f.read())
+                self.add_people(
+                    results, update_info_only=self.options["update_info_only"]
+                )
 
-        if options['recent']:
+        PersonPost.objects.filter(party=None).delete()
+        if not self.options["recent"] or self.options["update_info_only"]:
+            deleted_ids = self.existing_people.difference(self.seen_people)
+            Person.objects.filter(ynr_id__in=deleted_ids).delete()
+
+    def save_page(self, url, page):
+        # get the file name from the page number
+        if "cached-api" in url:
+            filename = url.split("/")[-1]
+        else:
+            if "page=" in url:
+                page_number = url.split("page_size=")[1].split("&")[0]
+
+            else:
+                page_number = 1
+            filename = "page-{}.json".format(page_number)
+        file_path = os.path.join(self.dirpath, filename)
+
+        # Save the page
+        with open(file_path, "w") as f:
+            f.write(page)
+
+    def download_pages(self):
+        if self.options["recent"]:
+            next_page = settings.YNR_BASE + "/api/next/persons/?page_size=200"
+        else:
+            self.existing_people = set(
+                Person.objects.values_list("pk", flat=True)
+            )
+            next_page = (
+                settings.YNR_BASE
+                + "/media/cached-api/latest/persons-000001.json"
+            )
+
+        if self.options["recent"]:
             past_time = datetime.now() - timedelta(
-                minutes=options['recent_minutes'])
+                minutes=self.options["recent_minutes"]
+            )
             next_page = "{}&updated_gte={}".format(
                 next_page, past_time.isoformat()
             )
 
         while next_page:
-            print(next_page)
+            self.stdout.write("Downloading {}".format(next_page))
             req = requests.get(next_page)
+            req.raise_for_status()
+            page = req.text
             results = req.json()
-            self.add_people(
-                results,
-                update_info_only=options['update_info_only']
-            )
-            next_page = results.get('next')
-
-        PersonPost.objects.filter(party=None).delete()
-        if not options['recent'] or options['update_info_only']:
-            deleted_ids = self.existing_people.difference(self.seen_people)
-            Person.objects.filter(ynr_id__in=deleted_ids).delete()
+            self.save_page(next_page, page)
+            next_page = results.get("next")
 
     def add_people(self, results, update_info_only=False):
         for person in results['results']:
