@@ -3,16 +3,15 @@ WCIVF requires Python 3.
 To install:
 
     sudo apt-get install python3-dev libpq-dev libjpeg-dev redis-server
-    sudo gem install --no-ri --no-rdoc sass -v 3.4.21
     pip install -r requirements/local.txt
 
 Create a Postgres database as detailed below, then:
 
     python manage.py migrate
     python manage.py import_elections
-    manage.py import_posts
-    manage.py import_parties
-    manage.py import_people
+    python manage.py import_posts
+    python manage.py import_parties
+    python manage.py import_people
 
 If you don't want to install Redis for some reason (like e.g. laziness) you can override
 the cache backend with a file at `./wcivf/settings/local.py` with the following:
@@ -57,7 +56,7 @@ Then, create a file `wcivf/settings/local.py` with the following contents, assum
 
 ## Creating inline CSS
 
-To regenerate the static files, `npm install -g yuglify`, then:
+To regenerate the static files:
 
     manage.py collectstatic
 
