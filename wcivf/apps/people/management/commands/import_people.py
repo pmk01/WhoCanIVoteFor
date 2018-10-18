@@ -25,12 +25,11 @@ class Command(BaseCommand):
         )
 
         parser.add_argument(
-            '--recent-minutes',
+            '--since',
             action='store',
-            dest='recent_minutes',
-            default=5,
-            type=int,
-            help='Number of minutes to look back for changes',
+            dest='since',
+            type=str,
+            help='Import changes since [datetime]',
         )
         parser.add_argument(
             '--update-info-only',
