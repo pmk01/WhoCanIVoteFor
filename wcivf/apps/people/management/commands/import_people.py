@@ -3,6 +3,8 @@ import json
 import tempfile
 import shutil
 
+from dateutil.parser import parse
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.conf import settings
@@ -17,25 +19,28 @@ from parties.models import Party
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
-            '--recent',
-            action='store_true',
-            dest='recent',
+            "--recent",
+            action="store_true",
+            dest="recent",
             default=False,
-            help='Import changes in the last `n` minutes',
+            help="Import changes in the last `n` minutes",
         )
 
         parser.add_argument(
-            '--since',
-            action='store',
-            dest='since',
-            type=str,
-            help='Import changes since [datetime]',
+            "--since",
+            action="store",
+            dest="since",
+            type=self.valid_date,
+            help="Import changes since [datetime]",
         )
         parser.add_argument(
-            '--update-info-only',
-            action='store_true',
-            help='Only update person info, not posts',
+            "--update-info-only",
+            action="store_true",
+            help="Only update person info, not posts",
         )
+
+    def valid_date(self, value):
+        return parse(value)
 
     def handle(self, **options):
         self.options = options
@@ -52,6 +57,7 @@ class Command(BaseCommand):
         self.all_parties = {p.party_id: p for p in Party.objects.all()}
         self.all_elections = {e.slug: e for e in Election.objects.all()}
         self.all_posts = {p.ynr_id: p for p in Post.objects.all()}
+        self.existing_people = set(Person.objects.values_list("pk", flat=True))
         self.seen_people = set()
 
         files = [f for f in os.listdir(self.dirpath) if f.endswith(".json")]
@@ -87,26 +93,23 @@ class Command(BaseCommand):
 
     def download_pages(self):
         if self.options["recent"] or self.options["since"]:
-            next_page = settings.YNR_BASE + "/api/next/persons/?page_size=200"
-        else:
-            self.existing_people = set(
-                Person.objects.values_list("pk", flat=True)
+            if self.options["recent"]:
+                past_time_str = Person.objects.latest().last_updated
+            if self.options["since"]:
+                past_time_str = self.options["since"]
+
+            next_page = (
+                settings.YNR_BASE
+                + "/api/next/persons/?page_size=200&updated_gte={}".format(
+                    past_time_str.isoformat()
+                )
             )
+
+        else:
             next_page = (
                 settings.YNR_BASE
                 + "/media/cached-api/latest/persons-000001.json"
             )
-
-        if self.options["recent"]:
-            past_time_str = Person.objects.latest().last_updated.isoformat()
-
-        if self.options["since"]:
-            past_time_str = self.options["since"]
-
-        next_page = "{}&updated_gte={}".format(
-            next_page, past_time_str
-        )
-
 
         while next_page:
             self.stdout.write("Downloading {}".format(next_page))
@@ -118,7 +121,7 @@ class Command(BaseCommand):
             next_page = results.get("next")
 
     def add_people(self, results, update_info_only=False):
-        for person in results['results']:
+        for person in results["results"]:
             person_obj = Person.objects.update_or_create_from_ynr(
                 person,
                 all_elections=self.all_elections,
@@ -126,5 +129,5 @@ class Command(BaseCommand):
                 all_parties=self.all_parties,
                 update_info_only=update_info_only,
             )
-            if person['memberships']:
+            if person["memberships"]:
                 self.seen_people.add(person_obj.pk)
