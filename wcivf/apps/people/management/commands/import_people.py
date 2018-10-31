@@ -11,6 +11,7 @@ from django.conf import settings
 
 import requests
 
+from core.helpers import show_data_on_error
 from people.models import Person, PersonPost
 from elections.models import Election, Post
 from parties.models import Party
@@ -122,12 +123,13 @@ class Command(BaseCommand):
 
     def add_people(self, results, update_info_only=False):
         for person in results["results"]:
-            person_obj = Person.objects.update_or_create_from_ynr(
-                person,
-                all_elections=self.all_elections,
-                all_posts=self.all_posts,
-                all_parties=self.all_parties,
-                update_info_only=update_info_only,
-            )
-            if person["memberships"]:
-                self.seen_people.add(person_obj.pk)
+            with show_data_on_error("Person {}".format(person['id']), person):
+                person_obj = Person.objects.update_or_create_from_ynr(
+                    person,
+                    all_elections=self.all_elections,
+                    all_posts=self.all_posts,
+                    all_parties=self.all_parties,
+                    update_info_only=update_info_only,
+                )
+                if person["memberships"]:
+                    self.seen_people.add(person_obj.pk)

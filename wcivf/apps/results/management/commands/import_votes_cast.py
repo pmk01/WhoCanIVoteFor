@@ -3,6 +3,7 @@ import requests
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
+from core.helpers import show_data_on_error
 from people.models import PersonPost
 from results.models import PersonPostResult
 from elections.models import PostElection, Election
@@ -52,14 +53,15 @@ class Command(BaseCommand):
                 ballot_paper_id=resultset['ballot_paper_id']
             )
             for membership in resultset['candidate_results']:
-                person_post = PersonPost.objects.get(
-                    post_election=post_election,
-                    person__pk=membership['membership']['person']['id']
-                )
-                person_post.elected = membership['is_winner']
-                person_post.save()
+                with show_data_on_error("Membership", membership):
+                    person_post = PersonPost.objects.get(
+                        post_election=post_election,
+                        person__pk=membership['membership']['person']['id']
+                    )
+                    person_post.elected = membership['is_winner']
+                    person_post.save()
 
-                PersonPostResult.objects.update_or_create(
-                    person_post=person_post,
-                    votes_cast=membership['num_ballots']
-                )
+                    PersonPostResult.objects.update_or_create(
+                        person_post=person_post,
+                        votes_cast=membership['num_ballots']
+                    )
