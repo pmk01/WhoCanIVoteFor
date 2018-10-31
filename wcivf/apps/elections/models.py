@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.html import mark_safe
 from django.utils.text import slugify
 
 
@@ -215,6 +216,16 @@ class PostElection(models.Model):
             self.post.ynr_id,
             settings.YNR_UTM_QUERY_STRING,
         )
+
+    @property
+    def short_cancelled_message(self):
+        if not self.cancelled:
+            return ''
+        if self.election.in_past():
+            message = '(The poll for this election was cancelled)'
+        else:
+            message = '<strong>(The poll for this election has been cancelled)</strong>'
+        return mark_safe(message)
 
 
 class VotingSystem(models.Model):

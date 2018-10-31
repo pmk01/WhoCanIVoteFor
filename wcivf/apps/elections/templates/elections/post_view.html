@@ -11,8 +11,10 @@
 {% block content %}
 <div class="card">
 
+  {% if object.cancelled %}
+    {% include "elections/includes/_cancelled_election.html" with object=object only %}
+  {% else %}
   <h1>{{ object.post.label }}</h1>
-
   <p>{{ object.post.label }} {% if object.election.in_past %}was{% else %}is{% endif %} a {% if object.election.name == '2017 General Election' %}constituency{% else %}post{% endif %} in the <a href="{{ object.election.get_absolute_url }}">{{ object.election.name }}</a>,
     {% now "j F Y" as current_day %}
     {% if object.election.election_date|date:"j F Y" == current_day %}
@@ -48,6 +50,7 @@
       {% endif %}
     {% endif %}
   </div>
+  {% endif %}
 
 </div>
 

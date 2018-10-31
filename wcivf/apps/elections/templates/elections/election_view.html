@@ -38,7 +38,10 @@
         <h3>Posts</h3>
         <ul>
           {% for postelection in object.postelection_set.all %}
-            <li><a href="{{ postelection.get_absolute_url }}">{{ postelection.post.label }}</a></li>
+            <li>
+              <a href="{{ postelection.get_absolute_url }}">{{ postelection.post.label }}</a>
+              {{ postelection.short_cancelled_message }}
+            </li>
           {% endfor %}
         </ul>
     {% endif %}
