@@ -177,6 +177,10 @@ class PostElection(models.Model):
     contested = models.BooleanField(default=True)
     winner_count = models.IntegerField(blank=True, null=True)
     locked = models.BooleanField(default=False)
+    cancelled = models.BooleanField(default=False)
+    replaced_by = models.ForeignKey('PostElection',
+        null=True, blank=True, related_name="replaces")
+    metadata = JSONField(null=True)
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
