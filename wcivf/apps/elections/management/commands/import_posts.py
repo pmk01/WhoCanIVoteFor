@@ -1,9 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
-import requests
-
-from elections.helpers import EEHelper
+from elections.helpers import EEHelper, JsonPaginator
 from elections.models import Post, PostElection
 
 
@@ -28,18 +26,15 @@ class Command(BaseCommand):
             return ee_data['metadata']
         return None
 
+    def get_paginator(self, page1):
+        return JsonPaginator(page1, self.stdout)
+
     def handle(self, **options):
-        next_page = settings.YNR_BASE \
-            + '/media/cached-api/latest/posts-000001.json'
-        while next_page:
-            print(next_page)
-            req = requests.get(next_page)
-            if req.status_code != 200:
-                print(req.url)
-                print(req.content)
-            results = req.json()
-            self.add_posts(results)
-            next_page = results.get('next')
+        pages = self.get_paginator(
+            settings.YNR_BASE + '/media/cached-api/latest/posts-000001.json'
+        )
+        for page in pages:
+            self.add_posts(page)
         self.attach_cancelled_ballot_info()
 
     def add_posts(self, results):
@@ -47,7 +42,7 @@ class Command(BaseCommand):
             post_obj, created = Post.objects.update_or_create_from_ynr(
                 post)
             if created:
-                print("Added new post: {0}".format(post['label']))
+                self.stdout.write("Added new post: {0}".format(post['label']))
 
     def attach_cancelled_ballot_info(self):
         # we need to do this as a post-process instead of in the manager
