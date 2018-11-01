@@ -18,9 +18,16 @@ class PersonPostQuerySet(models.QuerySet):
 
     def counts_by_post(self):
         return self.values(
-            'post__label', 'post_id', 'election__slug', 'election__name')\
-            .annotate(num_candidates=Count('person'))\
-            .order_by('-election__election_date', 'post__label',)
+            'post__label',
+            'post_id',
+            'election__slug',
+            'election__name',
+            'post_election__cancelled',
+        ).annotate(
+            num_candidates=Count('person')
+        ).order_by(
+            '-election__election_date', 'post__label'
+        )
 
 
 class PersonPostManager(models.Manager):

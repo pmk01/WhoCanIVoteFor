@@ -41,6 +41,9 @@
         <a href="{% url 'post_view' post.election__slug post.post_id post.post__label|slugify %}">
           {{ post.post__label }}
         </a>
+        {% if post.post_election__cancelled %}
+          (The poll for this election was cancelled)
+        {% endif %}
       </dt>
       <dd>
         {{ post.num_candidates }} candidate{{ post.num_candidates|pluralize }}
