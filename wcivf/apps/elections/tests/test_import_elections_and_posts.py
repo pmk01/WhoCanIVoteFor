@@ -1,5 +1,6 @@
 from django.test import TestCase
 from io import StringIO
+from unittest import mock
 
 import vcr
 import requests
@@ -7,7 +8,9 @@ import requests
 from django.conf import settings
 from django.core.management import call_command
 
+from elections.helpers import JsonPaginator
 from elections.models import Election, Post, PostElection
+from elections.management.commands.import_posts import Command as ImportPosts
 
 
 class TestElectionAndPostImporter(TestCase):
@@ -44,3 +47,78 @@ class TestElectionAndPostImporter(TestCase):
         assert Election.objects.count() == 925
         assert Post.objects.count() == 10
         assert PostElection.objects.count() == 21
+
+
+fake_cancelled_election_data = {
+    'results': [
+        {
+            'id': 1,
+            'label': 'Election 1',
+            'role': 'foo',
+            'group': 'foo',
+            'organization': {'name': 'foo'},
+            'elections': [
+                {
+                    'id': 'fake.election.1',
+                    'ballot_paper_id': 'fake.election.post.1',
+                    'candidates_locked': True,
+                    'winner_count': '1',
+                    'cancelled': True,
+                }
+            ],
+            'memberships': [],
+        },
+        {
+            'id': 2,
+            'label': 'Election 2',
+            'role': 'foo',
+            'group': 'foo',
+            'organization': {'name': 'foo'},
+            'elections': [
+                {
+                    'id': 'fake.election.2',
+                    'ballot_paper_id': 'fake.election.post.2',
+                    'candidates_locked': True,
+                    'winner_count': '1',
+                    'cancelled': False,
+                }
+            ],
+            'memberships': [],
+        },
+    ]
+}
+
+class FakeCancelledPager(JsonPaginator):
+    def __iter__(self):
+        yield fake_cancelled_election_data
+        raise StopIteration()
+
+
+class CancelledBallotPostImporter(TestCase):
+
+    @mock.patch(
+        "elections.helpers.EEHelper.get_data",
+        lambda x, y: {
+            'replaced_by': 'fake.election.post.2',
+            'metadata': {'foo': 'bar'}
+        }
+    )
+    def test_cancelled_ballots_import(self):
+        Election.objects.create(
+            slug='fake.election.1', election_date="2018-01-01", current=False)
+        Election.objects.create(
+            slug='fake.election.2', election_date="2018-02-01", current=False)
+        cmd = ImportPosts()
+        cmd.stdout = StringIO()
+        cmd.get_paginator = lambda x: FakeCancelledPager('', cmd.stdout)
+        cmd.handle()
+        cancelled = PostElection.objects.get(
+            ballot_paper_id='fake.election.post.1')
+        replacement = PostElection.objects.get(
+            ballot_paper_id='fake.election.post.2')
+        self.assertEqual(cancelled.cancelled, True)
+        self.assertEqual(cancelled.replaced_by, replacement)
+        self.assertDictEqual(cancelled.metadata, {'foo': 'bar'})
+        self.assertEqual(replacement.cancelled, False)
+        self.assertEqual(replacement.replaced_by, None)
+        self.assertEqual(replacement.metadata, None)
