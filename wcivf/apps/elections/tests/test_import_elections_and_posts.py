@@ -7,7 +7,7 @@ import requests
 from django.conf import settings
 from django.core.management import call_command
 
-from elections.models import Election, Post
+from elections.models import Election, Post, PostElection
 
 
 class TestElectionAndPostImporter(TestCase):
@@ -21,6 +21,11 @@ class TestElectionAndPostImporter(TestCase):
         url = self.base_url + '/api/v0.9/posts/'
         req = requests.get(url)
         results = req.json()
+        # doing this is going to import
+        # the first page of posts (10 records)
+        # and then discard all the subsequent pages
+        # so we only expect to import 10 posts
+        # and their associated PostElections
         for post in results['results']:
             Post.objects.update_or_create_from_ynr(post)
 
@@ -37,3 +42,5 @@ class TestElectionAndPostImporter(TestCase):
         self._import_elections()
         self._import_posts()
         assert Election.objects.count() == 925
+        assert Post.objects.count() == 10
+        assert PostElection.objects.count() == 21
