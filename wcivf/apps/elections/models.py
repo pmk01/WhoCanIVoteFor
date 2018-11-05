@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.html import mark_safe
 from django.utils.text import slugify
 
 
@@ -177,6 +178,10 @@ class PostElection(models.Model):
     contested = models.BooleanField(default=True)
     winner_count = models.IntegerField(blank=True, null=True)
     locked = models.BooleanField(default=False)
+    cancelled = models.BooleanField(default=False)
+    replaced_by = models.ForeignKey('PostElection',
+        null=True, blank=True, related_name="replaces")
+    metadata = JSONField(null=True)
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
@@ -211,6 +216,16 @@ class PostElection(models.Model):
             self.post.ynr_id,
             settings.YNR_UTM_QUERY_STRING,
         )
+
+    @property
+    def short_cancelled_message_html(self):
+        if not self.cancelled:
+            return ''
+        if self.election.in_past():
+            message = '(The poll for this election was cancelled)'
+        else:
+            message = '<strong>(The poll for this election has been cancelled)</strong>'
+        return mark_safe(message)
 
 
 class VotingSystem(models.Model):

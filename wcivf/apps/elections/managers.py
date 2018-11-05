@@ -1,19 +1,14 @@
 from django.db import models
-from django.conf import settings
-
-import requests
+from .helpers import EEHelper
 
 
 class ElectionManager(models.Manager):
 
-    def get_explainer_from_ee(self, election):
-        req = requests.get(
-            '{}/api/elections/{}/'.format(
-                settings.EE_BASE,
-                election['id'])
-            )
-        if req.status_code == 200:
-            description = req.json()['explanation']
+    def get_explainer(self, election):
+        ee = EEHelper()
+        ee_data = ee.get_data(election['id'])
+        if ee_data:
+            description = ee_data['explanation']
             if description:
                 return description
         return election['description']
@@ -28,7 +23,7 @@ class ElectionManager(models.Manager):
         if election_type == 'mayor':
             election_weight = 5
 
-        description = self.get_explainer_from_ee(election)
+        description = self.get_explainer(election)
 
         return self.update_or_create(
             slug=election['id'],
@@ -50,6 +45,7 @@ class ElectionManager(models.Manager):
 
 
 class PostManager(models.Manager):
+
     def update_or_create_from_ynr(self, post_dict):
         from .models import Election, PostElection
         post, created = self.update_or_create(
@@ -67,17 +63,21 @@ class PostManager(models.Manager):
         for election_dict in post_dict['elections']:
             election = Election.objects.get(slug=election_dict['id'])
             kwargs = {}
-            kwargs['locked'] = election_dict.get('candidates_locked', False)
             kwargs['ballot_paper_id'] = election_dict['ballot_paper_id']
+
+            kwargs['locked'] = election_dict.get('candidates_locked', False)
             if kwargs['locked']:
                 if election_dict['winner_count'] == \
                         len(post_dict['memberships']):
                     kwargs['contested'] = False
                 kwargs['winner_count'] = election_dict['winner_count']
 
+            kwargs['cancelled'] = election_dict['cancelled']
+
             PostElection.objects.update_or_create(
                 election=election,
                 post=post,
                 defaults=kwargs
             )
+
         return (post, created)

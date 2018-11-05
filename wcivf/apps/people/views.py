@@ -60,6 +60,7 @@ class PersonView(DetailView, PersonMixin):
                 'party',
                 'post',
                 'election',
+                'post_election'
             )
         obj.personpost = None
         if obj.current_personposts:

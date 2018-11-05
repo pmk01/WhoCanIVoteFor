@@ -298,6 +298,7 @@
     <ul>
     {% for person_post in object.past_personposts %}
     <li><strong>{{ person_post.election.election_date|date:"Y" }}:</strong> The <strong>{{ person_post.election }}</strong>, as the {{ person_post.party.party_name }} candidate for the {{ person_post.post.label }}
+      {{ person_post.post_election.short_cancelled_message_html }}
     {% endfor %}
     </ul>
 </div>
