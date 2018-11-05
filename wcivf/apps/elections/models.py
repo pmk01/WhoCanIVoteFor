@@ -218,7 +218,7 @@ class PostElection(models.Model):
         )
 
     @property
-    def short_cancelled_message(self):
+    def short_cancelled_message_html(self):
         if not self.cancelled:
             return ''
         if self.election.in_past():
