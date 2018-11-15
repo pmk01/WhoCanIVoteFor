@@ -81,7 +81,7 @@ class Command(BaseCommand):
             filename = url.split("/")[-1]
         else:
             if "page=" in url:
-                page_number = url.split("page_size=")[1].split("&")[0]
+                page_number = url.split("page=")[1].split("&")[0]
 
             else:
                 page_number = 1
