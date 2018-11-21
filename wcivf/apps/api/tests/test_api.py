@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 import vcr
@@ -34,6 +35,8 @@ class TestAPIBasics(APITestCase):
 class TestAPISearchViews(APITestCase):
 
     def setUp(self):
+        cache.clear()
+
         self.election = ElectionFactory(
             name="2017 General Election",
             election_date="2017-06-08",
