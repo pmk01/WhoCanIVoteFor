@@ -13,7 +13,11 @@ router.register(
     views.CandidatesAndElectionsForPostcodeViewSet,
     base_name='candidates-for-postcode'
 )
-
+router.register(
+    r'candidates_for_ballots',
+    views.CandidatesAndElectionsForBallots,
+    base_name='candidates-for-ballots'
+)
 
 
 urlpatterns = [
