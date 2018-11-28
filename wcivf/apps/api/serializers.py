@@ -4,10 +4,20 @@ from people.models import Person, PersonPost
 from parties.models import Party
 
 
-class PersonSerializer(serializers.HyperlinkedModelSerializer):
+class PersonSerializer(serializers.ModelSerializer):
+    absolute_url = serializers.SerializerMethodField()
+
+    def get_absolute_url(self, obj):
+        if 'request' in self.context:
+            return self.context['request'].build_absolute_uri(
+                obj.get_absolute_url()
+            )
+        return obj.get_absolute_url()
+
     class Meta:
         model = Person
-        fields = ('ynr_id', 'name')
+        fields = ('ynr_id', 'name', 'absolute_url')
+
 
 
 class PartySerializer(serializers.HyperlinkedModelSerializer):
