@@ -32,11 +32,7 @@ def log_postcode(log_dict, blocking=False):
     log_dict['created'] = now().timestamp()
 
     value = json.dumps(log_dict)
-    red.zadd(
-        key,
-        value,
-        log_dict['created']
-    )
+    red.zadd(key, {value: log_dict['created']})
 
 
 def write_logged_postcodes():
