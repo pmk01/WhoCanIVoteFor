@@ -1,5 +1,5 @@
 # Use normal pipeline on travis as it doesn't work with fingerprinting
-STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+STATICFILES_STORAGE = "pipeline.storage.PipelineStorage"
 
 # CACHES = {
 #     "default": {
@@ -8,13 +8,13 @@ STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wcivf',
-        'USER': 'wcivf',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "wcivf",
+        "USER": "wcivf",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
     }
 }
 

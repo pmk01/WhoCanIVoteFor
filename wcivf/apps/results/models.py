@@ -10,6 +10,7 @@ class ResultEvent(models.Model):
     expected_declaration_time = models.DateTimeField(blank=True, null=True)
     declaration_time = models.DateTimeField(blank=True, null=True)
 
+
 class PersonPostResult(models.Model):
-    person_post = models.OneToOneField('people.PersonPost', related_name='results')
+    person_post = models.OneToOneField("people.PersonPost", related_name="results")
     votes_cast = models.IntegerField()

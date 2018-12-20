@@ -8,29 +8,39 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0013_auto_20170515_2047'),
-    ]
+    dependencies = [("people", "0013_auto_20170515_2047")]
 
     operations = [
         migrations.AlterField(
-            model_name='personpost',
-            name='election',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='elections.Election'),
+            model_name="personpost",
+            name="election",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to="elections.Election",
+            ),
         ),
         migrations.AlterField(
-            model_name='personpost',
-            name='party',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='parties.Party'),
+            model_name="personpost",
+            name="party",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to="parties.Party",
+            ),
         ),
         migrations.AlterField(
-            model_name='personpost',
-            name='person',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='people.Person'),
+            model_name="personpost",
+            name="person",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.DO_NOTHING, to="people.Person"
+            ),
         ),
         migrations.AlterField(
-            model_name='personpost',
-            name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='elections.Post'),
+            model_name="personpost",
+            name="post",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.DO_NOTHING, to="elections.Post"
+            ),
         ),
     ]

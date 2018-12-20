@@ -7,18 +7,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0006_votingsystem_uses_lists'),
-    ]
+    dependencies = [("elections", "0006_votingsystem_uses_lists")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='votingsystem',
-            name='uses_lists',
-        ),
+        migrations.RemoveField(model_name="votingsystem", name="uses_lists"),
         migrations.AddField(
-            model_name='election',
-            name='uses_lists',
+            model_name="election",
+            name="uses_lists",
             field=models.BooleanField(default=False),
         ),
     ]

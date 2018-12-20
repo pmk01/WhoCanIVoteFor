@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0015_auto_20170304_1354'),
-    ]
+    dependencies = [("elections", "0015_auto_20170304_1354")]
 
     operations = [
         migrations.AddField(
-            model_name='postelection',
-            name='contested',
+            model_name="postelection",
+            name="contested",
             field=models.BooleanField(default=True),
-        ),
+        )
     ]

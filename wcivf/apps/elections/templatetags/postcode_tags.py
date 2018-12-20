@@ -4,8 +4,9 @@ import re
 
 register = template.Library()
 
-@register.filter(name='ni_postcode')
+
+@register.filter(name="ni_postcode")
 @stringfilter
 def ni_postcode(postcode):
-    if re.match('^BT.*', postcode):
+    if re.match("^BT.*", postcode):
         return True

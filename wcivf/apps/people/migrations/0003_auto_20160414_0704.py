@@ -7,39 +7,37 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0002_auto_20160412_1739'),
-    ]
+    dependencies = [("people", "0002_auto_20160412_1739")]
 
     operations = [
         migrations.AddField(
-            model_name='person',
-            name='facebook_page_url',
+            model_name="person",
+            name="facebook_page_url",
             field=models.CharField(blank=True, max_length=800),
         ),
         migrations.AddField(
-            model_name='person',
-            name='facebook_personal_url',
+            model_name="person",
+            name="facebook_personal_url",
             field=models.CharField(blank=True, max_length=800),
         ),
         migrations.AddField(
-            model_name='person',
-            name='homepage_url',
+            model_name="person",
+            name="homepage_url",
             field=models.CharField(blank=True, max_length=800),
         ),
         migrations.AddField(
-            model_name='person',
-            name='linkedin_url',
+            model_name="person",
+            name="linkedin_url",
             field=models.CharField(blank=True, max_length=800),
         ),
         migrations.AddField(
-            model_name='person',
-            name='twitter_username',
+            model_name="person",
+            name="twitter_username",
             field=models.CharField(blank=True, max_length=100),
         ),
         migrations.AddField(
-            model_name='person',
-            name='wikipedia_url',
+            model_name="person",
+            name="wikipedia_url",
             field=models.CharField(blank=True, max_length=800),
         ),
     ]

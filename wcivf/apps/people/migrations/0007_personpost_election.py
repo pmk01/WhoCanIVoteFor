@@ -9,14 +9,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('elections', '0009_election_for_post_role'),
-        ('people', '0006_personpost_party'),
+        ("elections", "0009_election_for_post_role"),
+        ("people", "0006_personpost_party"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='personpost',
-            name='election',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='elections.Election'),
-        ),
+            model_name="personpost",
+            name="election",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="elections.Election",
+            ),
+        )
     ]

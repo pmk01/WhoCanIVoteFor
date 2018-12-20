@@ -8,38 +8,33 @@ from django.core.management import call_command
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
-            '--full',
-            action='store_true',
-            dest='full',
+            "--full",
+            action="store_true",
+            dest="full",
             default=False,
-            help='Import all data, not just people',
+            help="Import all data, not just people",
         )
 
     def handle(self, **options):
 
-        if options['full']:
+        if options["full"]:
             commands = [
-                ('import_elections', ),
-                ('import_posts', ),
-                ('import_parties', ),
-                ('import_people', ),
-                ('import_cvs', ),
+                ("import_elections",),
+                ("import_posts",),
+                ("import_parties",),
+                ("import_people",),
+                ("import_cvs",),
             ]
         else:
-            commands = [
-                ('import_people', "--recent"),
-            ]
-
-
+            commands = [("import_people", "--recent")]
 
         for command in commands:
             print(" ".join(command))
             call_command(*command)
 
         # Unset dirty file if it exists
-        if getattr(settings, 'CHECK_HOST_DIRTY', False):
-            dirty_file_path = os.path.expanduser(
-                getattr(settings, 'DIRTY_FILE_PATH'))
+        if getattr(settings, "CHECK_HOST_DIRTY", False):
+            dirty_file_path = os.path.expanduser(getattr(settings, "DIRTY_FILE_PATH"))
 
             if os.path.exists(dirty_file_path):
                 os.remove(dirty_file_path)

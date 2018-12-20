@@ -108,8 +108,7 @@ class Command(BaseCommand):
 
         else:
             next_page = (
-                settings.YNR_BASE
-                + "/media/cached-api/latest/persons-000001.json"
+                settings.YNR_BASE + "/media/cached-api/latest/persons-000001.json"
             )
 
         while next_page:
@@ -123,7 +122,7 @@ class Command(BaseCommand):
 
     def add_people(self, results, update_info_only=False):
         for person in results["results"]:
-            with show_data_on_error("Person {}".format(person['id']), person):
+            with show_data_on_error("Person {}".format(person["id"]), person):
                 person_obj = Person.objects.update_or_create_from_ynr(
                     person,
                     all_elections=self.all_elections,

@@ -9,19 +9,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('elections', '0020_postelection_ballot_paper_id'),
-        ('parties', '0006_auto_20180417_1711'),
+        ("elections", "0020_postelection_ballot_paper_id"),
+        ("parties", "0006_auto_20180417_1711"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='localparty',
-            name='ballot_papers',
-        ),
+        migrations.RemoveField(model_name="localparty", name="ballot_papers"),
         migrations.AddField(
-            model_name='localparty',
-            name='post_election',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='elections.PostElection'),
+            model_name="localparty",
+            name="post_election",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="elections.PostElection",
+            ),
             preserve_default=False,
         ),
     ]

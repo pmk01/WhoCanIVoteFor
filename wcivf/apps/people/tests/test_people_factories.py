@@ -4,6 +4,7 @@ from people.tests.factories import PersonFactory
 
 from people.models import Person
 
+
 class TestFactories(TestCase):
     """
     Meta tests to ensure that the factories are working
@@ -16,6 +17,5 @@ class TestFactories(TestCase):
         return created_model
 
     def test_person_factory(self):
-        model = self._test_save(Person, PersonFactory, {'name': "Jane Smith"})
+        model = self._test_save(Person, PersonFactory, {"name": "Jane Smith"})
         self.assertEqual(model.name, "Jane Smith")
-

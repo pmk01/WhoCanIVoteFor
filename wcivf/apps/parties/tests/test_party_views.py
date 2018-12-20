@@ -7,8 +7,9 @@ from parties.models import Party
 
 
 @override_settings(
-    STATICFILES_STORAGE='pipeline.storage.NonPackagingPipelineStorage',
-    PIPELINE_ENABLED=False)
+    STATICFILES_STORAGE="pipeline.storage.NonPackagingPipelineStorage",
+    PIPELINE_ENABLED=False,
+)
 class PartyViewTests(TestCase):
     def setUp(self):
         self.party = PartyFactory()
@@ -27,29 +28,25 @@ class PartyViewTests(TestCase):
         # TODO Use reverse here
         response = self.client.get("/parties/", follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'parties/party_list.html')
+        self.assertTemplateUsed(response, "parties/party_list.html")
         self.assertContains(response, self.party.party_name)
 
     def test_party_detail_view(self):
         # TODO Use reverse here
         response = self.client.get(
-            "/parties/{}/london".format(self.party.party_id),
-            follow=True)
+            "/parties/{}/london".format(self.party.party_id), follow=True
+        )
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'parties/party_detail.html')
+        self.assertTemplateUsed(response, "parties/party_detail.html")
         self.assertContains(response, self.party.party_name)
 
     def test_party_detail_candidate_count_view(self):
         # Make a 2nd candidate
         pe = PostElectionFactory(
-            election=ElectionFactory(slug="2010", name="2010 GE"),
-            post=self.post
+            election=ElectionFactory(slug="2010", name="2010 GE"), post=self.post
         )
         PersonPostFactory(
-            post_election=pe,
-            party=self.party,
-            election=pe.election,
-            post=self.post,
+            post_election=pe, party=self.party, election=pe.election, post=self.post
         )
         p2 = PersonFactory(name="Test 3")
         PersonPostFactory(
@@ -62,9 +59,9 @@ class PartyViewTests(TestCase):
 
         # TODO Use reverse here
         response = self.client.get(
-            "/parties/{}/london".format(self.party.party_id),
-            follow=True)
+            "/parties/{}/london".format(self.party.party_id), follow=True
+        )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "3 candidates")
-        x = response.context_data['object']
+        x = response.context_data["object"]
         assert len(x.personpost_set.all().counts_by_post()) == 2

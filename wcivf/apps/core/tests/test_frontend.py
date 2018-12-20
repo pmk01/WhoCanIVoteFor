@@ -14,16 +14,16 @@ import vcr
 
 
 @override_settings(
-    STATICFILES_STORAGE='pipeline.storage.NonPackagingPipelineStorage',
-    PIPELINE_ENABLED=False)
+    STATICFILES_STORAGE="pipeline.storage.NonPackagingPipelineStorage",
+    PIPELINE_ENABLED=False,
+)
 class TestMetaTags(TestCase):
     important_urls = {
-        'homepage': reverse('home_view'),
-        'postcode': reverse('postcode_view', kwargs={'postcode' : 'EC1A 4EU'}),
+        "homepage": reverse("home_view"),
+        "postcode": reverse("postcode_view", kwargs={"postcode": "EC1A 4EU"}),
     }
 
-    @vcr.use_cassette(
-        'fixtures/vcr_cassettes/test_postcode_view.yaml')
+    @vcr.use_cassette("fixtures/vcr_cassettes/test_postcode_view.yaml")
     def test_200_on_important_urls(self):
         for name, url in self.important_urls.items():
             req = self.client.get(url)

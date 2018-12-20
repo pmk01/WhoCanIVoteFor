@@ -22,7 +22,7 @@ class PostElectionSitemap(Sitemap):
     # of 50,000 URLs.
     def items(self):
         return PostElection.objects.filter(
-            Q(election__election_type='parl') |
-            Q(election__election_type='2010') |
-            Q(election__election_type='2015')
+            Q(election__election_type="parl")
+            | Q(election__election_type="2010")
+            | Q(election__election_type="2015")
         )

@@ -10,20 +10,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('people', '0019_associatedcompany'),
-    ]
+    dependencies = [("people", "0019_associatedcompany")]
 
     operations = [
         migrations.CreateModel(
-            name='Leaflet',
+            name="Leaflet",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('leaflet_id', models.IntegerField()),
-                ('thumb_url', models.URLField(blank=True, null=True)),
-                ('date_uploaded_to_electionleaflets', models.DateTimeField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('person', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='people.Person')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("leaflet_id", models.IntegerField()),
+                ("thumb_url", models.URLField(blank=True, null=True)),
+                (
+                    "date_uploaded_to_electionleaflets",
+                    models.DateTimeField(blank=True, null=True),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "person",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="people.Person"
+                    ),
+                ),
             ],
-        ),
+        )
     ]

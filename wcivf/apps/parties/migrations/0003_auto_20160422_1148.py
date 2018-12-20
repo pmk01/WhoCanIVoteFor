@@ -7,19 +7,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('parties', '0002_auto_20160412_1739'),
-    ]
+    dependencies = [("parties", "0002_auto_20160412_1739")]
 
     operations = [
         migrations.AddField(
-            model_name='party',
-            name='description',
-            field=models.TextField(blank=True),
+            model_name="party", name="description", field=models.TextField(blank=True)
         ),
         migrations.AddField(
-            model_name='party',
-            name='wikipedia_url',
-            field=models.URLField(blank=True),
+            model_name="party", name="wikipedia_url", field=models.URLField(blank=True)
         ),
     ]

@@ -6,13 +6,12 @@ from elections.models import Post, PostElection
 
 
 class Command(BaseCommand):
-
     def get_replacement_ballot(self, ballot_id):
         replacement_ballot = None
         ee = EEHelper()
         ee_data = ee.get_data(ballot_id)
         if ee_data:
-            replacement_ballot_id = ee_data['replaced_by']
+            replacement_ballot_id = ee_data["replaced_by"]
             if replacement_ballot_id:
                 replacement_ballot = PostElection.objects.get(
                     ballot_paper_id=replacement_ballot_id
@@ -23,7 +22,7 @@ class Command(BaseCommand):
         ee = EEHelper()
         ee_data = ee.get_data(ballot_id)
         if ee_data:
-            return ee_data['metadata']
+            return ee_data["metadata"]
         return None
 
     def get_paginator(self, page1):
@@ -31,18 +30,17 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         pages = self.get_paginator(
-            settings.YNR_BASE + '/media/cached-api/latest/posts-000001.json'
+            settings.YNR_BASE + "/media/cached-api/latest/posts-000001.json"
         )
         for page in pages:
             self.add_posts(page)
         self.attach_cancelled_ballot_info()
 
     def add_posts(self, results):
-        for post in results['results']:
-            post_obj, created = Post.objects.update_or_create_from_ynr(
-                post)
+        for post in results["results"]:
+            post_obj, created = Post.objects.update_or_create_from_ynr(post)
             if created:
-                self.stdout.write("Added new post: {0}".format(post['label']))
+                self.stdout.write("Added new post: {0}".format(post["label"]))
 
     def attach_cancelled_ballot_info(self):
         # we need to do this as a post-process instead of in the manager

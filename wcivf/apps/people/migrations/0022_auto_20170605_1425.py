@@ -7,64 +7,62 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0021_person_twfy_id'),
-    ]
+    dependencies = [("people", "0021_person_twfy_id")]
 
     operations = [
         migrations.AddField(
-            model_name='person',
-            name='degree_cat',
+            model_name="person",
+            name="degree_cat",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='field_postgrad',
+            model_name="person",
+            name="field_postgrad",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='field_undergrad',
+            model_name="person",
+            name="field_undergrad",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='last_or_current_job',
+            model_name="person",
+            name="last_or_current_job",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='place_of_birth',
+            model_name="person",
+            name="place_of_birth",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='previously_in_parliament',
+            model_name="person",
+            name="previously_in_parliament",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='secondary_school',
+            model_name="person",
+            name="secondary_school",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='stem_postgrad',
+            model_name="person",
+            name="stem_postgrad",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='stem_undergrad',
+            model_name="person",
+            name="stem_undergrad",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='university_postgrad',
+            model_name="person",
+            name="university_postgrad",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='university_undergrad',
+            model_name="person",
+            name="university_undergrad",
             field=models.CharField(blank=True, max_length=800, null=True),
         ),
     ]

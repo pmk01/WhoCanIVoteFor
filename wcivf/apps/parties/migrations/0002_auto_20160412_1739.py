@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('parties', '0001_initial'),
-    ]
+    dependencies = [("parties", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='party',
-            name='emblem',
-            field=models.ImageField(null=True, upload_to='parties/emblems'),
-        ),
+            model_name="party",
+            name="emblem",
+            field=models.ImageField(null=True, upload_to="parties/emblems"),
+        )
     ]

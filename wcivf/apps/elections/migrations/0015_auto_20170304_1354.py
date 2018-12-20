@@ -7,14 +7,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0014_remove_post_elections'),
-    ]
+    dependencies = [("elections", "0014_remove_post_elections")]
 
     operations = [
         migrations.RenameField(
-            model_name='post',
-            old_name='elections2',
-            new_name='elections',
-        ),
+            model_name="post", old_name="elections2", new_name="elections"
+        )
     ]

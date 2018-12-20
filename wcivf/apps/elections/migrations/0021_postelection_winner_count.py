@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0020_postelection_ballot_paper_id'),
-    ]
+    dependencies = [("elections", "0020_postelection_ballot_paper_id")]
 
     operations = [
         migrations.AddField(
-            model_name='postelection',
-            name='winner_count',
+            model_name="postelection",
+            name="winner_count",
             field=models.IntegerField(blank=True, null=True),
-        ),
+        )
     ]

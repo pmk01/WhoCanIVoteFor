@@ -10,17 +10,23 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('people', '0007_personpost_election'),
-    ]
+    dependencies = [("people", "0007_personpost_election")]
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('person_post', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='people.PersonPost')),
-                ('text', models.TextField(blank=True)),
-                ('url', models.CharField(blank=True, max_length=800)),
+                (
+                    "person_post",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to="people.PersonPost",
+                    ),
+                ),
+                ("text", models.TextField(blank=True)),
+                ("url", models.CharField(blank=True, max_length=800)),
             ],
-        ),
+        )
     ]

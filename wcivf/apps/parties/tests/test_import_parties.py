@@ -42,12 +42,13 @@ SINGLE_PARTY_JSON = """{
 
 
 class PartyImporterTests(TmpMediaRootMixin, TestCase):
-    @vcr.use_cassette(
-        'fixtures/vcr_cassettes/test_party_import.yaml')
+    @vcr.use_cassette("fixtures/vcr_cassettes/test_party_import.yaml")
     def test_manager_creates_party(self):
         self.assertEqual(Party.objects.count(), 0)
         Party.objects.update_or_create_from_ynr(json.loads(SINGLE_PARTY_JSON))
         self.assertEqual(Party.objects.count(), 1)
         party = Party.objects.first()
         self.assertEqual(party.party_name, "Wombles Alliance")
-        self.assertEqual(party.emblem.name, "parties/emblems/bf63d47b577cfe1c8cf69a469830a847.jpg")
+        self.assertEqual(
+            party.emblem.name, "parties/emblems/bf63d47b577cfe1c8cf69a469830a847.jpg"
+        )

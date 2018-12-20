@@ -6,16 +6,12 @@ from django.db import migrations
 
 
 def change_weight(apps, schema_editor):
-    Election = apps.get_model('elections', 'Election')
+    Election = apps.get_model("elections", "Election")
     Election.objects.filter(slug="parl.2017-06-08").update(election_weight=100)
 
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0016_postelection_contested'),
-    ]
+    dependencies = [("elections", "0016_postelection_contested")]
 
-    operations = [
-        migrations.RunPython(change_weight)
-    ]
+    operations = [migrations.RunPython(change_weight)]

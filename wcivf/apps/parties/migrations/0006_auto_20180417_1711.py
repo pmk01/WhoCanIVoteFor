@@ -9,27 +9,53 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('elections', '0020_postelection_ballot_paper_id'),
-        ('parties', '0005_auto_20170530_1736'),
+        ("elections", "0020_postelection_ballot_paper_id"),
+        ("parties", "0005_auto_20170530_1736"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='LocalParty',
+            name="LocalParty",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(blank=True, max_length=100)),
-                ('twitter', models.CharField(blank=True, max_length=100)),
-                ('facebook_page', models.URLField(blank=True, max_length=800)),
-                ('homepage', models.URLField(blank=True, max_length=800)),
-                ('email', models.EmailField(blank=True, max_length=254)),
-                ('ballot_papers', models.ManyToManyField(to='elections.PostElection')),
-                ('parent', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='local_parties', to='parties.Party')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=100)),
+                ("twitter", models.CharField(blank=True, max_length=100)),
+                ("facebook_page", models.URLField(blank=True, max_length=800)),
+                ("homepage", models.URLField(blank=True, max_length=800)),
+                ("email", models.EmailField(blank=True, max_length=254)),
+                ("ballot_papers", models.ManyToManyField(to="elections.PostElection")),
+                (
+                    "parent",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="local_parties",
+                        to="parties.Party",
+                    ),
+                ),
             ],
         ),
         migrations.AlterField(
-            model_name='manifesto',
-            name='country',
-            field=models.CharField(choices=[('UK', 'UK'), ('England', 'England'), ('Scotland', 'Scotland'), ('Wales', 'Wales'), ('Northern Ireland', 'Northern Ireland'), ('Local', 'Local')], default='UK', max_length=200),
+            model_name="manifesto",
+            name="country",
+            field=models.CharField(
+                choices=[
+                    ("UK", "UK"),
+                    ("England", "England"),
+                    ("Scotland", "Scotland"),
+                    ("Wales", "Wales"),
+                    ("Northern Ireland", "Northern Ireland"),
+                    ("Local", "Local"),
+                ],
+                default="UK",
+                max_length=200,
+            ),
         ),
     ]

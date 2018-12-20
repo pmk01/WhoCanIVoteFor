@@ -7,13 +7,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0008_remove_person_party'),
-    ]
+    dependencies = [("people", "0008_remove_person_party")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='personpost',
-            options={'ordering': ('-election__election_date',)},
-        ),
+            name="personpost", options={"ordering": ("-election__election_date",)}
+        )
     ]
