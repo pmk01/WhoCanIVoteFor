@@ -11,12 +11,12 @@ router.register(r"people", views.PersonViewSet)
 router.register(
     r"candidates_for_postcode",
     views.CandidatesAndElectionsForPostcodeViewSet,
-    base_name="candidates-for-postcode",
+    basename="candidates-for-postcode",
 )
 router.register(
     r"candidates_for_ballots",
     views.CandidatesAndElectionsForBallots,
-    base_name="candidates-for-ballots",
+    basename="candidates-for-ballots",
 )
 
 
