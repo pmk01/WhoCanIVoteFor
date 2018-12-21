@@ -6,6 +6,13 @@ from .helpers import GoCardlessHelper, PAYMENT_UNITS
 
 
 class DonationFormMiddleware(object):
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.process_request(request) or self.get_response(request)
+        return response
+
     def get_initial(self, request):
         form_initial = {"payment_type": "subscription"}
         default_donation = 3
