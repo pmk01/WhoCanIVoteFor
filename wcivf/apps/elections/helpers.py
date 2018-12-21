@@ -41,4 +41,4 @@ class JsonPaginator:
 
             yield data
 
-        raise StopIteration()
+        return
