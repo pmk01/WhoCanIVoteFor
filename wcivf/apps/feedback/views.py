@@ -13,9 +13,8 @@ class FeedbackFormView(UpdateView):
     template_name = "feedback/feedback_form_view.html"
     donate_form_prefix = "donation_form"
 
-
     def get_object(self, queryset=None):
-        token = self.request.POST.get('token')
+        token = self.request.POST.get("token")
         try:
             return Feedback.objects.get(token=token)
         except Feedback.DoesNotExist:
@@ -26,11 +25,11 @@ class FeedbackFormView(UpdateView):
         messages.success(
             self.request,
             render_to_string(
-                'feedback/feedback_thanks.html',
+                "feedback/feedback_thanks.html",
                 request=self.request,
-                context={'object': self.object}
+                context={"object": self.object},
             ),
-            extra_tags='template',
+            extra_tags="template",
         )
 
         if is_safe_url(self.object.source_url):
@@ -41,15 +40,11 @@ class FeedbackFormView(UpdateView):
 
 class RecordJsonFeedback(View):
     def post(self, request):
-        found_useful = request.POST.get('found_useful')
-        source_url = request.POST.get('source_url')
-        token = request.POST.get('token')
+        found_useful = request.POST.get("found_useful")
+        source_url = request.POST.get("source_url")
+        token = request.POST.get("token")
         Feedback.objects.update_or_create(
             token=token,
-            defaults={
-                'found_useful': found_useful,
-                'source_url': source_url,
-            }
+            defaults={"found_useful": found_useful, "source_url": source_url},
         )
         return HttpResponse()
-

@@ -21,9 +21,9 @@ def dt_from_string(dt):
     """
     date = None
     try:
-        date = datetime.datetime.strptime(dt, '%Y-%b-%d')
+        date = datetime.datetime.strptime(dt, "%Y-%b-%d")
     except ValueError:
-        date = datetime.datetime.strptime(dt, '%Y-%B-%d')
+        date = datetime.datetime.strptime(dt, "%Y-%B-%d")
     if date:
         return timezone.make_aware(date, timezone.get_current_timezone())
 
@@ -33,7 +33,7 @@ def stringy_time_to_inty_time(stringy_time):
     Given a string in the form HH:MM return integer values for hour
     and minute.
     """
-    hour, minute = stringy_time.split(':')
+    hour, minute = stringy_time.split(":")
     return int(hour), int(minute)
 
 
@@ -50,16 +50,13 @@ def set_time_string_on_datetime(dt, time_string):
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
+        parser.add_argument("filename", help="Path to the file with the hustings in it")
         parser.add_argument(
-            'filename',
-            help='Path to the file with the hustings in it'
-        )
-        parser.add_argument(
-            '--quiet',
-            action='store_true',
-            dest='quiet',
+            "--quiet",
+            action="store_true",
+            dest="quiet",
             default=False,
-            help='Only output errors',
+            help="Only output errors",
         )
 
     def delete_all_hustings(self):
@@ -72,33 +69,30 @@ class Command(BaseCommand):
         """
         Create an individual husting
         """
-        starts = dt_from_string(row['Date (YYYY-Month-DD)'])
+        starts = dt_from_string(row["Date (YYYY-Month-DD)"])
         ends = None
-        if row['Start time (00:00)']:
-            starts = set_time_string_on_datetime(
-                starts, row['Start time (00:00)']
-            )
-        if row['End time (if known)']:
-            ends = set_time_string_on_datetime(
-                starts, row['End time (if known)']
-            )
+        if row["Start time (00:00)"]:
+            starts = set_time_string_on_datetime(starts, row["Start time (00:00)"])
+        if row["End time (if known)"]:
+            ends = set_time_string_on_datetime(starts, row["End time (if known)"])
 
         # Get the post_election
-        pes = PostElection.objects.filter(ballot_paper_id=row['Election ID'])
+        pes = PostElection.objects.filter(ballot_paper_id=row["Election ID"])
         if not pes.exists():
             # This might be a parent election ID
-            pes = PostElection.objects.filter(
-                election__slug=row['Election ID'])
+            pes = PostElection.objects.filter(election__slug=row["Election ID"])
         for pe in pes:
             husting = Husting(
                 post_election=pe,
                 title=row["Title of event"],
-                url=row['Link to event information'],
+                url=row["Link to event information"],
                 starts=starts,
                 ends=ends,
-                location=row['Name of event location (e.g. Church hall)'],
-                postcode=row['Postcode of event location'],
-                postevent_url=row['Link to post-event information (e.g. blog post, video)']
+                location=row["Name of event location (e.g. Church hall)"],
+                postcode=row["Postcode of event location"],
+                postevent_url=row[
+                    "Link to post-event information (e.g. blog post, video)"
+                ],
             )
             husting.save()
 
@@ -107,18 +101,18 @@ class Command(BaseCommand):
         """
         Entrypoint for our command.
         """
-        if options['quiet']:
+        if options["quiet"]:
             self.stdout = open(os.devnull, "w")
 
         self.delete_all_hustings()
         hustings_counter = 0
         self.not_a_constituency_friend = []
-        with open(options['filename'], 'r') as fh:
+        with open(options["filename"], "r") as fh:
             reader = csv.DictReader(fh)
             for row in reader:
                 husting = self.create_husting(row)
                 if husting:
                     hustings_counter += 1
-                    self.stdout.write('Created husting {0} <{1}>'.format(
-                        hustings_counter, husting)
+                    self.stdout.write(
+                        "Created husting {0} <{1}>".format(hustings_counter, husting)
                     )

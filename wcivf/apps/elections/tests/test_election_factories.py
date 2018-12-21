@@ -1,9 +1,14 @@
 from django.test import TestCase
 
 from elections.tests.factories import (
-    ElectionFactory, PostFactory, VotingSystemFactory, PostElectionFactory)
+    ElectionFactory,
+    PostFactory,
+    VotingSystemFactory,
+    PostElectionFactory,
+)
 
 from elections.models import Election, Post, VotingSystem, PostElection
+
 
 class TestFactories(TestCase):
     """
@@ -30,7 +35,6 @@ class TestFactories(TestCase):
         self._test_save(PostElection, PostElectionFactory)
         self.assertEqual(Election.objects.all().count(), 1)
         self.assertEqual(Post.objects.all().count(), 1)
-
 
     def test_voting_system_factory(self):
         model = self._test_save(VotingSystem, VotingSystemFactory)

@@ -1,5 +1,6 @@
 -r base.txt
 
+black
 tox
 pytest
 pytest-django

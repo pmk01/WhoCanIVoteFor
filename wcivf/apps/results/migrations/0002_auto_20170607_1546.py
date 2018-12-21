@@ -8,24 +8,24 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('results', '0001_initial'),
-    ]
+    dependencies = [("results", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='resultevent',
-            name='declaration_time',
+            model_name="resultevent",
+            name="declaration_time",
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='resultevent',
-            name='expected_declaration_time',
+            model_name="resultevent",
+            name="expected_declaration_time",
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='resultevent',
-            name='post_election',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='elections.PostElection'),
+            model_name="resultevent",
+            name="post_election",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="elections.PostElection"
+            ),
         ),
     ]

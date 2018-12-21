@@ -9,7 +9,7 @@ class PersonFactory(factory.django.DjangoModelFactory):
         model = Person
 
     ynr_id = factory.Sequence(lambda n: n)
-    name = factory.Sequence(lambda n: 'Candidate %d' % n)
+    name = factory.Sequence(lambda n: "Candidate %d" % n)
     elections = factory.RelatedFactory(ElectionFactory)
     posts = factory.RelatedFactory(PostFactory)
 

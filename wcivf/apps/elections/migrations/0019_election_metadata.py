@@ -8,14 +8,12 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0018_postelection_locked'),
-    ]
+    dependencies = [("elections", "0018_postelection_locked")]
 
     operations = [
         migrations.AddField(
-            model_name='election',
-            name='metadata',
+            model_name="election",
+            name="metadata",
             field=django.contrib.postgres.fields.jsonb.JSONField(null=True),
-        ),
+        )
     ]

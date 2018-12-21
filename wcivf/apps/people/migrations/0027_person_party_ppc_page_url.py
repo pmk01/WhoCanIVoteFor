@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0026_auto_20180417_1944'),
-    ]
+    dependencies = [("people", "0026_auto_20180417_1944")]
 
     operations = [
         migrations.AddField(
-            model_name='person',
-            name='party_ppc_page_url',
+            model_name="person",
+            name="party_ppc_page_url",
             field=models.CharField(blank=True, max_length=800, null=True),
-        ),
+        )
     ]

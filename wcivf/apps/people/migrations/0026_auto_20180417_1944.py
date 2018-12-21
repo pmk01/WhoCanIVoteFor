@@ -8,14 +8,14 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0025_personpost_post_election'),
-    ]
+    dependencies = [("people", "0025_personpost_post_election")]
 
     operations = [
         migrations.AlterField(
-            model_name='personpost',
-            name='post_election',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='elections.PostElection'),
-        ),
+            model_name="personpost",
+            name="post_election",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="elections.PostElection"
+            ),
+        )
     ]

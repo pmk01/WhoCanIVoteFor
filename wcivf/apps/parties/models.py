@@ -14,20 +14,17 @@ from elections.models import Election
 
 class PartyManager(models.Manager):
     def update_or_create_from_ynr(self, party):
-        defaults = {
-            'party_name': party['name']
-        }
+        defaults = {"party_name": party["name"]}
 
         party_obj, _ = self.update_or_create(
-            party_id=party['legacy_slug'],
-            defaults=defaults
+            party_id=party["legacy_slug"], defaults=defaults
         )
-        if party['emblems']:
+        if party["emblems"]:
             same_photo = False
 
-            selected_image = party['default_emblem']
-            url = selected_image['image']
-            photo_filename = url.split('/')[-1]
+            selected_image = party["default_emblem"]
+            url = selected_image["image"]
+            photo_filename = url.split("/")[-1]
 
             try:
                 file_path = party_obj.emblem.file.name
@@ -54,6 +51,7 @@ class Party(models.Model):
     """
     Represents a UK political party.
     """
+
     party_id = models.CharField(blank=True, max_length=100, primary_key=True)
     party_name = models.CharField(max_length=765)
     emblem = models.ImageField(upload_to="parties/emblems", null=True)
@@ -61,8 +59,8 @@ class Party(models.Model):
     description = models.TextField(blank=True)
 
     class Meta:
-        verbose_name_plural = 'Parties'
-        ordering = ('party_name', )
+        verbose_name_plural = "Parties"
+        ordering = ("party_name",)
 
     objects = PartyManager()
 
@@ -70,22 +68,18 @@ class Party(models.Model):
         return "%s (%s)" % (self.party_name, self.pk)
 
     def get_absolute_url(self):
-        return reverse('party_view', args=[
-            str(self.pk),
-            slugify(self.party_name)
-        ])
+        return reverse("party_view", args=[str(self.pk), slugify(self.party_name)])
 
     @property
     def ynr_emblem_url(self):
         return "{}/media/images/images/{}".format(
-            settings.YNR_BASE,
-            self.emblem.path.split('/')[-1]
-            )
+            settings.YNR_BASE, self.emblem.path.split("/")[-1]
+        )
 
 
 class LocalParty(models.Model):
     parent = models.ForeignKey(Party, related_name="local_parties")
-    post_election = models.ForeignKey('elections.PostElection')
+    post_election = models.ForeignKey("elections.PostElection")
     name = models.CharField(blank=True, max_length=100)
     twitter = models.CharField(blank=True, max_length=100)
     facebook_page = models.URLField(blank=True, max_length=800)
@@ -95,28 +89,19 @@ class LocalParty(models.Model):
 
 class Manifesto(models.Model):
     COUNTRY_CHOICES = (
-        ('UK', 'UK'),
-        ('England', 'England'),
-        ('Scotland', 'Scotland'),
-        ('Wales', 'Wales'),
-        ('Northern Ireland', 'Northern Ireland'),
-        ('Local', 'Local'),
+        ("UK", "UK"),
+        ("England", "England"),
+        ("Scotland", "Scotland"),
+        ("Wales", "Wales"),
+        ("Northern Ireland", "Northern Ireland"),
+        ("Local", "Local"),
     )
-    LANGUAGE_CHOICES = (
-        ('English', 'English'),
-        ('Welsh', 'Welsh')
-    )
+    LANGUAGE_CHOICES = (("English", "English"), ("Welsh", "Welsh"))
     party = models.ForeignKey(Party)
     election = models.ForeignKey(Election)
-    country = models.CharField(
-        max_length=200,
-        choices=COUNTRY_CHOICES,
-        default='UK'
-    )
+    country = models.CharField(max_length=200, choices=COUNTRY_CHOICES, default="UK")
     language = models.CharField(
-        max_length=200,
-        choices=LANGUAGE_CHOICES,
-        default='English'
+        max_length=200, choices=LANGUAGE_CHOICES, default="English"
     )
     pdf_url = models.URLField(blank=True, max_length=800)
     web_url = models.URLField(blank=True, max_length=800)
@@ -125,11 +110,11 @@ class Manifesto(models.Model):
         canonical_url = self.canonical_url()
         str = "<a href='%s'>" % canonical_url
         str += "%s manifesto" % (self.country)
-        if self.language != 'English':
-            str += ' in %s' % self.language
+        if self.language != "English":
+            str += " in %s" % self.language
         str += "</a>"
         if canonical_url == self.pdf_url:
-            str += ' (PDF)'
+            str += " (PDF)"
         return str
 
     def canonical_url(self):
@@ -142,8 +127,8 @@ class Manifesto(models.Model):
         if self.pdf_url or self.web_url:
             super(Manifesto, self).save(*args, **kwargs)
         else:
-            print('Manifesto must have either a web or PDF URL')
+            print("Manifesto must have either a web or PDF URL")
 
     class Meta:
-        ordering = ['-country', 'language']
-        unique_together = ('party', 'election', 'country', 'language')
+        ordering = ["-country", "language"]
+        unique_together = ("party", "election", "country", "language")

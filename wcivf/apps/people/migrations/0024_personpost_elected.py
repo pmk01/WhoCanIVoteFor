@@ -7,14 +7,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0023_auto_20170605_1559'),
-    ]
+    dependencies = [("people", "0023_auto_20170605_1559")]
 
     operations = [
         migrations.AddField(
-            model_name='personpost',
-            name='elected',
-            field=models.NullBooleanField(),
-        ),
+            model_name="personpost", name="elected", field=models.NullBooleanField()
+        )
     ]

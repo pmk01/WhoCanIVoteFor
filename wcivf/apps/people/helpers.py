@@ -11,15 +11,15 @@ def get_wikipedia_extract(person):
     https://github.com/DemocracyClub/YourNextMP-Read/blob/master/_scripts/get_wikipedia_extracts.py
     """
     base_url = "http://en.wikipedia.org/w/api.php"
-    wiki_title = person.wikipedia_url.strip('/').split('/')[-1]
+    wiki_title = person.wikipedia_url.strip("/").split("/")[-1]
     params = {
-        'titles': wiki_title,
-        'format': 'json',
-        'action': 'query',
-        'prop': 'extracts',
-        'exintro': '',
-        'explaintext': '',
-        'redirects': '',
+        "titles": wiki_title,
+        "format": "json",
+        "action": "query",
+        "prop": "extracts",
+        "exintro": "",
+        "explaintext": "",
+        "redirects": "",
     }
     url = "{}?{}".format(base_url, urlencode(params))
     print(url)
@@ -33,11 +33,11 @@ def get_wikipedia_extract(person):
         resp = resp.json()
     except:
         return None
-    page_id = list(resp['query']['pages'].keys())[0]
-    full = resp['query']['pages'][page_id]
+    page_id = list(resp["query"]["pages"].keys())[0]
+    full = resp["query"]["pages"][page_id]
 
-    if 'extract' in full:
-        first_para = full['extract'].split('\n')[0]
+    if "extract" in full:
+        first_para = full["extract"].split("\n")[0]
     else:
         first_para = None
 

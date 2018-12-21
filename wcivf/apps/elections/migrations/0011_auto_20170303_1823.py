@@ -7,18 +7,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0010_auto_20160502_1542'),
-    ]
+    dependencies = [("elections", "0010_auto_20160502_1542")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='post',
-            name='election',
-        ),
+        migrations.RemoveField(model_name="post", name="election"),
         migrations.AddField(
-            model_name='post',
-            name='elections',
-            field=models.ManyToManyField(to='elections.Election'),
+            model_name="post",
+            name="elections",
+            field=models.ManyToManyField(to="elections.Election"),
         ),
     ]

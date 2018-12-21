@@ -11,19 +11,33 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('elections', '0016_postelection_contested'),
-        ('people', '0024_personpost_elected'),
+        ("elections", "0016_postelection_contested"),
+        ("people", "0024_personpost_elected"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ResultEvent',
+            name="ResultEvent",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('expected_declaration_time', models.DateTimeField(blank=True)),
-                ('declaration_time', models.DateTimeField(blank=True)),
-                ('person_posts', models.ManyToManyField(to='people.PersonPost')),
-                ('post_election', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='elections.PostElection')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("expected_declaration_time", models.DateTimeField(blank=True)),
+                ("declaration_time", models.DateTimeField(blank=True)),
+                ("person_posts", models.ManyToManyField(to="people.PersonPost")),
+                (
+                    "post_election",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="elections.PostElection",
+                    ),
+                ),
             ],
-        ),
+        )
     ]

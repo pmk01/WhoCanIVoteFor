@@ -17,44 +17,35 @@ def drop_varchar_pattern_ops_index(apps, schemaEditor):
     for model in models:
         index_names = schemaEditor._constraint_names(model)
         for index_name in index_names:
-            if index_name.endswith('_like'):
+            if index_name.endswith("_like"):
                 # Django makes 'like' indexed by default, remove these because
                 # they break on integer fields
-                indexes_to_delete.append((
-                    model,
-                    index_name,
-                    schemaEditor.sql_delete_index
-                ))
+                indexes_to_delete.append(
+                    (model, index_name, schemaEditor.sql_delete_index)
+                )
 
     for model, index_name, op in indexes_to_delete:
-        schemaEditor.execute(
-            schemaEditor._delete_constraint_sql(
-                op,
-                model,
-                index_name
-            )
-        )
+        schemaEditor.execute(schemaEditor._delete_constraint_sql(op, model, index_name))
+
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('people', '0027_person_party_ppc_page_url'),
-        ('peoplecvs', '0002_auto_20170522_1324'),
-        ('pledges', '0002_auto_20180502_0946'),
+        ("people", "0027_person_party_ppc_page_url"),
+        ("peoplecvs", "0002_auto_20170522_1324"),
+        ("pledges", "0002_auto_20180502_0946"),
     ]
 
     operations = [
-        migrations.RunPython(
-            drop_varchar_pattern_ops_index, migrations.RunPython.noop
-        ),
+        migrations.RunPython(drop_varchar_pattern_ops_index, migrations.RunPython.noop),
         migrations.AlterField(
-            model_name='person',
-            name='ynr_id',
+            model_name="person",
+            name="ynr_id",
             field=models.IntegerField(primary_key=True, serialize=False),
         ),
         migrations.AlterField(
-            model_name='personpost',
-            name='person_id',
+            model_name="personpost",
+            name="person_id",
             field=models.IntegerField(serialize=False),
         ),
     ]

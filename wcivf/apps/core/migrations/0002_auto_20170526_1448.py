@@ -6,23 +6,14 @@ from django.db import migrations
 
 
 def add_site(apps, schema_editor):
-    Site = apps.get_model('sites', 'Site')
+    Site = apps.get_model("sites", "Site")
 
-    site = Site(
-        pk=1,
-        name='whocanivotefor.co.uk',
-        domain='whocanivotefor.co.uk',
-        )
+    site = Site(pk=1, name="whocanivotefor.co.uk", domain="whocanivotefor.co.uk")
     site.save()
 
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('core', '0001_initial'),
-        ('sites', '0001_initial'),
-    ]
+    dependencies = [("core", "0001_initial"), ("sites", "0001_initial")]
 
-    operations = [
-        migrations.RunPython(add_site)
-    ]
+    operations = [migrations.RunPython(add_site)]

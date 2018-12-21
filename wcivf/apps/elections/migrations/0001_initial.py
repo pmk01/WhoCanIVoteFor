@@ -9,19 +9,26 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Election',
+            name="Election",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('slug', models.CharField(max_length=128, unique=True)),
-                ('election_date', models.DateField()),
-                ('name', models.CharField(max_length=128)),
-                ('current', models.BooleanField()),
-                ('description', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("slug", models.CharField(max_length=128, unique=True)),
+                ("election_date", models.DateField()),
+                ("name", models.CharField(max_length=128)),
+                ("current", models.BooleanField()),
+                ("description", models.TextField()),
             ],
-        ),
+        )
     ]

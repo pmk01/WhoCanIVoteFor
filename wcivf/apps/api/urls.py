@@ -6,20 +6,18 @@ from api import views
 
 router = routers.DefaultRouter()
 
-router.register(r'people', views.PersonViewSet)
+router.register(r"people", views.PersonViewSet)
 
 router.register(
-    r'candidates_for_postcode',
+    r"candidates_for_postcode",
     views.CandidatesAndElectionsForPostcodeViewSet,
-    base_name='candidates-for-postcode'
+    base_name="candidates-for-postcode",
 )
 router.register(
-    r'candidates_for_ballots',
+    r"candidates_for_ballots",
     views.CandidatesAndElectionsForBallots,
-    base_name='candidates-for-ballots'
+    base_name="candidates-for-ballots",
 )
 
 
-urlpatterns = [
-    url(r'^', include(router.urls)),
-]
+urlpatterns = [url(r"^", include(router.urls))]

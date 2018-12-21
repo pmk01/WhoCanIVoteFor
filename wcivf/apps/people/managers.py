@@ -11,22 +11,22 @@ from parties.models import Party
 
 class PersonPostQuerySet(models.QuerySet):
     def by_party(self):
-        return self.order_by('party__party_name', 'list_position')
+        return self.order_by("party__party_name", "list_position")
 
     def elected(self):
         return self.filter(elected=True)
 
     def counts_by_post(self):
-        return self.values(
-            'post__label',
-            'post_id',
-            'election__slug',
-            'election__name',
-            'post_election__cancelled',
-        ).annotate(
-            num_candidates=Count('person')
-        ).order_by(
-            '-election__election_date', 'post__label'
+        return (
+            self.values(
+                "post__label",
+                "post_id",
+                "election__slug",
+                "election__name",
+                "post_election__cancelled",
+            )
+            .annotate(num_candidates=Count("person"))
+            .order_by("-election__election_date", "post__label")
         )
 
 
@@ -45,74 +45,75 @@ class PersonPostManager(models.Manager):
 
 
 class PersonManager(models.Manager):
-
-    def update_or_create_from_ynr(self, person,
-                                  all_elections=None,
-                                  all_posts=None,
-                                  all_parties=None,
-                                  update_info_only=False):
+    def update_or_create_from_ynr(
+        self,
+        person,
+        all_elections=None,
+        all_posts=None,
+        all_parties=None,
+        update_info_only=False,
+    ):
         posts = []
         elections = []
 
-        last_updated = make_aware(
-            parse_datetime(
-                person['versions'][0]['timestamp']
-            )
-        )
+        last_updated = make_aware(parse_datetime(person["versions"][0]["timestamp"]))
 
         defaults = {
-            'name': person['name'],
-            'email': person['email'] or None,
-            'gender': person['gender'] or None,
-            'birth_date': person['birth_date'] or None,
-            'last_updated': last_updated,
+            "name": person["name"],
+            "email": person["email"] or None,
+            "gender": person["gender"] or None,
+            "birth_date": person["birth_date"] or None,
+            "last_updated": last_updated,
         }
 
-        version_data = person['versions'][0]['data']
-        if 'twitter_username' in version_data:
-            defaults['twitter_username'] = version_data['twitter_username']
-        if 'facebook_page_url' in version_data:
-            defaults['facebook_page_url'] = version_data['facebook_page_url']
-        if 'facebook_personal_url' in version_data:
-            defaults['facebook_personal_url'] = \
-                version_data['facebook_personal_url']
-        if 'linkedin_url' in version_data:
-            defaults['linkedin_url'] = version_data['linkedin_url']
-        if 'homepage_url' in version_data:
-            defaults['homepage_url'] = version_data['homepage_url']
-        if 'party_ppc_page_url' in version_data:
-            defaults['party_ppc_page_url'] = version_data['party_ppc_page_url']
-        if 'wikipedia_url' in version_data:
-            defaults['wikipedia_url'] = version_data['wikipedia_url']
-        if 'biography' in version_data:
-            defaults['statement_to_voters'] = version_data['biography']
-        if 'thumbnail' in person:
-            defaults['photo_url'] = person['thumbnail']
-        if 'extra_fields' in version_data \
-                and 'favourite_biscuits' in version_data['extra_fields']:
-            defaults['favourite_biscuit'] = \
-                version_data['extra_fields']['favourite_biscuits']
-        if 'identifiers' in version_data:
-            for i in version_data['identifiers']:
-                if i['scheme'] == 'uk.org.publicwhip':
-                    defaults['twfy_id'] = i['identifier'].replace(
-                        "uk.org.publicwhip/person/", "")
+        version_data = person["versions"][0]["data"]
+        if "twitter_username" in version_data:
+            defaults["twitter_username"] = version_data["twitter_username"]
+        if "facebook_page_url" in version_data:
+            defaults["facebook_page_url"] = version_data["facebook_page_url"]
+        if "facebook_personal_url" in version_data:
+            defaults["facebook_personal_url"] = version_data["facebook_personal_url"]
+        if "linkedin_url" in version_data:
+            defaults["linkedin_url"] = version_data["linkedin_url"]
+        if "homepage_url" in version_data:
+            defaults["homepage_url"] = version_data["homepage_url"]
+        if "party_ppc_page_url" in version_data:
+            defaults["party_ppc_page_url"] = version_data["party_ppc_page_url"]
+        if "wikipedia_url" in version_data:
+            defaults["wikipedia_url"] = version_data["wikipedia_url"]
+        if "biography" in version_data:
+            defaults["statement_to_voters"] = version_data["biography"]
+        if "thumbnail" in person:
+            defaults["photo_url"] = person["thumbnail"]
+        if (
+            "extra_fields" in version_data
+            and "favourite_biscuits" in version_data["extra_fields"]
+        ):
+            defaults["favourite_biscuit"] = version_data["extra_fields"][
+                "favourite_biscuits"
+            ]
+        if "identifiers" in version_data:
+            for i in version_data["identifiers"]:
+                if i["scheme"] == "uk.org.publicwhip":
+                    defaults["twfy_id"] = i["identifier"].replace(
+                        "uk.org.publicwhip/person/", ""
+                    )
 
-        if person['memberships'] and not update_info_only:
-            for membership in person['memberships']:
+        if person["memberships"] and not update_info_only:
+            for membership in person["memberships"]:
                 election = None
                 post = None
 
-                if membership['election']:
-                    election_slug = membership['election']['id']
+                if membership["election"]:
+                    election_slug = membership["election"]["id"]
                     try:
                         election = all_elections[election_slug]
                     except KeyError:
                         election = Election.objects.get(slug=election_slug)
                     elections.append(election)
 
-                if membership['post']:
-                    post_id = membership['post']['id']
+                if membership["post"]:
+                    post_id = membership["post"]["id"]
                     try:
                         post = all_posts[post_id]
                     except KeyError:
@@ -122,10 +123,10 @@ class PersonManager(models.Manager):
                     if not election:
                         continue
 
-                post.party_list_position = membership['party_list_position']
+                post.party_list_position = membership["party_list_position"]
 
-                if membership['party']:
-                    post.party_id = membership['party']['legacy_slug']
+                if membership["party"]:
+                    post.party_id = membership["party"]["legacy_slug"]
                 else:
                     post.party_id = None
                 # If the same post occurs twice (e.g. if the candidate has
@@ -135,26 +136,21 @@ class PersonManager(models.Manager):
                 post_copy = deepcopy(post)
                 posts.append(post_copy)
 
-        person_id = person['id']
-        person_obj, _ = self.update_or_create(
-            ynr_id=person['id'],
-            defaults=defaults
-        )
+        person_id = person["id"]
+        person_obj, _ = self.update_or_create(ynr_id=person["id"], defaults=defaults)
 
         if posts and not update_info_only:
             from .models import PersonPost
+
             # Delete old posts for this person
             PersonPost.objects.filter(person_id=person_id).delete()
             for post in posts:
-                defaults = {
-                    'list_position': post.party_list_position
-                }
+                defaults = {"list_position": post.party_list_position}
                 if post.party_id:
                     try:
-                        defaults['party'] = all_parties[post.party_id]
+                        defaults["party"] = all_parties[post.party_id]
                     except KeyError:
-                        defaults['party'] = Party.objects.get(
-                            party_id=post.party_id)
+                        defaults["party"] = Party.objects.get(party_id=post.party_id)
 
                 post_election = PostElection.objects.get(
                     post=post, election=post.election
@@ -164,7 +160,7 @@ class PersonManager(models.Manager):
                     election=post.election,
                     person_id=person_id,
                     post_election=post_election,
-                    defaults=defaults
+                    defaults=defaults,
                 )
 
         return person_obj

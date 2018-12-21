@@ -8,21 +8,35 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0011_auto_20170303_1823'),
-    ]
+    dependencies = [("elections", "0011_auto_20170303_1823")]
 
     operations = [
         migrations.CreateModel(
-            name='PostElection',
+            name="PostElection",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('election', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='elections.Election')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "election",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="elections.Election",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='postelection',
-            name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='elections.Post'),
+            model_name="postelection",
+            name="post",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="elections.Post"
+            ),
         ),
     ]

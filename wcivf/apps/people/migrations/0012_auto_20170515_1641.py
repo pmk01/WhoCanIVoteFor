@@ -7,18 +7,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0011_person_statement_to_voters'),
-    ]
+    dependencies = [("people", "0011_person_statement_to_voters")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='person',
-            name='photo',
-        ),
+        migrations.RemoveField(model_name="person", name="photo"),
         migrations.AddField(
-            model_name='person',
-            name='photo_url',
+            model_name="person",
+            name="photo_url",
             field=models.URLField(blank=True, null=True),
         ),
     ]

@@ -7,19 +7,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0007_auto_20160405_0857'),
-    ]
+    dependencies = [("elections", "0007_auto_20160405_0857")]
 
     operations = [
         migrations.AddField(
-            model_name='election',
-            name='voter_age',
+            model_name="election",
+            name="voter_age",
             field=models.CharField(blank=True, max_length=100),
         ),
         migrations.AddField(
-            model_name='election',
-            name='voter_citizenship',
+            model_name="election",
+            name="voter_citizenship",
             field=models.TextField(blank=True),
         ),
     ]

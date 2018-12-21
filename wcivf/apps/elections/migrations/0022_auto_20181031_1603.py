@@ -9,24 +9,28 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('elections', '0021_postelection_winner_count'),
-    ]
+    dependencies = [("elections", "0021_postelection_winner_count")]
 
     operations = [
         migrations.AddField(
-            model_name='postelection',
-            name='cancelled',
+            model_name="postelection",
+            name="cancelled",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='postelection',
-            name='metadata',
+            model_name="postelection",
+            name="metadata",
             field=django.contrib.postgres.fields.jsonb.JSONField(null=True),
         ),
         migrations.AddField(
-            model_name='postelection',
-            name='replaced_by',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='replaces', to='elections.PostElection'),
+            model_name="postelection",
+            name="replaced_by",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="replaces",
+                to="elections.PostElection",
+            ),
         ),
     ]

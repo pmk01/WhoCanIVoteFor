@@ -8,18 +8,15 @@ import django.utils.timezone
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('people', '0028_person_pk_to_int'),
-    ]
+    dependencies = [("people", "0028_person_pk_to_int")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='person',
-            options={'get_latest_by': 'last_updated'},
+            name="person", options={"get_latest_by": "last_updated"}
         ),
         migrations.AddField(
-            model_name='person',
-            name='last_updated',
+            model_name="person",
+            name="last_updated",
             field=models.DateTimeField(default=django.utils.timezone.now),
         ),
     ]

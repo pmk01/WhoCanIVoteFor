@@ -9,20 +9,21 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Party',
+            name="Party",
             fields=[
-                ('party_id', models.CharField(blank=True, max_length=100, primary_key=True, serialize=False)),
-                ('party_name', models.CharField(max_length=765)),
-                ('emblem', models.ImageField(null=True, upload_to='people/photos')),
+                (
+                    "party_id",
+                    models.CharField(
+                        blank=True, max_length=100, primary_key=True, serialize=False
+                    ),
+                ),
+                ("party_name", models.CharField(max_length=765)),
+                ("emblem", models.ImageField(null=True, upload_to="people/photos")),
             ],
-            options={
-                'verbose_name_plural': 'Parties',
-                'ordering': ('party_name',),
-            },
-        ),
+            options={"verbose_name_plural": "Parties", "ordering": ("party_name",)},
+        )
     ]

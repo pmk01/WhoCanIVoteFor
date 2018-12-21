@@ -2,13 +2,13 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from people.tests.factories import PersonFactory, PersonPostFactory
 from parties.tests.factories import PartyFactory
-from elections.tests.factories import (
-    ElectionFactory, PostFactory, PostElectionFactory)
+from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
 
 
 @override_settings(
-    STATICFILES_STORAGE='pipeline.storage.NonPackagingPipelineStorage',
-    PIPELINE_ENABLED=False)
+    STATICFILES_STORAGE="pipeline.storage.NonPackagingPipelineStorage",
+    PIPELINE_ENABLED=False,
+)
 class PersonViewTests(TestCase):
     def setUp(self):
         self.party = PartyFactory()
@@ -18,8 +18,7 @@ class PersonViewTests(TestCase):
     def test_person_view(self):
         response = self.client.get(self.person_url, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'people/person_detail.html')
-
+        self.assertTemplateUsed(response, "people/person_detail.html")
 
     def test_correct_elections_listed(self):
         response = self.client.get(self.person_url, follow=True)
@@ -28,17 +27,12 @@ class PersonViewTests(TestCase):
 
         self.assertNotContains(response, election_name)
         election = ElectionFactory(
-            name=election_name,
-            current=True,
-            election_date="2040-01-01",
-            slug="foobar")
+            name=election_name, current=True, election_date="2040-01-01", slug="foobar"
+        )
         post = PostFactory()
         pe = PostElectionFactory(election=election, post=post)
         PersonPostFactory(
-            post_election=pe,
-            election=election,
-            person=self.person,
-            party=self.party,
+            post_election=pe, election=election, person=self.person, party=self.party
         )
 
         response = self.client.get(self.person_url, follow=True)
@@ -52,17 +46,12 @@ class PersonViewTests(TestCase):
 
         self.assertNotContains(response, election_name)
         election = ElectionFactory(
-            name=election_name,
-            current=True,
-            election_date="2017-01-01",
-            slug="foobar")
+            name=election_name, current=True, election_date="2017-01-01", slug="foobar"
+        )
         post = PostFactory()
         pe = PostElectionFactory(election=election, post=post)
         PersonPostFactory(
-            post_election=pe,
-            election=election,
-            person=self.person,
-            party=self.party,
+            post_election=pe, election=election, person=self.person, party=self.party
         )
 
         response = self.client.get(self.person_url, follow=True)

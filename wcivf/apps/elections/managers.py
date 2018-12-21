@@ -3,81 +3,76 @@ from .helpers import EEHelper
 
 
 class ElectionManager(models.Manager):
-
     def get_explainer(self, election):
         ee = EEHelper()
-        ee_data = ee.get_data(election['id'])
+        ee_data = ee.get_data(election["id"])
         if ee_data:
-            description = ee_data['explanation']
+            description = ee_data["explanation"]
             if description:
                 return description
-        return election['description']
-
+        return election["description"]
 
     def update_or_create_from_ynr(self, election):
-        election_type = self.election_id_to_type(election['id'])
+        election_type = self.election_id_to_type(election["id"])
 
         election_weight = 10
-        if election['party_lists_in_use']:
+        if election["party_lists_in_use"]:
             election_weight = 20
-        if election_type == 'mayor':
+        if election_type == "mayor":
             election_weight = 5
 
         description = self.get_explainer(election)
 
         return self.update_or_create(
-            slug=election['id'],
+            slug=election["id"],
             defaults={
-                'election_date': election['election_date'],
-                'name': election['name'].replace('2016', '').strip(),
-                'current': election['current'],
-                'description': description,
-                'election_type': election_type,
-                'uses_lists': election['party_lists_in_use'],
-                'for_post_role': election['for_post_role'],
-                'election_weight': election_weight,
-            }
+                "election_date": election["election_date"],
+                "name": election["name"].replace("2016", "").strip(),
+                "current": election["current"],
+                "description": description,
+                "election_type": election_type,
+                "uses_lists": election["party_lists_in_use"],
+                "for_post_role": election["for_post_role"],
+                "election_weight": election_weight,
+            },
         )
 
     def election_id_to_type(self, election_id):
-        parts = election_id.split('.')
+        parts = election_id.split(".")
         return parts[0]
 
 
 class PostManager(models.Manager):
-
     def update_or_create_from_ynr(self, post_dict):
         from .models import Election, PostElection
+
         post, created = self.update_or_create(
-            ynr_id=post_dict['id'],
+            ynr_id=post_dict["id"],
             defaults={
-                'label': post_dict['label'],
-                'role': post_dict['role'],
-                'group': post_dict['group'],
-                'organization': post_dict['organization']['name'],
-                'area_name': post_dict['label'],
-                'area_id': post_dict['id'],
-            }
+                "label": post_dict["label"],
+                "role": post_dict["role"],
+                "group": post_dict["group"],
+                "organization": post_dict["organization"]["name"],
+                "area_name": post_dict["label"],
+                "area_id": post_dict["id"],
+            },
         )
 
-        for election_dict in post_dict['elections']:
-            election = Election.objects.get(slug=election_dict['id'])
+        for election_dict in post_dict["elections"]:
+            election = Election.objects.get(slug=election_dict["id"])
             kwargs = {}
-            kwargs['ballot_paper_id'] = election_dict['ballot_paper_id']
+            kwargs["ballot_paper_id"] = election_dict["ballot_paper_id"]
 
-            kwargs['locked'] = election_dict.get('candidates_locked', False)
-            if kwargs['locked']:
-                if election_dict['winner_count'] == \
-                        len(post_dict['memberships']):
-                    kwargs['contested'] = False
-                kwargs['winner_count'] = election_dict['winner_count']
+            kwargs["locked"] = election_dict.get("candidates_locked", False)
+            if kwargs["locked"]:
+                if election_dict["winner_count"] == len(post_dict["memberships"]):
+                    kwargs["contested"] = False
+                kwargs["winner_count"] = election_dict["winner_count"]
 
-            kwargs['cancelled'] = election_dict['cancelled']
+            kwargs["cancelled"] = election_dict["cancelled"]
 
             PostElection.objects.update_or_create(
-                election=election,
-                post=post,
-                defaults=kwargs
+                election=election, post=post, defaults=kwargs
             )
 
         return (post, created)

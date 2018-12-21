@@ -14,9 +14,9 @@ class LoggedPostcode(TimeStampedModel):
     utm_medium = models.CharField(blank=True, max_length=100, db_index=True)
     utm_campaign = models.CharField(blank=True, max_length=100, db_index=True)
 
-
     def __str__(self):
         return "{0}".format(self.postcode)
+
 
 def log_postcode(log_dict, blocking=False):
     """
@@ -29,10 +29,10 @@ def log_postcode(log_dict, blocking=False):
     red = redis.Redis(connection_pool=settings.REDIS_POOL)
     key = "{}:log_postcode_queue".format(settings.REDIS_KEY_PREFIX)
 
-    log_dict['created'] = now().timestamp()
+    log_dict["created"] = now().timestamp()
 
     value = json.dumps(log_dict)
-    red.zadd(key, {value: log_dict['created']})
+    red.zadd(key, {value: log_dict["created"]})
 
 
 def write_logged_postcodes():
@@ -43,14 +43,12 @@ def write_logged_postcodes():
     # Get all the items from Redis
     logged_items = red.zrangebyscore(key, 0, score_max, withscores=True)
 
-    #Remove all the items we've seen from Redis
+    # Remove all the items we've seen from Redis
     red.zremrangebyscore(key, 0, score_max)
 
     postcodes_to_save = []
     for item in logged_items:
-        lp = LoggedPostcode(
-                **json.loads(item[0].decode())
-            )
+        lp = LoggedPostcode(**json.loads(item[0].decode()))
 
         postcodes_to_save.append(lp)
     LoggedPostcode.objects.bulk_create(postcodes_to_save)

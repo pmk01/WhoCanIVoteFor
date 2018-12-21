@@ -8,14 +8,14 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('peoplecvs', '0001_initial'),
-    ]
+    dependencies = [("peoplecvs", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='cv',
-            name='person',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='people.Person'),
-        ),
+            model_name="cv",
+            name="person",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to="people.Person"
+            ),
+        )
     ]

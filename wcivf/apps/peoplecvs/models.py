@@ -7,6 +7,7 @@ class CV(models.Model):
     """
     A candidate's CV.
     """
+
     person = models.OneToOneField(Person)
     url = models.URLField(blank=True, null=True)
     thumb_url = models.URLField(blank=True, null=True)

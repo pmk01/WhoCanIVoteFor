@@ -17,26 +17,23 @@ class Command(BaseCommand):
         feed_url = "{}/results/all.atom".format(settings.YNR_BASE)
         req = requests.get(feed_url)
         feed = feedparser.parse(req.text)
-        for entry in feed['entries']:
+        for entry in feed["entries"]:
             with show_data_on_error("Result", entry):
                 person_post = PersonPost.objects.get(
-                    person_id=entry['winner_person_id'],
-                    election__slug=entry['election_slug'],
-                    post__ynr_id=entry['post_id'],
-                    )
+                    person_id=entry["winner_person_id"],
+                    election__slug=entry["election_slug"],
+                    post__ynr_id=entry["post_id"],
+                )
                 post_election = PostElection.objects.get(
-                    election__slug=entry['election_slug'],
-                    post__ynr_id=entry['post_id'],
+                    election__slug=entry["election_slug"], post__ynr_id=entry["post_id"]
                 )
 
                 result_event, _ = ResultEvent.objects.update_or_create(
                     post_election=post_election,
-                    defaults={
-                        'declaration_time': entry['published'],
-                    }
+                    defaults={"declaration_time": entry["published"]},
                 )
 
-                if int(entry['retraction']) == 1:
+                if int(entry["retraction"]) == 1:
                     # The result has been retracted due to an error
                     # Unset the elected flag
                     person_post.elected = None

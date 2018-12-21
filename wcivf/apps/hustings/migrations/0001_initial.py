@@ -10,22 +10,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('elections', '0016_postelection_contested'),
-    ]
+    dependencies = [("elections", "0016_postelection_contested")]
 
     operations = [
         migrations.CreateModel(
-            name='Husting',
+            name="Husting",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250)),
-                ('url', models.URLField()),
-                ('starts', models.DateTimeField()),
-                ('ends', models.DateTimeField(blank=True, null=True)),
-                ('location', models.CharField(blank=True, max_length=250, null=True)),
-                ('postcode', models.CharField(blank=True, max_length=10, null=True)),
-                ('post_election', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='elections.PostElection')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=250)),
+                ("url", models.URLField()),
+                ("starts", models.DateTimeField()),
+                ("ends", models.DateTimeField(blank=True, null=True)),
+                ("location", models.CharField(blank=True, max_length=250, null=True)),
+                ("postcode", models.CharField(blank=True, max_length=10, null=True)),
+                (
+                    "post_election",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="elections.PostElection",
+                    ),
+                ),
             ],
-        ),
+        )
     ]

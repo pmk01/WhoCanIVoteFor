@@ -6,10 +6,9 @@ from elections.models import Election, Post, VotingSystem, PostElection
 class ElectionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Election
-        django_get_or_create = ('slug',)
+        django_get_or_create = ("slug",)
 
-
-    slug = 'parl.2015'
+    slug = "parl.2015"
     election_date = "2015-05-07"
     current = True
     name = "UK General Election 2015"
@@ -18,7 +17,7 @@ class ElectionFactory(factory.django.DjangoModelFactory):
 class PostFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Post
-        django_get_or_create = ('ynr_id',)
+        django_get_or_create = ("ynr_id",)
 
     ynr_id = "WMC:E14000647"
     label = "copeland"
@@ -28,7 +27,7 @@ class PostFactory(factory.django.DjangoModelFactory):
 class PostElectionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = PostElection
-        django_get_or_create = ('post', 'election')
+        django_get_or_create = ("post", "election")
 
     post = factory.SubFactory(PostFactory)
     election = factory.SubFactory(ElectionFactory)

@@ -1,8 +1,7 @@
 from django.test import TestCase
 
 from people.tests.factories import PersonFactory, PersonPostFactory
-from elections.tests.factories import (
-    ElectionFactory, PostFactory, PostElectionFactory)
+from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
 
 
 class TestPersonInMultipleElections(TestCase):
@@ -12,26 +11,18 @@ class TestPersonInMultipleElections(TestCase):
         election2 = ElectionFactory(slug="parl.2010")
         post1 = PostFactory(elections=election2)
         post2 = PostFactory(
-            ynr_id="WMC:E14000645",
-            label="Southwark",
-            elections=election2)
+            ynr_id="WMC:E14000645", label="Southwark", elections=election2
+        )
 
         pe1 = PostElectionFactory(election=election1, post=post1)
         pe2 = PostElectionFactory(election=election2, post=post2)
 
         PersonPostFactory(
-            person=person,
-            post_election=pe1,
-            post=post1,
-            election=election1,
+            person=person, post_election=pe1, post=post1, election=election1
         )
 
-
         PersonPostFactory(
-            post_election=pe2,
-            person=person,
-            election=election2,
-            post=post2,
+            post_election=pe2, person=person, election=election2, post=post2
         )
 
         assert person.personpost_set.all().count() == 2
