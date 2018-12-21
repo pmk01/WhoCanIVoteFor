@@ -18,14 +18,14 @@ sitemaps = {
 
 urlpatterns = (
     [
-        url(r"^admin/", include(admin.site.urls)),
+        url(r"^admin/", admin.site.urls),
         url(r"^", include("core.urls")),
         url(r"^elections/", include("elections.urls")),
         url(r"^results/", include("results.urls")),
         url(r"^parties/", include("parties.urls")),
         url(r"^person/", include("people.urls")),
         url(r"^feedback/", include("feedback.urls")),
-        url(r"^api/", include("api.urls", namespace="api")),
+        url(r"^api/", include(("api.urls", "api"), namespace="api")),
         url(
             r"^sitemap\.xml$",
             cache_page(86400)(sitemap),
@@ -34,7 +34,9 @@ urlpatterns = (
         ),
         url(r"^robots\.txt", include("robots.urls")),
         url(r"^email/", include("dc_signup_form.urls")),
-        url(r"^donate/", include("donations.urls", namespace="donations")),
+        url(
+            r"^donate/", include(("donations.urls", "donations"), namespace="donations")
+        ),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
