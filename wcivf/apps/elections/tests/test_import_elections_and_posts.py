@@ -91,7 +91,7 @@ fake_cancelled_election_data = {
 class FakeCancelledPager(JsonPaginator):
     def __iter__(self):
         yield fake_cancelled_election_data
-        raise StopIteration()
+        return
 
 
 class CancelledBallotPostImporter(TestCase):
