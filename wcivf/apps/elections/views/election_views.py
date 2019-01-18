@@ -1,5 +1,7 @@
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, RedirectView
 from django.http import Http404
+from django.shortcuts import get_object_or_404
+
 
 from django.db.models import Prefetch
 from django.apps import apps
@@ -54,6 +56,23 @@ class ElectionView(NewSlugsRedirectMixin, DetailView):
                 % {"verbose_name": queryset.model._meta.verbose_name}
             )
         return obj
+
+
+class RedirectPostView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        PostElection = apps.get_model("elections.PostElection")
+        post_id = self.kwargs.get("post_id")
+        election_id = self.kwargs.get("election_id")
+        model = get_object_or_404(
+            PostElection,
+            post__ynr_id=post_id,
+            election__slug=election_id
+        )
+        url = model.get_absolute_url()
+        args = self.request.META.get("QUERY_STRING", "")
+        if args and self.query_string:
+            url = "%s?%s" % (url, args)
+        return url
 
 
 class PostView(NewSlugsRedirectMixin, DetailView):
