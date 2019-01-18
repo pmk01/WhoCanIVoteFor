@@ -69,8 +69,7 @@
   {% url 'elections_view' as elections %}
   {% breadcrumb_item elections 'Elections' 2 %}
 
-  {% url 'election_view' object.election.slug object.election.name|slugify as election %}
-  {% breadcrumb_item election object.election.name 3 %}
+  {% breadcrumb_item object.election.get_absolute_url object.election.name 3 %}
 
   <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.post.label }}</li>
 </ol>

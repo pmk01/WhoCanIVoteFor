@@ -38,7 +38,7 @@
   {% for post in election.list %}
     <dl>
       <dt>
-        <a href="{% url 'post_view' post.election__slug post.post_id post.post__label|slugify %}">
+        <a href="{{ post.get_absolute_url }}">
           {{ post.post__label }}
         </a>
         {% if post.post_election__cancelled %}

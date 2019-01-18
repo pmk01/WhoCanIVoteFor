@@ -180,21 +180,16 @@ class PostElection(models.Model):
         return name
 
     def get_absolute_url(self):
-        return reverse(
-            "post_view",
-            args=[
-                str(self.election.slug),
-                str(self.post.ynr_id),
-                slugify(self.post.label),
-            ],
-        )
+        return reverse('election_view', args=[
+                str(self.ballot_paper_id),
+                slugify(self.post.label)
+            ])
 
     @property
     def ynr_link(self):
-        return "{}/election/{}/post/{}?{}".format(
+        return "{}/elections/{}?{}".format(
             settings.YNR_BASE,
-            self.election.slug,
-            self.post.ynr_id,
+            self.ballot_paper_id,
             settings.YNR_UTM_QUERY_STRING,
         )
 
