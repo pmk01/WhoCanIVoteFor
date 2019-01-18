@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from datetime import datetime, timedelta
 import json
 
 
@@ -26,3 +27,14 @@ def show_data_on_error(variable_name, data):
         print(message.format(variable_name))
         print(json.dumps(data, indent=4, sort_keys=True))
         raise
+
+
+def first_thursday_in_may_for_year(year):
+    d = datetime.strptime("{}-05-01".format(year), "%Y-%m-%d")
+    while d.weekday() != 3:
+        d = d + timedelta(days=1)
+    return d
+
+
+def may_election_day_this_year():
+    return first_thursday_in_may_for_year(datetime.now().year)
