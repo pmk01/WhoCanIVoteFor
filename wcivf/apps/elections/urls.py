@@ -18,6 +18,11 @@ urlpatterns = [
         name="redirect_post_view",
     ),
     url(
+        r"^(?P<election>[201[05]+)/(?P<ignored_slug>[^/]+)/$",
+        ElectionView.as_view(),
+        name="redirect_election_view",
+    ),
+    url(
         "^(?P<election>[a-z\-]+\.[^/]+)(?:/(?P<ignored_slug>[^/]+))?/$",
         ElectionIDSwitcher(election_view=ElectionView, ballot_view=PostView),
         name="election_view",
