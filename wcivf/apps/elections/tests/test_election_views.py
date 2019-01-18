@@ -18,7 +18,11 @@ class ElectionViewTests(TestCase):
         self.post = PostFactory(
             ynr_id="LBW:E05009288", label="Aldersgate", elections=self.election
         )
-        PostElection.objects.get_or_create(election=self.election, post=self.post)
+        PostElection.objects.get_or_create(
+            election=self.election,
+            post=self.post,
+            ballot_paper_id="local.city-of-london.aldersgate.2017-03-23",
+        )
 
     def test_election_list_view(self):
         # TODO Use reverse here
@@ -29,10 +33,7 @@ class ElectionViewTests(TestCase):
             self.assertContains(response, self.election.name)
 
     def test_election_detail_view(self):
-        # TODO Use reverse here
-        response = self.client.get(
-            "/elections/{}/london".format(self.election.slug), follow=True
-        )
+        response = self.client.get(self.election.get_absolute_url(), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "elections/election_view.html")
         self.assertContains(response, self.election.name)

@@ -1,10 +1,14 @@
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, RedirectView
 from django.http import Http404
+from django.shortcuts import get_object_or_404
+
+
 from django.db.models import Prefetch
 from django.apps import apps
 
 
 from people.helpers import peopleposts_for_election_post
+from elections.views.mixins import NewSlugsRedirectMixin
 
 
 class ElectionsView(TemplateView):
@@ -24,9 +28,10 @@ class ElectionsView(TemplateView):
         return context
 
 
-class ElectionView(DetailView):
+class ElectionView(NewSlugsRedirectMixin, DetailView):
     template_name = "elections/election_view.html"
     model = apps.get_model("elections.Election")
+    pk_url_kwarg = "election"
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -52,17 +57,31 @@ class ElectionView(DetailView):
         return obj
 
 
-class PostView(DetailView):
+class RedirectPostView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        PostElection = apps.get_model("elections.PostElection")
+        post_id = self.kwargs.get("post_id")
+        election_id = self.kwargs.get("election_id")
+        model = get_object_or_404(
+            PostElection, post__ynr_id=post_id, election__slug=election_id
+        )
+        url = model.get_absolute_url()
+        args = self.request.META.get("QUERY_STRING", "")
+        if args and self.query_string:
+            url = "%s?%s" % (url, args)
+        return url
+
+
+class PostView(NewSlugsRedirectMixin, DetailView):
     template_name = "elections/post_view.html"
     model = apps.get_model("elections.PostElection")
 
     def get_object(self, queryset=None):
         if queryset is None:
             queryset = self.get_queryset()
-        post_id = self.kwargs.get("post_id")
-        election_id = self.kwargs.get("election_id")
+
         queryset = queryset.filter(
-            post__ynr_id=post_id, election__slug=election_id
+            ballot_paper_id=self.kwargs["election"]
         ).select_related("post", "election")
 
         try:
@@ -77,8 +96,7 @@ class PostView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        Election = apps.get_model("elections.Election")
-        context["election"] = Election.objects.get(slug=self.kwargs["election_id"])
+        context["election"] = self.object.election
         context["person_posts"] = (
             peopleposts_for_election_post(
                 election=context["election"], post=self.object.post

@@ -9,10 +9,12 @@ from .mixins import (
     PostcodeToPostsMixin,
     PollingStationInfoMixin,
     PostelectionsToPeopleMixin,
+    NewSlugsRedirectMixin,
 )
 
 
 class PostcodeView(
+    NewSlugsRedirectMixin,
     PostcodeToPostsMixin,
     PollingStationInfoMixin,
     LogLookUpMixin,
@@ -29,6 +31,7 @@ class PostcodeView(
     """
 
     template_name = "elections/postcode_view.html"
+    pk_url_kwarg = "postcode"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,7 +54,12 @@ class PostcodeView(
         return context
 
 
-class PostcodeiCalView(PostcodeToPostsMixin, View, PollingStationInfoMixin):
+class PostcodeiCalView(
+    NewSlugsRedirectMixin, PostcodeToPostsMixin, View, PollingStationInfoMixin
+):
+
+    pk_url_kwarg = "postcode"
+
     def get(self, request, *args, **kwargs):
         postcode = kwargs["postcode"]
         polling_station = self.get_polling_station_info(postcode)

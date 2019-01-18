@@ -60,7 +60,7 @@ class TestAPISearchViews(APITestCase):
         self.expected_response = [
             {
                 "ballot_paper_id": "parl.cities-of-london-and-westminster.2017-06-08",
-                "absolute_url": "http://testserver/elections/parl.2017-06-08/post-WMC:E14000639/cities-of-london-and-westminster",
+                "absolute_url": "http://testserver/elections/parl.cities-of-london-and-westminster.2017-06-08/cities-of-london-and-westminster/",
                 "election_date": "2017-06-08",
                 "election_id": "parl.2017-06-08",
                 "election_name": "2017 General Election",

@@ -27,10 +27,15 @@ class PersonViewTests(TestCase):
 
         self.assertNotContains(response, election_name)
         election = ElectionFactory(
-            name=election_name, current=True, election_date="2040-01-01", slug="foobar"
+            name=election_name,
+            current=True,
+            election_date="2040-01-01",
+            slug="local.foobar.2040-01-01",
         )
         post = PostFactory()
-        pe = PostElectionFactory(election=election, post=post)
+        pe = PostElectionFactory(
+            election=election, post=post, ballot_paper_id="local.foo.bar.2040-01-01"
+        )
         PersonPostFactory(
             post_election=pe, election=election, person=self.person, party=self.party
         )
@@ -46,10 +51,15 @@ class PersonViewTests(TestCase):
 
         self.assertNotContains(response, election_name)
         election = ElectionFactory(
-            name=election_name, current=True, election_date="2017-01-01", slug="foobar"
+            name=election_name,
+            current=True,
+            election_date="2017-01-01",
+            slug="local.foobar.2017-01-01",
         )
         post = PostFactory()
-        pe = PostElectionFactory(election=election, post=post)
+        pe = PostElectionFactory(
+            election=election, post=post, ballot_paper_id="local.foo.bar.2017-01-01"
+        )
         PersonPostFactory(
             post_election=pe, election=election, person=self.person, party=self.party
         )
