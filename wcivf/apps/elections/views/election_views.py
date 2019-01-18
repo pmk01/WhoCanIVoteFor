@@ -30,9 +30,8 @@ class ElectionsView(TemplateView):
 
 class ElectionView(NewSlugsRedirectMixin, DetailView):
     template_name = "elections/election_view.html"
-    model = apps.get_model('elections.Election')
+    model = apps.get_model("elections.Election")
     pk_url_kwarg = "election"
-
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -64,9 +63,7 @@ class RedirectPostView(RedirectView):
         post_id = self.kwargs.get("post_id")
         election_id = self.kwargs.get("election_id")
         model = get_object_or_404(
-            PostElection,
-            post__ynr_id=post_id,
-            election__slug=election_id
+            PostElection, post__ynr_id=post_id, election__slug=election_id
         )
         url = model.get_absolute_url()
         args = self.request.META.get("QUERY_STRING", "")
@@ -84,9 +81,8 @@ class PostView(NewSlugsRedirectMixin, DetailView):
             queryset = self.get_queryset()
 
         queryset = queryset.filter(
-            ballot_paper_id=self.kwargs["election"]).select_related(
-                'post', 'election'
-            )
+            ballot_paper_id=self.kwargs["election"]
+        ).select_related("post", "election")
 
         try:
             # Get the single item from the filtered queryset
@@ -100,19 +96,14 @@ class PostView(NewSlugsRedirectMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['election'] = self.object.election
-        context['person_posts'] = peopleposts_for_election_post(
-            election=context['election'],
-            post=self.object.post
-        ).select_related(
-            'post',
-            'person',
-            'person__cv',
-            'party',
-            'results',
-        ).prefetch_related(
-            'person__leaflet_set',
-            'person__pledges',
-        ).order_by('-elected')
+        context["election"] = self.object.election
+        context["person_posts"] = (
+            peopleposts_for_election_post(
+                election=context["election"], post=self.object.post
+            )
+            .select_related("post", "person", "person__cv", "party", "results")
+            .prefetch_related("person__leaflet_set", "person__pledges")
+            .order_by("-elected")
+        )
 
         return context

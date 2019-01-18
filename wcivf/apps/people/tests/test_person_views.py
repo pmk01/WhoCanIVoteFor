@@ -30,13 +30,11 @@ class PersonViewTests(TestCase):
             name=election_name,
             current=True,
             election_date="2040-01-01",
-            slug="local.foobar.2040-01-01"
+            slug="local.foobar.2040-01-01",
         )
         post = PostFactory()
         pe = PostElectionFactory(
-            election=election,
-            post=post,
-            ballot_paper_id="local.foo.bar.2040-01-01"
+            election=election, post=post, ballot_paper_id="local.foo.bar.2040-01-01"
         )
         PersonPostFactory(
             post_election=pe, election=election, person=self.person, party=self.party
@@ -56,13 +54,11 @@ class PersonViewTests(TestCase):
             name=election_name,
             current=True,
             election_date="2017-01-01",
-            slug="local.foobar.2017-01-01"
+            slug="local.foobar.2017-01-01",
         )
         post = PostFactory()
         pe = PostElectionFactory(
-            election=election,
-            post=post,
-            ballot_paper_id="local.foo.bar.2017-01-01"
+            election=election, post=post, ballot_paper_id="local.foo.bar.2017-01-01"
         )
         PersonPostFactory(
             post_election=pe, election=election, person=self.person, party=self.party

@@ -135,6 +135,7 @@ class LogLookUpMixin(object):
         kwargs.update(self.request.session["utm_data"])
         log_postcode(kwargs)
 
+
 class NewSlugsRedirectMixin(object):
     def get_changed_election_slug(self, slug):
         return UPDATED_SLUGS.get(slug, slug)

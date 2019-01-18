@@ -22,9 +22,7 @@ urlpatterns = [
         ElectionIDSwitcher(election_view=ElectionView, ballot_view=PostView),
         name="election_view",
     ),
-    url(
-        r"^(?P<postcode>[^/]+)/$", PostcodeView.as_view(), name="postcode_view"
-    ),
+    url(r"^(?P<postcode>[^/]+)/$", PostcodeView.as_view(), name="postcode_view"),
     url(
         r"^(?P<postcode>[^/]+).ics$",
         PostcodeiCalView.as_view(),

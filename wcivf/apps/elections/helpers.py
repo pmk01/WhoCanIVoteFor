@@ -5,7 +5,6 @@ from django.conf import settings
 import requests
 
 
-
 class EEHelper:
 
     ee_cache = {}
@@ -56,6 +55,7 @@ class ElectionIDSwitcher:
 
     def __call__(self, request, *args, **kwargs):
         from elections.models import PostElection
+
         ballot_qs = PostElection.objects.filter(
             ballot_paper_id=kwargs[self.election_id_kwarg]
         )
