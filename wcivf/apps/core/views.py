@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from .forms import PostcodeLookupForm
 
 from elections.models import PostElection
+from core.helpers import may_election_day_this_year
 
 
 class PostcodeFormView(FormView):
@@ -49,10 +50,14 @@ class HomePageView(PostcodeFormView):
         delta = datetime.timedelta(weeks=4)
         cut_off_date = today + delta
 
-        context["upcoming_elections"] = PostElection.objects.filter(
-            election__election_date__gte=today,
-            election__election_date__lte=cut_off_date,
-        ).order_by("election__election_date")
+        context["upcoming_elections"] = (
+            PostElection.objects.filter(
+                election__election_date__gte=today,
+                election__election_date__lte=cut_off_date,
+            )
+            .exclude(election__election_date=may_election_day_this_year())
+            .order_by("election__election_date")
+        )
 
         return context
 
