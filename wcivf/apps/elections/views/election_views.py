@@ -26,7 +26,8 @@ class ElectionsView(TemplateView):
 
 class ElectionView(DetailView):
     template_name = "elections/election_view.html"
-    model = apps.get_model("elections.Election")
+    model = apps.get_model('elections.Election')
+    pk_url_kwarg = "election"
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -59,11 +60,11 @@ class PostView(DetailView):
     def get_object(self, queryset=None):
         if queryset is None:
             queryset = self.get_queryset()
-        post_id = self.kwargs.get("post_id")
-        election_id = self.kwargs.get("election_id")
+
         queryset = queryset.filter(
-            post__ynr_id=post_id, election__slug=election_id
-        ).select_related("post", "election")
+            ballot_paper_id=self.kwargs["election"]).select_related(
+                'post', 'election'
+            )
 
         try:
             # Get the single item from the filtered queryset
@@ -77,15 +78,19 @@ class PostView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        Election = apps.get_model("elections.Election")
-        context["election"] = Election.objects.get(slug=self.kwargs["election_id"])
-        context["person_posts"] = (
-            peopleposts_for_election_post(
-                election=context["election"], post=self.object.post
-            )
-            .select_related("post", "person", "person__cv", "party", "results")
-            .prefetch_related("person__leaflet_set", "person__pledges")
-            .order_by("-elected")
-        )
+        context['election'] = self.object.election
+        context['person_posts'] = peopleposts_for_election_post(
+            election=context['election'],
+            post=self.object.post
+        ).select_related(
+            'post',
+            'person',
+            'person__cv',
+            'party',
+            'results',
+        ).prefetch_related(
+            'person__leaflet_set',
+            'person__pledges',
+        ).order_by('-elected')
 
         return context
