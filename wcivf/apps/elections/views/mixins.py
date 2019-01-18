@@ -2,12 +2,14 @@ import re
 
 import requests
 
+from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.core.cache import cache
 
 from core.models import log_postcode
 from people.models import PersonPost
+from elections.constants import UPDATED_SLUGS
 
 
 class PostcodeToPostsMixin(object):
@@ -132,3 +134,17 @@ class LogLookUpMixin(object):
         kwargs = {"postcode": postcode}
         kwargs.update(self.request.session["utm_data"])
         log_postcode(kwargs)
+
+class NewSlugsRedirectMixin(object):
+    def get_changed_election_slug(self, slug):
+        return UPDATED_SLUGS.get(slug, slug)
+
+    def get(self, request, *args, **kwargs):
+        given_slug = self.kwargs.get(self.pk_url_kwarg)
+        updated_slug = self.get_changed_election_slug(given_slug)
+        if updated_slug != given_slug:
+            return HttpResponsePermanentRedirect(
+                reverse("election_view", kwargs={"election": updated_slug})
+            )
+
+        return super().get(request, *args, **kwargs)

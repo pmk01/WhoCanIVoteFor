@@ -1,10 +1,12 @@
 from django.views.generic import TemplateView, DetailView
 from django.http import Http404
+
 from django.db.models import Prefetch
 from django.apps import apps
 
 
 from people.helpers import peopleposts_for_election_post
+from elections.views.mixins import NewSlugsRedirectMixin
 
 
 class ElectionsView(TemplateView):
@@ -24,10 +26,11 @@ class ElectionsView(TemplateView):
         return context
 
 
-class ElectionView(DetailView):
+class ElectionView(NewSlugsRedirectMixin, DetailView):
     template_name = "elections/election_view.html"
     model = apps.get_model('elections.Election')
     pk_url_kwarg = "election"
+
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -53,7 +56,7 @@ class ElectionView(DetailView):
         return obj
 
 
-class PostView(DetailView):
+class PostView(NewSlugsRedirectMixin, DetailView):
     template_name = "elections/post_view.html"
     model = apps.get_model("elections.PostElection")
 
