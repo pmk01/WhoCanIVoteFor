@@ -16,6 +16,11 @@ urlpatterns = [
     url(
         r"^about/$", TemplateView.as_view(template_name="about.html"), name="about_view"
     ),
+    url(
+        r"^standing/$",
+        TemplateView.as_view(template_name="standing.html"),
+        name="standing_as_a_candidate",
+    ),
     url(r"^_status_check/$", StatusCheckView.as_view(), name="status_check_view"),
     url(r"^opensearch\.xml", OpenSearchView.as_view(), name="opensearch"),
 ]
