@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load markdown_deux_tags %}
+{% block content %}
+<div class="card">
+{% markdown %}
+## Adding your profile to WhoCanIVoteFor.co.uk
+
+WhoCanIVoteFor.co.uk has a free profile per candidate standing in every UK election. The profiles have been viewed by millions of people deciding who to vote for before elections.
+
+WhoCanIVoteFor.co.uk is powered by data from Democracy Club’s public database of election candidates. Democracy Club is a non-partisan and not-for-profit organisation.
+
+Democracy Club’s candidates database is run a bit like Wikipedia, where users can update profiles with sourced information. We encourage candidates, agents and parties to add information like photos, statements to voters and social media links.
+
+### I am a candidate
+
+To get started, go to [https://candidates.democracyclub.org.uk/search/](https://candidates.democracyclub.org.uk/search/), type your name into the ‘Find a candidate...’ box and press ‘Search’. You may already be in the database, in which case please do update your existing profile.
+
+### I am an agent or local party administrator
+
+You can edit an individual candidate as above, or you can ‘bulk add’ all candidates for your party.  To add all candidates for your party in an election, go to [https://candidates.democracyclub.org.uk/elections/](https://candidates.democracyclub.org.uk/elections/) and click on the election you want to add candidates for. Then click the “Add candidates for a single party” button, select your party and you’ll be able to add each candidate on a single form.
+
+
+Questions? Feedback? [Get in touch with us](https://democracyclub.org.uk/contact/).
+{% endmarkdown %}
+  </div>
+{% endblock %}
