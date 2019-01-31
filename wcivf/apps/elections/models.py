@@ -71,22 +71,6 @@ class Election(models.Model):
 
     @property
     def nice_election_name(self):
-        if self.election_type == "local":
-            return self.name
-        if self.election_type == "mayor":
-            if "hackney" in self.slug:
-                return "Mayor of Hackney election"
-            if "lewisham" in self.slug:
-                return "Mayor of Lewisham election"
-            if "newham" in self.slug:
-                return "Mayor of Newham election"
-            if "sheffield-city-ca" in self.slug:
-                return "Mayor of the Sheffield City Region election"
-            if "tower-hamlets" in self.slug:
-                return "Mayor of Tower Hamlets election"
-            if "watford" in self.slug:
-                return "Mayor of Watford election"
-            return "City mayor"
         return self.name
 
     def _election_datetime_tz(self):
