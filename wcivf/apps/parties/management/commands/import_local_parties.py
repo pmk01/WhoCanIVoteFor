@@ -23,8 +23,9 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, **options):
-        # Delete all data first, as rows in the source might have been deleted
-        LocalParty.objects.all().delete()
+        # Delete all data from non-current elections first,
+        # as rows in the source might have been deleted
+        LocalParty.objects.filter(post_election__election__current=True).delete()
         with open(options["filename"], "r") as fh:
             reader = csv.DictReader(fh)
             for row in reader:
