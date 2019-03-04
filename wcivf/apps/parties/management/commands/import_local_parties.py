@@ -1,3 +1,5 @@
+from dateutil.parser import parse
+
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
@@ -9,7 +11,16 @@ from elections.models import PostElection
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("filename", help="Path to the file with the manifestos")
+        parser.add_argument("filename", help="Path to the file with the local parties")
+        parser.add_argument(
+            "--election-date",
+            action="store",
+            type=self.valid_date,
+            help="The date of elections this file has data about",
+        )
+
+    def valid_date(self, value):
+        return parse(value)
 
     def get_party_list_from_party_id(self, party_id):
         party_id = "party:{}".format(party_id)
@@ -25,7 +36,10 @@ class Command(BaseCommand):
     def handle(self, **options):
         # Delete all data from non-current elections first,
         # as rows in the source might have been deleted
-        LocalParty.objects.filter(post_election__election__current=True).delete()
+        LocalParty.objects.filter(
+            post_election__election__election_date=options["election_date"]
+        ).delete()
+
         with open(options["filename"], "r") as fh:
             reader = csv.DictReader(fh)
             for row in reader:
