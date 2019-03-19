@@ -70,6 +70,7 @@ class TestAPISearchViews(APITestCase):
                 },
                 "cancelled": False,
                 "replaced_by": None,
+                "ballot_locked": False,
                 "candidates": [
                     {
                         "list_position": None,
@@ -102,3 +103,12 @@ class TestAPISearchViews(APITestCase):
             )
         assert req.status_code == 200
         assert req.json() == self.expected_response
+
+    @vcr.use_cassette("fixtures/vcr_cassettes/test_postcode_view.yaml")
+    def test_lock_status(self):
+        self.post_election.locked = True
+        self.post_election.save()
+        url = reverse("api:candidates-for-postcode-list")
+        req = self.client.get("{}?postcode=EC1A4EU".format(url))
+        assert req.status_code == 200
+        assert req.json()[0]["ballot_locked"] == True

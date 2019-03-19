@@ -70,6 +70,7 @@ class BaseCandidatesAndElectionsViewSet(
                     "post_slug": postelection.post.ynr_id,
                 },
                 "cancelled": postelection.cancelled,
+                "ballot_locked": postelection.locked,
                 "replaced_by": postelection.replaced_by,
                 "candidates": candidates,
             }
