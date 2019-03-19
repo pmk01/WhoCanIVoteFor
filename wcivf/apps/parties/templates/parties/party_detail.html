@@ -2,6 +2,7 @@
 
 {% load breadcrumb_tags %}
 {% load markdown_deux_tags %}
+{% load humanize %}
 
 {% block og_image %}{% if object.emblem %}{{ CANONICAL_URL }}{{ object.emblem.url }}{% endif %}{% endblock og_image %}
 {% block og_title %}{{ object.party_name }}{% endblock og_title %}
@@ -18,7 +19,7 @@
     {% endif %}
     <div>
       <h2>{{ object.party_name }}</h2>
-      <p>{{ object.personpost_set.all.count }} candidates</p>
+      <p>{{ object.personpost_set.all.count|intcomma }} candidates</p>
     </div>
   </div>
 
