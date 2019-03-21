@@ -15,7 +15,7 @@
     {% include "elections/includes/_cancelled_election.html" with object=object only %}
   {% else %}
   <h1>{{ object.post.label }}</h1>
-  <p>{{ object.post.label }} {% if object.election.in_past %}was{% else %}is{% endif %} a {% if object.election.name == '2017 General Election' %}constituency{% else %}post{% endif %} in the <a href="{{ object.election.get_absolute_url }}">{{ object.election.name }}</a>,
+  <p>{{ object.post.label }} {% if object.election.in_past %}was{% else %}is{% endif %} a {{ object.get_name_suffix }} in the <a href="{{ object.election.get_absolute_url }}">{{ object.election.nice_election_name }}</a>,
     {% now "j F Y" as current_day %}
     {% if object.election.election_date|date:"j F Y" == current_day %}
       <strong>which is being held today</strong>. Polls are open till 10pm.
@@ -26,15 +26,11 @@
 
   <div class="clearfix">
     {% if person_posts.all.count %}
-      {% if object.election.name == '2017 General Election' %}
+
       <p><strong>{{ person_posts.count }} candidates</strong>
-      {% if object.election.in_past %}stood{% else %}are standing{% endif %} in this constituency.</p>
-      {% else %}
-      <p>We know about <strong>{{ person_posts.count }} candidates</strong>
-      {% if object.election.in_past %}that stood{% else %}standing{% endif %} in this post.</p>
+      {% if object.election.in_past %}stood{% else %}are standing{% endif %} in this {{ object.get_name_suffix }}.</p>
       {% if not object.election.in_past and not object.locked %}
         <p><a href="{{ object.ynr_link }}">Add more at our candidate crowd-sourcing site</a></p>
-      {% endif %}
       {% endif %}
 
       {% if post.election.uses_lists %}
@@ -69,7 +65,7 @@
   {% url 'elections_view' as elections %}
   {% breadcrumb_item elections 'Elections' 2 %}
 
-  {% breadcrumb_item object.election.get_absolute_url object.election.name 3 %}
+  {% breadcrumb_item object.election.get_absolute_url object.election.nice_election_name 3 %}
 
   <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.post.label }}</li>
 </ol>
