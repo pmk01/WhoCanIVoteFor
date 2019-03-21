@@ -1,7 +1,6 @@
 {% load static %}
 {% load humanize %}
-  <section class="candidate_card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %} {% if person_post.elected %}person_elected{% endif %}">
-    <a href="{{ person_post.person.get_absolute_url }}">
+  <section class="candidate_card link-card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %} {% if person_post.elected %}person_elected{% endif %}">
     <span class="person_photo">
       {% if person_post.person.photo_url %}
         <img src="{{ person_post.person.photo_url }}" class="person_photo candidate_photo" alt="Photo of {{ person_post.person.name }}">
@@ -11,19 +10,17 @@
         <img src="{% static 'people/images/blank-woman.png' %}" style="background-color: #ddd;" class="person_photo candidate_photo">
       {% endif %}
     </span>
-    </a>
 
-    <a href="{{ person_post.person.get_absolute_url }}">
     <span class="candidate_info">
       <h4 class="candidate_name">
-        <span href="{{ person_post.person.get_absolute_url }}" class="person_name">
+        <a href="{{ person_post.person.get_absolute_url }}" class="person_name cta">
           {% if person_post.list_position %}
             {{ person_post.list_position }}.
           {% endif %}
           {% if person_post.elected %}🌟 <span class="elected_text">Elected:</span> {% endif %}
           {{ person_post.person.name }}
           {% if person_post.elected %}🌟{% endif %}
-        </span>
+        </a>
       </h4>
 
       {% if not person_post.list_position %}
@@ -48,9 +45,8 @@
       {% if person_post.person.email %}<i class="icon-mail" aria-hidden="true" title="Email"></i>{% endif %}
       </span>
 
-      <div class="more_info">
+      <a class="more_info" href="{{ person_post.person.get_absolute_url }}">
         Learn more
-      </div>
+      </a>
     </span> <!-- /.candidate_info -->
-    </a>
   </section>

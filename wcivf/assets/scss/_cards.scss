@@ -4,7 +4,6 @@
   width: 100%;
   box-sizing: border-box;
   float: left;
-
   a {
     word-wrap: break-word;
   }
@@ -71,6 +70,10 @@
 
 .candidate_grid {
   margin: 0 -10px 10px -10px;
+    @include media($max-width: 530px) {
+      margin: 0 -20px 10px -10px;
+    }
+
 }
 
 .candidate_card {
@@ -80,12 +83,12 @@
   width: 100%;
   position:relative;
   box-sizing:border-box;
-  margin: 10px 0;
+  margin: 0;
 
   @include media(tablet) {
     margin: 5px;
     padding: 0 0 0 15px;
-    height: 130px;
+    height: 132px;
     width: 100%;
     line-height:1.1em;
   }
@@ -100,6 +103,7 @@
   @include media(mobile) {
     padding: 10px;
     height: auto;
+    margin-bottom: 1em;
   }
 
   &.candidate_card_list_candidate {
@@ -110,7 +114,7 @@
     margin:0 auto 40px auto;
     display:block;
     @include media(desktop) {
-//      width: calc(100% - 25px);
+      width: calc(100% - 25px);
     }
     @include media(mobile) {
       width:100%;
@@ -169,7 +173,7 @@
       display: block;
       position:absolute;
       bottom:0;
-      width: 100%;
+      cursor: pointer;
       @include media(mobile) {
         position:relative;
         text-align:center;
