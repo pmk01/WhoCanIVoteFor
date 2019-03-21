@@ -79,6 +79,9 @@ class Election(models.Model):
             name = name.replace("election", "")
             name = name.replace("UK Parliament", "UK Parliamentary")
             name = "{} {}".format(name, "by-election")
+        if self.election_type == "mayor":
+            name = name.replace("election", "")
+
         return name
 
     def _election_datetime_tz(self):
@@ -162,6 +165,7 @@ class PostElection(models.Model):
             return "ward"
         if election_type == "parl":
             return "constituency"
+        return ""
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
@@ -174,6 +178,9 @@ class PostElection(models.Model):
 
         if ".by." in self.ballot_paper_id:
             name = "{} by-election".format(name)
+
+        if self.ballot_paper_id.startswith("mayor"):
+            return self.election.nice_election_name
 
         return name
 
