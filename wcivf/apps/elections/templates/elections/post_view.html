@@ -14,13 +14,18 @@
   {% if object.cancelled %}
     {% include "elections/includes/_cancelled_election.html" with object=object only %}
   {% else %}
-  <h1>{{ object.post.label }}</h1>
-  <p>{{ object.post.label }} {% if object.election.in_past %}was{% else %}is{% endif %} a {{ object.get_name_suffix }} in the <a href="{{ object.election.get_absolute_url }}">{{ object.election.nice_election_name }}</a>,
+  <h1>{{ object.election.nice_election_name }}</h1>
+  {% if object.friendly_name != object.election.nice_election_name %}
+  <h2>{{ object.friendly_name }}</h2>
+  {% endif %}
+
+  <p>
+      This election
     {% now "j F Y" as current_day %}
     {% if object.election.election_date|date:"j F Y" == current_day %}
-      <strong>which is being held today</strong>. Polls are open till 10pm.
+      <strong>is being held today</strong>. Polls are open till 10pm.
     {% else %}
-      which {% if object.election.in_past %}was{% else %}will be{% endif %} held {{ object.election.election_date|naturalday:"\o\n l j F Y" }}.
+      {% if object.election.in_past %}was{% else %}will be{% endif %} held {{ object.election.election_date|naturalday:"\o\n l j F Y" }}.
     {% endif %}
   </p>
 

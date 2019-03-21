@@ -54,10 +54,13 @@
     {% if postelection.cancelled %}
       {% include "elections/includes/_cancelled_election.html" with object=postelection only %}
     {% else %}
-      <h2>Your candidates in the {{ postelection.election.nice_election_name }}</h2>
+      <h1>{{ postelection.election.nice_election_name }}</h1>
+      {% if postelection.friendly_name != postelection.election.nice_election_name %}
+      <h2>{{ postelection.friendly_name }}</h2>
+      {% endif %}
 
       <p>
-        The {{ postelection.election.nice_election_name }}
+        This election
         {% now "j F Y" as current_day %}
         {% if postelection.election.election_date|date:"j F Y" == current_day %}
         <strong>is being held today</strong>. Polls are open till 10pm.
