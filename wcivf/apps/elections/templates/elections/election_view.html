@@ -10,9 +10,9 @@
 {% block content %}
 
 <div class="card">
-    <h1>{{ object.name }}</h1>
+    <h1>{{ object.nice_election_name }}</h1>
 
-    <p>The {{ object.name }}
+    <p>The {{ object.nice_election_name }}
       {% now "j F Y" as current_day %}
       {% if object.election_date|date:"j F Y" == current_day %}
       <strong>is being held today</strong>. Polls are open till 10pm.
@@ -73,7 +73,7 @@
   {% breadcrumb_item home_view 'Home' 1 %}
   {% url 'elections_view' as elections %}
   {% breadcrumb_item elections 'Elections' 2 %}
-  <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
+  <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.nice_election_name }}</li>
 </ol>
 
 {% endblock breadcrumbs %}

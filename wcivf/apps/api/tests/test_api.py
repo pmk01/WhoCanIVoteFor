@@ -38,6 +38,7 @@ class TestAPISearchViews(APITestCase):
             name="2017 General Election",
             election_date="2017-06-08",
             slug="parl.2017-06-08",
+            any_non_by_elections=True,
         )
         self.post = PostFactory(
             ynr_id="WMC:E14000639", label="Cities of London and Westminster"

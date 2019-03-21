@@ -26,7 +26,7 @@
 
       {% for election_group in elections_by_date %}
       <h3>{{ election_group.grouper }}</h3>
-      {% regroup election_group.list by election.name as named_postelections %}
+      {% regroup election_group.list by election.nice_election_name as named_postelections %}
       <ul>
         {% for election in named_postelections %}
           <li><strong>{{ election.grouper }}{{ election.list|length|pluralize }}</stroug>

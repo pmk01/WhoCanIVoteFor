@@ -28,17 +28,17 @@
         </p>
 
         <ul>
-          {% for post in election_group.list %}
+          {% for ballot in election_group.list %}
           <li>
             <a href="#election_{{ post.election.slug }}">
-            {{ post.election.nice_election_name }}
-            {% if post.post.label != post.election %}
-              {% if 'mayor' not in post.election.slug %}
-                : {{ post.post.label }}
+            {{ ballot.election.nice_election_name }}
+            {% if ballot.post.label != post.election %}
+              {% if 'mayor' not in ballot.election.slug %}
+                : {{ ballot.post.label }}
               {% endif %}
             {% endif %}
             </a>
-            {{ post.short_cancelled_message_html }}
+            {{ ballot.short_cancelled_message_html }}
           </li>
           {% endfor %}
         </ul>

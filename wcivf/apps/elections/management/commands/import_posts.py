@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 
 from elections.helpers import EEHelper, JsonPaginator
-from elections.models import Post, PostElection
+from elections.models import Post, PostElection, Election
 
 
 class Command(BaseCommand):
@@ -35,6 +35,7 @@ class Command(BaseCommand):
         for page in pages:
             self.add_posts(page)
         self.attach_cancelled_ballot_info()
+        self.populate_any_non_by_elections_field()
 
     def add_posts(self, results):
         for post in results["results"]:
@@ -51,3 +52,14 @@ class Command(BaseCommand):
             cb.replaced_by = self.get_replacement_ballot(cb.ballot_paper_id)
             cb.metadata = self.get_metadata(cb.ballot_paper_id)
             cb.save()
+
+    def populate_any_non_by_elections_field(self):
+        qs = Election.objects.all().prefetch_related("postelection_set")
+        for election in qs:
+            any_non_by_elections = any(
+                b.ballot_paper_id
+                for b in election.postelection_set.all()
+                if ".by." not in b.ballot_paper_id
+            )
+            election.any_non_by_elections = any_non_by_elections
+            election.save()

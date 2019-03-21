@@ -37,6 +37,7 @@ class Election(models.Model):
     for_post_role = models.TextField(blank=True)
     election_weight = models.IntegerField(default=10)
     metadata = JSONField(null=True)
+    any_non_by_elections = models.BooleanField(default=False)
 
     objects = ElectionManager()
 
@@ -71,7 +72,14 @@ class Election(models.Model):
 
     @property
     def nice_election_name(self):
-        return self.name
+
+        name = self.name
+        if not self.any_non_by_elections:
+            name = name.replace("elections", "")
+            name = name.replace("election", "")
+            name = name.replace("UK Parliament", "UK Parliamentary")
+            name = "{} {}".format(name, "by-election")
+        return name
 
     def _election_datetime_tz(self):
         election_date = self.election_date
@@ -148,17 +156,23 @@ class PostElection(models.Model):
     )
     metadata = JSONField(null=True)
 
+    def get_name_suffix(self):
+        election_type = self.ballot_paper_id.split(".")[0]
+        if election_type == "local":
+            return "ward"
+        if election_type == "parl":
+            return "constituency"
+
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
         # rather than hard coding not_wards and not_by_elections
         name = self.post.area_name
 
-        not_wards = ["W09000007"]
-        if not any([code in self.post.ynr_id for code in not_wards]):
-            name = "{} ward".format(name)
+        suffix = self.get_name_suffix()
+        if suffix:
+            name = "{} {}".format(name, suffix)
 
-        not_by_elections = []
-        if not any([code in self.post.ynr_id for code in not_by_elections]):
+        if ".by." in self.ballot_paper_id:
             name = "{} by-election".format(name)
 
         return name
