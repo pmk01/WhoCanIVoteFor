@@ -145,7 +145,7 @@ STATICFILES_DIRS = (root("assets"),)
 STATIC_ROOT = root("static")
 
 from dc_theme.settings import get_pipeline_settings
-from dc_theme.settings import STATICFILES_FINDERS, STATICFILES_STORAGE  # noqa
+from dc_theme.settings import STATICFILES_FINDERS  # noqa
 
 STATICFILES_STORAGE = "pipeline.storage.PipelineCachedStorage"
 
