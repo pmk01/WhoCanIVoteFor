@@ -163,6 +163,16 @@
     {% endif %}
   </div>
 
+  {% if postelections.count %}
+  <div class="card">
+        <h2>Help to make this website better</h2>
+        <a href="https://democracyclub.org.uk/blog/2019/03/14/lets-party-local-democracy/">
+          Join us at a crowdsourcing party to collect more information about election candidates
+        </a>
+  </div>
+  {% endif %}
+
+
   {% if postelection.husting_set.exists %}
     <div class="card">
       <h3>Election events near you</h3>
