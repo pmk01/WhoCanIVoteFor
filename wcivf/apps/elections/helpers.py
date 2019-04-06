@@ -1,6 +1,8 @@
 from functools import update_wrapper
 
 from django.conf import settings
+from sopn_publish_date import StatementPublishDate
+from sopn_publish_date.election_ids import AmbiguousElectionId
 
 import requests
 
@@ -79,3 +81,16 @@ class ElectionIDSwitcher:
 
         self.__name__ = self.__qualname__ = view.__name__
         return view(request, *args, **kwargs)
+
+
+def expected_sopn_publish_date(slug):
+    if not expected_sopn_publish_date.lookup:
+        expected_sopn_publish_date.lookup = StatementPublishDate()
+
+    try:
+        return expected_sopn_publish_date.lookup.for_id(slug)
+    except AmbiguousElectionId as e:
+        return None
+
+
+expected_sopn_publish_date.lookup = None

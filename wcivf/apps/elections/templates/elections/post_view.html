@@ -27,6 +27,16 @@
     {% else %}
       {% if object.election.in_past %}was{% else %}will be{% endif %} held {{ object.election.election_date|naturalday:"\o\n l j F Y" }}.
     {% endif %}
+    {% if object.expected_sopn_date %}
+      <br/>
+      The official candidate list
+      {% if object.expected_sopn_date|date:"j F Y" <= current_day %}
+        should have been
+      {% else %}
+        should be
+      {% endif %}
+      published on {{ object.expected_sopn_date|date:"j F Y" }}.
+    {% endif %}
   </p>
 
   <div class="clearfix">

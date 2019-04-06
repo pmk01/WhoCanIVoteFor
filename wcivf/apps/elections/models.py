@@ -10,6 +10,7 @@ from django.utils.text import slugify
 
 
 from .managers import ElectionManager, PostManager
+from .helpers import expected_sopn_publish_date
 
 LOCAL_TZ = pytz.timezone("Europe/London")
 
@@ -166,6 +167,9 @@ class PostElection(models.Model):
         if election_type == "parl":
             return "constituency"
         return ""
+
+    def expected_sopn_date(self):
+        return expected_sopn_publish_date(self.ballot_paper_id)
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
