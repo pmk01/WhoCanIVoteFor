@@ -89,7 +89,7 @@ def expected_sopn_publish_date(slug):
 
     try:
         return expected_sopn_publish_date.lookup.for_id(slug)
-    except AmbiguousElectionId as e:
+    except AmbiguousElectionId:
         return None
 
 
