@@ -142,6 +142,7 @@ class Post(models.Model):
     organization = models.CharField(blank=True, max_length=100)
     area_name = models.CharField(blank=True, max_length=100)
     area_id = models.CharField(blank=True, max_length=100)
+    territory = models.CharField(blank=True, max_length=3)
     elections = models.ManyToManyField(Election, through="elections.PostElection")
 
     objects = PostManager()
@@ -169,7 +170,7 @@ class PostElection(models.Model):
         return ""
 
     def expected_sopn_date(self):
-        return expected_sopn_publish_date(self.ballot_paper_id)
+        return expected_sopn_publish_date(self.ballot_paper_id, self.post.territory)
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
