@@ -66,13 +66,15 @@ class Command(BaseCommand):
             election.save()
 
     def extract_territory(self, ee_data):
-        if ee_data and ee_data['organisation']:
-            return ee_data['organisation'].get('territory_code', '???')
+        if ee_data and ee_data["organisation"]:
+            return ee_data["organisation"].get("territory_code", "???")
 
     def import_territories(self):
         ee = EEHelper()
 
-        post_elections_without_territory = PostElection.objects.filter(post__territory='')
+        post_elections_without_territory = PostElection.objects.filter(
+            post__territory=""
+        )
 
         for post_election in post_elections_without_territory:
 
@@ -84,4 +86,3 @@ class Command(BaseCommand):
 
             post_election.post.territory = territory
             post_election.post.save()
-
