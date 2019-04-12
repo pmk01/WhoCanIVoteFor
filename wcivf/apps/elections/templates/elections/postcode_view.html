@@ -92,7 +92,7 @@
               {{ postelection.post.label }} ward.
               {% endif %}
 
-              {% if postelection.winner_count %}
+              {% if postelection.winner_count and postelection.election.voting_system_id == 'FPTP' %}
               You will have {{ postelection.winner_count|intword }} vote{{ postelection.winner_count|pluralize }}.
               {% endif %}
 
