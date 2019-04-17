@@ -67,7 +67,9 @@ class Command(BaseCommand):
 
     def extract_territory(self, ee_data):
         if ee_data and "organisation" in ee_data:
-            return ee_data["organisation"].get("territory_code", "???")
+            return ee_data["organisation"].get("territory_code", "-")
+        else:
+            return "-"
 
     def import_territories(self):
         ee = EEHelper()
