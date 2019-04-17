@@ -19,18 +19,6 @@
       {% else %}
       {% if object.in_past %}was{% else %}will be{% endif %} held <strong>{{ object.election_date|naturalday:"\o\n l j F Y" }}</strong>.
       {% endif %}
-      {% if object.expected_sopn_date %}
-        <br/>
-        The official candidate list
-        <abbr title="Candidate lists can be delayed, such as when a candidate wants to withdraw their nomination.">
-        {% if object.expected_sopn_date|date:"j F Y" <= current_day %}
-            should have been
-        {% else %}
-            should be
-        {% endif %}
-        </abbr>
-        published on {{ object.expected_sopn_date|date:"j F Y" }}.
-      {% endif %}
     </p>
 
     {% if object.election_type != "ref" %}

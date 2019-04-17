@@ -27,18 +27,6 @@
     {% else %}
       {% if object.election.in_past %}was{% else %}will be{% endif %} held {{ object.election.election_date|naturalday:"\o\n l j F Y" }}.
     {% endif %}
-    {% if object.expected_sopn_date %}
-      <br/>
-      The official candidate list
-      <abbr title="Candidate lists can be delayed, such as when a candidate wants to withdraw their nomination.">
-      {% if object.expected_sopn_date|date:"j F Y" <= current_day %}
-        should have been
-      {% else %}
-        should be
-      {% endif %}
-      </abbr>
-      published on {{ object.expected_sopn_date|date:"j F Y" }}.
-    {% endif %}
   </p>
 
   <div class="clearfix">
@@ -58,6 +46,18 @@
         {% include "elections/includes/_people_list.html" with people=person_posts.all %}
       {% endif %}
     {% else %}
+
+      {% if object.expected_sopn_date and not object.election.in_past %}
+        <p>
+        The official candidate list
+        {% if object.expected_sopn_date|date:"j F Y" <= current_day %}
+        should have been
+        {% else %}
+        should be
+        {% endif %}
+        published on {{ object.expected_sopn_date|date:"j F Y" }}.
+        </p>
+      {% endif %}
       {% if not object.election.in_past %}
           <p><a href="{{ object.ynr_link }}">Add some candidates at our candidate crowd-sourcing site</a></p>
       {% endif %}
