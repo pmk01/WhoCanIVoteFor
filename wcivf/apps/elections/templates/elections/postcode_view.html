@@ -30,7 +30,7 @@
         <ul>
           {% for ballot in election_group.list %}
           <li>
-            <a href="#election_{{ post.election.slug }}">
+            <a href="#election_{{ ballot.election.slug }}">
             {{ ballot.election.nice_election_name }}
             {% if ballot.post.label != post.election %}
               {% if 'mayor' not in ballot.election.slug %}
