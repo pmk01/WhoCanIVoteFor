@@ -58,12 +58,21 @@ class Command(BaseCommand):
             default=False,
             help="Only output errors",
         )
+        parser.add_argument(
+            "--for-date",
+            action="store",
+            dest="date",
+            required=True,
+            help="The date of the elections this file is about",
+        )
 
-    def delete_all_hustings(self):
+    def delete_all_hustings(self, election_date):
         """
         Clear our hustings away.
         """
-        Husting.objects.all().delete()
+        Husting.objects.filter(
+            post_election__election__election_date=election_date
+        ).delete()
 
     def create_husting(self, row):
         """
@@ -99,12 +108,14 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
         """
-        Entrypoint for our command.
+        Entry point for our command.
         """
         if options["quiet"]:
             self.stdout = open(os.devnull, "w")
 
-        self.delete_all_hustings()
+        for_election = options["date"]
+
+        self.delete_all_hustings(for_election)
         hustings_counter = 0
         self.not_a_constituency_friend = []
         with open(options["filename"], "r") as fh:
