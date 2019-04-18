@@ -56,3 +56,4 @@ class PostcodeViewTests(TestCase):
         response = self.client.get("/elections/e32nx/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["postelections"].count(), 1)
+        self.assertContains(response, "Tower Hamlets")
