@@ -165,7 +165,9 @@ class PostElection(models.Model):
             return "ward"
         if election_type == "parl":
             return "constituency"
-        return ""
+        if election_type == "europarl":
+            return "region"
+        return "area"
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
