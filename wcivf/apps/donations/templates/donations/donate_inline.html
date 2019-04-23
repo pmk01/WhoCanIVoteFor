@@ -1,0 +1,24 @@
+{% load dc_forms %}
+{% if request.session.donate_split_test %}
+<div class="card donate_card">
+
+  {% if request.session.donate_split_test == "everyone_takes_part" %}
+    <h3>Democracy works when everyone takes part</h3>
+
+    <p>You can help make this website better for everyone. Donate £3 now.</p>
+    <p>This site receives no government funding. It’s run by a non-profit: Democracy Club. We need your support to
+      provide better election information for all.</p>
+  {% endif %}
+
+  {% if request.session.donate_split_test == "good_information" %}
+    <h3>Democracy runs on good information</h3>
+
+    <p>You can help make this website better for everyone. Donate £3 now. </p>
+    <p>This site receives no government funding. It’s run by a non-profit: Democracy Club. We need your support to
+      provide better election information for all.</p>
+  {% endif %}
+
+  <a href="https://democracyclub.org.uk/donate/?utm_source=wcivf&utm_campaign=inline_donate" class="link-button">
+    Support Democracy Club</a>
+</div>
+{% endif %}

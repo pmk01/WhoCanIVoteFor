@@ -1,3 +1,4 @@
+import random
 import re
 from django.http import HttpResponseRedirect
 
@@ -44,7 +45,18 @@ class DonationFormMiddleware(object):
         # Redirect to GoCardless
         return HttpResponseRedirect(redirect_url)
 
+    def assign_split_test_name(self, request):
+        """
+        Give a session a test name, used for A/B testing
+        """
+
+        if not "donate_split_test" in request.session:
+            split_tests = ["good_information", "everyone_takes_part"]
+            request.session["donate_split_test"] = random.choice(split_tests)
+            request.session.modified = True
+
     def process_request(self, request):
+        self.assign_split_test_name(request)
         form_prefix = "donation_form"
         key_to_check = "{}-amount".format(form_prefix)
 
