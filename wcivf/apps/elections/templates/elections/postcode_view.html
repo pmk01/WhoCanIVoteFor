@@ -179,18 +179,17 @@
 
 {% if not messages %}
   <div class="card">
-    <h2>Free election reminders</h2>
+    <h2>Election reminders for {{ postcode }}</h2>
     <p>We can email you the next time there is an election in {{ postcode }}.</p>
     {% include "email_form/election_reminders_form.html" %}
+
+    <p>
+    Or add future elections in {{ postcode }} to your calendar:
+    <a href="webcal://whocanivotefor.co.uk{% url 'postcode_ical_view' postcode %}">iCal feed</a>
+  </p>
   </div>
 {% endif %}
 
-<div class="card">
-  <p>
-    Add future elections in {{ postcode }} to your calendar:
-    <a href="webcal://whocanivotefor.co.uk{% url 'postcode_ical_view' postcode %}">iCal feed</a>
-  </p>
-</div>
 
 {% include "donations/donate_inline.html" %}
 {% include "feedback/feedback_form.html" %}
