@@ -1,6 +1,10 @@
 from django.test import TestCase
 
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 
 from elections.models import Election, Post, PostElection
 

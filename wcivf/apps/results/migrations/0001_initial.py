@@ -30,7 +30,10 @@ class Migration(migrations.Migration):
                 ),
                 ("expected_declaration_time", models.DateTimeField(blank=True)),
                 ("declaration_time", models.DateTimeField(blank=True)),
-                ("person_posts", models.ManyToManyField(to="people.PersonPost")),
+                (
+                    "person_posts",
+                    models.ManyToManyField(to="people.PersonPost"),
+                ),
                 (
                     "post_election",
                     models.ForeignKey(

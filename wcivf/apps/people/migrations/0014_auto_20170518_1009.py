@@ -33,14 +33,16 @@ class Migration(migrations.Migration):
             model_name="personpost",
             name="person",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.DO_NOTHING, to="people.Person"
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to="people.Person",
             ),
         ),
         migrations.AlterField(
             model_name="personpost",
             name="post",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.DO_NOTHING, to="elections.Post"
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to="elections.Post",
             ),
         ),
     ]

@@ -38,18 +38,21 @@ class PostcodeView(
         self.postcode = self.clean_postcode(kwargs["postcode"])
         context["postcode"] = self.postcode
         self.log_postcode(context["postcode"])
-        context["postelections"] = self.postcode_to_posts(context["postcode"])
+        context["postelections"] = self.postcode_to_ballots(context["postcode"])
 
         context["voter_id_required"] = [
             (pe, pe.election.metadata.get("2019-05-02-id-pilot"))
             for pe in context["postelections"]
-            if pe.election.metadata and pe.election.metadata.get("2019-05-02-id-pilot")
+            if pe.election.metadata
+            and pe.election.metadata.get("2019-05-02-id-pilot")
         ]
         context["people_for_post"] = {}
         for postelection in context["postelections"]:
-            postelection.people = self.postelections_to_people(postelection)
+            postelection.people = self.people_for_ballot(postelection)
 
-        context["polling_station"] = self.get_polling_station_info(context["postcode"])
+        context["polling_station"] = self.get_polling_station_info(
+            context["postcode"]
+        )
 
         return context
 
@@ -72,7 +75,7 @@ class PostcodeiCalView(
         cal.add("version", "2.0")
         cal.add("prodid", "-//Elections in {}//mxm.dk//".format(postcode))
 
-        for post_election in self.postcode_to_posts(postcode):
+        for post_election in self.postcode_to_ballots(postcode):
             event = Event()
             event["uid"] = "{}-{}".format(
                 post_election.post.ynr_id, post_election.election.slug

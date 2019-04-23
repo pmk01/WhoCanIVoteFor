@@ -65,7 +65,9 @@ class PostManager(models.Manager):
 
             kwargs["locked"] = election_dict.get("candidates_locked", False)
             if kwargs["locked"]:
-                if election_dict["winner_count"] == len(post_dict["memberships"]):
+                if election_dict["winner_count"] == len(
+                    post_dict["memberships"]
+                ):
                     kwargs["contested"] = False
                 kwargs["winner_count"] = election_dict["winner_count"]
 

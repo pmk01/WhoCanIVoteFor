@@ -35,7 +35,8 @@ urlpatterns = (
         url(r"^robots\.txt", include("robots.urls")),
         url(r"^email/", include("dc_signup_form.urls")),
         url(
-            r"^donate/", include(("donations.urls", "donations"), namespace="donations")
+            r"^donate/",
+            include(("donations.urls", "donations"), namespace="donations"),
         ),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
@@ -46,4 +47,6 @@ urlpatterns = (
 if settings.DEBUG:
     import debug_toolbar
 
-    urlpatterns = [url(r"^__debug__/", include(debug_toolbar.urls))] + urlpatterns
+    urlpatterns = [
+        url(r"^__debug__/", include(debug_toolbar.urls))
+    ] + urlpatterns

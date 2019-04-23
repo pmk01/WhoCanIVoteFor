@@ -16,7 +16,9 @@ class DonationFormMiddleware(object):
     def get_initial(self, request):
         form_initial = {"payment_type": "subscription"}
         default_donation = 3
-        suggested_donation = request.GET.get("suggested_donation", default_donation)
+        suggested_donation = request.GET.get(
+            "suggested_donation", default_donation
+        )
         if re.search("[^0-9]", str(suggested_donation)):
             suggested_donation = default_donation
 
@@ -51,5 +53,7 @@ class DonationFormMiddleware(object):
             if form.is_valid():
                 return self.form_valid(request, form)
         else:
-            form = DonationForm(initial=self.get_initial(request), prefix=form_prefix)
+            form = DonationForm(
+                initial=self.get_initial(request), prefix=form_prefix
+            )
         request.donation_form = form

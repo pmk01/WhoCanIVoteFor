@@ -11,6 +11,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="personpost", name="elected", field=models.NullBooleanField()
+            model_name="personpost",
+            name="elected",
+            field=models.NullBooleanField(),
         )
     ]

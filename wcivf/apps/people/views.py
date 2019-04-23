@@ -81,8 +81,14 @@ class PersonView(DetailView, PersonMixin):
             # We can't show manifestos if they've never stood for a party
             obj.manifestos = Manifesto.objects.filter(
                 party=obj.personpost.party, election=obj.personpost.election
-            ).filter(Q(country="Local") | Q(country="UK") | Q(country=obj.post_country))
-            obj.manifestos = sorted(obj.manifestos, key=lambda n: n.country != "UK")
+            ).filter(
+                Q(country="Local")
+                | Q(country="UK")
+                | Q(country=obj.post_country)
+            )
+            obj.manifestos = sorted(
+                obj.manifestos, key=lambda n: n.country != "UK"
+            )
 
             obj.local_party = obj.personpost.post_election.localparty_set.filter(
                 parent=obj.personpost.party
@@ -159,7 +165,9 @@ class PersonView(DetailView, PersonMixin):
                 votes = intcomma(person.personpost.results.votes_cast)
                 if person.personpost.elected:
                     intro[-1] = intro[-1] + "."
-                    results_str = "They were elected with <strong>{}</strong> votes"
+                    results_str = (
+                        "They were elected with <strong>{}</strong> votes"
+                    )
                 else:
                     results_str = ". They got <strong>{}</strong> votes"
                 results_str = results_str.format(votes)

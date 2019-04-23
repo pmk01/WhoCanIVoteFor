@@ -60,7 +60,8 @@ class Migration(migrations.Migration):
                 (
                     "party",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="parties.Party"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="parties.Party",
                     ),
                 ),
             ],

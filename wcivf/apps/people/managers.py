@@ -2,10 +2,12 @@ from copy import deepcopy
 
 from django.db import models
 from django.db.models import Count
+from django.core.cache import cache
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import make_aware
 
 from elections.models import Election, Post, PostElection
+from elections.constants import PEOPLE_FOR_BALLOT_KEY_FMT
 from parties.models import Party
 
 
@@ -56,7 +58,9 @@ class PersonManager(models.Manager):
         posts = []
         elections = []
 
-        last_updated = make_aware(parse_datetime(person["versions"][0]["timestamp"]))
+        last_updated = make_aware(
+            parse_datetime(person["versions"][0]["timestamp"])
+        )
 
         defaults = {
             "name": person["name"],
@@ -72,7 +76,9 @@ class PersonManager(models.Manager):
         if "facebook_page_url" in version_data:
             defaults["facebook_page_url"] = version_data["facebook_page_url"]
         if "facebook_personal_url" in version_data:
-            defaults["facebook_personal_url"] = version_data["facebook_personal_url"]
+            defaults["facebook_personal_url"] = version_data[
+                "facebook_personal_url"
+            ]
         if "linkedin_url" in version_data:
             defaults["linkedin_url"] = version_data["linkedin_url"]
         if "homepage_url" in version_data:
@@ -137,20 +143,30 @@ class PersonManager(models.Manager):
                 posts.append(post_copy)
 
         person_id = person["id"]
-        person_obj, _ = self.update_or_create(ynr_id=person["id"], defaults=defaults)
+        person_obj, _ = self.update_or_create(
+            ynr_id=person["id"], defaults=defaults
+        )
 
         if posts and not update_info_only:
             from .models import PersonPost
 
+            person_posts = PersonPost.objects.filter(person_id=person_id)
+            ballots_ids_to_invalidate = [
+                pp.post_election.ballot_paper_id for pp in person_posts
+            ]
+
             # Delete old posts for this person
-            PersonPost.objects.filter(person_id=person_id).delete()
+            person_posts.delete()
+
             for post in posts:
                 defaults = {"list_position": post.party_list_position}
                 if post.party_id:
                     try:
                         defaults["party"] = all_parties[post.party_id]
                     except KeyError:
-                        defaults["party"] = Party.objects.get(party_id=post.party_id)
+                        defaults["party"] = Party.objects.get(
+                            party_id=post.party_id
+                        )
 
                 post_election = PostElection.objects.get(
                     post=post, election=post.election
@@ -162,5 +178,9 @@ class PersonManager(models.Manager):
                     post_election=post_election,
                     defaults=defaults,
                 )
+            # Delete the cache for this person's ballots as the membership might
+            # have changed
+            for ballot_paper_id in ballots_ids_to_invalidate:
+                cache.delete(PEOPLE_FOR_BALLOT_KEY_FMT.format(ballot_paper_id))
 
         return person_obj

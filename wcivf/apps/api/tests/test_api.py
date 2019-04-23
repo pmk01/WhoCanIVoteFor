@@ -5,7 +5,11 @@ import vcr
 
 from people.tests.factories import PersonFactory, PersonPostFactory
 from parties.tests.factories import PartyFactory
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 
 
 class TestAPIBasics(APITestCase):
@@ -75,7 +79,10 @@ class TestAPISearchViews(APITestCase):
                 "candidates": [
                     {
                         "list_position": None,
-                        "party": {"party_id": "PP01", "party_name": "Test Party"},
+                        "party": {
+                            "party_id": "PP01",
+                            "party_name": "Test Party",
+                        },
                         "person": {
                             "absolute_url": "http://testserver/person/0/candidate-0",
                             "ynr_id": 0,

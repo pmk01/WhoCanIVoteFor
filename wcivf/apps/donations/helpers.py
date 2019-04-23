@@ -3,7 +3,10 @@ from django.utils.crypto import get_random_string
 
 import gocardless_pro
 
-PAYMENT_TYPES = (("subscription", "Monthly donation"), ("bill", "Single donation"))
+PAYMENT_TYPES = (
+    ("subscription", "Monthly donation"),
+    ("bill", "Single donation"),
+)
 
 PAYMENT_UNITS = ((3, "£3"), (10, "£10"), (25, "£25"), (50, "£50"))
 
@@ -16,7 +19,9 @@ class GoCardlessHelper(object):
         self.request.session.save()
 
         if not self.request.session.get("GC_SESSION_KEY"):
-            self.request.session["GC_SESSION_KEY"] = get_random_string(length=50)
+            self.request.session["GC_SESSION_KEY"] = get_random_string(
+                length=50
+            )
 
         if getattr(settings, "GOCARDLESS_USE_SANDBOX", False):
             gc_environment = "sandbox"
@@ -24,7 +29,8 @@ class GoCardlessHelper(object):
             gc_environment = "live"
 
         self.client = gocardless_pro.Client(
-            access_token=settings.GOCARDLESS_ACCESS_TOKEN, environment=gc_environment
+            access_token=settings.GOCARDLESS_ACCESS_TOKEN,
+            environment=gc_environment,
         )
 
     def get_redirect_url(self):

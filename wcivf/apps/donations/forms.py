@@ -10,7 +10,10 @@ class DonationForm(forms.Form):
     )
 
     amount = forms.ChoiceField(
-        required=True, label="", choices=PAYMENT_UNITS, widget=forms.RadioSelect()
+        required=True,
+        label="",
+        choices=PAYMENT_UNITS,
+        widget=forms.RadioSelect(),
     )
     other_amount = forms.CharField(
         required=False,

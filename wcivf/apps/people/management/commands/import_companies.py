@@ -37,7 +37,9 @@ def date_from_string(dt):
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("filename", help="Path to the file with the hustings in it")
+        parser.add_argument(
+            "filename", help="Path to the file with the hustings in it"
+        )
 
     def delete_all_companies(self):
         """

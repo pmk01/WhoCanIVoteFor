@@ -2,7 +2,11 @@ from django.test import TestCase
 
 import vcr
 
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 from hustings.models import Husting
 
 
@@ -10,7 +14,9 @@ class TestHustings(TestCase):
     def setUp(self):
         self.election = ElectionFactory(slug="mayor.tower-hamlets.2018-05-03")
         self.post = PostFactory(
-            ynr_id="tower-hamlets", label="Tower Hamlets", elections=self.election
+            ynr_id="tower-hamlets",
+            label="Tower Hamlets",
+            elections=self.election,
         )
         self.ballot = PostElectionFactory(
             post=self.post,

@@ -13,7 +13,8 @@ class Command(BaseCommand):
         data = open(
             os.path.abspath(
                 os.path.join(
-                    os.path.dirname(__file__), "../../data/pcc.2016.profiles.csv"
+                    os.path.dirname(__file__),
+                    "../../data/pcc.2016.profiles.csv",
                 )
             )
         )

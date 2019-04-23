@@ -50,7 +50,9 @@ def set_time_string_on_datetime(dt, time_string):
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("filename", help="Path to the file with the hustings in it")
+        parser.add_argument(
+            "filename", help="Path to the file with the hustings in it"
+        )
         parser.add_argument(
             "--quiet",
             action="store_true",
@@ -81,9 +83,13 @@ class Command(BaseCommand):
         starts = dt_from_string(row["Date (YYYY-Month-DD)"])
         ends = None
         if row["Start time (00:00)"]:
-            starts = set_time_string_on_datetime(starts, row["Start time (00:00)"])
+            starts = set_time_string_on_datetime(
+                starts, row["Start time (00:00)"]
+            )
         if row["End time (if known)"]:
-            ends = set_time_string_on_datetime(starts, row["End time (if known)"])
+            ends = set_time_string_on_datetime(
+                starts, row["End time (if known)"]
+            )
 
         # Get the post_election
         pes = PostElection.objects.filter(ballot_paper_id=row["Election ID"])
@@ -125,5 +131,7 @@ class Command(BaseCommand):
                 if husting:
                     hustings_counter += 1
                     self.stdout.write(
-                        "Created husting {0} <{1}>".format(hustings_counter, husting)
+                        "Created husting {0} <{1}>".format(
+                            hustings_counter, husting
+                        )
                     )

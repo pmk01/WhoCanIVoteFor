@@ -31,7 +31,9 @@ class Command(BaseCommand):
     help = "Import pledges from a CSV"
 
     def add_arguments(self, parser):
-        parser.add_argument("filename", help="Path to the file with the manifestos")
+        parser.add_argument(
+            "filename", help="Path to the file with the manifestos"
+        )
 
     @transaction.atomic
     def handle(self, **options):

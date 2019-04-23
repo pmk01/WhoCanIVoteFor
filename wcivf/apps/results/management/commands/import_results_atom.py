@@ -25,7 +25,8 @@ class Command(BaseCommand):
                     post__ynr_id=entry["post_id"],
                 )
                 post_election = PostElection.objects.get(
-                    election__slug=entry["election_slug"], post__ynr_id=entry["post_id"]
+                    election__slug=entry["election_slug"],
+                    post__ynr_id=entry["post_id"],
                 )
 
                 result_event, _ = ResultEvent.objects.update_or_create(

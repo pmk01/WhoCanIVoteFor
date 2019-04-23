@@ -11,6 +11,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="person", name="wikipedia_bio", field=models.TextField(null=True)
+            model_name="person",
+            name="wikipedia_bio",
+            field=models.TextField(null=True),
         )
     ]
