@@ -31,8 +31,8 @@ class PostcodeToPostsMixin(object):
         postcode = space_regex.sub(r" \1", postcode.upper())
         return postcode
 
-    def postcode_to_posts(self, postcode, compact=False):
         key = "upcoming_elections_{}".format(postcode.replace(" ", ""))
+    def postcode_to_ballots(self, postcode, compact=False):
         results_json = cache.get(key)
         if not results_json:
             url = "{0}/api/elections?postcode={1}&current=1".format(
@@ -58,7 +58,9 @@ class PostcodeToPostsMixin(object):
                 post_id = ":".join(
                     [
                         election["division"]["division_type"],
-                        election["division"]["official_identifier"].split(":")[-1],
+                        election["division"]["official_identifier"].split(":")[
+                            -1
+                        ],
                     ]
                 )
                 all_elections.append(election["group"])
@@ -78,14 +80,16 @@ class PostcodeToPostsMixin(object):
         pes = pes.select_related("election__voting_system")
         if not compact:
             pes = pes.prefetch_related("husting_set")
-        pes = pes.order_by("election__election_date", "election__election_weight")
+        pes = pes.order_by(
+            "election__election_date", "election__election_weight"
+        )
 
         return pes
 
 
 class PostelectionsToPeopleMixin(object):
-    def postelections_to_people(self, postelection):
         key = "person_posts_{}".format(postelection.post.ynr_id)
+    def people_for_ballot(self, postelection):
         people_for_post = cache.get(key)
         if people_for_post:
             return people_for_post
@@ -116,7 +120,9 @@ class PollingStationInfoMixin(object):
         info = {}
         base_url = settings.WDIV_BASE + settings.WDIV_API
         url = "{}/postcode/{}.json?auth_token={}".format(
-            base_url, postcode, getattr(settings, "WDIV_API_KEY", "DCINTERNAL-WHO")
+            base_url,
+            postcode,
+            getattr(settings, "WDIV_API_KEY", "DCINTERNAL-WHO"),
         )
         try:
             req = requests.get(url)

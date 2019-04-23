@@ -56,7 +56,9 @@ class PersonManager(models.Manager):
         posts = []
         elections = []
 
-        last_updated = make_aware(parse_datetime(person["versions"][0]["timestamp"]))
+        last_updated = make_aware(
+            parse_datetime(person["versions"][0]["timestamp"])
+        )
 
         defaults = {
             "name": person["name"],
@@ -72,7 +74,9 @@ class PersonManager(models.Manager):
         if "facebook_page_url" in version_data:
             defaults["facebook_page_url"] = version_data["facebook_page_url"]
         if "facebook_personal_url" in version_data:
-            defaults["facebook_personal_url"] = version_data["facebook_personal_url"]
+            defaults["facebook_personal_url"] = version_data[
+                "facebook_personal_url"
+            ]
         if "linkedin_url" in version_data:
             defaults["linkedin_url"] = version_data["linkedin_url"]
         if "homepage_url" in version_data:

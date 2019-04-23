@@ -49,7 +49,7 @@ class BaseCandidatesAndElectionsViewSet(
         postelections = self.get_ballots(request)
         for postelection in postelections:
             candidates = []
-            personposts = self.postelections_to_people(postelection)
+            personposts = self.people_for_ballot(postelection)
             for personpost in personposts:
                 candidates.append(
                     serializers.PersonPostSerializer(
@@ -92,7 +92,7 @@ class CandidatesAndElectionsForPostcodeViewSet(
             raise PostcodeNotProvided()
         postcode = self.clean_postcode(postcode)
         try:
-            return self.postcode_to_posts(postcode, compact=True)
+            return self.postcode_to_ballots(postcode, compact=True)
         except InvalidPostcodeError:
             raise InvalidPostcode()
 
