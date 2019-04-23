@@ -11,6 +11,12 @@ from core.models import log_postcode
 from people.models import PersonPost
 from elections.constants import UPDATED_SLUGS
 
+from elections.constants import (
+    POSTCODE_TO_BALLOT_KEY_FMT,
+    PEOPLE_FOR_BALLOT_KEY_FMT,
+    POLLING_STATIONS_KEY_FMT,
+)
+
 
 class PostcodeToPostsMixin(object):
     def get(self, request, *args, **kwargs):
@@ -31,8 +37,8 @@ class PostcodeToPostsMixin(object):
         postcode = space_regex.sub(r" \1", postcode.upper())
         return postcode
 
-        key = "upcoming_elections_{}".format(postcode.replace(" ", ""))
     def postcode_to_ballots(self, postcode, compact=False):
+        key = POSTCODE_TO_BALLOT_KEY_FMT.format(postcode.replace(" ", ""))
         results_json = cache.get(key)
         if not results_json:
             url = "{0}/api/elections?postcode={1}&current=1".format(
@@ -88,14 +94,14 @@ class PostcodeToPostsMixin(object):
 
 
 class PostelectionsToPeopleMixin(object):
-        key = "person_posts_{}".format(postelection.post.ynr_id)
     def people_for_ballot(self, postelection):
+        key = PEOPLE_FOR_BALLOT_KEY_FMT.format(postelection.ballot_paper_id)
         people_for_post = cache.get(key)
         if people_for_post:
             return people_for_post
 
         people_for_post = PersonPost.objects.filter(
-            post=postelection.post, election=postelection.election
+            post_election=postelection
         )
 
         if postelection.election.uses_lists:
@@ -112,7 +118,7 @@ class PostelectionsToPeopleMixin(object):
 
 class PollingStationInfoMixin(object):
     def get_polling_station_info(self, postcode):
-        key = "pollingstations_{}".format(postcode.replace(" ", ""))
+        key = POLLING_STATIONS_KEY_FMT.format(postcode.replace(" ", ""))
         info = cache.get(key)
         if info:
             return info
