@@ -100,9 +100,7 @@ class PostelectionsToPeopleMixin(object):
         if people_for_post:
             return people_for_post
 
-        people_for_post = PersonPost.objects.filter(
-            post_election=postelection
-        )
+        people_for_post = PersonPost.objects.filter(post_election=postelection)
 
         if postelection.election.uses_lists:
             order_by = ["party__party_name", "list_position"]

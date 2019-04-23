@@ -2,7 +2,11 @@ import vcr
 
 from django.test import TestCase, override_settings
 
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 from core.models import LoggedPostcode, write_logged_postcodes
 
 
@@ -39,7 +43,9 @@ class PostcodeViewTests(TestCase):
     @vcr.use_cassette("fixtures/vcr_cassettes/test_ical_view.yaml")
     def test_ical_view(self):
         election = ElectionFactory(slug="local.cambridgeshire.2017-05-04")
-        post = PostFactory(ynr_id="CED:romsey", label="Romsey", elections=election)
+        post = PostFactory(
+            ynr_id="CED:romsey", label="Romsey", elections=election
+        )
 
         PostElectionFactory(post=post, election=election)
         response = self.client.get("/elections/CB13HU.ics", follow=True)

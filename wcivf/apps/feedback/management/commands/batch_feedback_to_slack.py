@@ -69,7 +69,11 @@ class Command(BaseCommand):
             "fallback": comment.comments,
             "color": colour,
             "fields": [
-                {"title": comment_title, "value": comment.comments, "short": False},
+                {
+                    "title": comment_title,
+                    "value": comment.comments,
+                    "short": False,
+                },
                 {
                     "title": "Page",
                     "value": "<{0}{1}>".format(

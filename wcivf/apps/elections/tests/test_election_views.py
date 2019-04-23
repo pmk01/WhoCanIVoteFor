@@ -33,7 +33,9 @@ class ElectionViewTests(TestCase):
             self.assertContains(response, self.election.nice_election_name)
 
     def test_election_detail_view(self):
-        response = self.client.get(self.election.get_absolute_url(), follow=True)
+        response = self.client.get(
+            self.election.get_absolute_url(), follow=True
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "elections/election_view.html")
         self.assertContains(response, self.election.nice_election_name)

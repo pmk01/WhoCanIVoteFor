@@ -29,8 +29,14 @@ class Migration(migrations.Migration):
                 ("url", models.URLField()),
                 ("starts", models.DateTimeField()),
                 ("ends", models.DateTimeField(blank=True, null=True)),
-                ("location", models.CharField(blank=True, max_length=250, null=True)),
-                ("postcode", models.CharField(blank=True, max_length=10, null=True)),
+                (
+                    "location",
+                    models.CharField(blank=True, max_length=250, null=True),
+                ),
+                (
+                    "postcode",
+                    models.CharField(blank=True, max_length=10, null=True),
+                ),
                 (
                     "post_election",
                     models.ForeignKey(

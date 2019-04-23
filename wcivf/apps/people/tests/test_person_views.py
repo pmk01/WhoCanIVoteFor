@@ -2,7 +2,11 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from people.tests.factories import PersonFactory, PersonPostFactory
 from parties.tests.factories import PartyFactory
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 
 
 @override_settings(
@@ -34,10 +38,15 @@ class PersonViewTests(TestCase):
         )
         post = PostFactory()
         pe = PostElectionFactory(
-            election=election, post=post, ballot_paper_id="local.foo.bar.2040-01-01"
+            election=election,
+            post=post,
+            ballot_paper_id="local.foo.bar.2040-01-01",
         )
         PersonPostFactory(
-            post_election=pe, election=election, person=self.person, party=self.party
+            post_election=pe,
+            election=election,
+            person=self.person,
+            party=self.party,
         )
 
         response = self.client.get(self.person_url, follow=True)
@@ -58,10 +67,15 @@ class PersonViewTests(TestCase):
         )
         post = PostFactory()
         pe = PostElectionFactory(
-            election=election, post=post, ballot_paper_id="local.foo.bar.2017-01-01"
+            election=election,
+            post=post,
+            ballot_paper_id="local.foo.bar.2017-01-01",
         )
         PersonPostFactory(
-            post_election=pe, election=election, person=self.person, party=self.party
+            post_election=pe,
+            election=election,
+            person=self.person,
+            party=self.party,
         )
 
         response = self.client.get(self.person_url, follow=True)

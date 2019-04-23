@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
             model_name="personpost",
             name="post_election",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="elections.PostElection"
+                on_delete=django.db.models.deletion.CASCADE,
+                to="elections.PostElection",
             ),
         )
     ]

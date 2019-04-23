@@ -61,14 +61,18 @@ class Election(models.Model):
             elif delta.days > -5:
                 return "{} days ago".format(delta.days)
             else:
-                return "on {}".format(self.election_date.strftime("%A %-d %B %Y"))
+                return "on {}".format(
+                    self.election_date.strftime("%A %-d %B %Y")
+                )
         else:
             if delta.days == 1:
                 return "tomorrow"
             elif delta.days < 7:
                 return "in {} days".format(delta.days)
             else:
-                return "on {}".format(self.election_date.strftime("%A %-d %B %Y"))
+                return "on {}".format(
+                    self.election_date.strftime("%A %-d %B %Y")
+                )
 
     @property
     def nice_election_name(self):
@@ -86,7 +90,9 @@ class Election(models.Model):
 
     def _election_datetime_tz(self):
         election_date = self.election_date
-        election_datetime = datetime.datetime.fromordinal(election_date.toordinal())
+        election_datetime = datetime.datetime.fromordinal(
+            election_date.toordinal()
+        )
         election_datetime.replace(tzinfo=LOCAL_TZ)
         return election_datetime
 
@@ -101,7 +107,9 @@ class Election(models.Model):
         return utc_to_local(election_datetime.replace(hour=22))
 
     def get_absolute_url(self):
-        return reverse("election_view", args=[str(self.slug), slugify(self.name)])
+        return reverse(
+            "election_view", args=[str(self.slug), slugify(self.name)]
+        )
 
     def election_booklet(self):
         election_to_booklet = {
@@ -141,7 +149,9 @@ class Post(models.Model):
     organization = models.CharField(blank=True, max_length=100)
     area_name = models.CharField(blank=True, max_length=100)
     area_id = models.CharField(blank=True, max_length=100)
-    elections = models.ManyToManyField(Election, through="elections.PostElection")
+    elections = models.ManyToManyField(
+        Election, through="elections.PostElection"
+    )
 
     objects = PostManager()
 
@@ -188,13 +198,16 @@ class PostElection(models.Model):
 
     def get_absolute_url(self):
         return reverse(
-            "election_view", args=[str(self.ballot_paper_id), slugify(self.post.label)]
+            "election_view",
+            args=[str(self.ballot_paper_id), slugify(self.post.label)],
         )
 
     @property
     def ynr_link(self):
         return "{}/elections/{}?{}".format(
-            settings.YNR_BASE, self.ballot_paper_id, settings.YNR_UTM_QUERY_STRING
+            settings.YNR_BASE,
+            self.ballot_paper_id,
+            settings.YNR_UTM_QUERY_STRING,
         )
 
     @property

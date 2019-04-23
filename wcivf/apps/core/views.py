@@ -16,7 +16,10 @@ class PostcodeFormView(FormView):
     form_class = PostcodeLookupForm
 
     def get(self, request, *args, **kwargs):
-        if "postcode" in request.GET and "invalid_postcode" not in self.request.GET:
+        if (
+            "postcode" in request.GET
+            and "invalid_postcode" not in self.request.GET
+        ):
             redirect_url = reverse(
                 "postcode_view", kwargs={"postcode": request.GET["postcode"]}
             )
@@ -36,7 +39,9 @@ class PostcodeFormView(FormView):
 
     def form_valid(self, form):
         postcode = form.cleaned_data["postcode"]
-        self.success_url = reverse("postcode_view", kwargs={"postcode": postcode})
+        self.success_url = reverse(
+            "postcode_view", kwargs={"postcode": postcode}
+        )
         return super().form_valid(form)
 
 
@@ -77,7 +82,9 @@ class StatusCheckView(View):
     @property
     def server_is_dirty(self):
         if getattr(settings, "CHECK_HOST_DIRTY", False):
-            dirty_file_path = os.path.expanduser(getattr(settings, "DIRTY_FILE_PATH"))
+            dirty_file_path = os.path.expanduser(
+                getattr(settings, "DIRTY_FILE_PATH")
+            )
 
             if os.path.exists(dirty_file_path):
                 return True

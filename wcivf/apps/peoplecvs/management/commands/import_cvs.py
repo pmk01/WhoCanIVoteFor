@@ -29,7 +29,9 @@ class Command(BaseCommand):
                 cv_obj, created = CV.objects.update_or_create(person=person)
                 cv_obj.url = result["url"]
                 cv_obj.thumb_url = thumb_url
-                d = datetime.strptime(result["last_modified"], "%Y-%m-%dT%H:%M:%S")
+                d = datetime.strptime(
+                    result["last_modified"], "%Y-%m-%dT%H:%M:%S"
+                )
                 dt_aware = tz.make_aware(d, tz.get_current_timezone())
                 cv_obj.last_modified = dt_aware
                 cv_obj.save()

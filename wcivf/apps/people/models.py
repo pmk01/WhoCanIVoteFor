@@ -43,7 +43,9 @@ class Person(models.Model):
     # contact points
     twitter_username = models.CharField(blank=True, null=True, max_length=100)
     facebook_page_url = models.CharField(blank=True, null=True, max_length=800)
-    facebook_personal_url = models.CharField(blank=True, null=True, max_length=800)
+    facebook_personal_url = models.CharField(
+        blank=True, null=True, max_length=800
+    )
     linkedin_url = models.CharField(blank=True, null=True, max_length=800)
     homepage_url = models.CharField(blank=True, null=True, max_length=800)
     party_ppc_page_url = models.CharField(blank=True, null=True, max_length=800)
@@ -75,7 +77,9 @@ class Person(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("person_view", args=[str(self.ynr_id), slugify(self.name)])
+        return reverse(
+            "person_view", args=[str(self.ynr_id), slugify(self.name)]
+        )
 
     def has_biographical_info(self):
         attrs = [

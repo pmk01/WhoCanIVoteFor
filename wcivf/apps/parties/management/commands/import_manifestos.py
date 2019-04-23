@@ -15,7 +15,9 @@ class Command(BaseCommand):
     """
 
     def add_arguments(self, parser):
-        parser.add_argument("filename", help="Path to the file with the manifestos")
+        parser.add_argument(
+            "filename", help="Path to the file with the manifestos"
+        )
 
     def handle(self, **options):
         with open(options["filename"], "r") as fh:

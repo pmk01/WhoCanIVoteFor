@@ -9,7 +9,9 @@ class PersonSerializer(serializers.ModelSerializer):
 
     def get_absolute_url(self, obj):
         if "request" in self.context:
-            return self.context["request"].build_absolute_uri(obj.get_absolute_url())
+            return self.context["request"].build_absolute_uri(
+                obj.get_absolute_url()
+            )
         return obj.get_absolute_url()
 
     class Meta:

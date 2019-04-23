@@ -75,7 +75,9 @@ class BaseCandidatesAndElectionsViewSet(
                 "candidates": candidates,
             }
             if postelection.replaced_by:
-                election["replaced_by"] = postelection.replaced_by.ballot_paper_id
+                election[
+                    "replaced_by"
+                ] = postelection.replaced_by.ballot_paper_id
             else:
                 election["replaced_by"] = None
 
@@ -110,5 +112,7 @@ class CandidatesAndElectionsForBallots(BaseCandidatesAndElectionsViewSet):
 
         pes = PostElection.objects.filter(ballot_paper_id__in=ballot_ids_lst)
         pes = pes.select_related("post", "election", "election__voting_system")
-        pes = pes.order_by("election__election_date", "election__election_weight")
+        pes = pes.order_by(
+            "election__election_date", "election__election_weight"
+        )
         return pes

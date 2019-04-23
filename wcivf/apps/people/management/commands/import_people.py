@@ -108,7 +108,8 @@ class Command(BaseCommand):
 
         else:
             next_page = (
-                settings.YNR_BASE + "/media/cached-api/latest/persons-000001.json"
+                settings.YNR_BASE
+                + "/media/cached-api/latest/persons-000001.json"
             )
 
         while next_page:

@@ -181,11 +181,6 @@ class PersonManager(models.Manager):
             # Delete the cache for this person's ballots as the membership might
             # have changed
             for ballot_paper_id in ballots_ids_to_invalidate:
-                cache.delete(
-                    PEOPLE_FOR_BALLOT_KEY_FMT.format(
-                        ballot_paper_id
-                    )
-                )
-
+                cache.delete(PEOPLE_FOR_BALLOT_KEY_FMT.format(ballot_paper_id))
 
         return person_obj

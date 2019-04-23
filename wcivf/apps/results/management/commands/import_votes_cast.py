@@ -55,5 +55,6 @@ class Command(BaseCommand):
                     person_post.save()
 
                     PersonPostResult.objects.update_or_create(
-                        person_post=person_post, votes_cast=membership["num_ballots"]
+                        person_post=person_post,
+                        votes_cast=membership["num_ballots"],
                     )

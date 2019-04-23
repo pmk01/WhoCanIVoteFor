@@ -10,5 +10,7 @@ class Migration(migrations.Migration):
     dependencies = [("hustings", "0001_initial")]
 
     operations = [
-        migrations.AlterModelOptions(name="husting", options={"ordering": ["-starts"]})
+        migrations.AlterModelOptions(
+            name="husting", options={"ordering": ["-starts"]}
+        )
     ]

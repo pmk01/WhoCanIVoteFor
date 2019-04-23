@@ -25,7 +25,8 @@ class Migration(migrations.Migration):
             model_name="resultevent",
             name="post_election",
             field=models.OneToOneField(
-                on_delete=django.db.models.deletion.CASCADE, to="elections.PostElection"
+                on_delete=django.db.models.deletion.CASCADE,
+                to="elections.PostElection",
             ),
         ),
     ]

@@ -31,7 +31,10 @@ class Migration(migrations.Migration):
                 ("facebook_page", models.URLField(blank=True, max_length=800)),
                 ("homepage", models.URLField(blank=True, max_length=800)),
                 ("email", models.EmailField(blank=True, max_length=254)),
-                ("ballot_papers", models.ManyToManyField(to="elections.PostElection")),
+                (
+                    "ballot_papers",
+                    models.ManyToManyField(to="elections.PostElection"),
+                ),
                 (
                     "parent",
                     models.ForeignKey(
