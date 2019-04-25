@@ -1,21 +1,23 @@
 {% load dc_forms %}
+
 {% if request.session.donate_split_test %}
 <div class="card donate_card">
 
   {% if request.session.donate_split_test == "everyone_takes_part" %}
-    <h3>Democracy works when everyone takes part</h3>
+    <h3>Help make our democracy better</h3>
 
-    <p>You can help make this website better for everyone. Donate £3 now.</p>
-    <p>This site receives no government funding. It’s run by a non-profit: Democracy Club. We need your support to
-      provide better election information for all.</p>
+    <p>You can help make this website better for everyone.</p>
+    <p>This site is run by Democracy Club. It receives no government funding.
+      <em>Please chip in £3/month to help get everyone the information they need to take part.</em></p>
   {% endif %}
 
   {% if request.session.donate_split_test == "good_information" %}
     <h3>Democracy runs on good information</h3>
 
-    <p>You can help make this website better for everyone. Donate £3 now. </p>
-    <p>This site receives no government funding. It’s run by a non-profit: Democracy Club. We need your support to
-      provide better election information for all.</p>
+    <p>You can help make this website better for everyone.</p>
+    <p>This site is run by Democracy Club. It receives no government funding.
+      <em>Please chip in £3/month to help get everyone the information they need to take part.</em>
+    </p>
   {% endif %}
 
   <a href="https://pay.gocardless.com/AL0002A9BYC557" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
