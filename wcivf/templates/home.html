@@ -29,7 +29,7 @@
       {% regroup election_group.list by election.nice_election_name as named_postelections %}
       <ul>
         {% for election in named_postelections %}
-          <li><strong>{{ election.grouper }}{{ election.list|length|pluralize }}</stroug>
+          <li><strong>{{ election.grouper }}{{ election.list|length|pluralize }}</strong>
           {% for postelection in election.list %}
             <br><a href="{{ postelection.get_absolute_url }}">{{ postelection.friendly_name }}</a>
           {% endfor %}
