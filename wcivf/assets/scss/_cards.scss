@@ -245,13 +245,14 @@ blockquote {
   text-align:center;
   .party_emblem {
     float: none;
+    width:100px;
   }
 
   @include media(desktop) {
       text-align:left;
       .party_emblem {
         float: left;
-        padding-right:0.5em;
+        margin-right:0.5em;
       }
   }
 
