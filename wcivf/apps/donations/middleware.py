@@ -51,7 +51,7 @@ class DonationFormMiddleware(object):
         """
 
         if not "donate_split_test" in request.session:
-            split_tests = ["good_information", "everyone_takes_part"]
+            split_tests = ["good_information", "make_our_democracy_better"]
             request.session["donate_split_test"] = random.choice(split_tests)
             request.session.modified = True
 
