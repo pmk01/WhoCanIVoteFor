@@ -49,9 +49,8 @@ class DonationFormMiddleware(object):
         """
         Give a session a test name, used for A/B testing
         """
-
-        if not "donate_split_test" in request.session:
-            split_tests = ["good_information", "make_our_democracy_better"]
+        split_tests = ["good_information", "make_our_democracy_better"]
+        if request.session.get("donate_split_test") in split_tests:
             request.session["donate_split_test"] = random.choice(split_tests)
             request.session.modified = True
 
