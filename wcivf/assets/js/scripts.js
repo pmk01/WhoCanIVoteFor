@@ -19,7 +19,7 @@ $("#donate_button").on("click", function(el) {
                }
 
            });
-       } catch {
+       } catch (e) {
            document.location = url;
        }
    }
