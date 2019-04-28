@@ -36,6 +36,7 @@ class Command(BaseCommand):
             self.add_posts(page)
         self.attach_cancelled_ballot_info()
         self.populate_any_non_by_elections_field()
+        self.populate_empty_voting_systems()
 
     def add_posts(self, results):
         for post in results["results"]:
@@ -63,3 +64,15 @@ class Command(BaseCommand):
             )
             election.any_non_by_elections = any_non_by_elections
             election.save()
+
+    def populate_empty_voting_systems(self):
+        qs = Election.objects.filter(
+            voting_system=None, current=True
+        ).prefetch_related("postelection_set")
+        ee = EEHelper()
+        for election in qs:
+            for post_election in election.postelection_set.all():
+                post_election.voting_system_id = ee.get_data(
+                    post_election.ballot_paper_id
+                )["voting_system"]["slug"]
+                post_election.save()

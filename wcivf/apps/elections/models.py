@@ -168,6 +168,7 @@ class PostElection(models.Model):
         "PostElection", null=True, blank=True, related_name="replaces"
     )
     metadata = JSONField(null=True)
+    voting_system = models.ForeignKey("VotingSystem", null=True, blank=True)
 
     def get_name_suffix(self):
         election_type = self.ballot_paper_id.split(".")[0]
@@ -219,6 +220,13 @@ class PostElection(models.Model):
         else:
             message = "<strong>(The poll for this election has been cancelled)</strong>"
         return mark_safe(message)
+
+    @property
+    def get_voting_system(self):
+        if self.voting_system:
+            return self.voting_system
+        else:
+            return self.election.voting_system
 
 
 class VotingSystem(models.Model):

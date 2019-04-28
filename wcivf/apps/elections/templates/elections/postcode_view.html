@@ -119,7 +119,6 @@
 
       {% if postelection.people %}
         {% if postelection.election.uses_lists %}
-        <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
         {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
         {% else %}
         {% include "elections/includes/_people_list.html" with people=postelection.people %}
@@ -136,8 +135,8 @@
       {{ postelection.election.description|markdown }}
       {% endif %}
 
-      {% if postelection.election.voting_system %}
-      {% include "elections/includes/_how-to-vote.html" with voting_system=postelection.election.voting_system %}
+      {% if postelection.get_voting_system %}
+      {% include "elections/includes/_how-to-vote.html" with voting_system=postelection.get_voting_system %}
       {% endif %}
 
       {% if postelection.election.voter_age %}
