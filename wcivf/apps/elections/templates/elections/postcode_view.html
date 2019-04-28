@@ -137,13 +137,7 @@
       {% endif %}
 
       {% if postelection.election.voting_system %}
-      <details>
-        <summary>How you vote</summary>
-        <h5>{{ postelection.election.voting_system }}</h5>
-        {{ postelection.election.voting_system.description|markdown }}
-        <p><a href="{{ postelection.election.voting_system.wikipedia_url }}">
-            Read more on wikipedia</a></p>
-      </details>
+      {% include "elections/includes/_how-to-vote.html" with voting_system=postelection.election.voting_system %}
       {% endif %}
 
       {% if postelection.election.voter_age %}
