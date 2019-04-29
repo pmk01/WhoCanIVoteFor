@@ -66,6 +66,7 @@ class Command(BaseCommand):
         self.seen_people = set()
 
         files = [f for f in os.listdir(self.dirpath) if f.endswith(".json")]
+        files = sorted(files, key=lambda k: int(k.split("-")[-1].split(".")[0]))
         for file in files:
             self.stdout.write("Importing {}".format(file))
             with open(os.path.join(self.dirpath, file), "r") as f:
