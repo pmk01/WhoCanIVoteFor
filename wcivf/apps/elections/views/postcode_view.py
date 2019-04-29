@@ -94,9 +94,10 @@ class PostcodeiCalView(
             )
             if polling_station.get("polling_station_known"):
                 geometry = polling_station["polling_station"]["geometry"]
-                event["geo"] = "{};{}".format(
-                    geometry["coordinates"][0], geometry["coordinates"][1]
-                )
+                if geometry:
+                    event["geo"] = "{};{}".format(
+                        geometry["coordinates"][0], geometry["coordinates"][1]
+                    )
                 properties = polling_station["polling_station"]["properties"]
                 event["location"] = vText(
                     "{}, {}".format(
