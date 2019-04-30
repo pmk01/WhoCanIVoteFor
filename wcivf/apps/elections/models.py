@@ -183,7 +183,9 @@ class PostElection(models.Model):
         return "area"
 
     def expected_sopn_date(self):
-        return expected_sopn_publish_date(self.ballot_paper_id, self.post.territory)
+        return expected_sopn_publish_date(
+            self.ballot_paper_id, self.post.territory
+        )
 
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election

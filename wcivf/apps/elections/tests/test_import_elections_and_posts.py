@@ -169,7 +169,9 @@ class TerritoryImporter(TestCase):
         cmd.get_paginator = lambda x: FakeTerritoryPager("", cmd.stdout)
         cmd.handle()
 
-        post_election = PostElection.objects.get(ballot_paper_id="fake.election.post.1")
+        post_election = PostElection.objects.get(
+            ballot_paper_id="fake.election.post.1"
+        )
         self.assertEqual(post_election.post.territory, "ENG")
 
     @mock.patch(
@@ -184,5 +186,7 @@ class TerritoryImporter(TestCase):
         cmd.get_paginator = lambda x: FakeTerritoryPager("", cmd.stdout)
         cmd.handle()
 
-        post_election = PostElection.objects.get(ballot_paper_id="fake.election.post.1")
+        post_election = PostElection.objects.get(
+            ballot_paper_id="fake.election.post.1"
+        )
         self.assertEqual(post_election.post.territory, "-")

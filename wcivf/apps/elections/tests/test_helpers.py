@@ -21,7 +21,9 @@ class ExpectedSoPNDate(TestCase):
         assert expected is None
 
     def test_with_territory_code_unambiguous_election_type(self):
-        expected = expected_sopn_publish_date("nia.belfast-east.2017-03-02", "NIR")
+        expected = expected_sopn_publish_date(
+            "nia.belfast-east.2017-03-02", "NIR"
+        )
 
         assert expected == date(2017, 2, 8)
 

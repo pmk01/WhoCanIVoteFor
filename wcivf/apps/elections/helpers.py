@@ -102,7 +102,9 @@ def expected_sopn_publish_date(slug, territory):
     try:
         if slug.startswith("local") and territory is not None:
 
-            date_of_poll = datetime.strptime(slug.split(".")[-1], "%Y-%m-%d").date()
+            date_of_poll = datetime.strptime(
+                slug.split(".")[-1], "%Y-%m-%d"
+            ).date()
 
             return expected_sopn_publish_date.lookup.local(
                 date_of_poll, country=country[territory]
