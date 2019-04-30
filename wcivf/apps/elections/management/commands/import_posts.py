@@ -39,7 +39,6 @@ class Command(BaseCommand):
         self.populate_empty_voting_systems()
         self.import_territories()
 
-
     def add_posts(self, results):
         for post in results["results"]:
             post_obj, created = Post.objects.update_or_create_from_ynr(post)
@@ -66,7 +65,6 @@ class Command(BaseCommand):
             )
             election.any_non_by_elections = any_non_by_elections
             election.save()
-
 
     def extract_territory(self, ee_data):
         if ee_data and "organisation" in ee_data:
@@ -105,4 +103,3 @@ class Command(BaseCommand):
                         "voting_system"
                     ]["slug"]
                     post_election.save()
-
