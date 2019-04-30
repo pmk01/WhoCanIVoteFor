@@ -72,7 +72,9 @@ class Command(BaseCommand):
         ee = EEHelper()
         for election in qs:
             for post_election in election.postelection_set.all():
-                post_election.voting_system_id = ee.get_data(
-                    post_election.ballot_paper_id
-                )["voting_system"]["slug"]
-                post_election.save()
+                ballot_data = ee.get_data(post_election.ballot_paper_id)
+                if "voting_system" in ballot_data:
+                    post_election.voting_system_id = ballot_data[
+                        "voting_system"
+                    ]["slug"]
+                    post_election.save()
