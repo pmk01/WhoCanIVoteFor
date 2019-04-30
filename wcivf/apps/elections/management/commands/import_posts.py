@@ -85,7 +85,11 @@ class Command(BaseCommand):
 
             territory = self.extract_territory(ee_data)
 
-            self.stdout.write("Added territory to {0}: {1}".format(post_election.ballot_paper_id, territory))
+            self.stdout.write(
+                "Added territory to {0}: {1}".format(
+                    post_election.ballot_paper_id, territory
+                )
+            )
 
             post_election.post.territory = territory
             post_election.post.save()
