@@ -36,7 +36,9 @@ class Command(BaseCommand):
             self.add_posts(page)
         self.attach_cancelled_ballot_info()
         self.populate_any_non_by_elections_field()
+        self.populate_empty_voting_systems()
         self.import_territories()
+
 
     def add_posts(self, results):
         for post in results["results"]:
@@ -65,6 +67,7 @@ class Command(BaseCommand):
             election.any_non_by_elections = any_non_by_elections
             election.save()
 
+
     def extract_territory(self, ee_data):
         if ee_data and "organisation" in ee_data:
             return ee_data["organisation"].get("territory_code", "-")
@@ -88,3 +91,18 @@ class Command(BaseCommand):
 
             post_election.post.territory = territory
             post_election.post.save()
+
+    def populate_empty_voting_systems(self):
+        qs = Election.objects.filter(
+            voting_system=None, current=True
+        ).prefetch_related("postelection_set")
+        ee = EEHelper()
+        for election in qs:
+            for post_election in election.postelection_set.all():
+                ballot_data = ee.get_data(post_election.ballot_paper_id)
+                if "voting_system" in ballot_data:
+                    post_election.voting_system_id = ballot_data[
+                        "voting_system"
+                    ]["slug"]
+                    post_election.save()
+

@@ -12,5 +12,7 @@ class ResultEvent(models.Model):
 
 
 class PersonPostResult(models.Model):
-    person_post = models.OneToOneField("people.PersonPost", related_name="results")
+    person_post = models.OneToOneField(
+        "people.PersonPost", related_name="results"
+    )
     votes_cast = models.IntegerField()

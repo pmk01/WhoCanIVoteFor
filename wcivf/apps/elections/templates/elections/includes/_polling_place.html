@@ -77,19 +77,16 @@
   {% endif %}
   </p>
 
-  {% if polling_station.polling_station_known %}
+  {% if polling_station.polling_station_known and polling_station.polling_station.geometry %}
     <p>
       <a href="https://wheredoivote.co.uk/postcode/{{ postcode }}">
         Get walking directions from {{ postcode }}</a>.
     </p>
   {% endif %}
 
-  {% if not polling_station.custom_finder and polling_station.polling_station_known %}
+  {% if not polling_station.custom_finder and polling_station.polling_station_known and polling_station.polling_station.geometry %}
   <div id="area_map" style="height:400px;"></div>
-  {% endif %}
 
-
-  {% if not polling_station.custom_finder and polling_station.polling_station_known %}
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 

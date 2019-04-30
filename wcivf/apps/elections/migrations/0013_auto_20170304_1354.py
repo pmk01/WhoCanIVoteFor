@@ -20,6 +20,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="post",
             name="elections",
-            field=models.ManyToManyField(related_name="fake", to="elections.Election"),
+            field=models.ManyToManyField(
+                related_name="fake", to="elections.Election"
+            ),
         ),
     ]

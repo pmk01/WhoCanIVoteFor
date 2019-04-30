@@ -1,3 +1,7 @@
+POSTCODE_TO_BALLOT_KEY_FMT = "postcode_to_ballot_{}"
+PEOPLE_FOR_BALLOT_KEY_FMT = "people_for_ballot_{}"
+POLLING_STATIONS_KEY_FMT = "pollingstations_{}"
+
 UPDATED_SLUGS = {
     "2010": "parl.2010-05-06",
     "2015": "parl.2015-05-07",

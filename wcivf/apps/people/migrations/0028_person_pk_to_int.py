@@ -25,7 +25,9 @@ def drop_varchar_pattern_ops_index(apps, schemaEditor):
                 )
 
     for model, index_name, op in indexes_to_delete:
-        schemaEditor.execute(schemaEditor._delete_constraint_sql(op, model, index_name))
+        schemaEditor.execute(
+            schemaEditor._delete_constraint_sql(op, model, index_name)
+        )
 
 
 class Migration(migrations.Migration):
@@ -37,7 +39,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(drop_varchar_pattern_ops_index, migrations.RunPython.noop),
+        migrations.RunPython(
+            drop_varchar_pattern_ops_index, migrations.RunPython.noop
+        ),
         migrations.AlterField(
             model_name="person",
             name="ynr_id",

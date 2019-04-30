@@ -2,7 +2,11 @@ from django.test import TestCase
 
 from people.models import Person, PersonPost
 from people.tests.factories import PersonFactory, PersonPostFactory
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 
 
 class PersonManagerTests(TestCase):

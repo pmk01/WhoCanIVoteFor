@@ -17,7 +17,10 @@ class Migration(migrations.Migration):
                 (
                     "ynr_id",
                     models.CharField(
-                        blank=True, max_length=100, primary_key=True, serialize=False
+                        blank=True,
+                        max_length=100,
+                        primary_key=True,
+                        serialize=False,
                     ),
                 ),
                 ("label", models.CharField(blank=True, max_length=255)),

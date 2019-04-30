@@ -11,9 +11,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name="party", name="description", field=models.TextField(blank=True)
+            model_name="party",
+            name="description",
+            field=models.TextField(blank=True),
         ),
         migrations.AddField(
-            model_name="party", name="wikipedia_url", field=models.URLField(blank=True)
+            model_name="party",
+            name="wikipedia_url",
+            field=models.URLField(blank=True),
         ),
     ]

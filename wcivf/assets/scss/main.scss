@@ -52,10 +52,6 @@ dd {
   margin-left:1em;
 }
 
-.party_list_row {
-  clear:right;
-}
-
 .next_election {
     h2 {
         color: #666;
@@ -128,4 +124,8 @@ dd {
   @include media($max-width: 530px) {
       padding-left:10px;
     }
+}
+
+summary {
+  cursor: pointer;
 }

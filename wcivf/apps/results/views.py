@@ -12,16 +12,21 @@ class ResultsListView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["elections"] = []
-        election_qs = Election.objects.filter(current=True).order_by("-election_weight")
+        election_qs = Election.objects.filter(current=True).order_by(
+            "-election_weight"
+        )
         for election in election_qs:
 
             results1 = (
                 ResultEvent.objects.filter(
-                    post_election__election=election, declaration_time__isnull=False
+                    post_election__election=election,
+                    declaration_time__isnull=False,
                 )
                 .order_by("-declaration_time")
                 .select_related(
-                    "post_election", "post_election__election", "post_election__post"
+                    "post_election",
+                    "post_election__election",
+                    "post_election__post",
                 )
                 .prefetch_related(
                     "person_posts",
@@ -33,11 +38,14 @@ class ResultsListView(TemplateView):
 
             results2 = (
                 ResultEvent.objects.filter(
-                    post_election__election=election, declaration_time__isnull=True
+                    post_election__election=election,
+                    declaration_time__isnull=True,
                 )
                 .order_by("-expected_declaration_time")
                 .select_related(
-                    "post_election", "post_election__election", "post_election__post"
+                    "post_election",
+                    "post_election__election",
+                    "post_election__post",
                 )
                 .prefetch_related(
                     "person_posts__post__area_name",

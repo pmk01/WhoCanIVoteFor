@@ -50,7 +50,9 @@ def set_time_string_on_datetime(dt, time_string):
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument("filename", help="Path to the file with the hustings in it")
+        parser.add_argument(
+            "filename", help="Path to the file with the hustings in it"
+        )
         parser.add_argument(
             "--quiet",
             action="store_true",
@@ -58,12 +60,21 @@ class Command(BaseCommand):
             default=False,
             help="Only output errors",
         )
+        parser.add_argument(
+            "--for-date",
+            action="store",
+            dest="date",
+            required=True,
+            help="The date of the elections this file is about",
+        )
 
-    def delete_all_hustings(self):
+    def delete_all_hustings(self, election_date):
         """
         Clear our hustings away.
         """
-        Husting.objects.all().delete()
+        Husting.objects.filter(
+            post_election__election__election_date=election_date
+        ).delete()
 
     def create_husting(self, row):
         """
@@ -72,9 +83,13 @@ class Command(BaseCommand):
         starts = dt_from_string(row["Date (YYYY-Month-DD)"])
         ends = None
         if row["Start time (00:00)"]:
-            starts = set_time_string_on_datetime(starts, row["Start time (00:00)"])
+            starts = set_time_string_on_datetime(
+                starts, row["Start time (00:00)"]
+            )
         if row["End time (if known)"]:
-            ends = set_time_string_on_datetime(starts, row["End time (if known)"])
+            ends = set_time_string_on_datetime(
+                starts, row["End time (if known)"]
+            )
 
         # Get the post_election
         pes = PostElection.objects.filter(ballot_paper_id=row["Election ID"])
@@ -99,12 +114,14 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
         """
-        Entrypoint for our command.
+        Entry point for our command.
         """
         if options["quiet"]:
             self.stdout = open(os.devnull, "w")
 
-        self.delete_all_hustings()
+        for_election = options["date"]
+
+        self.delete_all_hustings(for_election)
         hustings_counter = 0
         self.not_a_constituency_friend = []
         with open(options["filename"], "r") as fh:
@@ -114,5 +131,7 @@ class Command(BaseCommand):
                 if husting:
                     hustings_counter += 1
                     self.stdout.write(
-                        "Created husting {0} <{1}>".format(hustings_counter, husting)
+                        "Created husting {0} <{1}>".format(
+                            hustings_counter, husting
+                        )
                     )

@@ -1,3 +1,4 @@
+import random
 import re
 from django.http import HttpResponseRedirect
 
@@ -16,7 +17,9 @@ class DonationFormMiddleware(object):
     def get_initial(self, request):
         form_initial = {"payment_type": "subscription"}
         default_donation = 3
-        suggested_donation = request.GET.get("suggested_donation", default_donation)
+        suggested_donation = request.GET.get(
+            "suggested_donation", default_donation
+        )
         if re.search("[^0-9]", str(suggested_donation)):
             suggested_donation = default_donation
 
@@ -42,7 +45,21 @@ class DonationFormMiddleware(object):
         # Redirect to GoCardless
         return HttpResponseRedirect(redirect_url)
 
+    def assign_split_test_name(self, request):
+        """
+        Give a session a test name, used for A/B testing
+        """
+        split_tests = [
+            "good_information",
+            "make_our_democracy_better",
+            "good_information_one_off_5",
+        ]
+        if not request.session.get("donate_split_test") in split_tests:
+            request.session["donate_split_test"] = random.choice(split_tests)
+            request.session.modified = True
+
     def process_request(self, request):
+        self.assign_split_test_name(request)
         form_prefix = "donation_form"
         key_to_check = "{}-amount".format(form_prefix)
 
@@ -51,5 +68,7 @@ class DonationFormMiddleware(object):
             if form.is_valid():
                 return self.form_valid(request, form)
         else:
-            form = DonationForm(initial=self.get_initial(request), prefix=form_prefix)
+            form = DonationForm(
+                initial=self.get_initial(request), prefix=form_prefix
+            )
         request.donation_form = form

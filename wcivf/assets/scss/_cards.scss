@@ -69,6 +69,8 @@
 }
 
 .candidate_grid {
+  clear:both;
+  padding-top:1em;
   margin: 0 -10px 10px -10px;
     @include media($max-width: 530px) {
       margin: 0 -20px 10px -10px;
@@ -219,4 +221,54 @@
 
 blockquote {
   font-style:italic;
+  font-family: sans-serif;
+}
+
+
+.donate_card em {
+  background-color: yellow;
+  font-style: normal;
+  padding: 0.1em;
+}
+
+.donate_card .link-button {
+  background-color: #00AEEF;
+  border: 0;
+  padding: 0.4em 0.6em;
+  margin: 0.5em 0;
+  font-size: 1em;
+  color: #FFF;
+  border-bottom: 3px solid #0089bc;
+}
+
+
+.party-list-card {
+  text-align:center;
+  .party_emblem {
+    float: none;
+    width:100px;
+  }
+
+  @include media(desktop) {
+      text-align:left;
+      .party_emblem {
+        float: left;
+        margin-right:0.5em;
+      }
+  }
+
+  details {
+    summary {
+      overflow:auto;
+      h4 {
+        margin-top:0;
+      }
+    }
+    summary::-webkit-details-marker {
+      display:none;
+    }
+    & > summary:first-of-type {
+    list-style-type: none;
+    }
+  }
 }

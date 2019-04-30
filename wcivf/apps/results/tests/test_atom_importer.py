@@ -16,7 +16,11 @@ from people.models import PersonPost
 from results.models import ResultEvent
 
 from people.tests.factories import PersonFactory, PersonPostFactory
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 
 
 @override_settings(
@@ -31,9 +35,21 @@ class TestResults(TestCase):
             slug="parl.2017-06-08",
         )
         winners = [
-            {"person_id": 2809, "post_id": "WMC:E14000803", "post_label": "Maidenhead"},
-            {"person_id": 357, "post_id": "WMC:E14000608", "post_label": "Buckingham"},
-            {"person_id": 2811, "post_id": "WMC:E14000803", "post_label": "Maidenhead"},
+            {
+                "person_id": 2809,
+                "post_id": "WMC:E14000803",
+                "post_label": "Maidenhead",
+            },
+            {
+                "person_id": 357,
+                "post_id": "WMC:E14000608",
+                "post_label": "Buckingham",
+            },
+            {
+                "person_id": 2811,
+                "post_id": "WMC:E14000803",
+                "post_label": "Maidenhead",
+            },
             {
                 "person_id": 34291,
                 "post_id": "WMC:E14000673",

@@ -49,7 +49,7 @@ class BaseCandidatesAndElectionsViewSet(
         postelections = self.get_ballots(request)
         for postelection in postelections:
             candidates = []
-            personposts = self.postelections_to_people(postelection)
+            personposts = self.people_for_ballot(postelection)
             for personpost in personposts:
                 candidates.append(
                     serializers.PersonPostSerializer(
@@ -75,7 +75,9 @@ class BaseCandidatesAndElectionsViewSet(
                 "candidates": candidates,
             }
             if postelection.replaced_by:
-                election["replaced_by"] = postelection.replaced_by.ballot_paper_id
+                election[
+                    "replaced_by"
+                ] = postelection.replaced_by.ballot_paper_id
             else:
                 election["replaced_by"] = None
 
@@ -92,7 +94,7 @@ class CandidatesAndElectionsForPostcodeViewSet(
             raise PostcodeNotProvided()
         postcode = self.clean_postcode(postcode)
         try:
-            return self.postcode_to_posts(postcode, compact=True)
+            return self.postcode_to_ballots(postcode, compact=True)
         except InvalidPostcodeError:
             raise InvalidPostcode()
 
@@ -110,5 +112,7 @@ class CandidatesAndElectionsForBallots(BaseCandidatesAndElectionsViewSet):
 
         pes = PostElection.objects.filter(ballot_paper_id__in=ballot_ids_lst)
         pes = pes.select_related("post", "election", "election__voting_system")
-        pes = pes.order_by("election__election_date", "election__election_weight")
+        pes = pes.order_by(
+            "election__election_date", "election__election_weight"
+        )
         return pes

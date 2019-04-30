@@ -28,10 +28,15 @@ class Command(BaseCommand):
         )
 
     def get_postelections(self, query, election):
-        return PostElection.objects.filter(election=election, post__area_name=query)
+        return PostElection.objects.filter(
+            election=election, post__area_name=query
+        )
 
     def get_constituency(self, constituency, election):
-        matches = {"Ashton Under Lyne": "Ashton-under-Lyne", "Ynys Mon": "Ynys Môn"}
+        matches = {
+            "Ashton Under Lyne": "Ashton-under-Lyne",
+            "Ynys Mon": "Ynys Môn",
+        }
         if constituency in matches:
             constituency = matches[constituency]
         constituency = constituency.replace("&", "and").strip()

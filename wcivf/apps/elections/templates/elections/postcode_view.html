@@ -30,7 +30,7 @@
         <ul>
           {% for ballot in election_group.list %}
           <li>
-            <a href="#election_{{ post.election.slug }}">
+            <a href="#election_{{ ballot.election.slug }}">
             {{ ballot.election.nice_election_name }}
             {% if ballot.post.label != post.election %}
               {% if 'mayor' not in ballot.election.slug %}
@@ -73,7 +73,7 @@
       <p>
         {% if postelection.election.in_past %}
         <strong>{{ postelection.people|length }} candidates</strong> stood in
-        {{ postelection.post.label }}&nbsp;constituency.
+        {{ postelection.post.label }}&nbsp;{{ postelection.get_name_suffix }}.
         {% else %}
           {# Display different messages depending on the number of candidates #}
           {# Case: No candidates for a contested election #}
@@ -89,10 +89,10 @@
               {% if 'mayor' in postelection.election.slug %}
               {{ postelection.election.nice_election_name }}.
               {% else %}
-              {{ postelection.post.label }} ward.
+              {{ postelection.post.label }} {{ postelection.get_name_suffix }}.
               {% endif %}
 
-              {% if postelection.winner_count %}
+              {% if postelection.winner_count and postelection.election.voting_system_id == 'FPTP' %}
               You will have {{ postelection.winner_count|intword }} vote{{ postelection.winner_count|pluralize }}.
               {% endif %}
 
@@ -101,7 +101,7 @@
             {# Case: Candidates and the post is NOT locked (add CTA) #}
               The official candidate list has not yet been published.
               However, we expect at least <strong>{{ postelection.people|length }} candidate{{postelection.people|pluralize}}</strong>
-              to stand in the {{ postelection.post.label }} ward.
+              to stand in the {{ postelection.post.label }} {{ postelection.get_name_suffix }}.
 
               You can help improve this page: <a href="{{ postelection.ynr_link }}">
                 add information about candidates to our database</a>.
@@ -119,7 +119,6 @@
 
       {% if postelection.people %}
         {% if postelection.election.uses_lists %}
-        <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
         {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
         {% else %}
         {% include "elections/includes/_people_list.html" with people=postelection.people %}
@@ -136,14 +135,8 @@
       {{ postelection.election.description|markdown }}
       {% endif %}
 
-      {% if postelection.election.voting_system %}
-      <details>
-        <summary>How you vote</summary>
-        <h5>{{ postelection.election.voting_system }}</h5>
-        {{ postelection.election.voting_system.description|markdown }}
-        <p><a href="{{ postelection.election.voting_system.wikipedia_url }}">
-            Read more on wikipedia</a></p>
-      </details>
+      {% if postelection.get_voting_system %}
+      {% include "elections/includes/_how-to-vote.html" with voting_system=postelection.get_voting_system %}
       {% endif %}
 
       {% if postelection.election.voter_age %}
@@ -163,16 +156,6 @@
     {% endif %}
   </div>
 
-  {% if postelections.count %}
-  <div class="card">
-        <h2>Help to make this website better</h2>
-        <a href="https://democracyclub.org.uk/blog/2019/03/14/lets-party-local-democracy/">
-          Join us at a crowdsourcing party to collect more information about election candidates
-        </a>
-  </div>
-  {% endif %}
-
-
   {% if postelection.husting_set.exists %}
     <div class="card">
       <h3>Election events near you</h3>
@@ -189,19 +172,19 @@
 
 {% if not messages %}
   <div class="card">
-    <h2>Free election reminders</h2>
+    <h2>Election reminders for {{ postcode }}</h2>
     <p>We can email you the next time there is an election in {{ postcode }}.</p>
     {% include "email_form/election_reminders_form.html" %}
+
+    <p>
+    Or add future elections in {{ postcode }} to your calendar:
+    <a href="webcal://whocanivotefor.co.uk{% url 'postcode_ical_view' postcode %}">iCal feed</a>
+  </p>
   </div>
 {% endif %}
 
-<div class="card">
-  <p>
-    Add future elections in {{ postcode }} to your calendar:
-    <a href="webcal://whocanivotefor.co.uk{% url 'postcode_ical_view' postcode %}">iCal feed</a>
-  </p>
-</div>
 
+{% include "donations/donate_inline.html" %}
 {% include "feedback/feedback_form.html" %}
 
 {% endblock content %}

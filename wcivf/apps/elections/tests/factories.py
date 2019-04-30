@@ -1,6 +1,6 @@
 import factory
 
-from elections.models import Election, Post, VotingSystem, PostElection
+from elections.models import Election, Post, PostElection
 
 
 class ElectionFactory(factory.django.DjangoModelFactory):
@@ -31,18 +31,3 @@ class PostElectionFactory(factory.django.DjangoModelFactory):
 
     post = factory.SubFactory(PostFactory)
     election = factory.SubFactory(ElectionFactory)
-
-
-class VotingSystemFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = VotingSystem
-
-    slug = "FPTP"
-    name = "First Past The Post"
-    wikipedia_url = "https://en.wikipedia.org/wiki/First-past-the-post_voting"
-    description = """
-        A first-past-the-post (abbreviated FPTP, 1stP, 1PTP or FPP) voting
-        method is one in which voters are required to indicate on the ballot
-        the candidate of their choice, and the candidate who receives more
-        votes than any other candidate wins.
-    """

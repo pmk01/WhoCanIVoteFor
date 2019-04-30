@@ -32,7 +32,9 @@ class TestElectionAndPostImporter(TestCase):
         for post in results["results"]:
             Post.objects.update_or_create_from_ynr(post)
 
-    @vcr.use_cassette("fixtures/vcr_cassettes/test_import_elections_from_ynr.yaml")
+    @vcr.use_cassette(
+        "fixtures/vcr_cassettes/test_import_elections_from_ynr.yaml"
+    )
     def test_import_elections_from_ynr(self):
         assert Election.objects.count() == 0
         self._import_elections()
@@ -113,8 +115,12 @@ class CancelledBallotPostImporter(TestCase):
         cmd.stdout = StringIO()
         cmd.get_paginator = lambda x: FakeCancelledPager("", cmd.stdout)
         cmd.handle()
-        cancelled = PostElection.objects.get(ballot_paper_id="fake.election.post.1")
-        replacement = PostElection.objects.get(ballot_paper_id="fake.election.post.2")
+        cancelled = PostElection.objects.get(
+            ballot_paper_id="fake.election.post.1"
+        )
+        replacement = PostElection.objects.get(
+            ballot_paper_id="fake.election.post.2"
+        )
         self.assertEqual(cancelled.cancelled, True)
         self.assertEqual(cancelled.replaced_by, replacement)
         self.assertDictEqual(cancelled.metadata, {"foo": "bar"})

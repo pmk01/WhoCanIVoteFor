@@ -13,7 +13,7 @@ import requests
 
 from core.helpers import show_data_on_error
 from people.models import Person, PersonPost
-from elections.models import Election, Post
+from elections.models import PostElection
 from parties.models import Party
 
 
@@ -56,12 +56,17 @@ class Command(BaseCommand):
     @transaction.atomic
     def add_to_db(self):
         self.all_parties = {p.party_id: p for p in Party.objects.all()}
-        self.all_elections = {e.slug: e for e in Election.objects.all()}
-        self.all_posts = {p.ynr_id: p for p in Post.objects.all()}
+        self.all_ballots = {
+            b.ballot_paper_id: b
+            for b in PostElection.objects.all().select_related(
+                "election", "post"
+            )
+        }
         self.existing_people = set(Person.objects.values_list("pk", flat=True))
         self.seen_people = set()
 
         files = [f for f in os.listdir(self.dirpath) if f.endswith(".json")]
+        files = sorted(files, key=lambda k: int(k.split("-")[-1].split(".")[0]))
         for file in files:
             self.stdout.write("Importing {}".format(file))
             with open(os.path.join(self.dirpath, file), "r") as f:
@@ -108,7 +113,8 @@ class Command(BaseCommand):
 
         else:
             next_page = (
-                settings.YNR_BASE + "/media/cached-api/latest/persons-000001.json"
+                settings.YNR_BASE
+                + "/media/cached-api/latest/persons-000001.json"
             )
 
         while next_page:
@@ -125,9 +131,8 @@ class Command(BaseCommand):
             with show_data_on_error("Person {}".format(person["id"]), person):
                 person_obj = Person.objects.update_or_create_from_ynr(
                     person,
-                    all_elections=self.all_elections,
-                    all_posts=self.all_posts,
-                    all_parties=self.all_parties,
+                    self.all_ballots,
+                    self.all_parties,
                     update_info_only=update_info_only,
                 )
                 if person["memberships"]:

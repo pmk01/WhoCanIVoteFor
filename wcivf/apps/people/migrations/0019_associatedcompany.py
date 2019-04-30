@@ -27,13 +27,17 @@ class Migration(migrations.Migration):
                 ("company_number", models.CharField(max_length=50)),
                 ("company_status", models.CharField(max_length=50)),
                 ("role", models.CharField(max_length=50)),
-                ("role_status", models.CharField(blank=True, max_length=50, null=True)),
+                (
+                    "role_status",
+                    models.CharField(blank=True, max_length=50, null=True),
+                ),
                 ("role_appointed_date", models.DateField()),
                 ("role_resigned_date", models.DateField(blank=True, null=True)),
                 (
                     "person",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="people.Person"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="people.Person",
                     ),
                 ),
             ],

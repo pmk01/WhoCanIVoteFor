@@ -38,7 +38,7 @@
         <p><a href="{{ object.ynr_link }}">Add more at our candidate crowd-sourcing site</a></p>
       {% endif %}
 
-      {% if post.election.uses_lists %}
+      {% if postelection.election.uses_lists %}
         <h3>List candidates by party</h3>
         <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
         {% include "elections/includes/_people_list_with_lists.html" with people=person_posts.all %}
@@ -66,6 +66,13 @@
   {% endif %}
 
 </div>
+
+{% if postelection.husting_set.exists %}
+  <div class="card">
+    <h3>Election events</h3>
+    {% include "elections/includes/_hustings_list.html" with hustings=postelection.husting_set.all %}
+  </div>
+{% endif %}
 
 {% include "elections/includes/_postcode_search_form.html" %}
 

@@ -336,6 +336,8 @@
 {% endif %}
   </div>
 
+{% include "donations/donate_inline.html" %}
+
 {% if not referer_postcode %}
 {% include "elections/includes/_postcode_search_form.html" %}
 {% endif %}

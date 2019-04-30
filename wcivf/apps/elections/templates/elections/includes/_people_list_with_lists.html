@@ -1,27 +1,47 @@
+{% load static %}
+{% load humanize %}
 {% regroup people.by_party by party.party_name as people_by_party %}
 
 {% for person_post in people_by_party %}
-  <div class="party_list_row">
-    <div class="party_list_row_inner">
-      <div class="card">
-        <div class="row">
-          <div class="columns large-3">
-            {% if person_post.list.0.party.emblem %}
-            <img src="{{ person_post.list.0.party.emblem.url }}" width="70px" height="70px">
-            {% endif %}
-          </div>
-          <div class="columns large-9">
-            <h4>{{ person_post.grouper }}</h4>
-            <details>
-              <summary>Show {{ person_post.list|length }} list candidates</summary>
-              {% for person in person_post.list %}
-                {% include "elections/includes/_person_card.html" with person_post=person lists=True %}
-              {% endfor %}
-            </details>
-          </div>
-        </div>
+  {% if person_post.list.0.party.party_id == "ynmp-party:2" %}
+    {#  This is a special case where we don't want to group independants, but show a single card per person  #}
+    {% for pp in person_post.list %}
+      <div class="card party-list-card">
+
+        {% if pp.person.photo_url %}
+          <img src="{{ pp.person.photo_url }}" class="party_emblem" alt="Photo of {{ pp.person.name }}">
+        {% elif pp.person.gender|lower == 'male' %}
+          <img src="{% static 'people/images/blank-man.png' %}" style="background-color: #ddd;" class="party_emblem">
+        {% else %}
+          <img src="{% static 'people/images/blank-woman.png' %}" style="background-color: #ddd;" class="party_emblem">
+        {% endif %}
+        <h4 class="candidate_name">
+        <a href="{{ pp.person.get_absolute_url }}" class="person_name cta">
+          {% if pp.elected %}🌟 <span class="elected_text">Elected:</span> {% endif %}
+          {{ person_post.grouper }}: {{ pp.person.name }}
+          {% if pp.elected %}🌟{% endif %}
+        </a>
+      </h4>
       </div>
+    {% endfor %}
+
+  {% else %}
+    <div class="card party-list-card">
+      <details>
+        <summary>
+          {% if person_post.list.0.party.emblem %}
+            <img src="{{ person_post.list.0.party.emblem.url }}" alt="Party emblem" class="party_emblem">
+          {% endif %}
+          <h4>{{ person_post.grouper }}</h4>
+          <a>Show {{ person_post.list|length }} list candidates</a>
+        </summary>
+        <div class="candidate_grid">
+          {% for person in person_post.list %}
+            {% include "elections/includes/_person_card.html" with person_post=person lists=True %}
+          {% endfor %}
+        </div>
+      </details>
     </div>
-  </div>
+  {% endif %}
 {% endfor %}
 

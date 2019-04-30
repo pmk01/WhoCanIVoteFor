@@ -68,7 +68,9 @@ class Party(models.Model):
         return "%s (%s)" % (self.party_name, self.pk)
 
     def get_absolute_url(self):
-        return reverse("party_view", args=[str(self.pk), slugify(self.party_name)])
+        return reverse(
+            "party_view", args=[str(self.pk), slugify(self.party_name)]
+        )
 
     @property
     def ynr_emblem_url(self):
@@ -99,7 +101,9 @@ class Manifesto(models.Model):
     LANGUAGE_CHOICES = (("English", "English"), ("Welsh", "Welsh"))
     party = models.ForeignKey(Party)
     election = models.ForeignKey(Election)
-    country = models.CharField(max_length=200, choices=COUNTRY_CHOICES, default="UK")
+    country = models.CharField(
+        max_length=200, choices=COUNTRY_CHOICES, default="UK"
+    )
     language = models.CharField(
         max_length=200, choices=LANGUAGE_CHOICES, default="English"
     )

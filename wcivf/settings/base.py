@@ -84,6 +84,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
+                "django.template.context_processors.i18n",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "dc_theme.context_processors.dc_theme_context",
@@ -174,7 +175,9 @@ WDIV_API = "/api/beta"
 CANONICAL_URL = "https://whocanivotefor.co.uk"
 ROBOTS_USE_HOST = False
 
-EMAIL_SIGNUP_ENDPOINT = "https://democracyclub.org.uk/mailing_list/api_signup/v1/"
+EMAIL_SIGNUP_ENDPOINT = (
+    "https://democracyclub.org.uk/mailing_list/api_signup/v1/"
+)
 EMAIL_SIGNUP_API_KEY = ""
 
 # DC Base Theme settings

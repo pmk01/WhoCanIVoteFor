@@ -2,7 +2,11 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from parties.tests.factories import PartyFactory
 from people.tests.factories import PersonFactory, PersonPostFactory
-from elections.tests.factories import ElectionFactory, PostFactory, PostElectionFactory
+from elections.tests.factories import (
+    ElectionFactory,
+    PostFactory,
+    PostElectionFactory,
+)
 from parties.models import Party
 
 
@@ -43,10 +47,14 @@ class PartyViewTests(TestCase):
     def test_party_detail_candidate_count_view(self):
         # Make a 2nd candidate
         pe = PostElectionFactory(
-            election=ElectionFactory(slug="2010", name="2010 GE"), post=self.post
+            election=ElectionFactory(slug="2010", name="2010 GE"),
+            post=self.post,
         )
         PersonPostFactory(
-            post_election=pe, party=self.party, election=pe.election, post=self.post
+            post_election=pe,
+            party=self.party,
+            election=pe.election,
+            post=self.post,
         )
         p2 = PersonFactory(name="Test 3")
         PersonPostFactory(

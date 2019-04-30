@@ -35,7 +35,8 @@ class Migration(migrations.Migration):
                 (
                     "person",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="people.Person"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="people.Person",
                     ),
                 ),
             ],

@@ -11280,9 +11280,9 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.9.1]
     method: GET
-    uri: https://elections.democracyclub.org.uk/api/elections/?current=true&metadata=1
+    uri: https://elections.democracyclub.org.uk/api/elections/?current=true
   response:
-    body: {string: '{"count": 1,"next": null,"previous": null,"results": [{"metadata": {"2018-05-03-id-pilot": {"title": "You need to show your poll card or ID to vote at this election","url": "https://www.swindon.gov.uk/info/20073/elections_and_voting/883/local_elections_may_2018_important_id_requirements_for_swindon_borough_voters/2","detail": "Voters in Swindon will be required to show their poll card before they can vote. If you do not have your poll card you will need to bring ID."}}}]}'}
+    body: {string: '{"count": 1,"next": null,"previous": null,"results": []}'}
     headers:
       Allow: ['GET, OPTIONS']
       Connection: [keep-alive]

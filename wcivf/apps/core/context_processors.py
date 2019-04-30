@@ -12,7 +12,9 @@ def site_title(request):
 
 
 def use_compress_css(request):
-    return {"USE_COMPRESSED_CSS": getattr(settings, "USE_COMPRESSED_CSS", False)}
+    return {
+        "USE_COMPRESSED_CSS": getattr(settings, "USE_COMPRESSED_CSS", False)
+    }
 
 
 def postcode_form(request):
@@ -23,5 +25,7 @@ def referer_postcode(request):
     referer_parts = request.META.get("HTTP_REFERER", "")
     referer_parts = referer_parts.strip("/").split("/")
     if len(referer_parts) >= 2 and referer_parts[-2] == "elections":
-        return {"referer_postcode": referer_parts[-1].upper().replace("%20", " ")}
+        return {
+            "referer_postcode": referer_parts[-1].upper().replace("%20", " ")
+        }
     return {}

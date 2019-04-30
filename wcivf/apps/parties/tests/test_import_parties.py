@@ -50,5 +50,6 @@ class PartyImporterTests(TmpMediaRootMixin, TestCase):
         party = Party.objects.first()
         self.assertEqual(party.party_name, "Wombles Alliance")
         self.assertEqual(
-            party.emblem.name, "parties/emblems/bf63d47b577cfe1c8cf69a469830a847.jpg"
+            party.emblem.name,
+            "parties/emblems/bf63d47b577cfe1c8cf69a469830a847.jpg",
         )

@@ -1,12 +1,10 @@
-from copy import deepcopy
-
 from django.db import models
 from django.db.models import Count
+from django.core.cache import cache
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import make_aware
 
-from elections.models import Election, Post, PostElection
-from parties.models import Party
+from elections.constants import PEOPLE_FOR_BALLOT_KEY_FMT
 
 
 class PersonPostQuerySet(models.QuerySet):
@@ -46,17 +44,12 @@ class PersonPostManager(models.Manager):
 
 class PersonManager(models.Manager):
     def update_or_create_from_ynr(
-        self,
-        person,
-        all_elections=None,
-        all_posts=None,
-        all_parties=None,
-        update_info_only=False,
+        self, person, all_ballots, all_parties, update_info_only=False
     ):
-        posts = []
-        elections = []
 
-        last_updated = make_aware(parse_datetime(person["versions"][0]["timestamp"]))
+        last_updated = make_aware(
+            parse_datetime(person["versions"][0]["timestamp"])
+        )
 
         defaults = {
             "name": person["name"],
@@ -72,7 +65,9 @@ class PersonManager(models.Manager):
         if "facebook_page_url" in version_data:
             defaults["facebook_page_url"] = version_data["facebook_page_url"]
         if "facebook_personal_url" in version_data:
-            defaults["facebook_personal_url"] = version_data["facebook_personal_url"]
+            defaults["facebook_personal_url"] = version_data[
+                "facebook_personal_url"
+            ]
         if "linkedin_url" in version_data:
             defaults["linkedin_url"] = version_data["linkedin_url"]
         if "homepage_url" in version_data:
@@ -99,68 +94,45 @@ class PersonManager(models.Manager):
                         "uk.org.publicwhip/person/", ""
                     )
 
-        if person["memberships"] and not update_info_only:
-            for membership in person["memberships"]:
-                election = None
-                post = None
-
-                if membership["election"]:
-                    election_slug = membership["election"]["id"]
-                    try:
-                        election = all_elections[election_slug]
-                    except KeyError:
-                        election = Election.objects.get(slug=election_slug)
-                    elections.append(election)
-
-                if membership["post"]:
-                    post_id = membership["post"]["id"]
-                    try:
-                        post = all_posts[post_id]
-                    except KeyError:
-                        post = Post.objects.get(ynr_id=post_id)
-                    if election:
-                        post.election = election
-                    if not election:
-                        continue
-
-                post.party_list_position = membership["party_list_position"]
-
-                if membership["party"]:
-                    post.party_id = membership["party"]["legacy_slug"]
-                else:
-                    post.party_id = None
-                # If the same post occurs twice (e.g. if the candidate has
-                # stood twice as an MP in the same seat), make
-                # sure we have the correct election/party information for
-                # each post, by taking a deep copy.
-                post_copy = deepcopy(post)
-                posts.append(post_copy)
-
         person_id = person["id"]
-        person_obj, _ = self.update_or_create(ynr_id=person["id"], defaults=defaults)
+        person_obj, _ = self.update_or_create(
+            ynr_id=person["id"], defaults=defaults
+        )
 
-        if posts and not update_info_only:
+        if not update_info_only:
             from .models import PersonPost
 
-            # Delete old posts for this person
-            PersonPost.objects.filter(person_id=person_id).delete()
-            for post in posts:
-                defaults = {"list_position": post.party_list_position}
-                if post.party_id:
-                    try:
-                        defaults["party"] = all_parties[post.party_id]
-                    except KeyError:
-                        defaults["party"] = Party.objects.get(party_id=post.party_id)
+            person_posts = PersonPost.objects.filter(person_id=person_id)
+            ballots_ids_to_invalidate = [
+                pp.post_election.ballot_paper_id for pp in person_posts
+            ]
 
-                post_election = PostElection.objects.get(
-                    post=post, election=post.election
-                )
-                PersonPost.objects.update_or_create(
-                    post=post,
-                    election=post.election,
-                    person_id=person_id,
-                    post_election=post_election,
-                    defaults=defaults,
-                )
+            # Delete old posts for this person
+            person_posts.delete()
+
+            if person["memberships"]:
+                for membership in person["memberships"]:
+
+                    if membership.get("ballot_paper_id"):
+                        ballot = all_ballots[membership["ballot_paper_id"]]
+                        defaults = {
+                            "list_position": membership["party_list_position"],
+                            "party": all_parties[
+                                membership["party"]["legacy_slug"]
+                            ],
+                            "post": ballot.post,
+                            "election": ballot.election,
+                        }
+
+                        PersonPost.objects.update_or_create(
+                            person_id=person_id,
+                            post_election=ballot,
+                            defaults=defaults,
+                        )
+
+            # Delete the cache for this person's ballots as the membership might
+            # have changed
+            for ballot_paper_id in ballots_ids_to_invalidate:
+                cache.delete(PEOPLE_FOR_BALLOT_KEY_FMT.format(ballot_paper_id))
 
         return person_obj
