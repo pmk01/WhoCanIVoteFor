@@ -9,6 +9,8 @@
     <p>You can help make this website better for everyone.</p>
     <p>This site is run by Democracy Club. It receives no government funding.
       <em>Please chip in £3/month to help get everyone the information they need to take part.</em></p>
+    <a href="https://pay.gocardless.com/AL0002A9BYC557" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
+    Support Democracy Club</a>
   {% endif %}
 
   {% if request.session.donate_split_test == "good_information" %}
@@ -18,9 +20,23 @@
     <p>This site is run by Democracy Club. It receives no government funding.
       <em>Please chip in £3/month to help get everyone the information they need to take part.</em>
     </p>
+    <a href="https://pay.gocardless.com/AL0002A9BYC557" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
+    Support Democracy Club</a>
   {% endif %}
 
-  <a href="https://pay.gocardless.com/AL0002A9BYC557" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
+
+  {% if request.session.donate_split_test == "good_information_one_off_5" %}
+    <h3>Democracy runs on good information</h3>
+
+    <p>You can help make this website better for everyone.</p>
+    <p>This site is run by Democracy Club. It receives no government funding.
+      <em>Please chip in £5 to help get everyone the information they need to take part.</em>
+    </p>
+    <a href="https://pay.gocardless.com/AL0002AJJRJAQH" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
     Support Democracy Club</a>
+  {% endif %}
+
+
+
 </div>
 {% endif %}
