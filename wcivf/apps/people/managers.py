@@ -1,14 +1,10 @@
-from copy import deepcopy
-
 from django.db import models
 from django.db.models import Count
 from django.core.cache import cache
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import make_aware
 
-from elections.models import Election, Post, PostElection
 from elections.constants import PEOPLE_FOR_BALLOT_KEY_FMT
-from parties.models import Party
 
 
 class PersonPostQuerySet(models.QuerySet):
@@ -51,7 +47,6 @@ class PersonManager(models.Manager):
         self, person, all_ballots, all_parties, update_info_only=False
     ):
 
-        person_ballots = []
         last_updated = make_aware(
             parse_datetime(person["versions"][0]["timestamp"])
         )
