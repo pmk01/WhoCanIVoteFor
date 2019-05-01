@@ -20,7 +20,7 @@
     <h2>Elections in your area</h2>
 
     {% for election_group in header_elections_by_date %}
-        <h3>{{ election_group.grouper|naturalday:"l j F Y" }}</h3>
+        <h3>{{ election_group.grouper|naturalday:"l j F Y"|title }}</h3>
 
         <p>
           You will have {{ election_group.list|length|apnumber }}
@@ -44,6 +44,9 @@
         </ul>
     {% endfor %}
   {% endif %}
+
+<p>There may also be parish, town or
+          community council elections in some areas.</p>
 </div>
 {% endif %}
 
@@ -84,19 +87,25 @@
           {% else %}
             {% if postelection.locked %}
             {# Case: Candidates and the post is locked #}
-              You can choose from <strong>{{ postelection.people|length }} candidates</strong>
-              in the
-              {% if 'mayor' in postelection.election.slug %}
-              {{ postelection.election.nice_election_name }}.
+              {% if postelection.voting_system.slug == "PR-CL" %}
+                You will have one vote, and can vote for a single party list or independent candidate.
               {% else %}
-              {{ postelection.post.label }} {{ postelection.get_name_suffix }}.
-              {% endif %}
+                You can choose from <strong>{{ postelection.people|length }} candidates</strong>
+                in the
+                {% if 'mayor' in postelection.election.slug %}
+                {{ postelection.election.nice_election_name }}.
+                {% else %}
+                {{ postelection.post.label }} {{ postelection.get_name_suffix }}.
+                {% endif %}
 
-              {% if postelection.winner_count and postelection.election.voting_system_id == 'FPTP' %}
-              You will have {{ postelection.winner_count|intword }} vote{{ postelection.winner_count|pluralize }}.
+                {% if postelection.winner_count and postelection.election.voting_system_id == 'FPTP' %}
+                You will have {{ postelection.winner_count|intword }} vote{{ postelection.winner_count|pluralize }}.
+                {% endif %}
               {% endif %}
-
               <p><a href='#where'>Where do I vote?</a></p>
+              {% if postelection.get_voting_system %}
+      {% include "elections/includes/_how-to-vote.html" with voting_system=postelection.get_voting_system %}
+      {% endif %}
             {% else %}
             {# Case: Candidates and the post is NOT locked (add CTA) #}
               The official candidate list has not yet been published.
@@ -135,9 +144,7 @@
       {{ postelection.election.description|markdown }}
       {% endif %}
 
-      {% if postelection.get_voting_system %}
-      {% include "elections/includes/_how-to-vote.html" with voting_system=postelection.get_voting_system %}
-      {% endif %}
+
 
       {% if postelection.election.voter_age %}
       <details>
