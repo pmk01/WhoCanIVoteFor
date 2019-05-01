@@ -324,7 +324,7 @@
 
       {% if object.cta_example_details %}
       - such as {{ object.name }}'s
-      {{ object.cta_example_details|join:", " }}
+      {{ object.cta_example_details|join:", " }} -
       {% endif %}
       please use our crowdsourcing website to add it.</p>
     <a href="{{ object.get_ynr_url }}update/" class="link-button">
