@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         pages = self.get_paginator(
-            settings.YNR_BASE + "/api/v0.9/elections/?page_size=200"
+            settings.YNR_BASE + "/api/next/elections/?page_size=200"
         )
         for page in pages:
             self.add_elections(page)
