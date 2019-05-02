@@ -89,7 +89,7 @@ class PostcodeiCalView(
             event.add(
                 "DESCRIPTION",
                 "Find out more at {}/elections/{}/".format(
-                    settings.CANONICAL_URL, postcode
+                    settings.CANONICAL_URL, postcode.replace(" ", "")
                 ),
             )
             if polling_station.get("polling_station_known"):
