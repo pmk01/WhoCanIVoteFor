@@ -73,7 +73,7 @@ class Command(BaseCommand):
         for election in qs:
             for post_election in election.postelection_set.all():
                 ballot_data = ee.get_data(post_election.ballot_paper_id)
-                if "voting_system" in ballot_data:
+                if ballot_data and "voting_system" in ballot_data:
                     post_election.voting_system_id = ballot_data[
                         "voting_system"
                     ]["slug"]
