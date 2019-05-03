@@ -107,8 +107,9 @@ class PersonManager(models.Manager):
                 pp.post_election.ballot_paper_id for pp in person_posts
             ]
 
-            # Delete old posts for this person
-            person_posts.delete()
+            # Delete old posts without results for this person
+            # We don't delete posts with results, as we know they stood
+            person_posts.filter(results=None).delete()
 
             if person["memberships"]:
                 for membership in person["memberships"]:
