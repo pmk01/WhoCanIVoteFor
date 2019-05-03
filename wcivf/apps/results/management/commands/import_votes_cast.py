@@ -30,7 +30,7 @@ class Command(BaseCommand):
             dates = [d.strftime("%Y-%m-%d") for d in qs]
 
         for date in dates:
-            base_url = "{}/api/v0.9/result_sets/?election_date={}".format(
+            base_url = "{}/api/next/result_sets/?election_date={}".format(
                 settings.YNR_BASE, date
             )
             next_page = base_url
