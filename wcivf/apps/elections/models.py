@@ -157,7 +157,7 @@ class Post(models.Model):
 
 
 class PostElection(models.Model):
-    ballot_paper_id = models.CharField(blank=True, max_length=800)
+    ballot_paper_id = models.CharField(blank=True, max_length=800, unique=True)
     post = models.ForeignKey(Post)
     election = models.ForeignKey(Election)
     contested = models.BooleanField(default=True)
