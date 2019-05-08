@@ -1,6 +1,8 @@
 from functools import update_wrapper
 
 from django.conf import settings
+from sopn_publish_date import StatementPublishDate, Country
+from datetime import datetime
 
 import requests
 
@@ -81,3 +83,36 @@ class ElectionIDSwitcher:
 
         self.__name__ = self.__qualname__ = view.__name__
         return view(request, *args, **kwargs)
+
+
+def expected_sopn_publish_date(slug, territory):
+    country = {
+        "ENG": Country.ENGLAND,
+        "WLS": Country.WALES,
+        "SCT": Country.SCOTLAND,
+        "NIR": Country.NORTHERN_IRELAND,
+    }
+
+    if not expected_sopn_publish_date.lookup:
+        expected_sopn_publish_date.lookup = StatementPublishDate()
+
+    if slug.startswith("local") and territory not in country:
+        return None
+
+    try:
+        if slug.startswith("local") and territory is not None:
+
+            date_of_poll = datetime.strptime(
+                slug.split(".")[-1], "%Y-%m-%d"
+            ).date()
+
+            return expected_sopn_publish_date.lookup.local(
+                date_of_poll, country=country[territory]
+            )
+        else:
+            return expected_sopn_publish_date.lookup.for_id(slug)
+    except BaseException:
+        return None
+
+
+expected_sopn_publish_date.lookup = None

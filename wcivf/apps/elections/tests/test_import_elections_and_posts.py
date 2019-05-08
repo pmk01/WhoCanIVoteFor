@@ -127,3 +127,66 @@ class CancelledBallotPostImporter(TestCase):
         self.assertEqual(replacement.cancelled, False)
         self.assertEqual(replacement.replaced_by, None)
         self.assertEqual(replacement.metadata, None)
+
+
+class FakeTerritoryPager(JsonPaginator):
+    def __iter__(self):
+        yield {
+            "results": [
+                {
+                    "id": 1,
+                    "label": "Election 1",
+                    "role": "foo",
+                    "group": "foo",
+                    "organization": {"name": "foo"},
+                    "elections": [
+                        {
+                            "id": "fake.election.1",
+                            "ballot_paper_id": "fake.election.post.1",
+                            "candidates_locked": True,
+                            "winner_count": "1",
+                            "cancelled": False,
+                        }
+                    ],
+                    "memberships": [],
+                }
+            ]
+        }
+        return
+
+
+class TerritoryImporter(TestCase):
+    @mock.patch(
+        "elections.helpers.EEHelper.get_data",
+        lambda x, y: {"organisation": {"territory_code": "ENG"}},
+    )
+    def test_territory_import(self):
+        Election.objects.create(
+            slug="fake.election.1", election_date="2018-01-01", current=False
+        )
+        cmd = ImportPosts()
+        cmd.stdout = StringIO()
+        cmd.get_paginator = lambda x: FakeTerritoryPager("", cmd.stdout)
+        cmd.handle()
+
+        post_election = PostElection.objects.get(
+            ballot_paper_id="fake.election.post.1"
+        )
+        self.assertEqual(post_election.post.territory, "ENG")
+
+    @mock.patch(
+        "elections.helpers.EEHelper.get_data", lambda x, y: {"organisation": {}}
+    )
+    def test_territory_import_without_territory_from_ee(self):
+        Election.objects.create(
+            slug="fake.election.1", election_date="2018-01-01", current=False
+        )
+        cmd = ImportPosts()
+        cmd.stdout = StringIO()
+        cmd.get_paginator = lambda x: FakeTerritoryPager("", cmd.stdout)
+        cmd.handle()
+
+        post_election = PostElection.objects.get(
+            ballot_paper_id="fake.election.post.1"
+        )
+        self.assertEqual(post_election.post.territory, "-")
