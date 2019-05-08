@@ -65,14 +65,6 @@
   </div>
   {% endif %}
 
-  {% if object.postelection.husting_set.exists %}
-    <div class="card info_card">
-      <h3>Local hustings</h3>
-      <p>You can meet candidates and question them at local hustings. Here are hustings where {{ object.name }} may be appearing.</p>
-      {% include "elections/includes/_hustings_list.html" with hustings=object.postelection.husting_set.all %}
-    </div>
-  {% endif %}
-
   {% if object.leaflets %}
   <div class="card info_card">
     <h3>Recent leaflets from {{ object.name }}</h3>
@@ -255,7 +247,6 @@
   </div>
   {% endif %}
 
-
   {% if object.local_party %}
   <div class="card info_card">
     <h3>{{ object.local_party.name }}</h3>
@@ -290,6 +281,15 @@
 
   </div>
   {% endif %}
+
+{% if object.postelection.husting_set.exists %}
+    <div class="card info_card">
+      <h3>Local hustings</h3>
+      <p>You can meet candidates and question them at local hustings. Here are hustings where {{ object.name }} may be appearing.</p>
+      {% include "elections/includes/_hustings_list.html" with hustings=object.postelection.husting_set.all %}
+    </div>
+{% endif %}
+
 
 {% if object.past_personposts %}
 <div class="card info_card">
