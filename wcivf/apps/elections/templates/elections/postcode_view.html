@@ -20,16 +20,33 @@
     <h2>Elections in your area</h2>
 
     {% for election_group in header_elections_by_date %}
-        <h3>{{ election_group.grouper|naturalday:"l j F Y"|title }}</h3>
 
-        <p>
-          You will have {{ election_group.list|length|apnumber }}
-          ballot paper{{ election_group.list|length|pluralize }} to fill out.
-        </p>
+
+        {% if election_group.list.0.past_date %}
+              {% ifchanged election_group.list.0.past_date %}
+                <h3>Recently past elections</h3>
+              {% endifchanged %}
+            {% endif %}
+        {% if election_group.list.0.past_date %}
+          <h4>
+            {{ election_group.grouper|naturalday:"l j F Y"|title }}
+          </h4>
+        {% else %}
+          <h3>
+            {{ election_group.grouper|naturalday:"l j F Y"|title }}
+          </h3>
+          <p>
+            You will have {{ election_group.list|length|apnumber }}
+            ballot paper{{ election_group.list|length|pluralize }} to fill out.
+          </p>
+
+        {% endif %}
+
 
         <ul>
           {% for ballot in election_group.list %}
-          <li>
+          <li {% if ballot.past_date %}class="past_elections"{% endif %}>
+
             <a href="#election_{{ ballot.election.slug }}">
             {{ ballot.election.nice_election_name }}
             {% if ballot.post.label != post.election %}

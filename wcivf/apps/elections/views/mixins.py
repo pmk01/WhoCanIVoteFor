@@ -1,4 +1,5 @@
 import re
+from datetime import date
 
 import requests
 
@@ -6,6 +7,8 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.core.cache import cache
+from django.db.models import IntegerField, Sum
+from django.db.models import When, Case
 
 from core.models import log_postcode
 from people.models import PersonPost
@@ -81,13 +84,20 @@ class PostcodeToPostsMixin(object):
         pes = PostElection.objects.filter(
             post__ynr_id__in=all_posts, election__slug__in=all_elections
         )
+        pes = pes.annotate(
+            past_date=Case(
+                When(election__election_date__lt=date.today(), then=1),
+                When(election__election_date__gte=date.today(), then=0),
+                output_field=IntegerField(),
+            )
+        )
         pes = pes.select_related("post")
         pes = pes.select_related("election")
         pes = pes.select_related("election__voting_system")
         if not compact:
             pes = pes.prefetch_related("husting_set")
         pes = pes.order_by(
-            "election__election_date", "election__election_weight"
+            "past_date", "election__election_date", "election__election_weight"
         )
 
         return pes
