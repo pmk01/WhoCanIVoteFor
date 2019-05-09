@@ -9,6 +9,9 @@ from django.apps import apps
 
 from people.helpers import peopleposts_for_election_post
 from elections.views.mixins import NewSlugsRedirectMixin
+from elections.models import PostElection
+from parties.models import LocalParty, Party
+from people.models import PersonPost
 
 
 class ElectionsView(TemplateView):
@@ -106,4 +109,31 @@ class PostView(NewSlugsRedirectMixin, DetailView):
             .order_by("-elected")
         )
 
+        return context
+
+
+class PartyListVew(TemplateView):
+    template_name = "elections/party_list_view.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["ballot"] = PostElection.objects.get(
+            ballot_paper_id=self.kwargs["election"]
+        )
+
+        context["party"] = Party.objects.get(party_id=self.kwargs["party_id"])
+
+        local_party_qs = LocalParty.objects.select_related("parent").filter(
+            post_election=context["ballot"], parent=context["party"]
+        )
+
+        if local_party_qs.exists():
+            context["local_party"] = local_party_qs.get()
+            context["party_name"] = context["local_party"].name
+        else:
+            context["party_name"] = context["party"].party_name
+
+        context["person_posts"] = PersonPost.objects.filter(
+            party=context["party"], post_election=context["ballot"]
+        ).order_by("list_position")
         return context
