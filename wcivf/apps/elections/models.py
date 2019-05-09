@@ -237,7 +237,7 @@ class PostElection(models.Model):
 
     @property
     def display_as_party_list(self):
-        if self.get_voting_system in settings.PARTY_LIST_VOTING_TYPES:
+        if self.get_voting_system.slug in settings.PARTY_LIST_VOTING_TYPES:
             return True
         return False
 
