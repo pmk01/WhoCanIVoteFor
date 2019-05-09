@@ -235,6 +235,12 @@ class PostElection(models.Model):
         else:
             return self.election.voting_system
 
+    @property
+    def display_as_party_list(self):
+        if self.get_voting_system in settings.PARTY_LIST_VOTING_TYPES:
+            return True
+        return False
+
 
 class VotingSystem(models.Model):
     slug = models.SlugField(primary_key=True)

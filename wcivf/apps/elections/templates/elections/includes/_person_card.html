@@ -1,6 +1,6 @@
 {% load static %}
 {% load humanize %}
-  <section class="candidate_card link-card {% if person_post.post.election.uses_lists %}candidate_card_list_candidate{% endif %} {% if person_post.elected %}person_elected{% endif %}">
+  <section class="candidate_card link-card {% if person_post.post_election.display_as_party_list %}candidate_card_list_candidate{% endif %} {% if person_post.elected %}person_elected{% endif %}">
     <span class="person_photo">
       {% if person_post.person.photo_url %}
         <img src="{{ person_post.person.photo_url }}" class="person_photo candidate_photo" alt="Photo of {{ person_post.person.name }}">
@@ -14,7 +14,7 @@
     <span class="candidate_info">
       <h4 class="candidate_name">
         <a href="{{ person_post.person.get_absolute_url }}" class="person_name cta">
-          {% if person_post.list_position %}
+          {% if person_post.list_position and person_post.post_election.display_as_party_list %}
             {{ person_post.list_position }}.
           {% endif %}
           {% if person_post.elected %}🌟 <span class="elected_text">Elected:</span> {% endif %}
@@ -23,7 +23,7 @@
         </a>
       </h4>
 
-      {% if not person_post.list_position %}
+      {% if not person_post.list_position or not person_post.post_election.display_as_party_list %}
       <p class="card_party">
         {{ person_post.party.party_name }}
       </p>

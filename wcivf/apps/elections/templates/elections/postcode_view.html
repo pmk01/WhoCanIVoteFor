@@ -144,7 +144,7 @@
       {% endif %}
 
       {% if postelection.people %}
-        {% if postelection.election.uses_lists %}
+        {% if postelection.display_as_party_list %}
         {% include "elections/includes/_people_list_with_lists.html" with people=postelection.people %}
         {% else %}
         {% include "elections/includes/_people_list.html" with people=postelection.people %}
