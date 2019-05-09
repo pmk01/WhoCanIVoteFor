@@ -50,7 +50,8 @@
       {% if object.expected_sopn_date and not object.election.in_past %}
         <p>
         The official candidate list
-        {% if object.expected_sopn_date|date:"j F Y" <= current_day %}
+        {% now "Y-m-d" as today %}
+        {% if object.expected_sopn_date|date:"Y-m-d" <= today %}
         should have been
         {% else %}
         should be
