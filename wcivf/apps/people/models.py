@@ -24,6 +24,13 @@ class PersonPost(models.Model):
             self.person.name, self.post.label, self.election.slug
         )
 
+    def get_local_party(self):
+        qs = self.party.local_parties.filter(post_election=self.post_election)
+        if qs.exists:
+            return qs.get()
+        else:
+            return None
+
     class Meta:
         ordering = ("-election__election_date",)
         unique_together = ("person", "post", "election")

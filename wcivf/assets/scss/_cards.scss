@@ -255,14 +255,17 @@ blockquote {
         float: left;
         margin-right:0.5em;
       }
+    &>div {
+      margin-left:120px;
+    }
+  }
+  h4 {
+    margin-top:0;
   }
 
   details {
     summary {
       overflow:auto;
-      h4 {
-        margin-top:0;
-      }
     }
     summary::-webkit-details-marker {
       display:none;
