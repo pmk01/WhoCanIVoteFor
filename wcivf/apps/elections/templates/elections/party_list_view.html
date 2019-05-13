@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
   <div class="card">
+    <header style="clear:both;overflow: auto">
+    {% if party.emblem %}
+      <img src="{{ party.emblem.url }}" class="manifesto_image" alt="{{ party_name }} emblem">
+    {% endif %}
+
     <h2>{{ party_name }}</h2>
     <h3>{{ ballot.election.nice_election_name }}: {{ ballot.friendly_name }}</h3>
+    </header>
     <dl>
         {% if local_party.facebook_page %}
         <dt>Facebook</dt>
@@ -15,7 +21,7 @@
         </dd>
         {% endif %}
 
-        {% if object.homepage %}
+        {% if local_party.homepage %}
         <dt>Home page</dt>
         <dd>
           <a href="{{ local_party.homepage }}" title="{{ local_party.name }}'s home page">
@@ -24,8 +30,6 @@
         </dd>
         {% endif %}
 
-
-
         {% if local_party.email %}
         <dt>Email</dt>
         <dd><a href="mailto:{{ local_party.email }}">{{ local_party.email }}</a></dd>
@@ -33,6 +37,16 @@
     </dl>
 
   </div>
+
+  {% if manifesto %}
+  <div class="card info_card">
+    <h3>Party manifesto</h3>
+    <p>
+
+    Find out more about the {{ party.party_name }} in their {{ manifesto|safe }}.
+    </p>
+  </div>
+  {% endif %}
 
   {% if local_party.twitter %}
   <div class="card info_card">

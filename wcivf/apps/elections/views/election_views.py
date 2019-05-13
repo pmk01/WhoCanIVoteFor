@@ -133,6 +133,12 @@ class PartyListVew(TemplateView):
         else:
             context["party_name"] = context["party"].party_name
 
+        manifestos = context["party"].manifesto_set.filter(
+            election=context["ballot"].election
+        )
+        if manifestos.exists():
+            context["manifesto"] = manifestos.get()
+
         context["person_posts"] = PersonPost.objects.filter(
             party=context["party"], post_election=context["ballot"]
         ).order_by("list_position")
