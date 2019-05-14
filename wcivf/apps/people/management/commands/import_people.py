@@ -47,10 +47,15 @@ class Command(BaseCommand):
         self.options = options
         self.dirpath = tempfile.mkdtemp()
 
+        self.past_time_str = Person.objects.latest().last_updated
+        if self.options["since"]:
+            self.past_time_str = self.options["since"]
+
         try:
             self.download_pages()
             self.add_to_db()
         finally:
+            self.delete_merged_people()
             shutil.rmtree(self.dirpath)
 
     @transaction.atomic
@@ -99,15 +104,11 @@ class Command(BaseCommand):
 
     def download_pages(self):
         if self.options["recent"] or self.options["since"]:
-            if self.options["recent"]:
-                past_time_str = Person.objects.latest().last_updated
-            if self.options["since"]:
-                past_time_str = self.options["since"]
 
             next_page = (
                 settings.YNR_BASE
                 + "/api/next/persons/?page_size=200&updated_gte={}".format(
-                    past_time_str.isoformat()
+                    self.past_time_str.isoformat()
                 )
             )
 
@@ -137,3 +138,19 @@ class Command(BaseCommand):
                 )
                 if person["memberships"]:
                     self.seen_people.add(person_obj.pk)
+
+    def delete_merged_people(self):
+        url = (
+            settings.YNR_BASE
+            + "/api/next/person_redirects/?page_size=200&updated_gte={}".format(
+                self.past_time_str.isoformat()
+            )
+        )
+        merged_ids = []
+        while url:
+            req = requests.get(url)
+            page = req.json()
+            for result in page["results"]:
+                merged_ids.append(result["old_person_id"])
+            url = page.get("next")
+        Person.objects.filter(ynr_id__in=merged_ids).delete()
