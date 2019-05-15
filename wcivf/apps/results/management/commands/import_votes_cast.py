@@ -56,5 +56,5 @@ class Command(BaseCommand):
 
                     PersonPostResult.objects.update_or_create(
                         person_post=person_post,
-                        votes_cast=membership["num_ballots"],
+                        defaults={"votes_cast": membership["num_ballots"]},
                     )
