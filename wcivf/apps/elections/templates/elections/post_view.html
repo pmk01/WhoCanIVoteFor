@@ -31,16 +31,21 @@
 
   <div class="clearfix">
     {% if person_posts.all.count %}
-
-      <p><strong>{{ person_posts.count }} candidates</strong>
-      {% if object.election.in_past %}stood{% else %}are standing{% endif %} in this {{ object.get_name_suffix }}.</p>
+      {% if not postelection.get_voting_system.slug == "PR-CL" %}
+        <p><strong>{{ person_posts.count }} candidates</strong>
+        {% if object.election.in_past %}stood{% else %}are standing{% endif %} in this {{ object.get_name_suffix }}.</p>
+      {% endif %}
       {% if not object.election.in_past and not object.locked %}
         <p><a href="{{ object.ynr_link }}">Add more at our candidate crowd-sourcing site</a></p>
       {% endif %}
 
       {% if postelection.display_as_party_list %}
         <h3>List candidates by party</h3>
-        <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
+        {% if postelection.get_voting_system.slug == "PR-CL" %}
+          <p>You will have one vote, and can vote for a single party list or independent candidate.</p>
+        {% else %}
+          <p>You will vote for your preferred party rather than a candidate on this ballot paper</p>
+        {% endif %}
         {% include "elections/includes/_people_list_with_lists.html" with people=person_posts.all %}
       {% else %}
         {% include "elections/includes/_people_list.html" with people=person_posts.all %}
