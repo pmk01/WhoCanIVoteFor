@@ -1,7 +1,20 @@
 {% load dc_forms %}
+{% load staticfiles %}
+
+<style>
+  #stripe_donate_form #stripe_elements_container {
+    color:red !important;
+    font-size:19px;
+    line-height: 1.31;
+    padding: 1.2em;
+    border: 1px solid #dee0e2;
+  }
+
+</style>
+
 
 {% if request.session.donate_split_test %}
-<div class="card donate_card">
+<div class="stripe_donate_card card donate_card">
 
   {% if request.session.donate_split_test == "make_our_democracy_better" %}
     <h3>Help make our democracy better</h3>
@@ -9,8 +22,6 @@
     <p>You can help make this website better for everyone.</p>
     <p>This site is run by Democracy Club. It receives no government funding.
       <em>Please chip in £3/month to help get everyone the information they need to take part.</em></p>
-    <a href="https://pay.gocardless.com/AL0002A9BYC557" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
-    Support Democracy Club</a>
   {% endif %}
 
   {% if request.session.donate_split_test == "good_information" %}
@@ -20,8 +31,6 @@
     <p>This site is run by Democracy Club. It receives no government funding.
       <em>Please chip in £3/month to help get everyone the information they need to take part.</em>
     </p>
-    <a href="https://pay.gocardless.com/AL0002A9BYC557" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
-    Support Democracy Club</a>
   {% endif %}
 
 
@@ -32,11 +41,34 @@
     <p>This site is run by Democracy Club. It receives no government funding.
       <em>Please chip in £5 to help get everyone the information they need to take part.</em>
     </p>
-    <a href="https://pay.gocardless.com/AL0002AJJRJAQH" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
-    Support Democracy Club</a>
   {% endif %}
 
 
+  {# The Actual payment form #}
+  <div id="payment-request-button">
+    <!-- A Stripe Element will be inserted here. -->
+  </div>
+
+  <form id="stripe_donate_form" method=post action="{% url "donations:donate_stripe_process" %}">
+    {% csrf_token %}
+    <div class="error" id="card-errors"></div>
+    <div id="stripe_elements_container">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+  </form>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{% static "js/stripe_donate.js" %}"></script>
+    <noscript>
+    <a href="https://pay.gocardless.com/AL0002AJJRJAQH" class="link-button" id="donate_button" data-split_test="{{ request.session.donate_split_test }}">
+      Support Democracy Club</a>
+    </noscript>
 
 </div>
+
+
+
+
+
+
 {% endif %}

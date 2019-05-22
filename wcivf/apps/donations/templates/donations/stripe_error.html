@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load dc_forms %}
+{% block content %}
+  <div class="card">
+    Sorry something went wrong with that payment method. The back up is to use Direct Debit to
+    donate.
+
+    Please select your donation options below and press next.
+
+    <form method="post" class="donate_form inline_radios" action="{% url "feedback_form_view" %}">
+      {% csrf_token %}
+      {{ request.donation_form.errors }}
+      {{ request.donation_form|dc_form }}
+      <button type="submit" class="buttonNew">Next</button>
+    </form>
+  </div>
+
+
+{% endblock %}
