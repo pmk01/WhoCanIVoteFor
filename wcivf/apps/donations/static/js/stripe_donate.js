@@ -11,6 +11,7 @@
         /**
          * Card Element
          */
+        document.getElementById("payment-request-button").hidden = true;
         var card = elements.create("card", {
             iconStyle: "solid",
             style: {
@@ -37,6 +38,7 @@
         });
 
         card.mount("#stripe_elements_container");
+        document.getElementById("stripe_donate_form").hidden = false;
 
         var form = document.getElementById('stripe_donate_form');
         var DonateButton = document.createElement('button');
@@ -118,7 +120,7 @@
         paymentRequest.canMakePayment().then(function (result) {
             if (result) {
                 prButton.mount('#payment-request-button');
-                document.getElementById("stripe_donate_form").remove()
+                document.getElementById("stripe_donate_form").hidden = true;
             } else {
                 document.getElementById('payment-request-button').style.display = 'none';
                 AddStripeForm();
@@ -146,10 +148,20 @@
                     }
                 });
         });
+
+        paymentRequest.on('cancel', function (ev) {
+           AddStripeForm();
+        });
     }
 
-    AddPaymentRequestAPI();
-    // AddStripeForm();
+    try {
+        AddPaymentRequestAPI();
+
+    } catch (e) {
+        var form = document.getElementById('stripe_donate_form');
+        form.innerHTML = document.getElementById('noscript_donate_button').innerHTML;
+    }
+
 
 
 })();
