@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     // This key is safe to be public
-    var stripe = Stripe('pk_test_Ahu7iWVhyMAkPzBXmd5psDqk');
+    var stripe = Stripe('pk_live_HzT3U8gpJzHFyBoR6A0BF5eu');
     var elements = stripe.elements();
 
 
