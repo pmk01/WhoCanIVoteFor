@@ -1,3 +1,4 @@
+import json
 import logging
 
 logger = logging.getLogger("StripeLogger")
@@ -29,7 +30,11 @@ class DonateThanksView(TemplateView):
 
 class StripeTokenProcessView(View):
     def post(self, *args, **kwargs):
-        stripe_token = self.request.POST.get("stripeToken")
+        if self.request.content_type == "application/json":
+            stripe_token = json.loads(self.request.body).get("token")
+        else:
+            stripe_token = self.request.POST.get("stripeToken")
+
         helper = StripeHelper()
         try:
             helper.charge(500, stripe_token)
