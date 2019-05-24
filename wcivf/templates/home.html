@@ -19,6 +19,9 @@
       <button type="submit">Find your candidates</button>
     </form>
   </div>
+
+  {% include "elections/includes/eu_results.html" %}
+
   {% if upcoming_elections %}
     <div class="card upcoming_elections">
       <h2>Upcoming by-elections</h2>

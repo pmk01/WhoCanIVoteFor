@@ -29,6 +29,9 @@
     {% endif %}
   </p>
 
+
+    {% include "elections/includes/eu_results.html" with card=0 %}
+
   <div class="clearfix">
     {% if person_posts.all.count %}
       {% if not postelection.get_voting_system.slug == "PR-CL" %}

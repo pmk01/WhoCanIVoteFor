@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 
 from .forms import PostcodeLookupForm
@@ -29,3 +31,8 @@ def referer_postcode(request):
             "referer_postcode": referer_parts[-1].upper().replace("%20", " ")
         }
     return {}
+
+
+def eu_results_card(request):
+    eu_results_time = datetime.datetime.strptime("2019-05-26 21", "%Y-%m-%d %H")
+    return {"eu_results_published": datetime.datetime.now() > eu_results_time}

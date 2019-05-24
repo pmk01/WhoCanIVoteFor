@@ -1,0 +1,29 @@
+{% if not card == 0 %}
+
+
+<div class="card">
+
+  <h2>European Parliament election results</h2>
+{% else %}
+  <h3>European Parliament election results</h3>
+{% endif %}
+  {% if eu_results_published %}
+  <p>
+      The results of the UK European Parliament elections
+      are published on the European Parliament's election results
+      website.
+  </p>
+      <a href="https://election-results.eu/" class="link-button">View results</a>
+
+
+  {% else %}
+
+    <p>
+      The results of the UK European Parliament elections
+      will be published on the European Parliament's <a href="https://election-results.eu/">election results
+      website</a> at 21.15 on May 26.
+    </p>
+  {% endif %}
+{% if not card == 0 %}
+</div>
+{% endif %}
