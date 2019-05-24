@@ -1,20 +1,20 @@
 {% load dc_forms %}
 {% load staticfiles %}
 
-<style>
-  #stripe_donate_form #stripe_elements_container {
-    color:red !important;
-    font-size:19px;
-    line-height: 1.31;
-    padding: 1.2em;
-    border: 1px solid #dee0e2;
-  }
-
-</style>
-
 
 {% if request.session.donate_split_test %}
 <div class="stripe_donate_card card donate_card">
+    
+  <style>
+    #stripe_donate_form #stripe_elements_container {
+      color:red !important;
+      font-size:19px;
+      line-height: 1.31;
+      padding: 1.2em;
+      border: 1px solid #dee0e2;
+    }
+
+  </style>
 
   {% if request.session.donate_split_test == "make_our_democracy_better" %}
     <h3>Help make our democracy better</h3>
