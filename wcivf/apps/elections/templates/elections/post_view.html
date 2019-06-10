@@ -30,7 +30,10 @@
   </p>
 
 
-    {% include "elections/includes/eu_results.html" with card=0 %}
+    {% if object.election.slug == "europarl.2019-05-23"%}
+      {% include "elections/includes/eu_results.html" with card=0 %}
+    {% endif %}
+
 
   <div class="clearfix">
     {% if person_posts.all.count %}
