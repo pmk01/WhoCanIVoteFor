@@ -23,7 +23,8 @@
       This election
     {% now "j F Y" as current_day %}
     {% if object.election.election_date|date:"j F Y" == current_day %}
-      <strong>is being held today</strong>. Polls are open till 10pm.
+      <strong>is being held today</strong>.
+      Polls are open till {% if "local.city-of-london" in object.election.slug %}8pm{% else%}10pm{%endif %}.
     {% else %}
       {% if object.election.in_past %}was{% else %}will be{% endif %} held {{ object.election.election_date|naturalday:"\o\n l j F Y" }}.
     {% endif %}
