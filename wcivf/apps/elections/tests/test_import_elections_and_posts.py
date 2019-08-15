@@ -21,7 +21,7 @@ class TestElectionAndPostImporter(TestCase):
         call_command("import_elections", stdout=command_stdout)
 
     def _import_posts(self):
-        url = self.base_url + "/api/v0.9/posts/"
+        url = self.base_url + "/api/next/posts/"
         req = requests.get(url)
         results = req.json()
         # doing this is going to import

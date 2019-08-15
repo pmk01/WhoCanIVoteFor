@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.core.cache import cache
-from django.db.models import IntegerField, Sum
+from django.db.models import IntegerField
 from django.db.models import When, Case
 
 from core.models import log_postcode

@@ -99,7 +99,7 @@ class StripeHelper:
         currency="gbp",
         description="Democracy Club Donation",
     ):
-        charge = stripe.Charge.create(
+        stripe.Charge.create(
             amount=amount,
             currency=currency,
             description=description,
