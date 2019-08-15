@@ -1,7 +1,4 @@
-import datetime
-
 from django.conf import settings
-
 from .forms import PostcodeLookupForm
 
 
