@@ -3,7 +3,7 @@ import pytz
 
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.utils.html import mark_safe
 from django.utils.text import slugify

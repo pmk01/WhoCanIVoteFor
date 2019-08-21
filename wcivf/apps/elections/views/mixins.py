@@ -3,7 +3,7 @@ from datetime import date
 
 import requests
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.core.cache import cache

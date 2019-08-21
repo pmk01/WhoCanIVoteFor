@@ -4,7 +4,7 @@ import datetime
 from django import http
 from django.conf import settings
 from django.views.generic import View, FormView, TemplateView
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from .forms import PostcodeLookupForm
 

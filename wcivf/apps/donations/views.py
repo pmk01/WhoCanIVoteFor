@@ -5,7 +5,7 @@ logger = logging.getLogger("StripeLogger")
 
 from django.views.generic import TemplateView, RedirectView, View
 from django.shortcuts import HttpResponse, HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from .helpers import GoCardlessHelper, StripeHelper
 
