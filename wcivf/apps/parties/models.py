@@ -80,8 +80,12 @@ class Party(models.Model):
 
 
 class LocalParty(models.Model):
-    parent = models.ForeignKey(Party, related_name="local_parties")
-    post_election = models.ForeignKey("elections.PostElection")
+    parent = models.ForeignKey(
+        Party, related_name="local_parties", on_delete=models.CASCADE
+    )
+    post_election = models.ForeignKey(
+        "elections.PostElection", on_delete=models.CASCADE
+    )
     name = models.CharField(blank=True, max_length=100)
     twitter = models.CharField(blank=True, max_length=100)
     facebook_page = models.URLField(blank=True, max_length=800)
@@ -99,8 +103,8 @@ class Manifesto(models.Model):
         ("Local", "Local"),
     )
     LANGUAGE_CHOICES = (("English", "English"), ("Welsh", "Welsh"))
-    party = models.ForeignKey(Party)
-    election = models.ForeignKey(Election)
+    party = models.ForeignKey(Party, on_delete=models.CASCADE)
+    election = models.ForeignKey(Election, on_delete=models.CASCADE)
     country = models.CharField(
         max_length=200, choices=COUNTRY_CHOICES, default="UK"
     )

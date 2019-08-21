@@ -4,7 +4,7 @@ from people.models import Person
 
 
 class Leaflet(models.Model):
-    person = models.ForeignKey(Person)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
     leaflet_id = models.IntegerField()
     thumb_url = models.URLField(null=True, blank=True)
     date_uploaded_to_electionleaflets = models.DateTimeField(

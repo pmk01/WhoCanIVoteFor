@@ -10,11 +10,13 @@ from .managers import PersonPostManager, PersonManager
 
 
 class PersonPost(models.Model):
-    person = models.ForeignKey("Person")
-    post_election = models.ForeignKey("elections.PostElection", null=False)
-    post = models.ForeignKey(Post)
-    party = models.ForeignKey(Party, null=True)
-    election = models.ForeignKey(Election, null=False)
+    person = models.ForeignKey("Person", on_delete=models.CASCADE)
+    post_election = models.ForeignKey(
+        "elections.PostElection", null=False, on_delete=models.CASCADE
+    )
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    party = models.ForeignKey(Party, null=True, on_delete=models.CASCADE)
+    election = models.ForeignKey(Election, null=False, on_delete=models.CASCADE)
     list_position = models.IntegerField(blank=True, null=True)
     elected = models.NullBooleanField()
     objects = PersonPostManager()
@@ -143,7 +145,7 @@ class Person(models.Model):
 
 
 class AssociatedCompany(models.Model):
-    person = models.ForeignKey(Person)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=255)
     company_number = models.CharField(max_length=50)
     company_status = models.CharField(max_length=50)
