@@ -3,7 +3,7 @@ import pytz
 
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.utils.html import mark_safe
 from django.utils.text import slugify
@@ -31,7 +31,9 @@ class Election(models.Model):
     description = models.TextField(blank=True)
     ballot_colour = models.CharField(blank=True, max_length=100)
     election_type = models.CharField(blank=True, max_length=100)
-    voting_system = models.ForeignKey("VotingSystem", null=True, blank=True)
+    voting_system = models.ForeignKey(
+        "VotingSystem", null=True, blank=True, on_delete=models.CASCADE
+    )
     uses_lists = models.BooleanField(default=False)
     voter_age = models.CharField(blank=True, max_length=100)
     voter_citizenship = models.TextField(blank=True)
@@ -160,17 +162,23 @@ class Post(models.Model):
 
 class PostElection(models.Model):
     ballot_paper_id = models.CharField(blank=True, max_length=800, unique=True)
-    post = models.ForeignKey(Post)
-    election = models.ForeignKey(Election)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    election = models.ForeignKey(Election, on_delete=models.CASCADE)
     contested = models.BooleanField(default=True)
     winner_count = models.IntegerField(blank=True, null=True)
     locked = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
     replaced_by = models.ForeignKey(
-        "PostElection", null=True, blank=True, related_name="replaces"
+        "PostElection",
+        null=True,
+        blank=True,
+        related_name="replaces",
+        on_delete=models.CASCADE,
     )
     metadata = JSONField(null=True)
-    voting_system = models.ForeignKey("VotingSystem", null=True, blank=True)
+    voting_system = models.ForeignKey(
+        "VotingSystem", null=True, blank=True, on_delete=models.CASCADE
+    )
 
     def get_name_suffix(self):
         election_type = self.ballot_paper_id.split(".")[0]
