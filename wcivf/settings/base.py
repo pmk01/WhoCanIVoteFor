@@ -69,7 +69,6 @@ MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
     "core.middleware.UTMTrackerMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "donations.middleware.DonationFormMiddleware",
 )
 
 ROOT_URLCONF = "wcivf.urls"

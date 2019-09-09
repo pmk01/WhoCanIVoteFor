@@ -8,7 +8,6 @@ from django.views.decorators.cache import cache_page
 from elections.sitemaps import ElectionSitemap, PostElectionSitemap
 from people.sitemaps import PersonSitemap
 from parties.sitemaps import PartySitemap
-from donations.views import AppleDeveloperMerchantidDomainAssociation
 
 sitemaps = {
     "elections": ElectionSitemap,
@@ -19,10 +18,6 @@ sitemaps = {
 
 urlpatterns = (
     [
-        url(
-            r"^.well-known/apple-developer-merchantid-domain-association",
-            AppleDeveloperMerchantidDomainAssociation.as_view(),
-        ),
         url(r"^admin/", admin.site.urls),
         url(r"^", include("core.urls")),
         url(r"^elections/", include("elections.urls")),
