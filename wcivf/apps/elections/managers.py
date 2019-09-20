@@ -1,8 +1,22 @@
 from django.db import models
+from django.utils import timezone
 from .helpers import EEHelper
 
 
-class ElectionManager(models.Manager):
+class ElectionQuerySet(models.QuerySet):
+    def current(self):
+        return self.filter(current=True)
+
+    def future(self):
+        return self.filter(election_date__gt=timezone.now())
+
+    def current_or_future(self):
+        return self.filter(
+            models.Q(current=True) | models.Q(election_date__gt=timezone.now())
+        )
+
+
+class ElectionManager(models.Manager.from_queryset(ElectionQuerySet)):
     def get_explainer(self, election):
         ee = EEHelper()
         ee_data = ee.get_data(election["id"])
