@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
@@ -30,8 +32,9 @@ class Command(BaseCommand):
                 )
 
     def import_extras(self):
+        poll_open_date_gte = str(date.today() - timedelta(days=30))
         pages = self.get_paginator(
-            "{}/api/elections/?current=true".format(settings.EE_BASE)
+            f"{settings.EE_BASE}/api/elections/?poll_open_date__gte={poll_open_date_gte}"
         )
         for page in pages:
             for election in page["results"]:
