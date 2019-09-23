@@ -95,9 +95,11 @@ class Command(BaseCommand):
             post_election.post.save()
 
     def populate_empty_voting_systems(self):
-        qs = Election.objects.filter(
-            voting_system=None, current=True
-        ).prefetch_related("postelection_set")
+        qs = (
+            Election.objects.current_or_future()
+            .filter(voting_system=None)
+            .prefetch_related("postelection_set")
+        )
         ee = EEHelper()
         for election in qs:
             for post_election in election.postelection_set.all():

@@ -4,6 +4,7 @@ from unittest import mock
 
 import vcr
 import requests
+from freezegun import freeze_time
 
 from django.conf import settings
 from django.core.management import call_command
@@ -35,12 +36,14 @@ class TestElectionAndPostImporter(TestCase):
     @vcr.use_cassette(
         "fixtures/vcr_cassettes/test_import_elections_from_ynr.yaml"
     )
+    @freeze_time("2016-04-04")
     def test_import_elections_from_ynr(self):
         assert Election.objects.count() == 0
         self._import_elections()
         assert Election.objects.count() == 385
 
     @vcr.use_cassette("fixtures/vcr_cassettes/test_import_posts_from_ynr.yaml")
+    @freeze_time("2016-04-04")
     def test_import_posts_from_ynr(self):
         assert Election.objects.count() == 0
         self._import_elections()

@@ -11280,7 +11280,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.9.1]
     method: GET
-    uri: https://elections.democracyclub.org.uk/api/elections/?current=true
+    uri: https://elections.democracyclub.org.uk/api/elections/?poll_open_date__gte=2016-03-05
   response:
     body: {string: '{"count": 1,"next": null,"previous": null,"results": []}'}
     headers:

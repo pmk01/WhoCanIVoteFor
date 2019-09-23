@@ -25,8 +25,9 @@ class ElectionsView(TemplateView):
         )
 
         context["past_elections"] = all_elections.filter(current=False)
-
-        context["current_elections"] = all_elections.filter(current=True)
+        context[
+            "current_or_future_elections"
+        ] = all_elections.current_or_future()
 
         return context
 
