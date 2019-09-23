@@ -58,7 +58,6 @@ class Command(BaseCommand):
             self.delete_merged_people()
             shutil.rmtree(self.dirpath)
 
-    @transaction.atomic
     def add_to_db(self):
         self.all_parties = {p.party_id: p for p in Party.objects.all()}
         self.all_ballots = {
@@ -127,6 +126,7 @@ class Command(BaseCommand):
             self.save_page(next_page, page)
             next_page = results.get("next")
 
+    @transaction.atomic
     def add_people(self, results, update_info_only=False):
         for person in results["results"]:
             with show_data_on_error("Person {}".format(person["id"]), person):
