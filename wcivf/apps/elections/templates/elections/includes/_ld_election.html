@@ -3,7 +3,9 @@
     "@context": "http://schema.org/",
     "@type": "Event",
     "name": "{{ election.election.name }}",
-    "startDate" : "{{ election.election.election_date }}",
+    "description": "{{ election.friendly_name }}",
+    "startDate": "{{ election.election.election_date }}",
+    "endDate": "{{ election.election.election_date }}",
     "url" : "{{ CANONICAL_URL }}{{ election.get_absolute_url }}",
     "location" : {
         "@type" : "Place",
