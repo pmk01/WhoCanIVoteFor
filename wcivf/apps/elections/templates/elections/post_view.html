@@ -78,6 +78,8 @@
   </div>
   {% endif %}
 
+  {% include "elections/includes/_ld_election.html" with election=object %}
+
 </div>
 
 {% if postelection.husting_set.exists %}

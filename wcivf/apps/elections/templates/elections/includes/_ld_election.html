@@ -1,0 +1,14 @@
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org/",
+    "@type": "Event",
+    "name": "{{ election.election.name }}",
+    "startDate" : "{{ election.election.election_date }}",
+    "url" : "{{ CANONICAL_URL }}{{ election.get_absolute_url }}",
+    "location" : {
+        "@type" : "Place",
+        "name" : "{{ election.friendly_name }}",
+        "address": "{{ election.election.name }}"
+    }
+}
+</script>
