@@ -369,4 +369,6 @@
   </ol>
 {% endif %}
 
+{% include "elections/includes/_ld_candidate.html" with person=object.personpost.person party=object.personpost.party %}
+
 {% endblock breadcrumbs %}

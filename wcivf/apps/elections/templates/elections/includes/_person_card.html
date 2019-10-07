@@ -48,5 +48,7 @@
       <a class="more_info" href="{{ person_post.person.get_absolute_url }}">
         Learn more
       </a>
+
+      {% include "elections/includes/_ld_candidate.html" with person=person_post.person party=person_post.party %}
     </span> <!-- /.candidate_info -->
   </section>
