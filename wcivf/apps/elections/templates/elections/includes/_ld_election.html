@@ -11,8 +11,7 @@
     "image": "{{ CANONICAL_URL }}{% static "dc_theme/images/logo.png" %}",
     "location" : {
         "@type" : "Place",
-        "name" : "{{ election.friendly_name }}",
-        "address": "{{ election.election.name }}"
+        "address": "{{ election.post.nice_organization }}, {{ election.post.nice_territory }}, UK"
     }
 }
 </script>
