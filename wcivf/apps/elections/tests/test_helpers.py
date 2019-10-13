@@ -8,7 +8,7 @@ class ExpectedSoPNDate(TestCase):
     def test_with_territory_code_eng(self):
         expected = expected_sopn_publish_date("local.2019-05-02", "ENG")
 
-        assert expected == date(2019, 4, 3)
+        assert expected == date(2019, 4, 4)
 
     def test_with_territory_code_nir(self):
         expected = expected_sopn_publish_date("local.2019-05-02", "NIR")

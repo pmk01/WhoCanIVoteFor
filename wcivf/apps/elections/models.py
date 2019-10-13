@@ -159,6 +159,30 @@ class Post(models.Model):
 
     objects = PostManager()
 
+    def nice_organization(self):
+        return (
+            self.organization.replace(" County Council", "")
+            .replace(" Borough Council", "")
+            .replace(" District Council", "")
+            .replace("London Borough of ", "")
+            .replace(" Council", "")
+        )
+
+    def nice_territory(self):
+        if self.territory == "WLS":
+            return "Wales"
+
+        if self.territory == "ENG":
+            return "England"
+
+        if self.territory == "SCT":
+            return "Scotland"
+
+        if self.territory == "NIR":
+            return "Northern Ireland"
+
+        return self.territory
+
 
 class PostElection(models.Model):
     ballot_paper_id = models.CharField(blank=True, max_length=800, unique=True)
