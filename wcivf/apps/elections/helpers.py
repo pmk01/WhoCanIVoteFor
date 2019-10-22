@@ -37,7 +37,7 @@ class JsonPaginator:
             r = requests.get(self.next_page)
             if r.status_code != 200:
                 self.stdout.write("crashing with response:")
-                self.stdout.write(r.content)
+                self.stdout.write(r.text)
             r.raise_for_status()
             data = r.json()
 
