@@ -12,9 +12,7 @@ from django.conf import settings
 import requests
 
 from core.helpers import show_data_on_error
-from people.models import Person, PersonPost
-from elections.models import PostElection
-from parties.models import Party
+from people.models import Person
 
 
 class Command(BaseCommand):
@@ -47,7 +45,10 @@ class Command(BaseCommand):
         self.options = options
         self.dirpath = tempfile.mkdtemp()
 
-        self.past_time_str = Person.objects.latest().last_updated
+        try:
+            self.past_time_str = Person.objects.latest().last_updated
+        except Person.DoesNotExist:
+            self.past_time_str = "1800-01-01"
         if self.options["since"]:
             self.past_time_str = self.options["since"]
 
@@ -59,13 +60,6 @@ class Command(BaseCommand):
             shutil.rmtree(self.dirpath)
 
     def add_to_db(self):
-        self.all_parties = {p.party_id: p for p in Party.objects.all()}
-        self.all_ballots = {
-            b.ballot_paper_id: b
-            for b in PostElection.objects.all().select_related(
-                "election", "post"
-            )
-        }
         self.existing_people = set(Person.objects.values_list("pk", flat=True))
         self.seen_people = set()
 
@@ -79,7 +73,6 @@ class Command(BaseCommand):
                     results, update_info_only=self.options["update_info_only"]
                 )
 
-        PersonPost.objects.filter(party=None).delete()
         if not self.options["recent"] or self.options["update_info_only"]:
             deleted_ids = self.existing_people.difference(self.seen_people)
             Person.objects.filter(ynr_id__in=deleted_ids).delete()
@@ -106,7 +99,7 @@ class Command(BaseCommand):
 
             next_page = (
                 settings.YNR_BASE
-                + "/api/next/persons/?page_size=200&updated_gte={}".format(
+                + "/api/next/people/?page_size=200&updated_gte={}".format(
                     self.past_time_str.isoformat()
                 )
             )
@@ -114,8 +107,15 @@ class Command(BaseCommand):
         else:
             next_page = (
                 settings.YNR_BASE
-                + "/media/cached-api/latest/persons-000001.json"
+                + "/media/cached-api/latest/people-000001.json"
             )
+
+        next_page = (
+            settings.YNR_BASE
+            + "/api/next/people/?page_size=200&updated_gte={}".format(
+                self.past_time_str.isoformat()
+            )
+        )
 
         while next_page:
             self.stdout.write("Downloading {}".format(next_page))
@@ -131,12 +131,9 @@ class Command(BaseCommand):
         for person in results["results"]:
             with show_data_on_error("Person {}".format(person["id"]), person):
                 person_obj = Person.objects.update_or_create_from_ynr(
-                    person,
-                    self.all_ballots,
-                    self.all_parties,
-                    update_info_only=update_info_only,
+                    person, update_info_only=update_info_only
                 )
-                if person["memberships"]:
+                if person["candidacies"]:
                     self.seen_people.add(person_obj.pk)
 
     def delete_merged_people(self):
