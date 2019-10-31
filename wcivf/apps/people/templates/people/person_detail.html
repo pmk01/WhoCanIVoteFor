@@ -222,6 +222,22 @@
           </a>
         </dd>
         {% endif %}
+        {% if object.instagram_url %}
+        <dt>Instagram</dt>
+        <dd>
+          <a href="{{ object.instagram_url }}" title="{{ object.name }}'s instagram">
+            {{ object.instagram_url }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.youtube_profile %}
+        <dt>YouTube</dt>
+        <dd>
+          <a href="{{ object.youtube_profile }}" title="{{ object.name }}'s YouTube">
+            {{ object.youtube_profile }}
+          </a>
+        </dd>
+        {% endif %}
         {% if object.party_ppc_page_url %}
         <dt>The party's candidate page for this person</dt>
         <dd>

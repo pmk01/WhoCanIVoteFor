@@ -60,7 +60,10 @@ class PersonManager(models.Manager):
             "party_ppc_page_url",
             "wikipedia_url",
             "theyworkforyou",
+            "youtube_profile",
+            "instagram_url",
         ]
+
         for identifier in person["identifiers"]:
             value_type = identifier["value_type"]
 
