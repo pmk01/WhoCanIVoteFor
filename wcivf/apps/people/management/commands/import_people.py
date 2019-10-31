@@ -12,7 +12,9 @@ from django.conf import settings
 import requests
 
 from core.helpers import show_data_on_error
+from elections.import_helpers import YNRBallotImporter
 from people.models import Person
+from elections.models import PostElection, Post
 
 
 class Command(BaseCommand):
@@ -44,10 +46,12 @@ class Command(BaseCommand):
     def handle(self, **options):
         self.options = options
         self.dirpath = tempfile.mkdtemp()
+        self.ballot_importer = YNRBallotImporter(stdout=self.stdout)
 
         try:
             self.past_time_str = Person.objects.latest().last_updated
         except Person.DoesNotExist:
+            # In case this is the first run
             self.past_time_str = "1800-01-01"
         if self.options["since"]:
             self.past_time_str = self.options["since"]
@@ -133,8 +137,50 @@ class Command(BaseCommand):
                 person_obj = Person.objects.update_or_create_from_ynr(
                     person, update_info_only=update_info_only
                 )
+
+                if self.options["recent"]:
+                    self.update_candidacies(person, person_obj)
+
                 if person["candidacies"]:
                     self.seen_people.add(person_obj.pk)
+
+    def update_candidacies(self, person, person_obj):
+        """
+        Compare the API dict to the candidacies we know about
+        """
+        known_candidacies = set(
+            person_obj.personpost_set.all().values_list(
+                "post_election__ballot_paper_id", flat=True
+            )
+        )
+
+        remote_candidacies = set(
+            [c["ballot"]["ballot_paper_id"] for c in person["candidacies"]]
+        )
+
+        if remote_candidacies != known_candidacies:
+            # Delete any old candidacies
+            deleted_candidacies = known_candidacies - remote_candidacies
+            person_obj.personpost_set.filter(
+                post_election__ballot_paper_id__in=deleted_candidacies
+            ).delete()
+
+            added_candidacies = remote_candidacies - known_candidacies
+            for candidacy in added_candidacies:
+                try:
+                    ballot = PostElection.objects.get(ballot_paper_id=candidacy)
+                except PostElection.DoesNotExist:
+                    # This might be because we've not run import_ballots
+                    # recently enough. Let's import just the ballots for this
+                    # date
+                    self.import_ballots_for_date(candidacy.split(".")[-1])
+                    import ipdb
+
+                    ipdb.set_trace()
+                    ballot = PostElection.objects.get(ballot_paper_id=candidacy)
+
+    def import_ballots_for_date(self, date):
+        self.ballot_importer.do_import(params={"election_date": date})
 
     def delete_merged_people(self):
         url = (

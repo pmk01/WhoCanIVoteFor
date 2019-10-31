@@ -1,4 +1,5 @@
 import sys
+from urllib.parse import urlencode
 
 from django.conf import settings
 from django.db import transaction
@@ -83,10 +84,6 @@ class YNRElectionImporter:
 
 
 class YNRPostImporter:
-    """
-
-    """
-
     def __init__(self, ee_helper=None):
         if not ee_helper:
             ee_helper = EEHelper()
@@ -96,7 +93,6 @@ class YNRPostImporter:
     def update_or_create_from_ballot_dict(self, ballot_dict):
         created = False
         if not ballot_dict["post"]["slug"] in self.post_cache:
-            print("querying for post")
             post, created = Post.objects.update_or_create(
                 ynr_id=ballot_dict["post"]["slug"],
                 defaults={"label": ballot_dict["post"]["label"]},
@@ -116,24 +112,46 @@ class YNRBallotImporter:
 
     """
 
-    def __init__(self, force_update=False, stdout=sys.stdout):
+    def __init__(
+        self,
+        force_update=False,
+        stdout=sys.stdout,
+        current_only=False,
+        exclude_candidacies=False,
+    ):
         self.stdout = stdout
         self.ee_helper = EEHelper()
         self.election_importer = YNRElectionImporter(self.ee_helper)
         self.post_imporer = YNRPostImporter(self.ee_helper)
         self.force_update = force_update
+        self.current_only = current_only
+        self.exclude_candidacies = exclude_candidacies
 
     def get_paginator(self, page1):
         return JsonPaginator(page1, self.stdout)
 
-    def do_import(self):
+    def do_import(self, params=None):
+        default_params = {"page_size": "200"}
+        if self.current_only:
+            default_params["current"] = True
+        if params:
+            default_params.update(params)
+        else:
+            self.ee_helper.prewarm_cache(current=self.current_only)
+
+        querystring = urlencode(default_params)
         pages = self.get_paginator(
-            settings.YNR_BASE + "/api/next/ballots/?page_size=200"
+            settings.YNR_BASE + "/api/next/ballots/?{}".format(querystring)
         )
 
         for page in pages:
             self.add_ballots(page)
-        self.run_post_ballot_import_tasks()
+        if not params:
+            # Don't try to do things like add replaced
+            # ballots if we've filtered the ballots.
+            # This is because there's a high chance we've not
+            # got all the ballots we need yet.
+            self.run_post_ballot_import_tasks()
 
     @transaction.atomic()
     def add_ballots(self, results):
@@ -162,25 +180,26 @@ class YNRBallotImporter:
 
             self.import_metadata_from_ee(ballot)
 
-            # Now set the nominations up for this ballot
-            # First, remove any old candidates, this is to flush out candidates
-            # that have changed. We just delete the `person_post`
-            # (`membership` in YNR), not the person profile.
-            ballot.personpost_set.all().delete()
-            for candidate in ballot_dict["candidacies"]:
-                person, person_created = Person.objects.update_or_create(
-                    ynr_id=candidate["person"]["id"],
-                    defaults={"name": candidate["person"]["name"]},
-                )
-                PersonPost.objects.create(
-                    post_election=ballot,
-                    person=person,
-                    party_id=candidate["party"]["legacy_slug"],
-                    list_position=candidate["party_list_position"],
-                    elected=candidate["elected"],
-                    post=ballot.post,
-                    election=ballot.election,
-                )
+            if not self.exclude_candidacies:
+                # Now set the nominations up for this ballot
+                # First, remove any old candidates, this is to flush out candidates
+                # that have changed. We just delete the `person_post`
+                # (`membership` in YNR), not the person profile.
+                ballot.personpost_set.all().delete()
+                for candidate in ballot_dict["candidacies"]:
+                    person, person_created = Person.objects.update_or_create(
+                        ynr_id=candidate["person"]["id"],
+                        defaults={"name": candidate["person"]["name"]},
+                    )
+                    PersonPost.objects.create(
+                        post_election=ballot,
+                        person=person,
+                        party_id=candidate["party"]["legacy_slug"],
+                        list_position=candidate["party_list_position"],
+                        elected=candidate["elected"],
+                        post=ballot.post,
+                        election=ballot.election,
+                    )
 
             if created:
                 self.stdout.write(
@@ -241,10 +260,11 @@ class YNRBallotImporter:
         # because if we're going to link 2 PostElection objects together
         # we need to be sure that both of them already exist in our DB
         cancelled_ballots = PostElection.objects.filter(cancelled=True)
+
         for cb in cancelled_ballots:
             cb.replaced_by = self.get_replacement_ballot(cb.ballot_paper_id)
             # Always get metadata, even if we might have it already.
             # This is because is self.force_update is False, it might not have
             # been imported already
-            cb.metadata = self.set_metadata(cb.ballot_paper_id)
+            cb.metadata = self.set_metadata(cb)
             cb.save()
