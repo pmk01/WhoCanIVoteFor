@@ -14,7 +14,7 @@ import requests
 from core.helpers import show_data_on_error
 from elections.import_helpers import YNRBallotImporter
 from people.models import Person
-from elections.models import PostElection, Post
+from elections.models import PostElection
 
 
 class Command(BaseCommand):
@@ -174,10 +174,21 @@ class Command(BaseCommand):
                     # recently enough. Let's import just the ballots for this
                     # date
                     self.import_ballots_for_date(candidacy.split(".")[-1])
-                    import ipdb
-
-                    ipdb.set_trace()
                     ballot = PostElection.objects.get(ballot_paper_id=candidacy)
+                for candidacy_dict in person["candidacies"]:
+                    if candidacy_dict["ballot"]["ballot_paper_id"] == candidacy:
+                        candidacy_dict_for_ballot = candidacy_dict
+
+                person_obj.personpost_set.update_or_create(
+                    post_election=ballot,
+                    post=ballot.post,
+                    election=ballot.election,
+                    party_id=candidacy_dict_for_ballot["party"]["legacy_slug"],
+                    list_position=candidacy_dict_for_ballot[
+                        "party_list_position"
+                    ],
+                    elected=candidacy_dict_for_ballot["elected"],
+                )
 
     def import_ballots_for_date(self, date):
         self.ballot_importer.do_import(params={"election_date": date})
