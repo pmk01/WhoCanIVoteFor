@@ -1,3 +1,4 @@
+import sys
 from functools import update_wrapper
 
 from django.conf import settings
@@ -10,6 +11,15 @@ import requests
 class EEHelper:
 
     ee_cache = {}
+
+    def prewarm_cache(self, current=False):
+        page1 = "{}/api/elections/".format(settings.EE_BASE)
+        if current:
+            page1 = "{}?current=True".format(page1)
+        pages = JsonPaginator(page1, sys.stdout)
+        for page in pages:
+            for result in page["results"]:
+                self.ee_cache[result["election_id"]] = result
 
     def get_data(self, election_id):
         if election_id in self.ee_cache:
@@ -37,7 +47,7 @@ class JsonPaginator:
             r = requests.get(self.next_page)
             if r.status_code != 200:
                 self.stdout.write("crashing with response:")
-                self.stdout.write(r.content)
+                self.stdout.write(r.text)
             r.raise_for_status()
             data = r.json()
 

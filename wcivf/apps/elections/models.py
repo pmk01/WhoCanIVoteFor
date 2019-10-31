@@ -9,8 +9,8 @@ from django.utils.html import mark_safe
 from django.utils.text import slugify
 
 
-from .managers import ElectionManager, PostManager
 from .helpers import expected_sopn_publish_date
+from .managers import ElectionManager
 
 LOCAL_TZ = pytz.timezone("Europe/London")
 
@@ -156,8 +156,6 @@ class Post(models.Model):
     elections = models.ManyToManyField(
         Election, through="elections.PostElection"
     )
-
-    objects = PostManager()
 
     def nice_organization(self):
         return (
