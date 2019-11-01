@@ -16,7 +16,7 @@ class PersonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ("ynr_id", "name", "absolute_url")
+        fields = ("ynr_id", "name", "absolute_url", "email", "photo_url")
 
 
 class PartySerializer(serializers.HyperlinkedModelSerializer):

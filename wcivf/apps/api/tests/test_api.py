@@ -87,6 +87,8 @@ class TestAPISearchViews(APITestCase):
                             "absolute_url": "http://testserver/person/0/candidate-0",
                             "ynr_id": 0,
                             "name": "Candidate 0",
+                            "email": None,
+                            "photo_url": None,
                         },
                     }
                 ],
