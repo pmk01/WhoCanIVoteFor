@@ -109,17 +109,7 @@ class Command(BaseCommand):
             )
 
         else:
-            next_page = (
-                settings.YNR_BASE
-                + "/media/cached-api/latest/people-000001.json"
-            )
-
-        next_page = (
-            settings.YNR_BASE
-            + "/api/next/people/?page_size=200&updated_gte={}".format(
-                self.past_time_str.isoformat()
-            )
-        )
+            next_page = settings.YNR_BASE + "/api/next/people/"
 
         while next_page:
             self.stdout.write("Downloading {}".format(next_page))
