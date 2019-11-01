@@ -118,6 +118,7 @@ class YNRBallotImporter:
         stdout=sys.stdout,
         current_only=False,
         exclude_candidacies=False,
+        force_metadata=False,
     ):
         self.stdout = stdout
         self.ee_helper = EEHelper()
@@ -126,6 +127,7 @@ class YNRBallotImporter:
         self.force_update = force_update
         self.current_only = current_only
         self.exclude_candidacies = exclude_candidacies
+        self.force_metadata = force_metadata
 
     def get_paginator(self, page1):
         return JsonPaginator(page1, self.stdout)
@@ -137,7 +139,10 @@ class YNRBallotImporter:
         if params:
             default_params.update(params)
         else:
-            self.ee_helper.prewarm_cache(current=self.current_only)
+            prewarm_current_only = True
+            if self.force_metadata:
+                prewarm_current_only = False
+            self.ee_helper.prewarm_cache(current=prewarm_current_only)
 
         querystring = urlencode(default_params)
         if not params and not self.current_only:
@@ -186,7 +191,8 @@ class YNRBallotImporter:
                 },
             )
 
-            self.import_metadata_from_ee(ballot)
+            if ballot.election.current or self.force_metadata:
+                self.import_metadata_from_ee(ballot)
 
             if not self.exclude_candidacies:
                 # Now set the nominations up for this ballot
