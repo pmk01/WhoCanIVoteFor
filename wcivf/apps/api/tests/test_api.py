@@ -17,17 +17,6 @@ class TestAPIBasics(APITestCase):
         req = self.client.get(reverse("api:api-root"))
         assert req.status_code == 200
 
-    def test_person_view(self):
-        req = self.client.get(reverse("api:person-list"))
-        assert req.status_code == 200
-        assert req.data == []
-
-        PersonFactory()  # Make a person
-
-        req = self.client.get(reverse("api:person-list"))
-        assert req.status_code == 200
-        assert len(req.data) == 1
-
     def test_candidates_for_postcode_view_raises_error(self):
         req = self.client.get(reverse("api:candidates-for-postcode-list"))
         assert req.status_code == 400
