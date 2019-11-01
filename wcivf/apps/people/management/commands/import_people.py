@@ -104,9 +104,14 @@ class Command(BaseCommand):
         if self.options["recent"] or self.options["since"]:
             params["updated_gte"] = self.past_time_str.isoformat()
 
-        next_page = settings.YNR_BASE + "/api/next/people/?{}".format(
-            urlencode(params)
-        )
+            next_page = settings.YNR_BASE + "/api/next/people/?{}".format(
+                urlencode(params)
+            )
+        else:
+            next_page = (
+                settings.YNR_BASE
+                + "/media/cached-api/latest/people-000001.json"
+            )
 
         while next_page:
             self.stdout.write("Downloading {}".format(next_page))
