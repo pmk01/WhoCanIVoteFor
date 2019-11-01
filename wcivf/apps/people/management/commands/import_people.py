@@ -2,6 +2,7 @@ import os
 import json
 import tempfile
 import shutil
+from urllib.parse import urlencode
 
 from dateutil.parser import parse
 
@@ -99,17 +100,13 @@ class Command(BaseCommand):
             f.write(page)
 
     def download_pages(self):
+        params = {"page_size": "200"}
         if self.options["recent"] or self.options["since"]:
+            params["updated_gte"] = self.past_time_str.isoformat()
 
-            next_page = (
-                settings.YNR_BASE
-                + "/api/next/people/?page_size=200&updated_gte={}".format(
-                    self.past_time_str.isoformat()
-                )
-            )
-
-        else:
-            next_page = settings.YNR_BASE + "/api/next/people/"
+        next_page = settings.YNR_BASE + "/api/next/people/?{}".format(
+            urlencode(params)
+        )
 
         while next_page:
             self.stdout.write("Downloading {}".format(next_page))
