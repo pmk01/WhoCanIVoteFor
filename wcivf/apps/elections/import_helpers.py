@@ -140,9 +140,17 @@ class YNRBallotImporter:
             self.ee_helper.prewarm_cache(current=self.current_only)
 
         querystring = urlencode(default_params)
-        pages = self.get_paginator(
-            settings.YNR_BASE + "/api/next/ballots/?{}".format(querystring)
-        )
+        if not params and not self.current_only:
+            # this is a full import, use the cache
+            url = (
+                settings.YNR_BASE
+                + "/media/cached-api/latest/ballots-000001.json"
+            )
+        else:
+            url = settings.YNR_BASE + "/api/next/ballots/?{}".format(
+                querystring
+            )
+        pages = self.get_paginator(url)
 
         for page in pages:
             self.add_ballots(page)
