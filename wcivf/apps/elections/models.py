@@ -102,7 +102,7 @@ class Election(models.Model):
     @property
     def start_time(self):
         election_datetime = self._election_datetime_tz()
-        return utc_to_local(election_datetime.replace(hour=6))
+        return utc_to_local(election_datetime.replace(hour=7))
 
     @property
     def end_time(self):
