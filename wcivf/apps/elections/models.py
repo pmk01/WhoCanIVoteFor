@@ -220,7 +220,7 @@ class PostElection(models.Model):
     def friendly_name(self):
         # TODO Take more info from YNR/EE about the election
         # rather than hard coding not_wards and not_by_elections
-        name = self.post.area_name
+        name = self.post.label
 
         suffix = self.get_name_suffix()
         if suffix:
