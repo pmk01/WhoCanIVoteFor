@@ -20,7 +20,9 @@ class Command(BaseCommand):
     # )
 
     def handle(self, *args, **options):
-        base_url = "{}/api/next/results/".format(settings.YNR_BASE)
+        base_url = "{}/api/next/results/?page_size=200".format(
+            settings.YNR_BASE
+        )
         next_page = base_url
         for page in JsonPaginator(next_page, self.stdout):
             self.import_page(page["results"])
