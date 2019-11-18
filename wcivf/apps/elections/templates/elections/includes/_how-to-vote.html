@@ -14,7 +14,7 @@ PR-CL:	Closed List
   This election uses {{ voting_system.name }}.
 
   {% if voting_system.slug == "FPTP" %}
-    <p>Mark an X in the box for your preferred candidate(s).</p>
+    <p>Mark an X in the box for your preferred candidate{{ postelection.winner_count|pluralize }}.</p>
   {% endif %}
 
   {% if voting_system.slug == "STV" %}
