@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 
 from elections.import_helpers import YNRBallotImporter
+from elections.models import Election
 
 
 class Command(YNRBallotImporter, BaseCommand):
@@ -20,6 +21,17 @@ class Command(YNRBallotImporter, BaseCommand):
             help="Imports all metadata from EE for all elections",
         )
 
+    def populate_any_non_by_elections_field(self):
+        qs = Election.objects.all().prefetch_related("postelection_set")
+        for election in qs:
+            any_non_by_elections = any(
+                b.ballot_paper_id
+                for b in election.postelection_set.all()
+                if ".by." not in b.ballot_paper_id
+            )
+            election.any_non_by_elections = any_non_by_elections
+            election.save()
+
     def handle(self, **options):
         importer = YNRBallotImporter(
             stdout=self.stdout,
@@ -27,3 +39,4 @@ class Command(YNRBallotImporter, BaseCommand):
             force_metadata=options["force_metadata"],
         )
         importer.do_import()
+        self.populate_any_non_by_elections_field()
