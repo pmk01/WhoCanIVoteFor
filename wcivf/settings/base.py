@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     "results",
     "donations",
     "pledges",
+    "news_mentions",
 )
 
 MIDDLEWARE = (
