@@ -1,5 +1,3 @@
-import requests
-
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
@@ -7,7 +5,7 @@ from core.helpers import show_data_on_error
 from elections.helpers import JsonPaginator
 from people.models import PersonPost
 from results.models import PersonPostResult
-from elections.models import PostElection, Election
+from elections.models import PostElection
 
 
 class Command(BaseCommand):
