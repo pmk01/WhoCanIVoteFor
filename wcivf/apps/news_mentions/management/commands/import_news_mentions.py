@@ -34,6 +34,9 @@ class Command(BaseCommand):
         if not line["Link"]:
             return
 
+        if not line["Link"].startswith("http"):
+            return
+
         article = Article(line["Link"])
         article.download()
         article.parse()
