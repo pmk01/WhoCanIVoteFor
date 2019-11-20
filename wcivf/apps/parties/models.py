@@ -113,6 +113,7 @@ class Manifesto(models.Model):
     )
     pdf_url = models.URLField(blank=True, max_length=800)
     web_url = models.URLField(blank=True, max_length=800)
+    easy_read_url = models.URLField(blank=True, max_length=800)
 
     def __str__(self):
         canonical_url = self.canonical_url()

@@ -42,12 +42,17 @@ class Command(BaseCommand):
 
         manifesto_web = row["manifesto website"].strip()
         manifesto_pdf = row["manifesto pdf"].strip()
+        easy_read_url = row.get("easy read version", "").strip()
         if any([manifesto_web, manifesto_pdf]):
             manifesto_obj, created = Manifesto.objects.update_or_create(
                 election=election,
                 party=party,
                 country=country,
                 language=language,
-                defaults={"web_url": manifesto_web, "pdf_url": manifesto_pdf},
+                defaults={
+                    "web_url": manifesto_web,
+                    "pdf_url": manifesto_pdf,
+                    "easy_read_url": easy_read_url,
+                },
             )
             manifesto_obj.save()
