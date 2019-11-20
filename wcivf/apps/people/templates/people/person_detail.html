@@ -24,16 +24,29 @@
   {% if object.manifestos %}
   {% with object.personpost.party as party %}
   <div class="card info_card">
+
     <h3>Party manifesto</h3>
-    <p>
     {% if party.emblem %}
       <a href="{{ object.manifestos.0.web_url }}"><img src="{{ party.emblem.url }}" class="manifesto_image"></a>
+      <style>
+      @media(min-width:550px) {
+        .manifesto_card_body {
+          margin-left:130px;
+        }
+      }
+      </style>
     {% endif %}
-    {{ object.name }} {{ object.personpost.election.in_past|yesno:"was,is" }} the {{ party.party_name }} candidate. Find out more about their policies from the {{ party.party_name }} {{ object.personpost.election.name }}
-    {% for manifesto in object.manifestos %}
-    {{ manifesto|safe }}{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} or {% else %}, {% endifequal %}{% else %}.{% endif %}
-    {% endfor %}
-    </p>
+    <div class="manifesto_card_body">
+      <p>
+
+      {{ object.name }} {{ object.personpost.election.in_past|yesno:"was,is" }} the {{ party.party_name }} candidate. Find out more about their policies from the {{ party.party_name }} {{ object.personpost.election.name }}
+      </p>
+      <ul>
+        {% for manifesto in object.manifestos %}
+          {% include "parties/single_manifesto.html" %}
+        {% endfor %}
+      </ul>
+    </div>
   </div>
   {% endwith %}
   {% endif %}
