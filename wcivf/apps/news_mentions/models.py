@@ -9,3 +9,4 @@ class BallotNewsArticle(TimeStampedModel):
     url = models.URLField(max_length=800)
     title = models.CharField(max_length=800)
     summary = models.TextField()
+    publisher = models.CharField(max_length=500, blank=True)

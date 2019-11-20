@@ -82,6 +82,10 @@
 
 </div>
 
+{% if postelection.ballotnewsarticle_set.exists %}
+  {% include "news_mentions/news_articles.html" with news_articles=postelection.ballotnewsarticle_set.all %}
+{% endif %}
+
 {% if postelection.husting_set.exists %}
   <div class="card">
     <h3>Election events</h3>

@@ -44,4 +44,5 @@ class Command(BaseCommand):
             ballot=self.get_ballot(line["Ballot Paper ID"]),
             url=article.canonical_link,
             title=article.title,
+            publisher=line["Newspaper (not essential)"],
         )

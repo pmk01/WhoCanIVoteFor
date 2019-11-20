@@ -189,21 +189,8 @@
     </div>
   {% endif %}
     {% if postelection.ballotnewsarticle_set.exists %}
-    <div class="card">
-      <h3>News articles</h3>
-      {% for news_article in postelection.ballotnewsarticle_set.all %}
-        <strong>
-          <a href="{{ news_article.url }}" rel="noopener noreferrer">
-            {{ news_article.title }}
-          </a>
-        </strong>
-        {% if news_article.summary %}
-        <p>{{ news_article.summary }}</p>
-        {% endif %}
-      {% endfor %}
-
-    </div>
-  {% endif %}
+    {% include "news_mentions/news_articles.html" with news_articles=postelection.ballotnewsarticle_set.all %}
+    {% endif %}
 
 
 
