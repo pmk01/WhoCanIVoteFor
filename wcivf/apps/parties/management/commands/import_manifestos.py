@@ -24,12 +24,17 @@ class Command(BaseCommand):
             reader = csv.DictReader(fh)
             for row in reader:
                 party_id = row["party_id"].strip()
+                if "-" in party_id:
+                    party_id = "joint-party:" + party_id
+                else:
+                    party_id = "party:" + party_id
+
                 try:
                     election = Election.objects.get(slug=row["election_id"])
                 except:
                     continue
                 try:
-                    party = Party.objects.get(party_id="party:%s" % party_id)
+                    party = Party.objects.get(party_id="%s" % party_id)
                     self.add_manifesto(row, party, election)
                 except Party.DoesNotExist:
                     print("Party not found with ID %s" % party_id)
