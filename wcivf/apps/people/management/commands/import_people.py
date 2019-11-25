@@ -80,7 +80,7 @@ class Command(BaseCommand):
                     results, update_info_only=self.options["update_info_only"]
                 )
 
-        if not self.options["recent"] or self.options["update_info_only"]:
+        if not self.options["recent"] or not self.options["update_info_only"]:
             deleted_ids = self.existing_people.difference(self.seen_people)
             Person.objects.filter(ynr_id__in=deleted_ids).delete()
 
