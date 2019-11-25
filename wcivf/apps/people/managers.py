@@ -64,6 +64,10 @@ class PersonManager(models.Manager):
             "instagram_url",
         ]
 
+        for value_type in value_types_to_import:
+            defaults[value_type] = None
+        del defaults["theyworkforyou"]
+
         for identifier in person["identifiers"]:
             value_type = identifier["value_type"]
 
