@@ -4,7 +4,11 @@
     {{ feedback_form.token }}
     {{ feedback_form.source_url }}
 
-    <h3>Did you find what you were looking for?</h3>
+    <h3>
+      <span aria-hidden="true">🔎</span>
+      Did you find what you were looking for?
+      <span aria-hidden="true">🔎</span>
+    </h3>
     {% for choice in feedback_form.found_useful %}
       {{ choice.tag }}
       <label class="link-button" for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>

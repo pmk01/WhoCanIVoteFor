@@ -74,7 +74,11 @@
     {% if postelection.cancelled %}
       {% include "elections/includes/_cancelled_election.html" with object=postelection only %}
     {% else %}
-      <h1>{{ postelection.election.nice_election_name }}</h1>
+      <h1>
+        <span aria-hidden="true">🗳️</span>
+        {{ postelection.election.nice_election_name }}
+        <span aria-hidden="true">🗳️</span>
+      </h1>
       {% if postelection.friendly_name != postelection.election.nice_election_name %}
       <h2>{{ postelection.friendly_name }}</h2>
       {% endif %}
@@ -183,7 +187,11 @@
 
   {% if postelection.husting_set.exists %}
     <div class="card">
-      <h3>Election events near you</h3>
+      <h3>
+        <span aria-hidden="true">📅</span>
+        Election events near you
+        <span aria-hidden="true">📅</span>
+      </h3>
       <p>You can meet candidates and question them at local hustings.</p>
       {% include "elections/includes/_hustings_list.html" with hustings=postelection.husting_set.all %}
     </div>
@@ -202,7 +210,11 @@
 
 {% if not messages %}
   <div class="card">
-    <h2>Election reminders for {{ postcode }}</h2>
+    <h2>
+      <span aria-hidden="true">⏰</span>
+      Election reminders for {{ postcode }}
+      <span aria-hidden="true">⏰</span>
+    </h2>
     <p>We can email you the next time there is an election in {{ postcode }}.</p>
     {% include "email_form/election_reminders_form.html" %}
 

@@ -14,7 +14,11 @@
   {% if object.cancelled %}
     {% include "elections/includes/_cancelled_election.html" with object=object only %}
   {% else %}
-  <h1>{{ object.election.nice_election_name }}</h1>
+  <h1>
+    <span aria-hidden="true">🗳️</span>
+    {{ object.election.nice_election_name }}
+    <span aria-hidden="true">🗳️</span>
+  </h1>
   {% if object.friendly_name != object.election.nice_election_name %}
   <h2>{{ object.friendly_name }}</h2>
   {% endif %}
