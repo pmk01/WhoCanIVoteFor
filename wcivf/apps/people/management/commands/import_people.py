@@ -2,6 +2,7 @@ import os
 import json
 import tempfile
 import shutil
+from datetime import timedelta
 from urllib.parse import urlencode
 
 from dateutil.parser import parse
@@ -50,7 +51,8 @@ class Command(BaseCommand):
         self.ballot_importer = YNRBallotImporter(stdout=self.stdout)
 
         try:
-            self.past_time_str = Person.objects.latest().last_updated
+            last_updated = Person.objects.latest().last_updated
+            self.past_time_str = last_updated - timedelta(hours=1)
         except Person.DoesNotExist:
             # In case this is the first run
             self.past_time_str = "1800-01-01"
