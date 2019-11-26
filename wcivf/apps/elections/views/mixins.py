@@ -11,6 +11,7 @@ from django.db.models import IntegerField
 from django.db.models import When, Case
 
 from core.models import log_postcode
+from core.utils import LastWord
 from people.models import PersonPost
 from elections.constants import UPDATED_SLUGS
 
@@ -111,11 +112,15 @@ class PostelectionsToPeopleMixin(object):
             return people_for_post
 
         people_for_post = PersonPost.objects.filter(post_election=postelection)
+        people_for_post = people_for_post.annotate(
+            last_name=LastWord("person__name")
+        )
 
         if postelection.election.uses_lists:
             order_by = ["party__party_name", "list_position"]
         else:
-            order_by = ["person__name"]
+            order_by = ["last_name"]
+
         people_for_post = people_for_post.order_by("-elected", *order_by)
         people_for_post = people_for_post.select_related(
             "post", "election", "person", "party", "person__cv", "results"
