@@ -2,6 +2,19 @@ from django.db import models
 from django.db.models import Count
 from django.utils.dateparse import parse_datetime
 
+VALUE_TYPES_TO_IMPORT = [
+    "twitter_username",
+    "facebook_page_url",
+    "facebook_personal_url",
+    "linkedin_url",
+    "homepage_url",
+    "party_ppc_page_url",
+    "wikipedia_url",
+    "theyworkforyou",
+    "youtube_profile",
+    "instagram_url",
+]
+
 
 class PersonPostQuerySet(models.QuerySet):
     def by_party(self):
@@ -51,27 +64,14 @@ class PersonManager(models.Manager):
             "last_updated": last_updated,
         }
 
-        value_types_to_import = [
-            "twitter_username",
-            "facebook_page_url",
-            "facebook_personal_url",
-            "linkedin_url",
-            "homepage_url",
-            "party_ppc_page_url",
-            "wikipedia_url",
-            "theyworkforyou",
-            "youtube_profile",
-            "instagram_url",
-        ]
-
-        for value_type in value_types_to_import:
+        for value_type in VALUE_TYPES_TO_IMPORT:
             defaults[value_type] = None
         del defaults["theyworkforyou"]
 
         for identifier in person["identifiers"]:
             value_type = identifier["value_type"]
 
-            if value_type in value_types_to_import:
+            if value_type in VALUE_TYPES_TO_IMPORT:
                 if value_type == "theyworkforyou":
                     defaults["twfy_id"] = identifier[
                         "internal_identifier"

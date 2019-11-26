@@ -6,7 +6,7 @@ from elections.models import Election, Post
 from parties.models import Party
 
 from wcivf import settings
-from .managers import PersonPostManager, PersonManager
+from .managers import PersonPostManager, PersonManager, VALUE_TYPES_TO_IMPORT
 
 
 class PersonPost(models.Model):
@@ -124,16 +124,7 @@ class Person(models.Model):
         """
         Does this person have any info to display in the contact info box?
         """
-        return any(
-            (
-                self.email,
-                self.twitter_username,
-                self.facebook_page_url,
-                self.facebook_personal_url,
-                self.linkedin_url,
-                self.homepage_url,
-            )
-        )
+        return any([getattr(self, vt, False) for vt in VALUE_TYPES_TO_IMPORT])
 
     @property
     def cta_example_details(self):
