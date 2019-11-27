@@ -11,66 +11,16 @@
 {% block content %}
 
 {% if postelections.count != 1 %}
-
-<div class="card next_election">
-  {% if postelections.count == 0 %}
-    We don't know of any upcoming elections.
-  {% else %}
-    {% regroup postelections by election.election_date as header_elections_by_date %}
-    <h2>Elections in your area</h2>
-
-    {% for election_group in header_elections_by_date %}
-
-
-        {% if election_group.list.0.past_date %}
-              {% ifchanged election_group.list.0.past_date %}
-                <h3>Recently past elections</h3>
-              {% endifchanged %}
-            {% endif %}
-        {% if election_group.list.0.past_date %}
-          <h4>
-            {{ election_group.grouper|naturalday:"l j F Y"|title }}
-          </h4>
-        {% else %}
-          <h3>
-            {{ election_group.grouper|naturalday:"l j F Y"|title }}
-          </h3>
-          <p>
-            You will have {{ election_group.list|length|apnumber }}
-            ballot paper{{ election_group.list|length|pluralize }} to fill out.
-          </p>
-
-        {% endif %}
-
-
-        <ul>
-          {% for ballot in election_group.list %}
-          <li {% if ballot.past_date %}class="past_elections"{% endif %}>
-
-            <a href="#election_{{ ballot.election.slug }}">
-            {{ ballot.election.nice_election_name }}
-            {% if ballot.post.label != post.election %}
-              {% if 'mayor' not in ballot.election.slug %}
-                : {{ ballot.post.label }}
-              {% endif %}
-            {% endif %}
-            </a>
-            {{ ballot.short_cancelled_message_html }}
-          </li>
-          {% endfor %}
-        </ul>
-    {% endfor %}
-  {% endif %}
-
-<p>There may also be parish, town or
-          community council elections in some areas.</p>
-</div>
+{#  Inline nav of elections #}
+{% include "elections/includes/inline_elections_nav_list.html" %}
 {% endif %}
+
 
 {% regroup postelections by election.election_date as elections_by_date %}
 {% for election_group in elections_by_date %}
   {% for postelection in election_group.list %}
-  <div id="election_{{ postelection.election.slug }}" class="card">
+  <section id="election_{{ postelection.election.slug }}">
+    <div class="card">
     {% if postelection.cancelled %}
       {% include "elections/includes/_cancelled_election.html" with object=postelection only %}
     {% else %}
@@ -183,7 +133,7 @@
       {% endif %}
 
     {% endif %}
-  </div>
+    </div>
 
   {% if postelection.husting_set.exists %}
     <div class="card">
@@ -201,6 +151,7 @@
     {% endif %}
 
 
+  </section>
 
   {% endfor %}
 {% endfor %}
@@ -209,7 +160,7 @@
 {% include "elections/includes/_polling_place.html" with elections_by_date=elections_by_date voter_id_required=voter_id_required %}
 
 {% if not messages %}
-  <div class="card">
+  <section class="card">
     <h2>
       <span aria-hidden="true">⏰</span>
       Election reminders for {{ postcode }}
@@ -222,7 +173,7 @@
     Or add future elections in {{ postcode }} to your calendar:
     <a href="webcal://whocanivotefor.co.uk{% url 'postcode_ical_view' postcode %}">iCal feed</a>
   </p>
-  </div>
+  </section>
 {% endif %}
 
 

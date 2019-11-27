@@ -1,5 +1,9 @@
 /* Cards */
 
+section + .card {
+  margin-top:$card-margin*2;
+}
+
 .card {
   width: 100%;
   box-sizing: border-box;

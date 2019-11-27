@@ -1,4 +1,4 @@
-<div class="card">
+<section class="card">
   <form id="feedback_form" method="post" action="{% url 'feedback_form_view' %}">
     {% csrf_token %}
     {{ feedback_form.token }}
@@ -20,4 +20,4 @@
       <button type="submit" class="button">Send feedback</button>
     </div>
   </form>
-</div>
+</section>
