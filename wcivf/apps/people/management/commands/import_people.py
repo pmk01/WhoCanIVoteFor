@@ -59,6 +59,8 @@ class Command(BaseCommand):
         if self.options["since"]:
             self.past_time_str = self.options["since"]
 
+        self.past_time_str = str(self.past_time_str)
+
         try:
             self.download_pages()
             self.add_to_db()
@@ -111,7 +113,7 @@ class Command(BaseCommand):
     def download_pages(self):
         params = {"page_size": "200"}
         if self.options["recent"] or self.options["since"]:
-            params["updated_gte"] = self.past_time_str.isoformat()
+            params["updated_gte"] = self.past_time_str
 
             next_page = settings.YNR_BASE + "/api/next/people/?{}".format(
                 urlencode(params)
@@ -198,7 +200,7 @@ class Command(BaseCommand):
         url = (
             settings.YNR_BASE
             + "/api/next/person_redirects/?page_size=200&updated_gte={}".format(
-                self.past_time_str.isoformat()
+                self.past_time_str
             )
         )
         merged_ids = []
