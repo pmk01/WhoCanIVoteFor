@@ -8,7 +8,10 @@ from django.apps import apps
 
 
 from people.helpers import peopleposts_for_election_post
-from elections.views.mixins import NewSlugsRedirectMixin
+from elections.views.mixins import (
+    NewSlugsRedirectMixin,
+    PostelectionsToPeopleMixin,
+)
 from elections.models import PostElection
 from parties.models import LocalParty, Party
 from people.models import PersonPost
@@ -76,7 +79,7 @@ class RedirectPostView(RedirectView):
         return url
 
 
-class PostView(NewSlugsRedirectMixin, DetailView):
+class PostView(NewSlugsRedirectMixin, PostelectionsToPeopleMixin, DetailView):
     template_name = "elections/post_view.html"
     model = apps.get_model("elections.PostElection")
 
@@ -101,15 +104,7 @@ class PostView(NewSlugsRedirectMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["election"] = self.object.election
-        context["person_posts"] = (
-            peopleposts_for_election_post(
-                election=context["election"], post=self.object.post
-            )
-            .select_related("post", "person", "person__cv", "party", "results")
-            .prefetch_related("person__leaflet_set", "person__pledges")
-            .order_by("-elected")
-        )
-
+        context["person_posts"] = self.people_for_ballot(self.object)
         return context
 
 
