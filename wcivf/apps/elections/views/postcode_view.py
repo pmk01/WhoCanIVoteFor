@@ -4,6 +4,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
 
+from core.helpers import clean_postcode
 from .mixins import (
     LogLookUpMixin,
     PostcodeToPostsMixin,
@@ -35,7 +36,7 @@ class PostcodeView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.postcode = self.clean_postcode(kwargs["postcode"])
+        self.postcode = clean_postcode(kwargs["postcode"])
         context["postcode"] = self.postcode
         self.log_postcode(context["postcode"])
         context["postelections"] = self.postcode_to_ballots(context["postcode"])

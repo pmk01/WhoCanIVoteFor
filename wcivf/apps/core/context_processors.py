@@ -1,4 +1,6 @@
 from django.conf import settings
+
+from core.helpers import clean_postcode
 from .forms import PostcodeLookupForm
 
 
