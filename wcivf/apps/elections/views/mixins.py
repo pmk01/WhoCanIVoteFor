@@ -119,7 +119,7 @@ class PostelectionsToPeopleMixin(object):
         if postelection.election.uses_lists:
             order_by = ["party__party_name", "list_position"]
         else:
-            order_by = ["person__sort_name", "last_name"]
+            order_by = ["person__sort_name", "last_name", "person__name"]
 
         people_for_post = people_for_post.order_by("-elected", *order_by)
         people_for_post = people_for_post.select_related(
