@@ -11,7 +11,11 @@
 
 {% block content %}
   <div class="card person_banner">
-    <h2 class="person_name">{{ object.name }}</h2>
+    <h2 class="person_name">{{ object.name }}
+    {% if person.death_date and person.has_current_candidacies and person.personpost.party.party_id == "ynmp-party:2" %}
+      (Deceased)
+    {% endif %}
+    </h2>
     {% if object.photo_url %}
       <img src="{{ object.photo_url }}" class="person_photo detail" alt="profile photo of {{ object.name }}">
     {% endif %}
