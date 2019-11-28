@@ -66,6 +66,7 @@ class PersonManager(models.Manager):
             "email": person["email"] or None,
             "gender": person["gender"] or None,
             "birth_date": person["birth_date"] or None,
+            "death_date": person["death_date"] or None,
             "last_updated": last_updated,
         }
 
