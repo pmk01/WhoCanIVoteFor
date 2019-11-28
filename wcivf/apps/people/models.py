@@ -42,6 +42,7 @@ class Person(models.Model):
     ynr_id = models.IntegerField(primary_key=True)
     twfy_id = models.IntegerField(null=True, blank=True)
     name = models.CharField(blank=True, max_length=255)
+    sort_name = models.CharField(null=True, max_length=255)
     email = models.EmailField(null=True)
     gender = models.CharField(blank=True, max_length=255, null=True)
     birth_date = models.CharField(null=True, max_length=255)

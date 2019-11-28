@@ -56,8 +56,13 @@ class PersonManager(models.Manager):
 
         last_updated = parse_datetime(person["last_updated"])
 
+        sort_name = person.get("sort_name")
+        if not sort_name:
+            sort_name = person["name"].split(" ")[-1]
+
         defaults = {
             "name": person["name"],
+            "sort_name": sort_name,
             "email": person["email"] or None,
             "gender": person["gender"] or None,
             "birth_date": person["birth_date"] or None,
