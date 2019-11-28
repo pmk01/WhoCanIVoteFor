@@ -394,7 +394,7 @@
   <ol vocab="http://schema.org/" typeof="BreadcrumbList" class="breadcrumbs" aria-label="You are here:" role="navigation">
     {% url 'home_view' as home_view %}
     {% breadcrumb_item home_view 'Home' 1 %}
-    {% breadcrumb_item object.personpost.election.get_absolute_url 'Candidates in '|add:object.personpost.post.label 2 %}
+    {% breadcrumb_item object.personpost.post_election.get_absolute_url 'Candidates in '|add:object.personpost.post.label 2 %}
     <li class="disabled"><span class="show-for-sr">Current: </span> {{ object.name }}</li>
   </ol>
 {% endif %}
