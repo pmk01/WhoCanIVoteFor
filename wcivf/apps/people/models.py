@@ -46,6 +46,7 @@ class Person(models.Model):
     email = models.EmailField(null=True)
     gender = models.CharField(blank=True, max_length=255, null=True)
     birth_date = models.CharField(null=True, max_length=255)
+    death_date = models.CharField(null=True, max_length=255)
     photo_url = models.URLField(blank=True, null=True)
     favourite_biscuit = models.CharField(null=True, max_length=800)
     last_updated = models.DateTimeField(default=now)
