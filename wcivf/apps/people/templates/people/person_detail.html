@@ -25,7 +25,6 @@
   {% with object.personpost.party as party %}
   <div class="card info_card">
 
-    <h3>Party manifesto</h3>
     {% if party.emblem %}
       <a href="{{ object.manifestos.0.web_url }}"><img src="{{ party.emblem.url }}" class="manifesto_image"></a>
       <style>
@@ -36,10 +35,12 @@
       }
       </style>
     {% endif %}
+    <h3>Party manifesto</h3>
     <div class="manifesto_card_body">
       <p>
 
-      {{ object.name }} {{ object.personpost.election.in_past|yesno:"was,is" }} the {{ party.party_name }} candidate. Find out more about their policies from the {{ party.party_name }} {{ object.personpost.election.name }}
+      {{ object.name }} {{ object.personpost.election.in_past|yesno:"was,is" }} the {{ party.party_name }} candidate.
+        Find out more about their policies in the {{ party.party_name }} manifesto.
       </p>
       <ul>
         {% for manifesto in object.manifestos %}
