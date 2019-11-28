@@ -5,13 +5,13 @@
     {% if manifesto.canonical_url == manifesto.pdf_url %}(PDF){% endif %}
   </a>
 </li>
-<li>
-    {% if manifesto.canonical_url != manifesto.pdf_url %}
-      <a href="{{ manifesto.pdf_url }}" rel="noopener noreferrer">PDF Version</a>
-    {% endif %}
-</li>
-<li>
-    {% if manifesto.easy_read_url %}
-      <a href="{{ manifesto.easy_read_url }}">Easy Read version</a>
-    {% endif %}
-</li>
+{% if manifesto.canonical_url != manifesto.pdf_url %}
+  <li>
+    <a href="{{ manifesto.pdf_url }}" rel="noopener noreferrer">PDF Version</a>
+  </li>
+{% endif %}
+{% if manifesto.easy_read_url %}
+  <li>
+    <a href="{{ manifesto.easy_read_url }}">Easy Read version</a>
+  </li>
+{% endif %}
