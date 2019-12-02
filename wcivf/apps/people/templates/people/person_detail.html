@@ -64,16 +64,16 @@
   </div>
   {% endif %}
 
-  {% if object.cv %}
-  <div class="card info_card">
-    <h3>{{ object.name }}'s CV</h3>
-      {% if object.cv.thumb_url %}
-      <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">
-      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" style="float: left" alt="Thumbnail of CV for {{ object.name }}" /></a>
-      {% endif %}
-      {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>
-  </div>
-  {% endif %}
+{#  {% if object.cv %}#}
+{#  <div class="card info_card">#}
+{#    <h3>{{ object.name }}'s CV</h3>#}
+{#      {% if object.cv.thumb_url %}#}
+{#      <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">#}
+{#      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" style="float: left" alt="Thumbnail of CV for {{ object.name }}" /></a>#}
+{#      {% endif %}#}
+{#      {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>#}
+{#  </div>#}
+{#  {% endif %}#}
 
   {% if object.wikipedia_bio %}
   <div class="card info_card">
