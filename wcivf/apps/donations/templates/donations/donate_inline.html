@@ -1,9 +1,11 @@
-<section class="card donate_card">
+<section class="{% if not hide_card %}card donate_card{% endif %}">
+    {% if not hide_header %}
     <h2>
       <span aria-hidden="true">🙏</span>
       Democracy runs on good information
       <span aria-hidden="true">🙏</span>
     </h2>
+    {% endif %}
 
     <p>You can help make this website better for everyone.</p>
     <p>This site is run by Democracy Club. It receives no government funding.
