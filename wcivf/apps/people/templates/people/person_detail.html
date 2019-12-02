@@ -83,28 +83,28 @@
   </div>
   {% endif %}
 
-  {% if object.leaflets %}
-  <div class="card info_card">
-    <h3>Recent leaflets from {{ object.name }}</h3>
-    {% for leaflet in object.leaflets %}
-    <div class="leaflet link-card">
-      <div class="text">
-      {% if leaflet.thumb_url %}
-      <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}">
-      <img src="{{ leaflet.thumb_url }}" alt="Thumbnail of leaflet from {{ object.name }}" />
-      </a>
-      {% endif %}
-        <p>
-        Uploaded {{ leaflet.date_uploaded_to_electionleaflets|naturalday:"j M Y" }}<br/>
-        <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}" class="cta">See leaflet</a>
-        </p>
-
-      </div>
-    </div>
-    {% endfor %}
-    <p class="text" style="clear:both;padding-top:1em"><a class="link-button">Upload more leaflets</a></p>
-  </div>
-  {% endif %}
+{#  {% if object.leaflets %}#}
+{#  <div class="card info_card">#}
+{#    <h3>Recent leaflets from {{ object.name }}</h3>#}
+{#    {% for leaflet in object.leaflets %}#}
+{#    <div class="leaflet link-card">#}
+{#      <div class="text">#}
+{#      {% if leaflet.thumb_url %}#}
+{#      <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}">#}
+{#      <img src="{{ leaflet.thumb_url }}" alt="Thumbnail of leaflet from {{ object.name }}" />#}
+{#      </a>#}
+{#      {% endif %}#}
+{#        <p>#}
+{#        Uploaded {{ leaflet.date_uploaded_to_electionleaflets|naturalday:"j M Y" }}<br/>#}
+{#        <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}" class="cta">See leaflet</a>#}
+{#        </p>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#    {% endfor %}#}
+{#    <p class="text" style="clear:both;padding-top:1em"><a class="link-button">Upload more leaflets</a></p>#}
+{#  </div>#}
+{#  {% endif %}#}
 
   {% if object.twfy_id %}
   <div class="card info_card">
