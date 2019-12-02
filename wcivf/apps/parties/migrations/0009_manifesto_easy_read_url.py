@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("parties", "0008_auto_20180422_1248"),
-    ]
+    dependencies = [("parties", "0008_auto_20180422_1248")]
 
     operations = [
         migrations.AddField(
             model_name="manifesto",
             name="easy_read_url",
             field=models.URLField(blank=True, max_length=800),
-        ),
+        )
     ]

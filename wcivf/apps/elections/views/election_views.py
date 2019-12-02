@@ -7,7 +7,6 @@ from django.db.models import Prefetch
 from django.apps import apps
 
 
-from people.helpers import peopleposts_for_election_post
 from elections.views.mixins import (
     NewSlugsRedirectMixin,
     PostelectionsToPeopleMixin,

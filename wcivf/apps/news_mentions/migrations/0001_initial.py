@@ -9,9 +9,7 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ("elections", "0028_add_territory_to_posts"),
-    ]
+    dependencies = [("elections", "0028_add_territory_to_posts")]
 
     operations = [
         migrations.CreateModel(
@@ -54,5 +52,5 @@ class Migration(migrations.Migration):
                 "get_latest_by": "modified",
                 "abstract": False,
             },
-        ),
+        )
     ]

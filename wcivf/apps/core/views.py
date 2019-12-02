@@ -61,7 +61,7 @@ class HomePageView(PostcodeFormView):
                 election__election_date__lte=cut_off_date,
                 election__any_non_by_elections=False,
             )
-            .exclude(election__election_date=may_election_day_this_year(),)
+            .exclude(election__election_date=may_election_day_this_year())
             .select_related("election", "post")
             .order_by("election__election_date")
         )
