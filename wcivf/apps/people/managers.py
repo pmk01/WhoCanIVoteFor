@@ -1,3 +1,6 @@
+import requests
+from django.conf import settings
+
 from django.db import models
 from django.db.models import Count
 from django.utils.dateparse import parse_datetime
@@ -96,3 +99,14 @@ class PersonManager(models.Manager):
             ynr_id=person_id, defaults=defaults
         )
         return person_obj
+
+    def get_by_pk_or_redirect_from_ynr(self, pk):
+        try:
+            return self.get(pk=pk)
+        except self.model.DoesNotExist:
+            req = requests.get(
+                "{}/api/next/person_redirects/{}/".format(settings.YNR_BASE, pk)
+            )
+            if req.status_code == 200:
+                return self.get(pk=req.json()["new_person_id"])
+            raise

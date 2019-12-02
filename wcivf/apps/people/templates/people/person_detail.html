@@ -87,19 +87,22 @@
   <div class="card info_card">
     <h3>Recent leaflets from {{ object.name }}</h3>
     {% for leaflet in object.leaflets %}
-    <div class="leaflet">
+    <div class="leaflet link-card">
+      <div class="text">
       {% if leaflet.thumb_url %}
       <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}">
-      <img src="{{ leaflet.thumb_url }}" class="cv_thumb" alt="Thumbnail of leaflet from {{ object.name }}" />
+      <img src="{{ leaflet.thumb_url }}" alt="Thumbnail of leaflet from {{ object.name }}" />
       </a>
       {% endif %}
-      <p>
-      Uploaded {{ leaflet.date_uploaded_to_electionleaflets|naturalday:"j M Y" }}<br/>
-      <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}">See leaflet</a>
-      </p>
+        <p>
+        Uploaded {{ leaflet.date_uploaded_to_electionleaflets|naturalday:"j M Y" }}<br/>
+        <a href="https://electionleaflets.org/leaflets/{{ leaflet.leaflet_id }}" class="cta">See leaflet</a>
+        </p>
+
+      </div>
     </div>
-    </a>
     {% endfor %}
+    <p class="text" style="clear:both;padding-top:1em"><a class="link-button">Upload more leaflets</a></p>
   </div>
   {% endif %}
 
@@ -368,6 +371,12 @@
     <p>You can also email {{ object.name }} directly to ask them to add information to this page.
   <p><a href="{% url 'email_person_view' pk=object.pk ignored_slug=person.name|slugify %}" class="link-button">Ask the candidate for more information &raquo;</a></p>
 {% endif %}
+
+  <h4>Upload your leaflets</h4>
+  <p>If you've received election leaflets from {{ object.name }}, please take a photo
+  of them and upload them to ElectionLeaflets.org</p>
+  <p><a class="link-button" href="https://electionleaflets.org/">Add leaflets</a> </p>
+
   </div>
 
 {% include "donations/donate_inline.html" %}
