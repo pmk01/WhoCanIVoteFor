@@ -15,6 +15,7 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
         base_url = "https://electionleaflets.org/api/ballots/"
+        Leaflet.objects.all().delete()
         qs = PostElection.objects.filter(election__current=True)
         for ballot in qs:
             url = base_url + ballot.ballot_paper_id
