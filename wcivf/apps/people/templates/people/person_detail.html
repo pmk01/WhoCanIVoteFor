@@ -83,10 +83,10 @@
   </div>
   {% endif %}
 
-  {% if object.leaflets %}
+  {% if object.leaflet_set.exists %}
   <div class="card info_card">
     <h3>Recent leaflets from {{ object.name }}</h3>
-    {% for leaflet in object.leaflets %}
+    {% for leaflet in object.leaflet_set.all %}
     <div class="leaflet link-card">
       <div class="text">
       {% if leaflet.thumb_url %}

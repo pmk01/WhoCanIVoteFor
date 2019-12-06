@@ -14,11 +14,11 @@ from leaflets.models import Leaflet
 class Command(BaseCommand):
     @transaction.atomic
     def handle(self, **options):
-        base_url = "https://electionleaflets.org/api/ballots/"
+        base_url_fmt = "https://electionleaflets.org/api/ballots/{}/"
         Leaflet.objects.all().delete()
         qs = PostElection.objects.filter(election__current=True)
         for ballot in qs:
-            url = base_url + ballot.ballot_paper_id
+            url = base_url_fmt.format(ballot.ballot_paper_id)
             while url:
                 req = requests.get(url)
                 if req.status_code == 200:
@@ -43,14 +43,11 @@ class Command(BaseCommand):
                 person = Person.objects.get_by_pk_or_redirect_from_ynr(
                     person_id
                 )
-                leaflet_obj, created = Leaflet.objects.update_or_create(
+                Leaflet.objects.create(
                     leaflet_id=leaflet_id,
-                    defaults={
-                        "thumb_url": thumb_url,
-                        "date_uploaded_to_electionleaflets": dt_aware,
-                        "person": person,
-                    },
+                    thumb_url=thumb_url,
+                    date_uploaded_to_electionleaflets=dt_aware,
+                    person=person,
                 )
-                leaflet_obj.save()
             except Person.DoesNotExist:
                 print("No person found with id %s" % person_id)
