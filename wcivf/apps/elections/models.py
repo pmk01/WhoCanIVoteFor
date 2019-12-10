@@ -8,7 +8,7 @@ from django.db import models
 from django.utils.html import mark_safe
 from django.utils.text import slugify
 
-
+from elections.wikipedia_map import ballot_to_wikipedia
 from .helpers import expected_sopn_publish_date
 from .managers import ElectionManager
 
@@ -201,6 +201,8 @@ class PostElection(models.Model):
     voting_system = models.ForeignKey(
         "VotingSystem", null=True, blank=True, on_delete=models.CASCADE
     )
+    wikipedia_url = models.CharField(blank=True, null=True, max_length=800)
+    wikipedia_bio = models.TextField(null=True)
 
     def get_name_suffix(self):
         election_type = self.ballot_paper_id.split(".")[0]
