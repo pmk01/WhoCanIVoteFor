@@ -1,6 +1,6 @@
 import csv
 import requests
-from newspaper import Article
+from newspaper import Article, ArticleException
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -21,7 +21,10 @@ class Command(BaseCommand):
         req = requests.get(self.url)
         csv_data = csv.DictReader(req.text.splitlines())
         for line in csv_data:
-            self.add_article(line)
+            try:
+                self.add_article(line)
+            except ArticleException:
+                pass
 
     def get_ballot(self, ballot_paper_id):
         if not ballot_paper_id in self.ballot_cache:
