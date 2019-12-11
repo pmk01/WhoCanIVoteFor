@@ -174,6 +174,10 @@ class FacebookAdvert(models.Model):
     )
     image_url = models.URLField(blank=True, null=True)
 
+    class Meta:
+        ordering = ("-ad_json__ad_delivery_start_time",)
+        get_latest_by = "ad_json__ad_delivery_start_time"
+
     @property
     def get_spend_range(self):
         return sorted(self.ad_json.get("spend").values())
