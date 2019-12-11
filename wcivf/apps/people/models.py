@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import JSONField
 from django.urls import reverse
 from django.db import models
 from django.utils.text import slugify
@@ -139,6 +140,17 @@ class Person(models.Model):
         )
         return [a[1] for a in attrs if not getattr(self, a[0], False)]
 
+    @property
+    def get_max_facebook_ad_spend(self):
+        return round(
+            sum(
+                [
+                    float(x.get_spend_range[1])
+                    for x in self.facebookadvert_set.all()
+                ]
+            )
+        )
+
 
 class AssociatedCompany(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -149,3 +161,19 @@ class AssociatedCompany(models.Model):
     role_status = models.CharField(max_length=50, blank=True, null=True)
     role_appointed_date = models.DateField()
     role_resigned_date = models.DateField(blank=True, null=True)
+
+
+class FacebookAdvert(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    ad_id = models.CharField(
+        max_length=500, help_text="The Facebook ID for this advert"
+    )
+    ad_json = JSONField(
+        help_text="The JSON returned from the Facebook "
+        "Graph API for this advert"
+    )
+    image_url = models.URLField(blank=True, null=True)
+
+    @property
+    def get_spend_range(self):
+        return sorted(self.ad_json.get("spend").values())

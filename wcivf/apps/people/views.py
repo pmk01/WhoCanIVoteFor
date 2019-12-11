@@ -27,7 +27,9 @@ class PersonMixin(object):
                     queryset=PersonPost.objects.all().select_related(
                         "election", "post", "party", "post_election"
                     ),
-                )
+                ),
+                "facebookadvert_set",
+                "leaflet_set",
             )
         )
 

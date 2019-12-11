@@ -25,6 +25,82 @@
     </p>
   </div>
 
+  {% if object.has_any_contact_info %}
+  <div class="card info_card">
+    <h3>Contact information</h3>
+    <dl>
+        {% if object.facebook_page_url or object.facebook_personal_url %}
+        <dt>Facebook</dt>
+        <dd>
+          {% if object.facebook_personal_url %}
+          {% if object.facebook_page_url and object.facebook_personal_url %}Personal profile: {% endif %}<a href="{{ object.facebook_personal_url }}" title="{{ object.name }}'s Facebook page">
+            {{ object.facebook_personal_url }}
+          </a><br/>
+          {% endif %}
+          {% if object.facebook_page_url %}
+          {% if object.facebook_page_url and object.facebook_personal_url %}Public page: {% endif %}<a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
+            {{ object.facebook_page_url }}
+          </a>
+          {% endif %}
+        </dd>
+        {% endif %}
+        {% if object.linkedin_url %}
+        <dt>LinkedIn</dt>
+        <dd>
+          <a href="{{ object.linkedin_url }}" title="{{ object.name }}'s LinkedIn profile">
+            {{ object.linkedin_url }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.homepage_url %}
+        <dt>Home page</dt>
+        <dd>
+          <a href="{{ object.homepage_url }}" title="{{ object.name }}'s home page">
+            {{ object.homepage_url }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.instagram_url %}
+        <dt>Instagram</dt>
+        <dd>
+          <a href="{{ object.instagram_url }}" title="{{ object.name }}'s instagram">
+            {{ object.instagram_url }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.youtube_profile %}
+        <dt>YouTube</dt>
+        <dd>
+          <a href="{{ object.youtube_profile }}" title="{{ object.name }}'s YouTube">
+            {{ object.youtube_profile }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.party_ppc_page_url %}
+        <dt>The party's candidate page for this person</dt>
+        <dd>
+          <a href="{{ object.party_ppc_page_url }}" title="Party page for {{ object.name }}">
+            {{ object.party_ppc_page_url }}
+          </a>
+        </dd>
+        {% endif %}
+        {% if object.favourite_biscuit %}
+        <dt>Favourite biscuit</dt>
+        <dd>
+            &ldquo;{{ object.favourite_biscuit }}&rdquo;
+        </dd>
+        {% endif %}
+        {% if object.email %}
+        <dt>Email</dt>
+        <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
+        {% else %}
+        We don't know {{ object.name }}'s email address.
+        <a href="{{ object.get_ynr_url }}">Can you add it?</a>
+        {% endif %}
+    </dl>
+  </div>
+  {% endif %}
+
   {% if object.manifestos %}
   {% with object.personpost.party as party %}
   <div class="card info_card">
@@ -134,6 +210,7 @@
 </div>
 {% endif %}
 
+
 {#{% if object.associatedcompany_set.exists %}#}
 {#  <div class="card info_card">#}
 {#    <h3>Associated companies</h3>#}
@@ -166,6 +243,7 @@
   </div>
   {% endif %}
 
+{%  include "people/includes/facebook_adverts_card.html" %}
 
   {% if object.pledges.exists %}
   <div class="card info_card">
@@ -208,82 +286,6 @@
     <strong>Previous job:</strong> {{ object.last_or_current_job }}
     {% endif %}
     <p class="small">Data supplied by <a href="http://www.nesta.org.uk/blog/open-data-set-who-are-2017-general-elections-candidates">Nesta</a>. Something wrong? <a href="mailto:hello@democracyclub.org.uk">Let us know</a>.</p>
-  </div>
-  {% endif %}
-
-  {% if object.has_any_contact_info %}
-  <div class="card info_card">
-    <h3>Contact information</h3>
-    <dl>
-        {% if object.facebook_page_url or object.facebook_personal_url %}
-        <dt>Facebook</dt>
-        <dd>
-          {% if object.facebook_personal_url %}
-          {% if object.facebook_page_url and object.facebook_personal_url %}Personal profile: {% endif %}<a href="{{ object.facebook_personal_url }}" title="{{ object.name }}'s Facebook page">
-            {{ object.facebook_personal_url }}
-          </a><br/>
-          {% endif %}
-          {% if object.facebook_page_url %}
-          {% if object.facebook_page_url and object.facebook_personal_url %}Public page: {% endif %}<a href="{{ object.facebook_page_url }}" title="{{ object.name }}'s Facebook profile">
-            {{ object.facebook_page_url }}
-          </a>
-          {% endif %}
-        </dd>
-        {% endif %}
-        {% if object.linkedin_url %}
-        <dt>LinkedIn</dt>
-        <dd>
-          <a href="{{ object.linkedin_url }}" title="{{ object.name }}'s LinkedIn profile">
-            {{ object.linkedin_url }}
-          </a>
-        </dd>
-        {% endif %}
-        {% if object.homepage_url %}
-        <dt>Home page</dt>
-        <dd>
-          <a href="{{ object.homepage_url }}" title="{{ object.name }}'s home page">
-            {{ object.homepage_url }}
-          </a>
-        </dd>
-        {% endif %}
-        {% if object.instagram_url %}
-        <dt>Instagram</dt>
-        <dd>
-          <a href="{{ object.instagram_url }}" title="{{ object.name }}'s instagram">
-            {{ object.instagram_url }}
-          </a>
-        </dd>
-        {% endif %}
-        {% if object.youtube_profile %}
-        <dt>YouTube</dt>
-        <dd>
-          <a href="{{ object.youtube_profile }}" title="{{ object.name }}'s YouTube">
-            {{ object.youtube_profile }}
-          </a>
-        </dd>
-        {% endif %}
-        {% if object.party_ppc_page_url %}
-        <dt>The party's candidate page for this person</dt>
-        <dd>
-          <a href="{{ object.party_ppc_page_url }}" title="Party page for {{ object.name }}">
-            {{ object.party_ppc_page_url }}
-          </a>
-        </dd>
-        {% endif %}
-        {% if object.favourite_biscuit %}
-        <dt>Favourite biscuit</dt>
-        <dd>
-            &ldquo;{{ object.favourite_biscuit }}&rdquo;
-        </dd>
-        {% endif %}
-        {% if object.email %}
-        <dt>Email</dt>
-        <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
-        {% else %}
-        We don't know {{ object.name }}'s email address.
-        <a href="{{ object.get_ynr_url }}">Can you add it?</a>
-        {% endif %}
-    </dl>
   </div>
   {% endif %}
 
