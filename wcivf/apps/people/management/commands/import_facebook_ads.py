@@ -9,9 +9,7 @@ from people.helpers import get_wikipedia_extract
 
 class Command(BaseCommand):
     def handle(self, **options):
-        url = (
-            "https://candidates.democracyclub.org.uk/api/next/facebook_adverts/"
-        )
+        url = "https://candidates.democracyclub.org.uk/api/next/facebook_adverts/?page_size=200"
         while url:
             req = requests.get(url)
             req.raise_for_status()
