@@ -15,8 +15,8 @@
           {{ advert.ad_json.ad_creative_body|linebreaksbr }}
         {% endif %}
         <figcaption>
-          <a href="https://www.facebook.com/ads/library/?id={{ advert.ad_id }}" class="cta">
-            See details on the Facebook Advert Library
+          <a href="https://www.facebook.com/ads/library/?id={{ advert.ad_id }}" class="cta link-button" target="_blank">
+            Details
           </a>
         </figcaption>
       </figure>
@@ -25,6 +25,9 @@
   </div>
 {% endfor %}
   </div>
+<div>
+  <p><a href="https://www.facebook.com/ads/library/?view_all_page_id={{ object.facebookadvert_set.first.ad_json.page_id }}" class="link-button" target="_blank">See all adverts</a></p>
+</div>
 
 </div>
 {% endif %}
