@@ -7,8 +7,8 @@
 <div class="fukol-grid">
 {% for advert in object.facebookadvert_set.all|slice:":2" %}
   <div class="facebook_advert link-card">
-    <div class="text">
-      <figure>
+    <div>
+      <figure style="margin:0.1em;">
         {% if advert.image_url %}
           <img src="{{ advert.image_url }}">
         {% else %}
