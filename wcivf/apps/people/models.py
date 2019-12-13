@@ -20,6 +20,7 @@ class PersonPost(models.Model):
     election = models.ForeignKey(Election, null=False, on_delete=models.CASCADE)
     list_position = models.IntegerField(blank=True, null=True)
     elected = models.NullBooleanField()
+    votes_cast = models.PositiveSmallIntegerField(null=True)
     objects = PersonPostManager()
 
     def __str__(self):

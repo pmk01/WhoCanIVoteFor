@@ -166,8 +166,8 @@ class PersonView(DetailView, PersonMixin):
             str += '">' + person.personpost.election.name + "</a>"
             intro.append(str)
 
-            if hasattr(person.personpost, "results"):
-                votes = intcomma(person.personpost.results.votes_cast)
+            if person.personpost.votes_cast:
+                votes = intcomma(person.personpost.votes_cast)
                 if person.personpost.elected:
                     intro[-1] = intro[-1] + "."
                     results_str = (

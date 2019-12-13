@@ -36,8 +36,8 @@
       {% endif %}
 
       <span class="icons">
-      {% if person_post.results.votes_cast %}
-      {{ person_post.results.votes_cast|intcomma }} vote{{ person_post.results.votes_cast|pluralize }}
+      {% if person_post.votes_cast %}
+      {{ person_post.votes_cast|intcomma }} vote{{ person_post.votes_cast|pluralize }}
       {% endif %}
 
       {% if person_post.person.statement_to_voters %}<span class="text-icon">Statement</span>{% endif %}

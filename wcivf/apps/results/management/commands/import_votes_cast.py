@@ -4,7 +4,6 @@ from django.conf import settings
 from core.helpers import show_data_on_error
 from elections.helpers import JsonPaginator
 from people.models import PersonPost
-from results.models import PersonPostResult
 from elections.models import PostElection
 
 
@@ -41,20 +40,5 @@ class Command(BaseCommand):
                     except PersonPost.DoesNotExist:
                         continue
                     person_post.elected = candidacy["elected"]
+                    person_post.votes_cast = candidacy["num_ballots"]
                     person_post.save()
-
-                    if hasattr(person_post, "results"):
-                        person_post.results.votes_cast = candidacy[
-                            "num_ballots"
-                        ]
-                        person_post.results.save()
-                    else:
-                        PersonPostResult.objects.create(
-                            person_post=person_post,
-                            votes_cast=candidacy["num_ballots"],
-                        )
-
-                    # PersonPostResult.objects.filter(
-                    #     person_post=person_post
-                    # ).delete()
-                    #
