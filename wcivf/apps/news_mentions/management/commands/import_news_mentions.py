@@ -1,6 +1,6 @@
 import csv
 import requests
-from newspaper import Article, ArticleException
+from newspaper import Article, ArticleException, Config
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -40,7 +40,10 @@ class Command(BaseCommand):
         if not line["Link"].startswith("http"):
             return
 
-        article = Article(line["Link"])
+        config = Config()
+        config.request_timeout = 3
+        print(line["Link"])
+        article = Article(line["Link"], config=config)
         article.download()
         article.parse()
         BallotNewsArticle.objects.create(
