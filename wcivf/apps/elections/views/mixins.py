@@ -113,7 +113,7 @@ class PostelectionsToPeopleMixin(object):
         else:
             order_by = ["person__sort_name", "last_name", "person__name"]
 
-        people_for_post = people_for_post.order_by("-elected", *order_by)
+        people_for_post = people_for_post.order_by("elected", *order_by)
         people_for_post = people_for_post.select_related(
             "post", "election", "person", "party", "person__cv", "results"
         ).prefetch_related("person__leaflet_set", "person__pledges")
