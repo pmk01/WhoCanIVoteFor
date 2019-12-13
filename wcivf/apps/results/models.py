@@ -13,6 +13,9 @@ class ResultEvent(models.Model):
 
 class PersonPostResult(models.Model):
     person_post = models.OneToOneField(
-        "people.PersonPost", related_name="results", on_delete=models.CASCADE
+        "people.PersonPost",
+        related_name="results",
+        on_delete=models.CASCADE,
+        primary_key=True,
     )
     votes_cast = models.IntegerField()
