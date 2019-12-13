@@ -42,8 +42,11 @@ class Command(BaseCommand):
                         continue
                     person_post.elected = candidacy["elected"]
                     person_post.save()
+                    PersonPostResult.objects.filter(
+                        person_post=person_post
+                    ).delete()
 
-                    PersonPostResult.objects.update_or_create(
+                    PersonPostResult.objects.create(
                         person_post=person_post,
-                        defaults={"votes_cast": candidacy["num_ballots"]},
+                        votes_cast=candidacy["num_ballots"],
                     )
