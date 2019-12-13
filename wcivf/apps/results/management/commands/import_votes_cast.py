@@ -42,11 +42,19 @@ class Command(BaseCommand):
                         continue
                     person_post.elected = candidacy["elected"]
                     person_post.save()
-                    PersonPostResult.objects.filter(
-                        person_post=person_post
-                    ).delete()
 
-                    PersonPostResult.objects.create(
-                        person_post=person_post,
-                        votes_cast=candidacy["num_ballots"],
-                    )
+                    if hasattr(person_post, "results"):
+                        person_post.results.votes_cast = candidacy[
+                            "num_ballots"
+                        ]
+                        person_post.results.save()
+                    else:
+                        PersonPostResult.objects.create(
+                            person_post=person_post,
+                            votes_cast=candidacy["num_ballots"],
+                        )
+
+                    # PersonPostResult.objects.filter(
+                    #     person_post=person_post
+                    # ).delete()
+                    #
