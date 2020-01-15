@@ -56,16 +56,16 @@ class HomePageView(PostcodeFormView):
         delta = datetime.timedelta(weeks=4)
         cut_off_date = today + delta
 
-        # context["upcoming_elections"] = (
-        #     PostElection.objects.filter(
-        #         election__election_date__gte=today,
-        #         election__election_date__lte=cut_off_date,
-        #         election__any_non_by_elections=False,
-        #     )
-        #     .exclude(election__election_date=may_election_day_this_year())
-        #     .select_related("election", "post")
-        #     .order_by("election__election_date")
-        # )
+        context["upcoming_elections"] = (
+            PostElection.objects.filter(
+                election__election_date__gte=today,
+                election__election_date__lte=cut_off_date,
+                election__any_non_by_elections=False,
+            )
+            .exclude(election__election_date=may_election_day_this_year())
+            .select_related("election", "post")
+            .order_by("election__election_date")
+        )
 
         polls_open = timezone.make_aware(
             datetime.datetime.strptime("2019-12-12 7", "%Y-%m-%d %H")
