@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("elections", "0028_add_territory_to_posts"),
-    ]
+    dependencies = [("elections", "0028_add_territory_to_posts")]
 
     operations = [
         migrations.AddField(

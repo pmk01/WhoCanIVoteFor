@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("elections", "0029_wikipedia_on_ballot"),
-    ]
+    dependencies = [("elections", "0029_wikipedia_on_ballot")]
 
     operations = [
         migrations.AddField(
             model_name="post",
             name="organization_type",
             field=models.CharField(blank=True, max_length=100),
-        ),
+        )
     ]

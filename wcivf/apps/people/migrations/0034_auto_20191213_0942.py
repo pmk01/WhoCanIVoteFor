@@ -5,9 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("people", "0033_facebookadvert"),
-    ]
+    dependencies = [("people", "0033_facebookadvert")]
 
     operations = [
         migrations.AlterModelOptions(
@@ -16,5 +14,5 @@ class Migration(migrations.Migration):
                 "get_latest_by": "ad_json__ad_delivery_start_time",
                 "ordering": ("-ad_json__ad_delivery_start_time",),
             },
-        ),
+        )
     ]
