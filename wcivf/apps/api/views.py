@@ -54,7 +54,11 @@ class BaseCandidatesAndElectionsViewSet(
             for personpost in personposts:
                 candidates.append(
                     serializers.PersonPostSerializer(
-                        personpost, context={"request": request}
+                        personpost,
+                        context={
+                            "request": request,
+                            "postelection": postelection,
+                        },
                     ).data
                 )
 
