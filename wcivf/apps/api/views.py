@@ -83,6 +83,7 @@ class BaseCandidatesAndElectionsViewSet(
                 "voting_system": VotingSystemSerializer(
                     postelection.voting_system
                 ).data,
+                "seats_contested": postelection.winner_count,
             }
             if postelection.replaced_by:
                 election[
