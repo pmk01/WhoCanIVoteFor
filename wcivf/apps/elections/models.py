@@ -8,7 +8,6 @@ from django.db import models
 from django.utils.html import mark_safe
 from django.utils.text import slugify
 
-from elections.wikipedia_map import ballot_to_wikipedia
 from .helpers import expected_sopn_publish_date
 from .managers import ElectionManager
 
