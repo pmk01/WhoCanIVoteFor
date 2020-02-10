@@ -51,32 +51,14 @@ class PostcodeToPostsMixin(object):
             results_json = req.json()["results"]
             cache.set(key, results_json)
 
-        all_posts = []
-        all_elections = []
+        all_ballots = []
         for election in results_json:
-
-            # Convert an EE election dict in to a YNR ID
-            if election["division"]:
-                post_id = ":".join(
-                    [
-                        election["division"]["division_type"],
-                        election["division"]["official_identifier"].split(":")[
-                            -1
-                        ],
-                    ]
-                )
-                all_elections.append(election["group"])
-            else:
-                post_id = election["organisation"]["slug"]
-                all_elections.append(election["election_id"])
-
-            all_posts.append(post_id)
+            ballot_paper_id = election["election_id"]
+            all_ballots.append(ballot_paper_id)
 
         from ..models import PostElection
 
-        pes = PostElection.objects.filter(
-            post__ynr_id__in=all_posts, election__slug__in=all_elections
-        )
+        pes = PostElection.objects.filter(ballot_paper_id__in=all_ballots)
         pes = pes.annotate(
             past_date=Case(
                 When(election__election_date__lt=date.today(), then=1),
