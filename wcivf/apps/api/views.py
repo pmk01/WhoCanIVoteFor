@@ -52,7 +52,7 @@ class BaseCandidatesAndElectionsViewSet(
         postelections = postelections.select_related("voting_system",)
         for postelection in postelections:
             candidates = []
-            personposts = self.people_for_ballot(postelection)
+            personposts = self.people_for_ballot(postelection, compact=True)
             for personpost in personposts:
                 candidates.append(
                     serializers.PersonPostSerializer(
