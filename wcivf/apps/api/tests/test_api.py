@@ -65,6 +65,7 @@ class TestAPISearchViews(APITestCase):
                 "cancelled": False,
                 "replaced_by": None,
                 "seats_contested": 1,
+                "organisation_type": "local-authority",
                 "voting_system": {"name": "", "slug": ""},
                 "ballot_locked": False,
                 "candidates": [

@@ -84,6 +84,7 @@ class BaseCandidatesAndElectionsViewSet(
                     postelection.voting_system
                 ).data,
                 "seats_contested": postelection.winner_count,
+                "organisation_type": postelection.post.organization_type,
             }
             if postelection.replaced_by:
                 election[

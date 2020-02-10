@@ -149,6 +149,7 @@ class Post(models.Model):
     role = models.CharField(blank=True, max_length=255)
     group = models.CharField(blank=True, max_length=100)
     organization = models.CharField(blank=True, max_length=100)
+    organization_type = models.CharField(blank=True, max_length=100)
     area_name = models.CharField(blank=True, max_length=100)
     area_id = models.CharField(blank=True, max_length=100)
     territory = models.CharField(blank=True, max_length=3)
