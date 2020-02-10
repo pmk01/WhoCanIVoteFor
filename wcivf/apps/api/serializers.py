@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from elections.models import VotingSystem
 from people.models import Person, PersonPost
 from parties.models import Party
 
@@ -47,3 +48,9 @@ class PersonPostSerializer(serializers.HyperlinkedModelSerializer):
         ).display_as_party_list:
             return obj.list_position
         return None
+
+
+class VotingSystemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VotingSystem
+        fields = ("slug", "name")
