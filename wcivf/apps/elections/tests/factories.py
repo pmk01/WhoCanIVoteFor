@@ -22,6 +22,7 @@ class PostFactory(factory.django.DjangoModelFactory):
     ynr_id = "WMC:E14000647"
     label = "copeland"
     elections = factory.RelatedFactory(ElectionFactory)
+    organization_type = "local-authority"
 
 
 class PostElectionFactory(factory.django.DjangoModelFactory):
@@ -31,6 +32,7 @@ class PostElectionFactory(factory.django.DjangoModelFactory):
 
     post = factory.SubFactory(PostFactory)
     election = factory.SubFactory(ElectionFactory)
+    winner_count = 1
     ballot_paper_id = factory.Sequence(
         lambda n: "parl.place-name-%d.2015-05-07" % n
     )

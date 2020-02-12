@@ -209,7 +209,7 @@ GO_CARDLESS_PAYMENT_DESCRIPTION = (
 
 GOCARDLESS_REDIRECT_URL = "https://whocanivotefor.co.uk/donate/process/"
 
-PARTY_LIST_VOTING_TYPES = ["PR-CL"]
+PARTY_LIST_VOTING_TYPES = ["PR-CL", "AMS"]
 
 # .local.py overrides all the common settings.
 try:

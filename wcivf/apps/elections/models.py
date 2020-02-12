@@ -8,7 +8,6 @@ from django.db import models
 from django.utils.html import mark_safe
 from django.utils.text import slugify
 
-from elections.wikipedia_map import ballot_to_wikipedia
 from .helpers import expected_sopn_publish_date
 from .managers import ElectionManager
 
@@ -150,6 +149,7 @@ class Post(models.Model):
     role = models.CharField(blank=True, max_length=255)
     group = models.CharField(blank=True, max_length=100)
     organization = models.CharField(blank=True, max_length=100)
+    organization_type = models.CharField(blank=True, max_length=100)
     area_name = models.CharField(blank=True, max_length=100)
     area_id = models.CharField(blank=True, max_length=100)
     territory = models.CharField(blank=True, max_length=3)

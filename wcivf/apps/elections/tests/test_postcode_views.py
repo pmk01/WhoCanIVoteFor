@@ -58,7 +58,11 @@ class PostcodeViewTests(TestCase):
             ynr_id="tower-hamlets", label="Tower Hamlets", elections=election
         )
 
-        PostElectionFactory(post=post, election=election)
+        PostElectionFactory(
+            post=post,
+            election=election,
+            ballot_paper_id="mayor.tower-hamlets.2018-05-03",
+        )
         response = self.client.get("/elections/e32nx/", follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["postelections"].count(), 1)

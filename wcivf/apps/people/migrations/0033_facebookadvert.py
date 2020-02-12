@@ -7,9 +7,7 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("people", "0032_person_death_date"),
-    ]
+    dependencies = [("people", "0032_person_death_date")]
 
     operations = [
         migrations.CreateModel(
@@ -46,5 +44,5 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-        ),
+        )
     ]

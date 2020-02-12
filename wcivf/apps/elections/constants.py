@@ -1,5 +1,5 @@
 POSTCODE_TO_BALLOT_KEY_FMT = "postcode_to_ballot_{}"
-PEOPLE_FOR_BALLOT_KEY_FMT = "people_for_ballot_{}"
+PEOPLE_FOR_BALLOT_KEY_FMT = "people_for_ballot_{}_compact_{}"
 POLLING_STATIONS_KEY_FMT = "pollingstations_{}"
 
 UPDATED_SLUGS = {

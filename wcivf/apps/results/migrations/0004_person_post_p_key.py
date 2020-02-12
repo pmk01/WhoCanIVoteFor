@@ -6,12 +6,10 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("results", "0003_personpostresult"),
-    ]
+    dependencies = [("results", "0003_personpostresult")]
 
     operations = [
-        migrations.RemoveField(model_name="personpostresult", name="id",),
+        migrations.RemoveField(model_name="personpostresult", name="id"),
         migrations.AlterField(
             model_name="personpostresult",
             name="person_post",

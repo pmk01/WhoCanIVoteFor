@@ -64,6 +64,9 @@ class TestAPISearchViews(APITestCase):
                 },
                 "cancelled": False,
                 "replaced_by": None,
+                "seats_contested": 1,
+                "organisation_type": "local-authority",
+                "voting_system": {"name": "", "slug": ""},
                 "ballot_locked": False,
                 "candidates": [
                     {
@@ -87,14 +90,14 @@ class TestAPISearchViews(APITestCase):
     @vcr.use_cassette("fixtures/vcr_cassettes/test_postcode_view.yaml")
     def test_candidates_for_postcode_view(self):
         url = reverse("api:candidates-for-postcode-list")
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(3):
             req = self.client.get("{}?postcode=EC1A4EU".format(url))
         assert req.status_code == 200
         assert req.json() == self.expected_response
 
     def test_candidates_for_ballots(self):
         url = reverse("api:candidates-for-ballots-list")
-        with self.assertNumQueries(6):
+        with self.assertNumQueries(3):
             req = self.client.get(
                 "{}?ballot_ids=parl.cities-of-london-and-westminster.2017-06-08".format(
                     url

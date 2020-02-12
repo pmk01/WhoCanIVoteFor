@@ -226,6 +226,7 @@ class YNRBallotImporter:
         self.set_territory(ballot)
         self.set_voting_system(ballot)
         self.set_metadata(ballot)
+        self.set_organisation_type(ballot)
         ballot.save()
 
     def set_territory(self, ballot):
@@ -254,6 +255,16 @@ class YNRBallotImporter:
         ee_data = self.ee_helper.get_data(ballot.ballot_paper_id)
         if ee_data:
             ballot.metadata = ee_data["metadata"]
+
+    def set_organisation_type(self, ballot):
+        if ballot.post.organization_type and not self.force_update:
+            return
+        ee_data = self.ee_helper.get_data(ballot.ballot_paper_id)
+        if ee_data:
+            ballot.post.organization_type = ee_data["organisation"][
+                "organisation_type"
+            ]
+            ballot.post.save()
 
     def run_post_ballot_import_tasks(self):
         self.attach_cancelled_ballot_info()

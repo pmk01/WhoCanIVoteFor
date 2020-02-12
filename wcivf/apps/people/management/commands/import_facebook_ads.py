@@ -1,10 +1,7 @@
 import requests
 from django.core.management.base import BaseCommand
 
-from elections.models import PostElection
-from elections.wikipedia_map import ballot_to_wikipedia
-from people.models import Person, FacebookAdvert
-from people.helpers import get_wikipedia_extract
+from people.models import FacebookAdvert
 
 
 class Command(BaseCommand):

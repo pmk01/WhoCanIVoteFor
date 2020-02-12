@@ -4,6 +4,7 @@ from rest_framework import viewsets
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 from api import serializers
+from api.serializers import VotingSystemSerializer
 from core.helpers import clean_postcode
 
 from people.models import Person
@@ -48,13 +49,18 @@ class BaseCandidatesAndElectionsViewSet(
         results = []
 
         postelections = self.get_ballots(request)
+        postelections = postelections.select_related("voting_system")
         for postelection in postelections:
             candidates = []
-            personposts = self.people_for_ballot(postelection)
+            personposts = self.people_for_ballot(postelection, compact=True)
             for personpost in personposts:
                 candidates.append(
                     serializers.PersonPostSerializer(
-                        personpost, context={"request": request}
+                        personpost,
+                        context={
+                            "request": request,
+                            "postelection": postelection,
+                        },
                     ).data
                 )
 
@@ -74,6 +80,11 @@ class BaseCandidatesAndElectionsViewSet(
                 "ballot_locked": postelection.locked,
                 "replaced_by": postelection.replaced_by,
                 "candidates": candidates,
+                "voting_system": VotingSystemSerializer(
+                    postelection.voting_system
+                ).data,
+                "seats_contested": postelection.winner_count,
+                "organisation_type": postelection.post.organization_type,
             }
             if postelection.replaced_by:
                 election[
