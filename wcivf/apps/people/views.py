@@ -6,7 +6,6 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 
 from .models import Person, PersonPost
 from elections.models import PostElection
-from leaflets.models import Leaflet
 from parties.models import Manifesto
 
 
@@ -29,7 +28,7 @@ class PersonMixin(object):
                     ),
                 ),
                 "facebookadvert_set",
-                "leaflet_set",
+                # "leaflet_set",
             )
         )
 
@@ -45,9 +44,9 @@ class PersonMixin(object):
         obj.current_personposts = PersonPost.objects.filter(
             person=obj, election__current=True
         ).select_related("party", "post", "election", "post_election")
-        obj.leaflets = Leaflet.objects.filter(person=obj).order_by(
-            "-date_uploaded_to_electionleaflets"
-        )[:3]
+        # obj.leaflets = Leaflet.objects.filter(person=obj).order_by(
+        #     "-date_uploaded_to_electionleaflets"
+        # )[:3]
 
         return obj
 
