@@ -285,3 +285,7 @@ class VotingSystem(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def uses_party_lists(self):
+        return self.slug in ["PR-CL", "AMS"]

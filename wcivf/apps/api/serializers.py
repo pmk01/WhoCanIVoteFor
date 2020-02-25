@@ -53,4 +53,4 @@ class PersonPostSerializer(serializers.HyperlinkedModelSerializer):
 class VotingSystemSerializer(serializers.ModelSerializer):
     class Meta:
         model = VotingSystem
-        fields = ("slug", "name")
+        fields = ("slug", "name", "uses_party_lists")
