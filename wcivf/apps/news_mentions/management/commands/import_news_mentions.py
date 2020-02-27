@@ -16,15 +16,18 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         BallotNewsArticle.objects.all().delete()
         self.ballot_cache = {}
-        self.url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGhmOojqQ5eUr0EIwhs577kZrBJOgHB02rivqcdjst7qoNTCuLigtLb4m1JZ8KSbzGYOZfIj1-Tea-/pub?gid=1312231964&single=true&output=csv"
-
-        req = requests.get(self.url)
-        csv_data = csv.DictReader(req.text.splitlines())
-        for line in csv_data:
-            try:
-                self.add_article(line)
-            except ArticleException:
-                pass
+        self.urls = [
+            "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGhmOojqQ5eUr0EIwhs577kZrBJOgHB02rivqcdjst7qoNTCuLigtLb4m1JZ8KSbzGYOZfIj1-Tea-/pub?gid=1312231964&single=true&output=csv",
+            "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGhmOojqQ5eUr0EIwhs577kZrBJOgHB02rivqcdjst7qoNTCuLigtLb4m1JZ8KSbzGYOZfIj1-Tea-/pub?gid=730408843&single=true&output=csv",
+        ]
+        for url in self.urls:
+            req = requests.get(url)
+            csv_data = csv.DictReader(req.text.splitlines())
+            for line in csv_data:
+                try:
+                    self.add_article(line)
+                except ArticleException:
+                    pass
 
     def get_ballot(self, ballot_paper_id):
         if not ballot_paper_id in self.ballot_cache:
