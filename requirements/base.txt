@@ -20,7 +20,7 @@ django-debug-toolbar==1.11
 gocardless_pro==1.9.0
 newspaper3k==0.2.8
 
-git+git://github.com/DemocracyClub/dc_base_theme.git@0.3.9
+git+git://github.com/DemocracyClub/dc_base_theme.git@0.3.11
 git+https://github.com/DemocracyClub/dc_signup_form.git@2.1.0
 djangorestframework-jsonp==1.0.2
 feedparser==5.2.1

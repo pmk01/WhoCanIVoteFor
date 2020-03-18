@@ -23,4 +23,7 @@
 {{ object.metadata.cancelled_election.detail }}
     {% endfilter %}
   {% endif %}
+  {% if object.metadata.cancelled_election.url %}
+    <a href="{{ object.metadata.cancelled_election.url }}">Read more</a>
+  {% endif %}
 </p>

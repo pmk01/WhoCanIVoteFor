@@ -22,7 +22,11 @@
   {% if object.friendly_name != object.election.nice_election_name %}
   <h2>{{ object.friendly_name }}</h2>
   {% endif %}
-
+  {% if postelection.metadata.coronavirus_message %}
+    <div style="border:1px solid red;margin:1em 0;padding:1em">
+    <strong>{{ postelection.metadata.coronavirus_message|safe }}</strong>
+    </div>
+  {% endif %}
   <p>
       This election
     {% now "j F Y" as current_day %}
