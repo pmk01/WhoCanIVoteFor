@@ -119,6 +119,7 @@ class YNRBallotImporter:
         current_only=False,
         exclude_candidacies=False,
         force_metadata=False,
+        force_current_metadata=False,
     ):
         self.stdout = stdout
         self.ee_helper = EEHelper()
@@ -128,6 +129,7 @@ class YNRBallotImporter:
         self.current_only = current_only
         self.exclude_candidacies = exclude_candidacies
         self.force_metadata = force_metadata
+        self.force_current_metadata = force_current_metadata
 
     def get_paginator(self, page1):
         return JsonPaginator(page1, self.stdout)
@@ -250,8 +252,9 @@ class YNRBallotImporter:
             ballot.save()
 
     def set_metadata(self, ballot):
-        if ballot.metadata and not self.force_update:
-            return
+        if not self.force_current_metadata:
+            if ballot.metadata and not self.force_update:
+                return
         ee_data = self.ee_helper.get_data(ballot.ballot_paper_id)
         if ee_data:
             ballot.metadata = ee_data["metadata"]

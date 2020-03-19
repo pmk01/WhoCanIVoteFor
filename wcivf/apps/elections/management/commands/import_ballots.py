@@ -20,6 +20,13 @@ class Command(YNRBallotImporter, BaseCommand):
             default=False,
             help="Imports all metadata from EE for all elections",
         )
+        parser.add_argument(
+            "--force-current-metadata",
+            action="store_true",
+            dest="force_current_metadata",
+            default=False,
+            help="Imports all metadata from EE for current elections",
+        )
 
     def populate_any_non_by_elections_field(self):
         qs = Election.objects.all().prefetch_related("postelection_set")
@@ -37,6 +44,7 @@ class Command(YNRBallotImporter, BaseCommand):
             stdout=self.stdout,
             current_only=options["current"],
             force_metadata=options["force_metadata"],
+            force_current_metadata=options["force_current_metadata"],
         )
         importer.do_import()
         self.populate_any_non_by_elections_field()
