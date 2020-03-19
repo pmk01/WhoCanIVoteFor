@@ -33,6 +33,9 @@
           <li><strong>{{ election.grouper }}{{ election.list|length|pluralize }}</strong>
           {% for postelection in election.list %}
             <br><a href="{{ postelection.get_absolute_url }}">{{ postelection.friendly_name }}</a>
+            {% if postelection.cancelled %}
+            {{ postelection.short_cancelled_message_html }}
+            {% endif %}
           {% endfor %}
           </li>
         {% endfor %}

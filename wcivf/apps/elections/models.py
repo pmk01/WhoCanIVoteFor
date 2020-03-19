@@ -254,10 +254,20 @@ class PostElection(models.Model):
     def short_cancelled_message_html(self):
         if not self.cancelled:
             return ""
-        if self.election.in_past():
-            message = "(The poll for this election was cancelled)"
-        else:
-            message = "<strong>(The poll for this election has been cancelled)</strong>"
+        message = None
+        if self.metadata and self.metadata.get("cancelled_election"):
+            title = self.metadata["cancelled_election"].get("title")
+            url = self.metadata["cancelled_election"].get("url")
+            message = title
+            if url:
+                message = """<strong> ❌ <a href="{}">{}</a></strong>""".format(
+                    url, title
+                )
+        if not message:
+            if self.election.in_past():
+                message = "(The poll for this election was cancelled)"
+            else:
+                message = "<strong>(The poll for this election has been cancelled)</strong>"
         return mark_safe(message)
 
     @property
