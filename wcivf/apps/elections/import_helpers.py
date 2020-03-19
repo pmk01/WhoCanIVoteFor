@@ -278,9 +278,12 @@ class YNRBallotImporter:
         if ee_data:
             replacement_ballot_id = ee_data["replaced_by"]
             if replacement_ballot_id:
-                replacement_ballot = PostElection.objects.get(
-                    ballot_paper_id=replacement_ballot_id
-                )
+                try:
+                    replacement_ballot = PostElection.objects.get(
+                        ballot_paper_id=replacement_ballot_id
+                    )
+                except PostElection.DoesNotExist:
+                    pass
         return replacement_ballot
 
     def attach_cancelled_ballot_info(self):
