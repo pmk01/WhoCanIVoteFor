@@ -291,11 +291,12 @@ class YNRBallotImporter:
         # because if we're going to link 2 PostElection objects together
         # we need to be sure that both of them already exist in our DB
         cancelled_ballots = PostElection.objects.filter(cancelled=True)
-
+        if self.current_only:
+            cancelled_ballots = cancelled_ballots.filter(election__current=True)
         for cb in cancelled_ballots:
             cb.replaced_by = self.get_replacement_ballot(cb.ballot_paper_id)
             # Always get metadata, even if we might have it already.
             # This is because is self.force_update is False, it might not have
             # been imported already
-            cb.metadata = self.set_metadata(cb)
+            self.set_metadata(cb)
             cb.save()
