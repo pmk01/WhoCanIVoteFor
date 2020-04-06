@@ -11,7 +11,6 @@ from .models import Feedback
 class FeedbackFormView(UpdateView):
     form_class = FeedbackForm
     template_name = "feedback/feedback_form_view.html"
-    donate_form_prefix = "donation_form"
 
     def get_object(self, queryset=None):
         token = self.request.POST.get("token")
