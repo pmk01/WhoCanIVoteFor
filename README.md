@@ -13,7 +13,6 @@ It will have the following features:
 * "Where is my polling staion?"
 * Enter email address and postcode to get alerted about future elections in yous area
 * Option to show interest in standing for future elections
-* Option to donate to DC in order to keep the site running
 * Option to record results of elections (power users only, maybe in a different interface to the normal one)
 * …and other things like that.
 

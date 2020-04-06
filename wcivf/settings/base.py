@@ -55,7 +55,6 @@ INSTALLED_APPS = (
     "robots",
     "api",
     "results",
-    "donations",
     "pledges",
     "news_mentions",
 )
@@ -200,14 +199,6 @@ REST_FRAMEWORK = {
     ),
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
-
-GO_CARDLESS_PAYMENT_NAME = "Democracy Club Donation"
-GO_CARDLESS_PAYMENT_DESCRIPTION = (
-    "Helping Democracy Club "
-    "increase the quality of information on elections & the democratic processes"
-)
-
-GOCARDLESS_REDIRECT_URL = "https://whocanivotefor.co.uk/donate/process/"
 
 PARTY_LIST_VOTING_TYPES = ["PR-CL", "AMS"]
 
