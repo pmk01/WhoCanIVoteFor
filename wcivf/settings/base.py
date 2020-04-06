@@ -111,12 +111,10 @@ WSGI_APPLICATION = "wcivf.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": "",
-        "USER": "postgres",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "wcivf",
+        "USER": "",
         "PASSWORD": "",
-        "HOST": "",
-        "PORT": "",
     }
 }
 
