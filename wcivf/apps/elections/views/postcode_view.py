@@ -77,6 +77,8 @@ class PostcodeiCalView(
         cal.add("prodid", "-//Elections in {}//mxm.dk//".format(postcode))
 
         for post_election in self.postcode_to_ballots(postcode):
+            if post_election.cancelled:
+                continue
             event = Event()
             event["uid"] = "{}-{}".format(
                 post_election.post.ynr_id, post_election.election.slug
