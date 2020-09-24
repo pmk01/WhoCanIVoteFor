@@ -251,14 +251,11 @@ class YNRBallotImporter:
         if ee_data and "voting_system" in ee_data:
             voting_system_slug = ee_data["voting_system"]["slug"]
             if not voting_system_slug in self.voting_systems:
-                self.voting_systems[
-                    voting_system_slug
-                ] = VotingSystem.objects.update_or_create(
+                voting_system = VotingSystem.objects.update_or_create(
                     slug=voting_system_slug,
                     defaults={"description": ee_data["voting_system"]["name"]},
-                )[
-                    0
-                ]
+                )[0]
+                self.voting_systems[voting_system_slug] = voting_system
 
             ballot.voting_system = self.voting_systems[voting_system_slug]
             ballot.save()
