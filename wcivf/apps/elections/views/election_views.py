@@ -103,7 +103,7 @@ class PostView(NewSlugsRedirectMixin, PostelectionsToPeopleMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["election"] = self.object.election
-        context["person_posts"] = self.people_for_ballot(self.object)
+        self.object.people = self.people_for_ballot(self.object)
         return context
 
 
