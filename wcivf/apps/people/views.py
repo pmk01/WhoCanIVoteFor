@@ -58,7 +58,7 @@ class PersonView(DetailView, PersonMixin):
         obj = self.get_person(queryset)
 
         obj.past_personposts = PersonPost.objects.filter(
-            person=obj, election__current=False
+            person=obj, election__current=False, post_election__cancelled=False
         ).select_related("party", "post", "election", "post_election")
         obj.personpost = None
         if obj.current_personposts:
