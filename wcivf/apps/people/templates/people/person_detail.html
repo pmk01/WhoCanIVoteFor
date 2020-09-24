@@ -90,7 +90,7 @@
             &ldquo;{{ object.favourite_biscuit }}&rdquo;
         </dd>
         {% endif %}
-        {% if object.email %}
+        {% if object.email and object.current_personposts %}
         <dt>Email</dt>
         <dd><a href="mailto:{{ object.email }}">{{ object.email }}</a></dd>
         {% else %}
@@ -140,17 +140,6 @@
   </div>
   {% endif %}
 
-{#  {% if object.cv %}#}
-{#  <div class="card info_card">#}
-{#    <h3>{{ object.name }}'s CV</h3>#}
-{#      {% if object.cv.thumb_url %}#}
-{#      <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">#}
-{#      <img src="{{ object.cv.thumb_url }}" class="cv_thumb" style="float: left" alt="Thumbnail of CV for {{ object.name }}" /></a>#}
-{#      {% endif %}#}
-{#      {{ object.name }} has sent us their CV. We collect CVs to help voters assess candidates' skills and background. <a href="http://cv.democracyclub.org.uk/show_cv/{{ object.ynr_id }}" title="{{ object.name }}'s CV">See {{ object.name }}'s CV.</a>#}
-{#  </div>#}
-{#  {% endif %}#}
-
   {% if object.wikipedia_bio %}
   <div class="card info_card">
     <h3>Wikipedia</h3>
@@ -193,22 +182,6 @@
     </p>
   </div>
   {% endif %}
-
-{% if object.personpost_set.all.0.profile %}
-<div class="card info_card">
-  <h3>Personal statement</h3>
-  {% for personpost in object.personpost_set.all %}
-    {% if personpost.profile %}
-      <h4>{{ personpost.election.name }}</h4>
-      {% if request.user.is_staff %}
-      <a href="/admin/profiles/profile/{{ personpost.profile.pk }}/change/" class="button alert tiny">Edit</a>
-      {% endif %}
-      {{ personpost.profile.text|markdown|urlize }}
-      <a href="{{ personpost.profile.url }}" class="small">source</a>
-    {% endif %}
-  {% endfor %}
-</div>
-{% endif %}
 
 
 {#{% if object.associatedcompany_set.exists %}#}
@@ -257,39 +230,7 @@
   {% endif %}
 
 
-
-  {% if object.has_biographical_info %}
-  <div class="card info_card">
-    <h3>Biographical summary</h3>
-    {% if object.birth_date or object.place_of_birth %}
-    <strong>Born:</strong>
-    {% if object.birth_date %}{{ object.birth_date }}{% endif %}{% if object.birth_date and object.place_of_birth %}, {% endif %}{% if object.place_of_birth %}{{ object.place_of_birth }}{% endif %}
-    <br/>
-    {% endif %}
-    {% if object.secondary_school %}
-    <strong>School:</strong>
-    {{ object.secondary_school }}
-    <br/>
-    {% endif %}
-    {% if object.university_undergrad or object.field_undergrad %}
-    <strong>Undergraduate degree:</strong>
-    {% if object.field_undergrad %}{{ object.field_undergrad }}{% endif %}{% if object.university_undergrad and object.field_undergrad %}, {% endif %}{% if object.university_undergrad %}{{ object.university_undergrad }}{% endif %}
-    <br/>
-    {% endif %}
-    {% if object.university_postgrad or object.field_postgrad %}
-    <strong>Postgraduate degree:</strong>
-    {% if object.field_postgrad %}{{ object.field_postgrad }}{% endif %}{% if object.university_postgrad and object.field_postgrad %}, {% endif %}
-    {% if object.university_postgrad %}{{ object.university_postgrad }}{% endif %}
-    <br/>
-    {% endif %}
-    {% if object.last_or_current_job %}
-    <strong>Previous job:</strong> {{ object.last_or_current_job }}
-    {% endif %}
-    <p class="small">Data supplied by <a href="http://www.nesta.org.uk/blog/open-data-set-who-are-2017-general-elections-candidates">Nesta</a>. Something wrong? <a href="mailto:hello@democracyclub.org.uk">Let us know</a>.</p>
-  </div>
-  {% endif %}
-
-  {% if object.local_party %}
+  {% if object.local_party and object.current_personposts %}
   <div class="card info_card">
     <h3>{{ object.local_party.name }}</h3>
     <p>{{ object.name }}'s local party is the {{ object.local_party.name }}.</p>
@@ -324,7 +265,7 @@
   </div>
   {% endif %}
 
-{% if object.postelection.husting_set.exists %}
+{% if object.postelection.husting_set.exists and object.current_personposts %}
     <div class="card info_card">
       <h3>Local hustings</h3>
       <p>You can meet candidates and question them at local hustings. Here are hustings where {{ object.name }} may be appearing.</p>
@@ -355,6 +296,7 @@
   {% endif %}
 
   {# Edit link #}
+  {% if object.current_personposts %}
   <div class="card" id="findmore">
   <h3>That's all we know! Will you help us find more about this candidate?</h3>
 
@@ -383,8 +325,9 @@
 {#  <p><a class="link-button" href="https://electionleaflets.org/">Add leaflets</a> </p>#}
 
   </div>
+  {% endif %}
 
-{% if not referer_postcode %}
+  {% if not referer_postcode %}
 {% include "elections/includes/_postcode_search_form.html" %}
 {% endif %}
 
