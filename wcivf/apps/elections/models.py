@@ -251,6 +251,14 @@ class PostElection(models.Model):
         )
 
     @property
+    def ynr_sopn_link(self):
+        return "{}/elections/{}/sopn/?{}".format(
+            settings.YNR_BASE,
+            self.ballot_paper_id,
+            settings.YNR_UTM_QUERY_STRING,
+        )
+
+    @property
     def short_cancelled_message_html(self):
         if not self.cancelled:
             return ""
