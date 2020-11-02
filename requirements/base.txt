@@ -9,7 +9,7 @@ django-localflavor==3.0.1
 django-extensions==2.2.5
 djangorestframework==3.12.1
 django-redis==4.10.0
-freezegun==0.3.12
+freezegun==1.0.0
 hiredis==1.1.0
 redis==3.3.11
 Pillow==7.1.0
