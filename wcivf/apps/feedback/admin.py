@@ -52,9 +52,10 @@ class FeedbackAdmin(admin.ModelAdmin):
 
     def export(self, qs):
         response = HttpResponse(content_type="text/csv")
-        response["Content-Disposition"] = (
-            'attachment; filename="feedback-%s.csv"'
-            % (datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S"))
+        response[
+            "Content-Disposition"
+        ] = 'attachment; filename="feedback-%s.csv"' % (
+            datetime.datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
         )
         fields = ["id", "created", "comments", "found_useful", "source_url"]
         writer = csv.writer(response)
