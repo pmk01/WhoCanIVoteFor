@@ -94,9 +94,11 @@ class PersonView(DetailView, PersonMixin):
                 obj.manifestos, key=lambda n: n.country != "UK"
             )
 
-            obj.local_party = obj.personpost.post_election.localparty_set.filter(
-                parent=obj.personpost.party
-            ).first()
+            obj.local_party = (
+                obj.personpost.post_election.localparty_set.filter(
+                    parent=obj.personpost.party
+                ).first()
+            )
 
         return obj
 
